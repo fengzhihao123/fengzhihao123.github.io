@@ -230,8 +230,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/01/06/test/" itemprop="url">
-                  test
+                <a class="post-title-link" href="/2017/01/06/Qiniu-Question/" itemprop="url">
+                  Qiniu Question
                 </a>
               
             
@@ -244,7 +244,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-06T13:57:57+08:00" content="2017-01-06">
+            <time itemprop="dateCreated" datetime="2017-01-06T14:02:47+08:00" content="2017-01-06">
               2017-01-06
             </time>
           </span>
@@ -274,9 +274,17 @@
       
         
           
-            <h1 id="你好，我是测试"><a href="#你好，我是测试" class="headerlink" title="你好，我是测试"></a>你好，我是测试</h1><blockquote>
-<p>aaaaa</p>
-</blockquote>
+            <h2 id="iOS-七牛云SDK的使用问题总结"><a href="#iOS-七牛云SDK的使用问题总结" class="headerlink" title="iOS - 七牛云SDK的使用问题总结"></a>iOS - 七牛云SDK的使用问题总结</h2><p>1、问题描述</p>
+<p>Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com</p>
+<ul>
+<li>7.0 SDK</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">QNUploadManager *upManager = [[QNUploadManager alloc] init];</div><div class="line">[upManager setValue:@&quot;http://up-z1.qiniu.com/&quot; forKeyPath:@&quot;config.up.address&quot;];</div><div class="line">   [upManager putData:imageData key:nil token:token</div><div class="line">             complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) &#123;</div><div class="line">                 &#125;</div><div class="line">             &#125; option:nil];</div></pre></td></tr></table></figure>
+<ul>
+<li>7.1 SDK:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) &#123;</div><div class="line">        builder.zone = [QNZone zone1];</div><div class="line">    &#125;];</div><div class="line">    QNUploadManager *upManager = [[QNUploadManager alloc] initWithConfiguration:config];</div><div class="line">    [upManager putData:imageData key:nil token:token</div><div class="line">              complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) &#123;</div><div class="line">                  &#125;</div><div class="line">              &#125; option:nil];</div></pre></td></tr></table></figure>
+<p><a href="http://developer.qiniu.com/code/v7/sdk/objc.html#api-reference" target="_blank" rel="external">参考链接</a></p>
 
           
         
@@ -353,6 +361,13 @@
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
