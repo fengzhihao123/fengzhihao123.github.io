@@ -240,6 +240,156 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/07/Swift-Range/" itemprop="url">
+                  Swift-Range
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-07T10:49:51+08:00" content="2017-01-07">
+              2017-01-07
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/07/Swift-Range/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/07/Swift-Range/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/07/Swift-Range/" class="leancloud_visitors" data-flag-title="Swift-Range">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Swift 的range比NSRange更加复杂，并且它在Swift3中并没有变的更加容易。如果你想更加透彻的明白复杂的原因，你可以阅读<a href="https://oleb.net/blog/2016/09/swift-3-ranges/" target="_blank" rel="external">这</a>还有<a href="https://github.com/apple/swift-evolution/blob/master/proposals/0065-collections-move-indices.md" target="_blank" rel="external">这</a>。我仅仅告诉你如何创建和使用它们。</p>
+<p>#####Closed Ranges:  <code>a...b</code></p>
+<p>这个区间表达式创建了一个Swift的range，该表达式包含元素a和元素b，即使可能为某个类型的最大值(例如<code>Int.max</code>)。关于closed range有两个类型：<code>CloseRange</code>和<code>CountableCloseRange</code>。</p>
+<ul>
+<li><code>ClosedRange</code><br>该区间的所有元素是可比较的在Swift中(它们遵守<code>Comparable</code>协议)。</li>
+</ul>
+<p>它会允许你访问一个集合中某区间的元素。代码示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let myRange: ClosedRange = 1...3</div><div class="line">let myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;]</div><div class="line">myArray[myRange] // [&quot;b&quot;, &quot;c&quot;, &quot;d&quot;]</div></pre></td></tr></table></figure>
+<p>但是，<code>ClosedRange</code>是不可计算的(它没有遵守<code>Sequence</code>协议)。这就意味你不能迭代该区间的值通过一个循环，如果你想循环访问某个区间的值你需要使用<code>CountableClosedRange</code>类型。</p>
+<ul>
+<li><code>CountableClosedRange</code><br>该类型可迭代循环。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//此处换成ClosedRange会报错</div><div class="line">let myRange: CountableClosedRange = 1...3</div><div class="line">let myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;]</div><div class="line">myArray[myRange] // [&quot;b&quot;, &quot;c&quot;, &quot;d&quot;]</div><div class="line">for index in myRange &#123;</div><div class="line">    print(myArray[index])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="Half-Open-Range-a-lt-b"><a href="#Half-Open-Range-a-lt-b" class="headerlink" title="Half-Open Range:a..&lt;b"></a>Half-Open Range:<code>a..&lt;b</code></h5><p>该区间表达式包含a但不包括b，和上面一样，它也有两个不同的类型：<code>Range</code>和<code>CountableRange</code></p>
+<ul>
+<li><code>Range</code><br>和<code>CloseRange</code>一样，你可以在一个集合中访问某区间的元素，示例代码：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let myRange: Range = 1..&lt;3</div><div class="line">let myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;]</div><div class="line">myArray[myRange] // [&quot;b&quot;, &quot;c&quot;]</div></pre></td></tr></table></figure>
+<p>重要的事再说一次，该类型不可应用于for循环语句！</p>
+<ul>
+<li><code>CountableRange</code><br>该类型可应用于for循环语句</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let myRange: CountableRange = 1..&lt;3</div><div class="line">let myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;]</div><div class="line">myArray[myRange] // [&quot;b&quot;, &quot;c&quot;]</div><div class="line">for index in myRange &#123;</div><div class="line">    print(myArray[index])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>#####NSRange</p>
+<p>有的时候你仍然需要使用NSRange在Swift(eg：当你创建富文本的时候)，所以了解如何创建它也是非常有用的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let myNSRange = NSRange(location: 3, length: 2)</div></pre></td></tr></table></figure>
+<p>在这里强调一下上面的表达式代表的是<code>location</code>和<code>length</code>，并不是<code>start index</code>和<code>end index</code>。上面的例子和Swift中<code>3..&lt;5</code>看起来非常相似。但是，它俩是不同的，它们并不能互相替换使用。</p>
+<p>#####Ranges with Strings</p>
+<p>通过<code>...</code>和<code>..&lt;</code>创建ranges是非常方便的方法。代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let myRange = 1..&lt;3</div></pre></td></tr></table></figure>
+<p>比较苦逼的创建方式（作用和上面的代码是一样的）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let myRange = CountableRange&lt;Int&gt;(uncheckedBounds: (lower: 1, upper: 3)) // 1..&lt;3</div></pre></td></tr></table></figure>
+<p>######Problem with NSRange</p>
+<p>NSRange在截取含有emoji字符的字符串时，会出现错误。</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let myNSRange = NSRange(location: 1, length: 3)</div><div class="line">let myNSString: NSString = &quot;abcde&quot;</div><div class="line">myNSString.substring(with: myNSRange) // &quot;bcd&quot;</div><div class="line">let myNSString2: NSString = &quot;a😀cde&quot;</div><div class="line">myNSString2.substring(with: myNSRange) // &quot;😀c&quot;    Where is the &quot;d&quot;!?</div></pre></td></tr></table></figure>
+<p>######Swift Solution</p>
+<p>由于以上的原因，在Swift中的字符串你需要使用<code>Range&lt;String.Index&gt;</code>而不是<code>Range&lt;Int&gt;</code>。String Index的计算是基于一个特殊的string，所以它能识别string中含有emoji或者其他的扩展字体集。</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var myString = &quot;abcde&quot;</div><div class="line">let start = myString.index(myString.startIndex, offsetBy: 1)</div><div class="line">let end = myString.index(myString.startIndex, offsetBy: 4)</div><div class="line">let myRange = start..&lt;end</div><div class="line">myString.substring(with: myRange) // &quot;bcd&quot;</div><div class="line">myString = &quot;a😀cde&quot;</div><div class="line">let start2 = myString.index(myString.startIndex, offsetBy: 1)</div><div class="line">let end2 = myString.index(myString.startIndex, offsetBy: 4)</div><div class="line">let myRange2 = start2..&lt;end2</div><div class="line">myString.substring(with: myRange2) // &quot;😀cd&quot;</div></pre></td></tr></table></figure>
+<p><a href="http://stackoverflow.com/questions/30093688/how-to-create-range-in-swift" target="_blank" rel="external">原文链接</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/01/06/关于项目的一点思考/" itemprop="url">
                   关于项目的一点思考
                 </a>
@@ -300,8 +450,7 @@
       
         
           
-            <h2 id="关于项目的一点思考"><a href="#关于项目的一点思考" class="headerlink" title="关于项目的一点思考"></a>关于项目的一点思考</h2><p>醒目</p>
-
+            <h2 id="关于项目的一点思考"><a href="#关于项目的一点思考" class="headerlink" title="关于项目的一点思考"></a>关于项目的一点思考</h2>
           
         
       
@@ -490,7 +639,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -500,7 +649,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
