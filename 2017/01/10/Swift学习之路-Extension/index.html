@@ -84,31 +84,19 @@
 
 
 
-<meta name="description" content="请在观看该文章时，顺手将文中的示例代码在playground中敲一遍，这样能加深你的理解！！！阅读该文章大约需要:15分钟读完之后你能获得:
-
-Extension是什么
-它能做什么
-
-本文内容基于Swift版本:3.0.1Extension的基本语法123extension SomeType &amp;#123;    // new functionality to add to SomeType goe">
+<meta name="description" content="请在阅读本文章时，顺手将文中的示例代码在playground中敲一遍，这样能加深理解！！！阅读该文章大约需要:15分钟读完之后你能获得:1、Extension是什么2、它能做什么
+本文全部内容基于Swift版本:3.0.1Extension的基本语法123extension SomeType &amp;#123;    // new functionality to add to SomeType goe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift学习之路-Extension">
 <meta property="og:url" content="http://yoursite.com/2017/01/10/Swift学习之路-Extension/index.html">
 <meta property="og:site_name" content="冯志浩的个人博客">
-<meta property="og:description" content="请在观看该文章时，顺手将文中的示例代码在playground中敲一遍，这样能加深你的理解！！！阅读该文章大约需要:15分钟读完之后你能获得:
-
-Extension是什么
-它能做什么
-
-本文内容基于Swift版本:3.0.1Extension的基本语法123extension SomeType &amp;#123;    // new functionality to add to SomeType goe">
-<meta property="og:updated_time" content="2017-01-11T12:43:32.000Z">
+<meta property="og:description" content="请在阅读本文章时，顺手将文中的示例代码在playground中敲一遍，这样能加深理解！！！阅读该文章大约需要:15分钟读完之后你能获得:1、Extension是什么2、它能做什么
+本文全部内容基于Swift版本:3.0.1Extension的基本语法123extension SomeType &amp;#123;    // new functionality to add to SomeType goe">
+<meta property="og:updated_time" content="2017-01-11T12:54:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift学习之路-Extension">
-<meta name="twitter:description" content="请在观看该文章时，顺手将文中的示例代码在playground中敲一遍，这样能加深你的理解！！！阅读该文章大约需要:15分钟读完之后你能获得:
-
-Extension是什么
-它能做什么
-
-本文内容基于Swift版本:3.0.1Extension的基本语法123extension SomeType &amp;#123;    // new functionality to add to SomeType goe">
+<meta name="twitter:description" content="请在阅读本文章时，顺手将文中的示例代码在playground中敲一遍，这样能加深理解！！！阅读该文章大约需要:15分钟读完之后你能获得:1、Extension是什么2、它能做什么
+本文全部内容基于Swift版本:3.0.1Extension的基本语法123extension SomeType &amp;#123;    // new functionality to add to SomeType goe">
 
 
 
@@ -312,12 +300,8 @@ Extension是什么
       
 
       
-        <p>请在观看该文章时，顺手将文中的示例代码在playground中敲一遍，这样能加深你的理解！！！<br>阅读该文章大约需要:15分钟<br>读完之后你能获得:</p>
-<ul>
-<li>Extension是什么</li>
-<li>它能做什么</li>
-</ul>
-<h2 id="本文内容基于Swift版本-3-0-1"><a href="#本文内容基于Swift版本-3-0-1" class="headerlink" title="本文内容基于Swift版本:3.0.1"></a>本文内容基于Swift版本:3.0.1</h2><h2 id="Extension的基本语法"><a href="#Extension的基本语法" class="headerlink" title="Extension的基本语法"></a>Extension的基本语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">extension SomeType &#123;</div><div class="line">    // new functionality to add to SomeType goes here</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <p>请在阅读本文章时，顺手将文中的示例代码在playground中敲一遍，这样能加深理解！！！<br>阅读该文章大约需要:15分钟<br>读完之后你能获得:<br>1、Extension是什么<br>2、它能做什么</p>
+<h2 id="本文全部内容基于Swift版本-3-0-1"><a href="#本文全部内容基于Swift版本-3-0-1" class="headerlink" title="本文全部内容基于Swift版本:3.0.1"></a>本文全部内容基于Swift版本:3.0.1</h2><h2 id="Extension的基本语法"><a href="#Extension的基本语法" class="headerlink" title="Extension的基本语法"></a>Extension的基本语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">extension SomeType &#123;</div><div class="line">    // new functionality to add to SomeType goes here</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Tip:<code>扩展可以为一个类型添加新的功能，但是不能重写已有的功能。</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">struct Student &#123;</div><div class="line">    var name = &quot;&quot;</div><div class="line">    var age = 1</div><div class="line">    func print() &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">extension Student &#123;</div><div class="line">    //改行会报错`invalid redeclaration print()`重复声明print()，重写变量也是不行的。</div><div class="line">    func print() &#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="Swift中的Extension可以做什么"><a href="#Swift中的Extension可以做什么" class="headerlink" title="Swift中的Extension可以做什么"></a>Swift中的Extension可以做什么</h2><p>我们想知道Extension在Swift中能做些什么，最直接的方法就是查看Swift的官方文档了。下面是文档中指出Extension能做的六个方面。</p>
@@ -342,7 +326,7 @@ Extension是什么
 <h3 id="提供新的构造器-Initializers"><a href="#提供新的构造器-Initializers" class="headerlink" title="提供新的构造器(Initializers)"></a>提供新的构造器(Initializers)</h3><p>最常见的Rect通常由<code>origin</code>和<code>size</code>来构造初始化，但是如果在你写完Rect的定义后，你偏偏想要通过center和size来确定Rect(作为一个程序员就要有一种作死的精神)，那你就要用Extension来给Rect提供一个新的构造器。关于更多关于构造器的信息，请参考<a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Initialization.html#//apple_ref/doc/uid/TP40014097-CH18-ID203" target="_blank" rel="external">官方文档</a></p>
 <p><code>本例子来源官方文档</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">struct Size &#123;</div><div class="line">    var width = 0.0, height = 0.0</div><div class="line">&#125;</div><div class="line">struct Point &#123;</div><div class="line">    var x = 0.0, y = 0.0</div><div class="line">&#125;</div><div class="line">struct Rect &#123;</div><div class="line">    var origin = Point()</div><div class="line">    var size = Size()</div><div class="line">&#125;</div><div class="line"></div><div class="line">let defaultRect = Rect()</div><div class="line">let memberwiseRect = Rect(origin: Point(x: 2.0, y: 2.0),</div><div class="line">                          size: Size(width: 5.0, height: 5.0))</div></pre></td></tr></table></figure>
-<p>Extension:</p>
+<p>通过Extension来给Rect添加一个新的构造器。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">extension Rect &#123;</div><div class="line">    init(center: Point, size: Size) &#123;</div><div class="line">        let originX = center.x - (size.width / 2)</div><div class="line">        let originY = center.y - (size.height / 2)</div><div class="line">        self.init(origin: Point(x: originX, y: originY), size: size)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这样你就可以通过新的构造器来初始化Rect。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let centerRect = Rect(center: Point(x: 4.0, y: 4.0),</div><div class="line">                      size: Size(width: 3.0, height: 3.0))</div><div class="line">// centerRect&apos;s origin is (2.5, 2.5) and its size is (3.0, 3.0)</div></pre></td></tr></table></figure>
@@ -350,6 +334,7 @@ Extension是什么
 <p><code>本例子来源官方文档</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">extension Int &#123;</div><div class="line">    subscript(digitIndex: Int) -&gt; Int &#123;</div><div class="line">        var decimalBase = 1</div><div class="line">        for _ in 0..&lt;digitIndex &#123;</div><div class="line">            decimalBase *= 10</div><div class="line">        &#125;</div><div class="line">        return (self / decimalBase) % 10</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">746381295[0]</div><div class="line">// 5</div><div class="line">746381295[1]</div><div class="line">// 9</div></pre></td></tr></table></figure>
 <h3 id="定义和使用新的嵌套类型-nest-type"><a href="#定义和使用新的嵌套类型-nest-type" class="headerlink" title="定义和使用新的嵌套类型(nest type)"></a>定义和使用新的嵌套类型(nest type)</h3><p>Extensions可以给已知的类、结构体、枚举添加嵌套类型。下面的例子是给Int类型添加一个判断正负数的Extension，该Extension嵌套一个枚举。</p>
+<p><code>本例子来源官方文档</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">extension Int &#123;</div><div class="line">    enum Kind &#123;</div><div class="line">        case negative, zero, positive</div><div class="line">    &#125;</div><div class="line">    var kind: Kind &#123;</div><div class="line">        switch self &#123;</div><div class="line">        case 0:</div><div class="line">            return .zero</div><div class="line">        case let x where x &gt; 0:</div><div class="line">            return .positive</div><div class="line">        default:</div><div class="line">            return .negative</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">func printIntegerKinds(_ numbers: [Int]) &#123;</div><div class="line">    for number in numbers &#123;</div><div class="line">        switch number.kind &#123;</div><div class="line">        case .negative:</div><div class="line">            print(&quot;- &quot;, terminator: &quot;&quot;)</div><div class="line">        case .zero:</div><div class="line">            print(&quot;0 &quot;, terminator: &quot;&quot;)</div><div class="line">        case .positive:</div><div class="line">            print(&quot;+ &quot;, terminator: &quot;&quot;)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    print(&quot;&quot;)</div><div class="line">&#125;</div><div class="line">printIntegerKinds([3, 19, -27, 0, -6, 0, 7])</div><div class="line">// Prints &quot;+ + - 0 - 0 + &quot;</div></pre></td></tr></table></figure>
 <h3 id="使已存在的类型遵守某个协议"><a href="#使已存在的类型遵守某个协议" class="headerlink" title="使已存在的类型遵守某个协议"></a>使已存在的类型遵守某个协议</h3><p>编写使该类型遵守某个协议的Extension的语法如下:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">extension SomeType: SomeProtocol, AnotherProtocol &#123;</div><div class="line">    // implementation of protocol requirements goes here</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -362,9 +347,9 @@ Extension是什么
 <li>可以在没有权限获取原始源代码的情况下扩展类型的内容</li>
 <li>Extendion和Objective-C中的Category类似。(OC中的Category有名字，Swift中的扩展没有名字)</li>
 </ul>
-<p>下篇:Swift-Protocol</p>
+<p>下篇预告:Swift-Protocol</p>
 <p>若本文有何错误或者不当之处，还望不吝赐教。谢谢！</p>
-<p><a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Extensions.html#//apple_ref/doc/uid/TP40014097-CH24-ID151" target="_blank" rel="external">参考链接</a></p>
+<p><a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Extensions.html#//apple_ref/doc/uid/TP40014097-CH24-ID151" target="_blank" rel="external">Swift-Extension的官方文档</a></p>
 
       
     </div>
@@ -516,7 +501,7 @@ Extension是什么
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本文内容基于Swift版本-3-0-1"><span class="nav-number">1.</span> <span class="nav-text">本文内容基于Swift版本:3.0.1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extension的基本语法"><span class="nav-number">2.</span> <span class="nav-text">Extension的基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift中的Extension可以做什么"><span class="nav-number">3.</span> <span class="nav-text">Swift中的Extension可以做什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加计算型实例属性和计算型类型属性"><span class="nav-number">3.1.</span> <span class="nav-text">添加计算型实例属性和计算型类型属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义实例方法和类型方法"><span class="nav-number">3.2.</span> <span class="nav-text">定义实例方法和类型方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提供新的构造器-Initializers"><span class="nav-number">3.3.</span> <span class="nav-text">提供新的构造器(Initializers)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义下标"><span class="nav-number">3.4.</span> <span class="nav-text">定义下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义和使用新的嵌套类型-nest-type"><span class="nav-number">3.5.</span> <span class="nav-text">定义和使用新的嵌套类型(nest type)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使已存在的类型遵守某个协议"><span class="nav-number">3.6.</span> <span class="nav-text">使已存在的类型遵守某个协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本文全部内容基于Swift版本-3-0-1"><span class="nav-number">1.</span> <span class="nav-text">本文全部内容基于Swift版本:3.0.1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extension的基本语法"><span class="nav-number">2.</span> <span class="nav-text">Extension的基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift中的Extension可以做什么"><span class="nav-number">3.</span> <span class="nav-text">Swift中的Extension可以做什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加计算型实例属性和计算型类型属性"><span class="nav-number">3.1.</span> <span class="nav-text">添加计算型实例属性和计算型类型属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义实例方法和类型方法"><span class="nav-number">3.2.</span> <span class="nav-text">定义实例方法和类型方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提供新的构造器-Initializers"><span class="nav-number">3.3.</span> <span class="nav-text">提供新的构造器(Initializers)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义下标"><span class="nav-number">3.4.</span> <span class="nav-text">定义下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义和使用新的嵌套类型-nest-type"><span class="nav-number">3.5.</span> <span class="nav-text">定义和使用新的嵌套类型(nest type)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使已存在的类型遵守某个协议"><span class="nav-number">3.6.</span> <span class="nav-text">使已存在的类型遵守某个协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
