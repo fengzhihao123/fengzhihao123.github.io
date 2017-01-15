@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Swift," />
 
 
 
@@ -84,64 +84,13 @@
 
 
 
-<meta name="description" content="文章基于Swift版本:3.0.1
-在本篇文章中，主要讲解的是Swift中的一些关键字，让刚接触Swift的同学可以更快的理解Swift代码。
-常见的关键字
-let/var
-class/struct/enum
-protocol不太常见的关键字
-inout 
-final
-throw 
-try
-T
-mutating
-where
-$
-associatedtype
-typealias
-open，publi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift学习之路-关键字解读">
-<meta property="og:url" content="http://yoursite.com/2017/01/11/Swift学习之路-关键字解读/index.html">
+<meta property="og:title" content="Swift学习之路-Protocol">
+<meta property="og:url" content="http://yoursite.com/2017/01/12/Swift学习之路-Protocol/index.html">
 <meta property="og:site_name" content="冯志浩的个人博客">
-<meta property="og:description" content="文章基于Swift版本:3.0.1
-在本篇文章中，主要讲解的是Swift中的一些关键字，让刚接触Swift的同学可以更快的理解Swift代码。
-常见的关键字
-let/var
-class/struct/enum
-protocol不太常见的关键字
-inout 
-final
-throw 
-try
-T
-mutating
-where
-$
-associatedtype
-typealias
-open，publi">
-<meta property="og:updated_time" content="2017-01-12T09:27:30.000Z">
+<meta property="og:updated_time" content="2017-01-12T09:27:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift学习之路-关键字解读">
-<meta name="twitter:description" content="文章基于Swift版本:3.0.1
-在本篇文章中，主要讲解的是Swift中的一些关键字，让刚接触Swift的同学可以更快的理解Swift代码。
-常见的关键字
-let/var
-class/struct/enum
-protocol不太常见的关键字
-inout 
-final
-throw 
-try
-T
-mutating
-where
-$
-associatedtype
-typealias
-open，publi">
+<meta name="twitter:title" content="Swift学习之路-Protocol">
 
 
 
@@ -159,7 +108,7 @@ open，publi">
   };
 </script>
 
-  <title> Swift学习之路-关键字解读 | 冯志浩的个人博客 </title>
+  <title> Swift学习之路-Protocol | 冯志浩的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -289,7 +238,7 @@ open，publi">
             
             
               
-                Swift学习之路-关键字解读
+                Swift学习之路-Protocol
               
             
           </h1>
@@ -301,8 +250,8 @@ open，publi">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-11T14:38:40+08:00" content="2017-01-11">
-              2017-01-11
+            <time itemprop="dateCreated" datetime="2017-01-12T10:46:13+08:00" content="2017-01-12">
+              2017-01-12
             </time>
           </span>
 
@@ -312,8 +261,8 @@ open，publi">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/01/11/Swift学习之路-关键字解读/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/Swift学习之路-关键字解读/" itemprop="commentsCount"></span>
+                <a href="/2017/01/12/Swift学习之路-Protocol/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/12/Swift学习之路-Protocol/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -323,7 +272,7 @@ open，publi">
 
           
           
-             <span id="/2017/01/11/Swift学习之路-关键字解读/" class="leancloud_visitors" data-flag-title="Swift学习之路-关键字解读">
+             <span id="/2017/01/12/Swift学习之路-Protocol/" class="leancloud_visitors" data-flag-title="Swift学习之路-Protocol">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -345,26 +294,7 @@ open，publi">
       
 
       
-        <p>文章基于Swift版本:3.0.1</p>
-<p>在本篇文章中，主要讲解的是Swift中的一些关键字，让刚接触Swift的同学可以更快的理解Swift代码。</p>
-<h2 id="常见的关键字"><a href="#常见的关键字" class="headerlink" title="常见的关键字"></a>常见的关键字</h2><ul>
-<li>let/var</li>
-<li>class/struct/enum</li>
-<li>protocol<h2 id="不太常见的关键字"><a href="#不太常见的关键字" class="headerlink" title="不太常见的关键字"></a>不太常见的关键字</h2></li>
-<li>inout </li>
-<li>final</li>
-<li>throw </li>
-<li>try</li>
-<li>T</li>
-<li>mutating</li>
-<li>where</li>
-<li>$</li>
-<li>associatedtype</li>
-<li>typealias</li>
-<li>open，public，internal，filepart，private </li>
-<li>fileprivate(set)，private(set) 或 internal(set) </li>
-</ul>
-
+        
       
     </div>
 
@@ -383,21 +313,27 @@ open，publi">
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/11/idea/" rel="next" title="idea">
-                <i class="fa fa-chevron-left"></i> idea
+              <a href="/2017/01/11/Swift学习之路-关键字解读/" rel="next" title="Swift学习之路-关键字解读">
+                <i class="fa fa-chevron-left"></i> Swift学习之路-关键字解读
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/12/Swift学习之路-Protocol/" rel="prev" title="Swift学习之路-Protocol">
-                Swift学习之路-Protocol <i class="fa fa-chevron-right"></i>
+              <a href="/2017/01/12/Go学习之路-环境配置/" rel="prev" title="Go学习之路-环境配置">
+                Go学习之路-环境配置 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -424,8 +360,8 @@ open，publi">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/01/11/Swift学习之路-关键字解读/"
-           data-title="Swift学习之路-关键字解读" data-url="http://yoursite.com/2017/01/11/Swift学习之路-关键字解读/">
+      <div class="ds-thread" data-thread-key="2017/01/12/Swift学习之路-Protocol/"
+           data-title="Swift学习之路-Protocol" data-url="http://yoursite.com/2017/01/12/Swift学习之路-Protocol/">
       </div>
     
   </div>
@@ -509,7 +445,7 @@ open，publi">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的关键字"><span class="nav-number">1.</span> <span class="nav-text">常见的关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不太常见的关键字"><span class="nav-number">2.</span> <span class="nav-text">不太常见的关键字</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
