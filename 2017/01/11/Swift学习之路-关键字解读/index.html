@@ -87,20 +87,13 @@
 <meta name="description" content="文章基于Swift版本:3.0.1
 在本篇文章中，主要讲解的是Swift中的一些关键字，让刚接触Swift的同学可以更快的理解Swift代码。
 常见的关键字
-let/var
-class/struct/enum
-protocol不太常见的关键字
-inout 
-final
-throw 
-try
-T
-mutating
-where
-$
-associatedtype
-typealias
-open，publi">
+let/var:修饰常量或者变量
+
+12let name = &amp;quot;Tom&amp;quot;var age = 18
+
+class/struct/enum:修饰类、结构体、枚举
+
+123class Student &amp;#123;//struct">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift学习之路-关键字解读">
 <meta property="og:url" content="http://yoursite.com/2017/01/11/Swift学习之路-关键字解读/index.html">
@@ -108,40 +101,26 @@ open，publi">
 <meta property="og:description" content="文章基于Swift版本:3.0.1
 在本篇文章中，主要讲解的是Swift中的一些关键字，让刚接触Swift的同学可以更快的理解Swift代码。
 常见的关键字
-let/var
-class/struct/enum
-protocol不太常见的关键字
-inout 
-final
-throw 
-try
-T
-mutating
-where
-$
-associatedtype
-typealias
-open，publi">
-<meta property="og:updated_time" content="2017-01-12T09:27:30.000Z">
+let/var:修饰常量或者变量
+
+12let name = &amp;quot;Tom&amp;quot;var age = 18
+
+class/struct/enum:修饰类、结构体、枚举
+
+123class Student &amp;#123;//struct">
+<meta property="og:updated_time" content="2017-01-16T08:47:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift学习之路-关键字解读">
 <meta name="twitter:description" content="文章基于Swift版本:3.0.1
 在本篇文章中，主要讲解的是Swift中的一些关键字，让刚接触Swift的同学可以更快的理解Swift代码。
 常见的关键字
-let/var
-class/struct/enum
-protocol不太常见的关键字
-inout 
-final
-throw 
-try
-T
-mutating
-where
-$
-associatedtype
-typealias
-open，publi">
+let/var:修饰常量或者变量
+
+12let name = &amp;quot;Tom&amp;quot;var age = 18
+
+class/struct/enum:修饰类、结构体、枚举
+
+123class Student &amp;#123;//struct">
 
 
 
@@ -348,13 +327,33 @@ open，publi">
         <p>文章基于Swift版本:3.0.1</p>
 <p>在本篇文章中，主要讲解的是Swift中的一些关键字，让刚接触Swift的同学可以更快的理解Swift代码。</p>
 <h2 id="常见的关键字"><a href="#常见的关键字" class="headerlink" title="常见的关键字"></a>常见的关键字</h2><ul>
-<li>let/var</li>
-<li>class/struct/enum</li>
-<li>protocol<h2 id="不太常见的关键字"><a href="#不太常见的关键字" class="headerlink" title="不太常见的关键字"></a>不太常见的关键字</h2></li>
-<li>inout </li>
-<li>final</li>
-<li>throw </li>
-<li>try</li>
+<li>let/var:修饰常量或者变量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let name = &quot;Tom&quot;</div><div class="line">var age = 18</div></pre></td></tr></table></figure>
+<ul>
+<li>class/struct/enum:修饰类、结构体、枚举</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class Student &#123;//struct和enum和class用法类似</div><div class="line">	var name = &quot;Tom&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>protocol:修饰协议</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">protocol SomeDelegate &#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>extension:修饰扩展</p>
+</li>
+</ul>
+<h2 id="不太常见的关键字"><a href="#不太常见的关键字" class="headerlink" title="不太常见的关键字"></a>不太常见的关键字</h2><ul>
+<li>inout:表示函数的参数可以在内部改变</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func changeData(name:inout String,age: inout Int) &#123;//因为在Swift中，函数中声明参数默认为let，所以如果你不添加inout关键字，编译器会报错。</div><div class="line">    name = &quot;shshs&quot;</div><div class="line">    age = 11</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>final:表示该类不允许继承，常用于你不想被重写的类。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">final class Student &#123;</div><div class="line">    var name = &quot;student&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class SubStudent: Student &#123;//这会报错`inheritance form a final class &apos;Student&apos;`</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>throw </p>
+</li>
+<li><p>try</p>
+</li>
 <li>T</li>
 <li>mutating</li>
 <li>where</li>
