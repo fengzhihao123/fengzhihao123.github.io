@@ -108,7 +108,7 @@ let/var:修饰常量或者变量
 class/struct/enum:修饰类、结构体、枚举
 
 123class Student &amp;#123;//struct">
-<meta property="og:updated_time" content="2017-01-16T08:47:13.000Z">
+<meta property="og:updated_time" content="2017-01-17T02:11:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift学习之路-关键字解读">
 <meta name="twitter:description" content="文章基于Swift版本:3.0.1
@@ -342,6 +342,7 @@ class/struct/enum:修饰类、结构体、枚举
 </li>
 </ul>
 <h2 id="不太常见的关键字"><a href="#不太常见的关键字" class="headerlink" title="不太常见的关键字"></a>不太常见的关键字</h2><ul>
+<li>deinit</li>
 <li>inout:表示函数的参数可以在内部改变</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func changeData(name:inout String,age: inout Int) &#123;//因为在Swift中，函数中声明参数默认为let，所以如果你不添加inout关键字，编译器会报错。</div><div class="line">    name = &quot;shshs&quot;</div><div class="line">    age = 11</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -354,8 +355,14 @@ class/struct/enum:修饰类、结构体、枚举
 </li>
 <li><p>try</p>
 </li>
-<li>T</li>
-<li>mutating</li>
+<li><p>T</p>
+</li>
+<li><p>mutating:表示其修饰的值类型可以在实例方法中修改值类型的属性(结构体和枚举是值类型，而它们默认是不能在实例方法中修改它们的属性)。</p>
+</li>
+</ul>
+<p><a href="https://developer.apple.com/library/prerelease/content/documentation/Swift/Conceptual/Swift_Programming_Language/Methods.html#//apple_ref/doc/uid/TP40014097-CH15-ID239" target="_blank" rel="external">详情见文档</a></p>
+<p><code>本例子来源官方文档</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">protocol Tofflable &#123;</div><div class="line">    mutating func toggle()</div><div class="line">&#125;</div><div class="line"></div><div class="line">enum OnOffSwitch: Tofflable &#123;</div><div class="line">    case Off, On</div><div class="line">    mutating func toggle() &#123;</div><div class="line">        switch self &#123;</div><div class="line">        case .Off:</div><div class="line">            self = .On</div><div class="line">        case .On:</div><div class="line">            self = .Off</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var lightSwitch = OnOffSwitch.Off</div><div class="line">lightSwitch.toggle()</div></pre></td></tr></table></figure></p>
+<ul>
 <li>where</li>
 <li>$</li>
 <li>associatedtype</li>
