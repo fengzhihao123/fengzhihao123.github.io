@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="MySQL," />
 
 
 
@@ -84,13 +84,46 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="系统级命令
+mysql -u root -p
+brew services start mysql:启动mysql服务
+brew services stop mysql:停止mysql服务
+exit:退出mysql环境
+
+SQL语句DDL
+CREATE DATABASE - 创建新数据库
+ALTER DATABASE - 修改数据库
+CREATE TABLE - 创建新表
+ALTER TABLE -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql总结">
+<meta property="og:url" content="http://yoursite.com/2017/01/23/mysql总结/index.html">
 <meta property="og:site_name" content="冯志浩的个人博客">
-<meta property="og:updated_time" content="2017-01-06T07:22:03.000Z">
+<meta property="og:description" content="系统级命令
+mysql -u root -p
+brew services start mysql:启动mysql服务
+brew services stop mysql:停止mysql服务
+exit:退出mysql环境
+
+SQL语句DDL
+CREATE DATABASE - 创建新数据库
+ALTER DATABASE - 修改数据库
+CREATE TABLE - 创建新表
+ALTER TABLE -">
+<meta property="og:updated_time" content="2017-01-23T12:56:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="标签">
+<meta name="twitter:title" content="mysql总结">
+<meta name="twitter:description" content="系统级命令
+mysql -u root -p
+brew services start mysql:启动mysql服务
+brew services stop mysql:停止mysql服务
+exit:退出mysql环境
+
+SQL语句DDL
+CREATE DATABASE - 创建新数据库
+ALTER DATABASE - 修改数据库
+CREATE TABLE - 创建新表
+ALTER TABLE -">
 
 
 
@@ -108,13 +141,7 @@
   };
 </script>
 
-  <title>
-  
-
-  
-    标签 | 冯志浩的个人博客
-  
-</title>
+  <title> mysql总结 | 冯志浩的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -145,7 +172,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -225,16 +252,164 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-      <div class="tag-cloud">
-        <div class="tag-cloud-title">
-            目前共计 11 个标签
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                mysql总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-23T14:23:47+08:00" content="2017-01-23">
+              2017-01-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/23/mysql总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/23/mysql总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/23/mysql总结/" class="leancloud_visitors" data-flag-title="mysql总结">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
         </div>
-        <div class="tag-cloud-tags">
-          <a href="/tags/Go/" style="font-size: 30px; color: #111">Go</a> <a href="/tags/Life/" style="font-size: 12px; color: #ccc">Life</a> <a href="/tags/MAC/" style="font-size: 12px; color: #ccc">MAC</a> <a href="/tags/MySQL/" style="font-size: 12px; color: #ccc">MySQL</a> <a href="/tags/Question/" style="font-size: 12px; color: #ccc">Question</a> <a href="/tags/Read/" style="font-size: 12px; color: #ccc">Read</a> <a href="/tags/Sublime3/" style="font-size: 12px; color: #ccc">Sublime3</a> <a href="/tags/Swift/" style="font-size: 30px; color: #111">Swift</a> <a href="/tags/Think/" style="font-size: 12px; color: #ccc">Think</a> <a href="/tags/booklist/" style="font-size: 12px; color: #ccc">booklist</a> <a href="/tags/shell/" style="font-size: 12px; color: #ccc">shell</a>
-        </div>
-      </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="系统级命令"><a href="#系统级命令" class="headerlink" title="系统级命令"></a>系统级命令</h3><ul>
+<li>mysql -u root -p</li>
+<li>brew services start mysql:启动mysql服务</li>
+<li>brew services stop mysql:停止mysql服务</li>
+<li>exit:退出mysql环境</li>
+</ul>
+<h3 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h3><h4 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h4><ul>
+<li>CREATE DATABASE - 创建新数据库</li>
+<li>ALTER DATABASE - 修改数据库</li>
+<li>CREATE TABLE - 创建新表</li>
+<li>ALTER TABLE - 变更（改变）数据库表</li>
+<li>DROP TABLE - 删除表</li>
+<li>CREATE INDEX - 创建索引（搜索键）</li>
+<li>DROP INDEX - 删除索引<h4 id="DML"><a href="#DML" class="headerlink" title="DML"></a>DML</h4></li>
+<li>增<br>INSERT INTO Persons VALUES (2, ‘Gates’, ‘Bill’, ‘Xuanwumen 10’, ‘Beijing’)</li>
+<li><p>删<br>DELETE FROM Person WHERE LastName = ‘Wilson’<br>DELETE FROM table_name or DELETE * FROM table_name:可以在不删除表的情况下删除所有的行。这意味着表的结构、属性和索引都是完整</p>
+</li>
+<li><p>改<br>UPDATE Person SET FirstName = ‘Fred’ WHERE LastName = ‘Wilson’ </p>
+</li>
+<li>查<br><code>*</code>代表所有的列<br>SELECT username FROM userinfo<br>SELECT * FROM Persons WHERE City=’Beijing’</li>
+</ul>
+<h3 id="MySQL工具"><a href="#MySQL工具" class="headerlink" title="MySQL工具"></a>MySQL工具</h3><ul>
+<li>Sequel Pro<h3 id="用户的相关操作"><a href="#用户的相关操作" class="headerlink" title="用户的相关操作"></a>用户的相关操作</h3></li>
+<li><a href="http://www.jianshu.com/p/d7b9c468f20d" target="_blank" rel="external">http://www.jianshu.com/p/d7b9c468f20d</a></li>
+<li><a href="https://libuchao.com/2013/04/06/mysql-user-and-privilege" target="_blank" rel="external">https://libuchao.com/2013/04/06/mysql-user-and-privilege</a><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3></li>
+<li><a href="http://blog.itpub.net/26148431/viewspace-1466379/" target="_blank" rel="external">http://blog.itpub.net/26148431/viewspace-1466379/</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag">#MySQL</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/23/shell学习之路/" rel="next" title="shell学习之路">
+                <i class="fa fa-chevron-left"></i> shell学习之路
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/24/Go学习之路-错误总结/" rel="prev" title="Go学习之路-错误总结">
+                Go学习之路-错误总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -245,8 +420,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="tags/index.html"
-           data-title="标签" data-url="http://yoursite.com/tags/index.html">
+      <div class="ds-thread" data-thread-key="2017/01/23/mysql总结/"
+           data-title="mysql总结" data-url="http://yoursite.com/2017/01/23/mysql总结/">
       </div>
     
   </div>
@@ -270,8 +445,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -314,6 +498,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统级命令"><span class="nav-number">1.</span> <span class="nav-text">系统级命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL语句"><span class="nav-number">2.</span> <span class="nav-text">SQL语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DDL"><span class="nav-number">2.1.</span> <span class="nav-text">DDL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DML"><span class="nav-number">2.2.</span> <span class="nav-text">DML</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL工具"><span class="nav-number">3.</span> <span class="nav-text">MySQL工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户的相关操作"><span class="nav-number">4.</span> <span class="nav-text">用户的相关操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -417,6 +612,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
