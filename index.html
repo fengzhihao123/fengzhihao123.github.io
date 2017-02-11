@@ -240,6 +240,136 @@
             
               
                 
+                <a class="post-title-link" href="/2017/02/10/LeetCode总结/" itemprop="url">
+                  LeetCode总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-10T13:07:13+08:00" content="2017-02-10">
+              2017-02-10
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/10/LeetCode总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/10/LeetCode总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/10/LeetCode总结/" class="leancloud_visitors" data-flag-title="LeetCode总结">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h2><p>1.Two Sum</p>
+<p>Example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Given nums = [2, 7, 11, 15], target = 9,</div><div class="line">Because nums[0] + nums[1] = 2 + 7 = 9,</div><div class="line">return [0, 1].</div></pre></td></tr></table></figure>
+<p>Code(Swift):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">func twoSum(_ nums: [Int], _ target: Int) -&gt; [Int] &#123;</div><div class="line">    if nums.count &lt;= 1 &#123;</div><div class="line">        return [0]</div><div class="line">    &#125;</div><div class="line">    for index1 in 0..&lt;nums.count &#123;</div><div class="line">        for index2 in index1+1..&lt;nums.count &#123;</div><div class="line">            if nums[index1] + nums[index2] == target &#123;</div><div class="line">                return [index1, index2]</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return [1]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2.Reverse Integer</p>
+<p>Example1: x = 123, return 321<br>Example2: x = -123, return -321</p>
+<p>Code:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">    func reverse(_ x: Int) -&gt; Int &#123;</div><div class="line">    var reversed = 0</div><div class="line">    var n = x</div><div class="line">    while n != 0 &#123;</div><div class="line">        let temp = reversed * 10 + n % 10</div><div class="line">        n = n / 10</div><div class="line">        if temp / 10 != reversed &#123;</div><div class="line">            reversed = 0</div><div class="line">            break</div><div class="line">        &#125;</div><div class="line">        reversed = temp</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    if reversed &gt; 2147483647 || reversed &lt; -2147483647&#123;</div><div class="line">        return 0</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    return reversed</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h2><p>1.Combine Two Tables</p>
+<p>Code(MySQL):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select a.FirstName,a.LastName,b.City,b.State from Person a left join Address b on a.PersonId = b.PersonId</div></pre></td></tr></table></figure>
+<p>考察知识点：join</p>
+<p>2.Second Highest Salary</p>
+<p>Code(MySQL):</p>
+<p>第一种解法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SELECT max(Salary)</div><div class="line">From Employee</div><div class="line">WHERE Salary not in (SELECT max(Salary) FROM Employee)</div></pre></td></tr></table></figure>
+<p>第二种解法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">select (</div><div class="line">  select distinct num from test order by num Desc limit 1 offset 1</div><div class="line">)as second</div></pre></td></tr></table></figure>
+<p>考察知识点: max函数</p>
+<p><a href="https://github.com/scottszb1987/LeetCodeInCSharp" target="_blank" rel="external">解题思路</a><br><a href="http://www.cnblogs.com/0201zcr/p/4820706.html" target="_blank" rel="external">http://www.cnblogs.com/0201zcr/p/4820706.html</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/02/08/iOS三方库总结/" itemprop="url">
                   iOS三方库总结
                 </a>
@@ -1459,116 +1589,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/22/MAC-配置文件/" itemprop="url">
-                  MAC 配置文件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-22T10:57:15+08:00" content="2017-01-22">
-              2017-01-22
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/01/22/MAC-配置文件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/22/MAC-配置文件/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/01/22/MAC-配置文件/" class="leancloud_visitors" data-flag-title="MAC 配置文件">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://elf8848.iteye.com/blog/1582137" target="_blank" rel="external">http://elf8848.iteye.com/blog/1582137</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1614,7 +1634,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1624,7 +1644,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
