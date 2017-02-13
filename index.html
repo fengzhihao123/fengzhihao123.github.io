@@ -316,10 +316,18 @@
 <p>2.Second Highest Salary</p>
 <p>Code(MySQL):</p>
 <p>第一种解法:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SELECT max(Salary)</div><div class="line">From Employee</div><div class="line">WHERE Salary not in (SELECT max(Salary) FROM Employee)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SELECT max(Salary) as SecondHighestSalary</div><div class="line">From Employee</div><div class="line">WHERE Salary not in (SELECT max(Salary) FROM Employee)</div></pre></td></tr></table></figure>
 <p>第二种解法:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">select (</div><div class="line">  select distinct num from test order by num Desc limit 1 offset 1</div><div class="line">)as second</div></pre></td></tr></table></figure>
 <p>考察知识点: max函数</p>
+<ol>
+<li>Employees Earning More Than Their Managers</li>
+</ol>
+<p>Code(MySQL):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SELECT E1.Name as Employee</div><div class="line">FROM Employee as E1, Employee as E2</div><div class="line">WHERE E1.ManagerId = E2.id and E1.Salary &gt; E2.Salary</div></pre></td></tr></table></figure>
+<p>4.Duplicate Emails</p>
+<p>Code(MySQL):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT email as `Email` FROM Person GROUP BY email HAVING count(*) &gt; 1</div></pre></td></tr></table></figure>
 <p><a href="https://github.com/scottszb1987/LeetCodeInCSharp" target="_blank" rel="external">解题思路</a><br><a href="http://www.cnblogs.com/0201zcr/p/4820706.html" target="_blank" rel="external">http://www.cnblogs.com/0201zcr/p/4820706.html</a></p>
 
           
