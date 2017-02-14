@@ -333,6 +333,9 @@
 <p>4.Duplicate Emails</p>
 <p>Code(MySQL):</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT email as `Email` FROM Person GROUP BY email HAVING count(*) &gt; 1</div></pre></td></tr></table></figure>
+<p>5.Customers Who Never Order</p>
+<p>Code(MySQL):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">select a.Name as Customers from Customers a </div><div class="line">left join Orders o on(o.CustomerId = a.Id)</div><div class="line">where o.Id is null</div></pre></td></tr></table></figure>
 <p><a href="https://github.com/scottszb1987/LeetCodeInCSharp" target="_blank" rel="external">解题思路</a><br><a href="http://www.cnblogs.com/0201zcr/p/4820706.html" target="_blank" rel="external">http://www.cnblogs.com/0201zcr/p/4820706.html</a></p>
 
           
