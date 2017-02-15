@@ -240,6 +240,132 @@
             
               
                 
+                <a class="post-title-link" href="/2017/02/14/Swift-Perfect的总结/" itemprop="url">
+                  Swift-Perfect的总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-14T16:42:37+08:00" content="2017-02-14">
+              2017-02-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/14/Swift-Perfect的总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/14/Swift-Perfect的总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/14/Swift-Perfect的总结/" class="leancloud_visitors" data-flag-title="Swift-Perfect的总结">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="配置Xcode运行项目"><a href="#配置Xcode运行项目" class="headerlink" title="配置Xcode运行项目"></a>配置Xcode运行项目</h3><p>Path: <code>Build Setting</code> -&gt; <code>Import Paths</code><br>将下面的命令添加到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(PROJECT_DIR) - Recursive</div></pre></td></tr></table></figure></p>
+<p><img src="/images/Xcode.png" alt="Xcode"></p>
+<ul>
+<li>配置Package.swift</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">import PackageDescription</div><div class="line"></div><div class="line">let package = Package(</div><div class="line">    name: &quot;PerfectTemplate&quot;,</div><div class="line">    targets: [],</div><div class="line">    dependencies: [</div><div class="line">        .Package(url: &quot;https://github.com/PerfectlySoft/Perfect-HTTPServer.git&quot;,</div><div class="line">            majorVersion: 2, minor: 0),</div><div class="line">        .Package(url: &quot;https://github.com/PerfectlySoft/Perfect-Mustache.git&quot;,</div><div class="line">            majorVersion: 2, minor: 0)</div><div class="line">    ]</div><div class="line">)</div></pre></td></tr></table></figure>
+<ul>
+<li>生成Xcode可管理文件的命令：<code>swift package generate-xcodeproj</code><h3 id="查看post-request"><a href="#查看post-request" class="headerlink" title="查看post request"></a>查看post request</h3></li>
+<li><a href="http://baike.baidu.com/link?url=s-rtwe9o5PCuiAV0qbus4QloNz2VqRhTTqDruM55SrCtbwr0u3Br6RdZSOEH6QGGB5ButA28II-csaDyNCLZsK" target="_blank" rel="external">curl</a></li>
+<li>Postman</li>
+</ul>
+<h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h3><ul>
+<li>Alamofire中header的作用</li>
+<li><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3></li>
+<li><a href="http://www.cnblogs.com/ludashi/p/6160898.html" target="_blank" rel="external">Swift3.0服务端开发(二) 静态文件添加、路由配置以及表单提交</a></li>
+<li><a href="http://www.cocoachina.com/swift/20160318/15712.html" target="_blank" rel="external">Hello，服务端 Swift</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/02/10/LeetCode总结/" itemprop="url">
                   LeetCode总结
                 </a>
@@ -772,16 +898,31 @@
 <li>204 No Content：请求正常处理，没有内容返回</li>
 <li>206 Partial Content：范围请求</li>
 </ul>
-<h4 id="3xx"><a href="#3xx" class="headerlink" title="3xx"></a>3xx</h4><h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><ul>
+<h4 id="3xx"><a href="#3xx" class="headerlink" title="3xx"></a>3xx</h4><ul>
+<li>301 Moved Permanently:永久性重定向</li>
+<li>302 Found：临时性重定向</li>
+<li>303 See Other：请求对应的资源存在另一个URI，应该使用GET定向获取资源</li>
+<li>304 Not Modified</li>
+<li>307 Temporary Redirect</li>
+</ul>
+<h4 id="4XX"><a href="#4XX" class="headerlink" title="4XX"></a>4XX</h4><ul>
+<li>400 Bad Request：请求报文中存在语法错误</li>
+<li>403 Forbidden：服务器拒绝对请求资源的访问</li>
+<li>404 Not Found：没有找到资源或服务器拒绝访问</li>
+</ul>
+<h4 id="5XX"><a href="#5XX" class="headerlink" title="5XX"></a>5XX</h4><ul>
+<li>500 Internal Server Error</li>
+<li>502 Bad Gateway</li>
+<li>503 Service Unavailable</li>
+</ul>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><ul>
 <li>GET：获取资源</li>
 <li>POST：修改资源</li>
 <li>PUT：上传文件（一般不适用该方法，因为自身没有验证机制，任何人都可以上传，存在安全性问题）</li>
 <li>DELETE：删除文件，一般不用，原因同上</li>
 </ul>
-<h3 id="HTTP三次握手"><a href="#HTTP三次握手" class="headerlink" title="HTTP三次握手"></a>HTTP三次握手</h3><p>第一次握手：client发送SYN包给server，进入SYN_SEND状态，等待server确认<br>第二次握手：server收到SYN包，确认收到客户的SYN包，同时自己发送一个SYN+ACK包，此时服务器进入SYN_RECV状态<br>第三次握手：client收到server的SYN+ACK包，向服务器发送确认ACK，此包发送完毕，client和server进入ESTABLISHED状态，完成三次握手。<br><!-- 第一次握手：客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；
-第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；
-第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手 --></p>
-
+<h3 id="HTTP三次握手"><a href="#HTTP三次握手" class="headerlink" title="HTTP三次握手"></a>HTTP三次握手</h3><p>第一次握手：client发送SYN包给server，进入SYN_SEND状态，等待server确认<br>第二次握手：server收到SYN包，确认收到客户的SYN包，同时自己发送一个SYN+ACK包，此时服务器进入SYN_RECV状态<br>第三次握手：client收到server的SYN+ACK包，向服务器发送确认ACK，此包发送完毕，client和server进入ESTABLISHED状态，完成三次握手。</p>
+<h3 id="读书记录-第五章"><a href="#读书记录-第五章" class="headerlink" title="读书记录 第五章"></a>读书记录 第五章</h3>
           
         
       
@@ -1488,123 +1629,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/23/booklist/" itemprop="url">
-                  booklist
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-23T08:49:36+08:00" content="2017-01-23">
-              2017-01-23
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/01/23/booklist/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/23/booklist/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/01/23/booklist/" class="leancloud_visitors" data-flag-title="booklist">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="技术相关书籍"><a href="#技术相关书籍" class="headerlink" title="技术相关书籍"></a>技术相关书籍</h3><h4 id="已读"><a href="#已读" class="headerlink" title="已读"></a>已读</h4><ul>
-<li><h4 id="未读"><a href="#未读" class="headerlink" title="未读"></a>未读</h4></li>
-<li>大话数据结构</li>
-<li>图解http</li>
-</ul>
-<h3 id="非技术书籍"><a href="#非技术书籍" class="headerlink" title="非技术书籍"></a>非技术书籍</h3><h4 id="已读-1"><a href="#已读-1" class="headerlink" title="已读"></a>已读</h4><ul>
-<li>蔡康永的说话之道上</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1650,7 +1674,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1660,7 +1684,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
