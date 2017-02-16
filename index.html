@@ -240,6 +240,120 @@
             
               
                 
+                <a class="post-title-link" href="/2017/02/16/BeeGo总结/" itemprop="url">
+                  BeeGo总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-16T15:00:22+08:00" content="2017-02-16">
+              2017-02-16
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/16/BeeGo总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/16/BeeGo总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/16/BeeGo总结/" class="leancloud_visitors" data-flag-title="BeeGo总结">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>设置primary key  <code>orm:&quot;pk;column(Userid);&quot;</code></li>
+<li><code>Unknown column ‘XXX’ in ‘field list’</code>:重新写字段  <a href="http://docs.wex5.com/bex5-server-question-list-10013/" target="_blank" rel="external">http://docs.wex5.com/bex5-server-question-list-10013/</a></li>
+<li></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/02/14/Swift-Perfect的总结/" itemprop="url">
                   Swift-Perfect的总结
                 </a>
@@ -307,7 +421,8 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">import PackageDescription</div><div class="line"></div><div class="line">let package = Package(</div><div class="line">    name: &quot;PerfectTemplate&quot;,</div><div class="line">    targets: [],</div><div class="line">    dependencies: [</div><div class="line">        .Package(url: &quot;https://github.com/PerfectlySoft/Perfect-HTTPServer.git&quot;,</div><div class="line">            majorVersion: 2, minor: 0),</div><div class="line">        .Package(url: &quot;https://github.com/PerfectlySoft/Perfect-Mustache.git&quot;,</div><div class="line">            majorVersion: 2, minor: 0)</div><div class="line">    ]</div><div class="line">)</div></pre></td></tr></table></figure>
 <ul>
-<li>生成Xcode可管理文件的命令：<code>swift package generate-xcodeproj</code><h3 id="查看post-request"><a href="#查看post-request" class="headerlink" title="查看post request"></a>查看post request</h3></li>
+<li>生成Xcode可管理文件的命令：<code>swift package generate-xcodeproj</code></li>
+<li>运行的命令:<code>.build/debug/PerfectTemplate</code><h3 id="查看post-request"><a href="#查看post-request" class="headerlink" title="查看post request"></a>查看post request</h3></li>
 <li><a href="http://baike.baidu.com/link?url=s-rtwe9o5PCuiAV0qbus4QloNz2VqRhTTqDruM55SrCtbwr0u3Br6RdZSOEH6QGGB5ButA28II-csaDyNCLZsK" target="_blank" rel="external">curl</a></li>
 <li>Postman</li>
 </ul>
@@ -462,6 +577,11 @@
 <p>5.Customers Who Never Order</p>
 <p>Code(MySQL):</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">select a.Name as Customers from Customers a </div><div class="line">left join Orders o on(o.CustomerId = a.Id)</div><div class="line">where o.Id is null</div></pre></td></tr></table></figure>
+<p>6.Delete Duplicate Emails</p>
+<p>Code(MySQL):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DELETE p1</div><div class="line">FROM Person p1, Person p2</div><div class="line">WHERE p1.Email = p2.Email AND</div><div class="line">p1.Id &gt; p2.Id</div></pre></td></tr></table></figure>
+<p>7.Rising Temperature</p>
+<p>Code(MySQL):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">select w1.Id from Weather w1, Weather w2</div><div class="line">where subdate(w1.Date, 1) = w2.Date </div><div class="line">and w1.Temperature &gt; w2.Temperature</div><div class="line"></div><div class="line">select w1.Id</div><div class="line">from Weather w1, Weather w2</div><div class="line">where w1.Temperature &gt; w2.Temperature</div><div class="line">and to_days(w1.DATE) - to_days(w2.date) = 1;</div></pre></td></tr></table></figure></p>
 <p><a href="https://github.com/scottszb1987/LeetCodeInCSharp" target="_blank" rel="external">解题思路</a><br><a href="http://www.cnblogs.com/0201zcr/p/4820706.html" target="_blank" rel="external">http://www.cnblogs.com/0201zcr/p/4820706.html</a></p>
 
           
@@ -922,6 +1042,10 @@
 <li>DELETE：删除文件，一般不用，原因同上</li>
 </ul>
 <h3 id="HTTP三次握手"><a href="#HTTP三次握手" class="headerlink" title="HTTP三次握手"></a>HTTP三次握手</h3><p>第一次握手：client发送SYN包给server，进入SYN_SEND状态，等待server确认<br>第二次握手：server收到SYN包，确认收到客户的SYN包，同时自己发送一个SYN+ACK包，此时服务器进入SYN_RECV状态<br>第三次握手：client收到server的SYN+ACK包，向服务器发送确认ACK，此包发送完毕，client和server进入ESTABLISHED状态，完成三次握手。</p>
+<ul>
+<li>session/cookie</li>
+<li>json web token</li>
+</ul>
 <h3 id="读书记录-第五章"><a href="#读书记录-第五章" class="headerlink" title="读书记录 第五章"></a>读书记录 第五章</h3>
           
         
@@ -1504,131 +1628,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/23/shell学习之路/" itemprop="url">
-                  shell学习之路
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-23T13:44:16+08:00" content="2017-01-23">
-              2017-01-23
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/01/23/shell学习之路/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/23/shell学习之路/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/01/23/shell学习之路/" class="leancloud_visitors" data-flag-title="shell学习之路">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="相关配置文件说明"><a href="#相关配置文件说明" class="headerlink" title="相关配置文件说明"></a>相关配置文件说明</h3><ul>
-<li><p>/etc/profile（建议不修改这个文件）全局（公有）配置，不管是哪个用户，登录时都会读取该文件。</p>
-</li>
-<li><p>/etc/bashrc(一般在这个文件中添加系统级环境变量)全局(公有)配置，bash shell执行时，不管是何种方式，都会读取此文件。</p>
-</li>
-<li><p>~/.bash_profile(一般在这个文件中添加用户级环境变量)每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次!</p>
-</li>
-<li><p>想配置文件立即生效： 运行<code>source .bash_profile</code></p>
-<h3 id="切换shell"><a href="#切换shell" class="headerlink" title="切换shell"></a>切换shell</h3></li>
-<li>若为bash，在终端输入<code>zsh</code>，则切换为zsh</li>
-<li><p>若为zsh，在终端输入<code>bash</code>，则切换为bash</p>
-<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><ul>
-<li><a href="http://www.runoob.com/linux/linux-file-content-manage.html" target="_blank" rel="external">http://www.runoob.com/linux/linux-file-content-manage.html</a></li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1674,7 +1673,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1684,7 +1683,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

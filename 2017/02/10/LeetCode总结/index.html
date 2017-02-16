@@ -98,7 +98,7 @@ Example:
 123Given nums = [2, 7, 11, 15], target = 9,Because nums[0] + nums[1] = 2 + 7 = 9,return [0, 1].
 Code(Swift):
 12345678910111213func twoSum(_ nums: [Int], _ target: Int) -&amp;g">
-<meta property="og:updated_time" content="2017-02-14T04:50:29.000Z">
+<meta property="og:updated_time" content="2017-02-16T12:59:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode总结">
 <meta name="twitter:description" content="Algorithms1.Two Sum
@@ -345,6 +345,11 @@ Code(Swift):
 <p>5.Customers Who Never Order</p>
 <p>Code(MySQL):</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">select a.Name as Customers from Customers a </div><div class="line">left join Orders o on(o.CustomerId = a.Id)</div><div class="line">where o.Id is null</div></pre></td></tr></table></figure>
+<p>6.Delete Duplicate Emails</p>
+<p>Code(MySQL):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DELETE p1</div><div class="line">FROM Person p1, Person p2</div><div class="line">WHERE p1.Email = p2.Email AND</div><div class="line">p1.Id &gt; p2.Id</div></pre></td></tr></table></figure>
+<p>7.Rising Temperature</p>
+<p>Code(MySQL):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">select w1.Id from Weather w1, Weather w2</div><div class="line">where subdate(w1.Date, 1) = w2.Date </div><div class="line">and w1.Temperature &gt; w2.Temperature</div><div class="line"></div><div class="line">select w1.Id</div><div class="line">from Weather w1, Weather w2</div><div class="line">where w1.Temperature &gt; w2.Temperature</div><div class="line">and to_days(w1.DATE) - to_days(w2.date) = 1;</div></pre></td></tr></table></figure></p>
 <p><a href="https://github.com/scottszb1987/LeetCodeInCSharp" target="_blank" rel="external">解题思路</a><br><a href="http://www.cnblogs.com/0201zcr/p/4820706.html" target="_blank" rel="external">http://www.cnblogs.com/0201zcr/p/4820706.html</a></p>
 
       
@@ -458,7 +463,7 @@ Code(Swift):
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -468,7 +473,7 @@ Code(Swift):
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -240,6 +240,139 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/10/iOS项目代码规范/" itemprop="url">
+                  iOS知识点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-10T19:54:27+08:00" content="2017-01-10">
+              2017-01-10
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/10/iOS项目代码规范/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/10/iOS项目代码规范/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/10/iOS项目代码规范/" class="leancloud_visitors" data-flag-title="iOS知识点">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Xcode"><a href="#Xcode" class="headerlink" title="Xcode"></a>Xcode</h3><h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><ul>
+<li>Command+Shift+O:快速打开文件</li>
+<li>Command + Shift + J:显示左侧导航栏</li>
+<li>Control + 6:快捷查找方法</li>
+<li>快速查看谁写的代码:选中一行代码右键，选择<code>Show Blame for Line</code></li>
+</ul>
+<h3 id="项目规范"><a href="#项目规范" class="headerlink" title="项目规范"></a>项目规范</h3><ul>
+<li>属性命名规范</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, strong) NSMutableArray *orderInfoArray;</div></pre></td></tr></table></figure>
+<ul>
+<li>在逻辑表达中不要使用纯数字</li>
+</ul>
+<p>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSDictionary *dict = [arrray objectAtIndex: indexPath.row - 3];</div></pre></td></tr></table></figure>
+<p>如果你这样使用的话，在等你隔一段时间或者别人改你的代码的时候还要重新闾一遍逻辑，来看一下这个<code>3</code>到底代表什么。如果你在取得为某个product的的字典，而product所在cell上面还有三个别的cell，你可以将<code>3</code>改为<code>cellNumberTopOfProduct</code>。这样的话别人就会知道该变量代表的product上面还有几个cell，而不是在去理解<code>3</code>。</p>
+<h3 id="小知识点"><a href="#小知识点" class="headerlink" title="小知识点"></a>小知识点</h3><ul>
+<li>在使用UINavigationController的pushViewController:animated:执行入栈一个子控制器操作时，如果自控制器背景色没有设置则会出现”卡顿”现象。</li>
+</ul>
+<p>原因：这是因为从iOS7开始，UIViewController的根view的背景颜色默认为透明色即clearColor，所谓”卡顿”其实就是由于透明色重叠后，造成视觉上的错觉，所以这并不是真正的”卡顿”。</p>
+<ul>
+<li><a href="https://onevcat.com/2016/08/notification/" target="_blank" rel="external">Swift notification</a></li>
+<li><a href="http://swift.gg/2017/01/18/barcode-reader-swift/" target="_blank" rel="external">Swift 扫描二维码</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/01/10/iOS-中Unicode和中文字符的二三事/" itemprop="url">
                   iOS 中Unicode和中文字符的二三事
                 </a>
@@ -864,7 +997,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -874,7 +1007,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
