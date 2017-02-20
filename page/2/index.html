@@ -84,12 +84,15 @@
 
 
 
+<meta name="description" content="一个不安分的程序猿">
 <meta property="og:type" content="website">
 <meta property="og:title" content="冯志浩的个人博客">
 <meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="冯志浩的个人博客">
+<meta property="og:description" content="一个不安分的程序猿">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="冯志浩的个人博客">
+<meta name="twitter:description" content="一个不安分的程序猿">
 
 
 
@@ -867,152 +870,6 @@
             
               
                 
-                <a class="post-title-link" href="/2017/01/12/Go学习之路-环境配置/" itemprop="url">
-                  Go学习之路-环境配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-12T17:49:15+08:00" content="2017-01-12">
-              2017-01-12
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/01/12/Go学习之路-环境配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/12/Go学习之路-环境配置/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/01/12/Go学习之路-环境配置/" class="leancloud_visitors" data-flag-title="Go学习之路-环境配置">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>go env:打印Go的环境配置</p>
-<ul>
-<li>每一个可独立运行的Go程序，必定包含一个package main，在这个main包中必定包含一个入口函数main，而这个函数既没有参数，也没有返回值</li>
-<li>Go使用package来组织代码</li>
-<li>使用UTF-8字符串和标识符(因为UTF-8的发明者也就是Go的发明者之一)，所以它天生支持多语言</li>
-</ul>
-<h2 id="Go-的基本类型的使用"><a href="#Go-的基本类型的使用" class="headerlink" title="Go 的基本类型的使用"></a>Go 的基本类型的使用</h2><ul>
-<li><p>驼峰命名</p>
-</li>
-<li><p>var方式来定义全局变量,<code>:=</code>这个符号直接取代了var和type,这种形式叫做简短声明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vname1, vname2 := 2, 10.0</div><div class="line">	fmt.Printf(&quot;vname1 = %d\n,vname2=%f&quot;, vname1, vname2)</div></pre></td></tr></table></figure>
-</li>
-<li><p>Go对于已声明但未使用的变量会在编译阶段报错</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">    func main() &#123;</div><div class="line">        var i int</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>需要注意的一点是，不同数据类型的变量之间不允许互相赋值或操作，不然会在编译时引起编译器报错-<code>invalid operation: a + b (mismatched types int8 and int32)</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var a int8</div><div class="line">var b int32</div><div class="line">c:=a + b</div></pre></td></tr></table></figure>
-</li>
-<li><p>在Go中字符串是不可变的-<code>cannot assign to s[0]</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var s string = &quot;hello&quot;</div><div class="line">    s[0] = &apos;c&apos;</div></pre></td></tr></table></figure>
-</li>
-<li><p>`为打印当前字符串</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">m := `hello</div><div class="line">    world`</div></pre></td></tr></table></figure>
-</li>
-<li><p>在Go语言中，同时声明多个常量、变量，或者导入多个包时，可采用分组的方式进行声明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">import(</div><div class="line">        &quot;fmt&quot;</div><div class="line">        &quot;os&quot;</div><div class="line">    )</div><div class="line"></div><div class="line">    const(</div><div class="line">        i = 100</div><div class="line">        pi = 3.1415</div><div class="line">        prefix = &quot;Go_&quot;</div><div class="line">    )</div><div class="line"></div><div class="line">    var(</div><div class="line">        i int</div><div class="line">        pi float32</div><div class="line">        prefix string</div><div class="line">    )</div></pre></td></tr></table></figure>
-</li>
-<li><p>大写字母开头的变量是可导出的，也就是其它包可以读取的，是公有变量；小写字母开头的就是不可导出的，是私有变量。</p>
-</li>
-<li>大写字母开头的函数也是一样，相当于class中的带public关键词的公有函数；小写字母开头的就是有private关键词的私有函数。</li>
-<li>Go里面switch默认相当于每个case最后带有break</li>
-<li>Go中的switch可以使用fallthrough强制执行后面的case代码</li>
-<li>defer是采用后进先出模式</li>
-</ul>
-<h3 id="Go的学习资料"><a href="#Go的学习资料" class="headerlink" title="Go的学习资料"></a>Go的学习资料</h3><ul>
-<li><a href="http://www.kancloud.cn/kancloud/the-way-to-go/72675" target="_blank" rel="external">中文版Go入门指南</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2017/01/12/Swift学习之路-Protocol/" itemprop="url">
                   Swift学习之路-Protocol
                 </a>
@@ -1526,6 +1383,139 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/10/iOS项目代码规范/" itemprop="url">
+                  iOS知识点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-10T19:54:27+08:00" content="2017-01-10">
+              2017-01-10
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/10/iOS项目代码规范/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/10/iOS项目代码规范/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/10/iOS项目代码规范/" class="leancloud_visitors" data-flag-title="iOS知识点">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Xcode"><a href="#Xcode" class="headerlink" title="Xcode"></a>Xcode</h3><h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><ul>
+<li>Command+Shift+O:快速打开文件</li>
+<li>Command + Shift + J:显示左侧导航栏</li>
+<li>Control + 6:快捷查找方法</li>
+<li>快速查看谁写的代码:选中一行代码右键，选择<code>Show Blame for Line</code></li>
+</ul>
+<h3 id="项目规范"><a href="#项目规范" class="headerlink" title="项目规范"></a>项目规范</h3><ul>
+<li>属性命名规范</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, strong) NSMutableArray *orderInfoArray;</div></pre></td></tr></table></figure>
+<ul>
+<li>在逻辑表达中不要使用纯数字</li>
+</ul>
+<p>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSDictionary *dict = [arrray objectAtIndex: indexPath.row - 3];</div></pre></td></tr></table></figure>
+<p>如果你这样使用的话，在等你隔一段时间或者别人改你的代码的时候还要重新闾一遍逻辑，来看一下这个<code>3</code>到底代表什么。如果你在取得为某个product的的字典，而product所在cell上面还有三个别的cell，你可以将<code>3</code>改为<code>cellNumberTopOfProduct</code>。这样的话别人就会知道该变量代表的product上面还有几个cell，而不是在去理解<code>3</code>。</p>
+<h3 id="小知识点"><a href="#小知识点" class="headerlink" title="小知识点"></a>小知识点</h3><ul>
+<li>在使用UINavigationController的pushViewController:animated:执行入栈一个子控制器操作时，如果自控制器背景色没有设置则会出现”卡顿”现象。</li>
+</ul>
+<p>原因：这是因为从iOS7开始，UIViewController的根view的背景颜色默认为透明色即clearColor，所谓”卡顿”其实就是由于透明色重叠后，造成视觉上的错觉，所以这并不是真正的”卡顿”。</p>
+<ul>
+<li><a href="https://onevcat.com/2016/08/notification/" target="_blank" rel="external">Swift notification</a></li>
+<li><a href="http://swift.gg/2017/01/18/barcode-reader-swift/" target="_blank" rel="external">Swift 扫描二维码</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1566,12 +1556,12 @@
                src="/images/avatar.png"
                alt="冯志浩" />
           <p class="site-author-name" itemprop="name">冯志浩</p>
-          <p class="site-description motion-element" itemprop="description">一名iOS开发者</p>
+          <p class="site-description motion-element" itemprop="description">一个不安分的程序猿</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
