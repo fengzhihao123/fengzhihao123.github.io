@@ -1148,6 +1148,38 @@
 <li><p><a href="https://golang.org/pkg/builtin/" target="_blank" rel="external">Go builtin</a></p>
 </li>
 </ul>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><h4 id="拼接字符串各种方法的性能"><a href="#拼接字符串各种方法的性能" class="headerlink" title="拼接字符串各种方法的性能"></a>拼接字符串各种方法的性能</h4><ul>
+<li>在循环中使用加号 + 拼接字符串并不是最高效的做法，更好的办法是使用函数 strings.Join()（第 4.7.10 节），有没有更好地办法了？有！使用字节缓冲（bytes.Buffer）拼接更加给力</li>
+</ul>
+<h4 id="strings-package"><a href="#strings-package" class="headerlink" title="strings package"></a>strings package</h4><ul>
+<li>strings.HasPrefix(s, prefix string) bool: 判断前缀</li>
+<li>strings.HasSuffix(s, suffix string) bool: 判断后缀</li>
+<li>strings.Contains(s, substr string) bool: 包含字符</li>
+<li>strings.Index(s, str string) int: str在s中的索引,返回-1代表要查询的字符串不存在</li>
+<li>strings.LastIndex(s, str string) int: str在s中的最后一次的索引,返回-1代表要查询的字符串不存在</li>
+<li>strings.IndexRune(s string, r rune) int:非ASCII编码的字符，建议使用该函数来对字符进行定位</li>
+<li>strings.Replace(str, old, new, n) string: Replace 用于将字符串 str 中的前 n 个字符串 old 替换为字符串 new，并返回一个新的字符串，如果 n = -1 则替换所有字符串 old 为字符串 new</li>
+<li>strings.Count(s, str string) int: Count 用于计算字符串 str 在字符串 s 中出现的非重叠次数</li>
+<li>strings.Repeat(s, count int) string: Repeat 用于重复 count 次字符串 s 并返回一个新的字符串</li>
+<li>strings.ToLower(s) string: 将字符串中的 Unicode 字符全部转换为相应的小写字符</li>
+<li>strings.ToUpper(s) string: 将字符串中的 Unicode 字符全部转换为相应的大写字符</li>
+<li>strings.TrimSpace(s):  来剔除字符串开头和结尾的空白符号</li>
+<li>strings.Trim(s, “cut”): 将开头和结尾的 cut 去除掉</li>
+<li>TrimLeft/TrimRight: 只想剔除开头或者结尾的字符串</li>
+<li>strings.Fields(s):利用个空白符号来作为动态长度的分隔符将字符串分割成若干小块，并返回一个 slice</li>
+<li>strings.Split(s, sep): 用于自定义分割符号来对指定字符串进行分割，同样返回 slice</li>
+<li>strings.Join(sl []string, sep string) string: Join 用于将元素类型为 string 的 slice 使用分割符号来拼接组成一个字符串</li>
+</ul>
+<p><a href="https://github.com/Unknwon/the-way-to-go_ZH_CN/blob/master/eBook/04.7.md" target="_blank" rel="external">参考原文</a></p>
+<h3 id="Time"><a href="#Time" class="headerlink" title="Time"></a>Time</h3><h4 id="time-package"><a href="#time-package" class="headerlink" title="time package"></a>time package</h4><ul>
+<li>code example</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">t := time.Now()</div><div class="line">fmt.Println(t) // e.g. Wed Dec 21 09:52:14 +0100 RST 2011</div><div class="line">fmt.Printf(&quot;%02d.%02d.%4d\n&quot;, t.Day(), t.Month(), t.Year())</div><div class="line">// 21.12.2011</div><div class="line">t = time.Now().UTC()</div><div class="line">fmt.Println(t) // Wed Dec 21 08:52:14 +0000 UTC 2011</div><div class="line">fmt.Println(time.Now()) // Wed Dec 21 09:52:14 +0100 RST 2011</div><div class="line">// calculating times:</div><div class="line">week = 60 * 60 * 24 * 7 * 1e9 // must be in nanosec</div><div class="line">week_from_now := t.Add(week)</div><div class="line">fmt.Println(week_from_now) // Wed Dec 28 08:52:14 +0000 UTC 2011</div><div class="line">// formatting times:</div><div class="line">fmt.Println(t.Format(time.RFC822)) // 21 Dec 11 0852 UTC</div><div class="line">fmt.Println(t.Format(time.ANSIC)) // Wed Dec 21 08:56:34 2011</div><div class="line">fmt.Println(t.Format(&quot;02 Jan 2006 15:04&quot;)) // 21 Dec 2011 08:52</div><div class="line">s := t.Format(&quot;20060102&quot;)</div><div class="line">fmt.Println(t, &quot;=&gt;&quot;, s)</div><div class="line">// Wed Dec 21 08:52:14 +0000 UTC 2011 =&gt; 20111221</div></pre></td></tr></table></figure>
+<ul>
+<li>如果你需要在应用程序在经过一定时间或周期执行某项任务（事件处理的特例），则可以使用 time.After 或者 time.Ticker： </li>
+<li>time.Sleep（Duration d）可以实现对某个进程（实质上是 goroutine）</li>
+</ul>
+<p><a href="https://github.com/Unknwon/the-way-to-go_ZH_CN/blob/master/eBook/04.8.md" target="_blank" rel="external">参考原文</a></p>
 
           
         
