@@ -243,6 +243,137 @@
             
               
                 
+                <a class="post-title-link" href="/2017/02/25/将开源项目放到CocoaPods/" itemprop="url">
+                  将开源项目放到CocoaPods
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-25T11:31:10+08:00" content="2017-02-25">
+              2017-02-25
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/25/将开源项目放到CocoaPods/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/25/将开源项目放到CocoaPods/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/25/将开源项目放到CocoaPods/" class="leancloud_visitors" data-flag-title="将开源项目放到CocoaPods">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="pod-相关命令"><a href="#pod-相关命令" class="headerlink" title="pod 相关命令"></a>pod 相关命令</h3><ul>
+<li><a href="http://stackoverflow.com/questions/32304421/whats-the-different-between-pod-spec-lint-and-pod-lib-lint" target="_blank" rel="external">what’s the different between ‘pod spec lint’ and ‘pod lib lint’</a></li>
+</ul>
+<h3 id="中途遇到的错误"><a href="#中途遇到的错误" class="headerlink" title="中途遇到的错误"></a>中途遇到的错误</h3><ul>
+<li>error:ERROR:While executing gem … (Errno::EPERM)Operation not permitted - /usr/bin/pod.<a href="http://stackoverflow.com/questions/30812777/cannot-install-cocoa-pods-after-uninstalling-results-in-error/30851030#30851030" target="_blank" rel="external">answer</a></li>
+<li>error: Unable to find a pod with name, author, summary, or description matching <code>FZHInitialize</code> <a href="http://blog.cocoachina.com/article/29127" target="_blank" rel="external">answer</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pod setup成功后，依然不能pod search，是因为之前你执行pod search生成了search_index.json，此时需要删掉。</div><div class="line">终端输入：rm ~/Library/Caches/CocoaPods/search_index.json</div><div class="line">删除成功后，再执行pod search。</div></pre></td></tr></table></figure>
+<ul>
+<li>error:ERROR | [iOS] file patterns: The <code>source_files</code> pattern did not match any file.</li>
+</ul>
+<p>可能原因:</p>
+<ul>
+<li>This was also driving me nuts for ‘hours’. I then discovered that the files and tags must be present in the source git repo. So make sure you push your code and your tags to the remote repo</li>
+</ul>
+<p>我的情况的最终解决办法：将<code>s.source</code>中的tag改为最近的commit<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s.source       = &#123; :git =&gt; &quot;https://github.com/fengzhihao123/FZHProjectInitializer.git&quot;, :commit =&gt; &quot;e004159d7d4cf32734ca52680b6af1bd5516aaf2&quot; &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
+<li><a href="http://guides.cocoapods.org/making/specs-and-specs-repo.html" target="_blank" rel="external">CocoaPods</a></li>
+<li><a href="http://www.jianshu.com/p/32ba94d41861" target="_blank" rel="external">如何发布自己的开源框架到CocoaPods</a></li>
+<li><a href="http://caibaojian.com/github-create-tag.html" target="_blank" rel="external">如何创建tag</a></li>
+<li><a href="https://onevcat.com/2016/01/create-framework/" target="_blank" rel="external">如何打造一个让人愉快的框架</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/02/16/BeeGo总结/" itemprop="url">
                   BeeGo总结
                 </a>
@@ -1502,131 +1633,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/23/shell学习之路/" itemprop="url">
-                  shell学习之路
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-23T13:44:16+08:00" content="2017-01-23">
-              2017-01-23
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/01/23/shell学习之路/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/23/shell学习之路/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/01/23/shell学习之路/" class="leancloud_visitors" data-flag-title="shell学习之路">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="相关配置文件说明"><a href="#相关配置文件说明" class="headerlink" title="相关配置文件说明"></a>相关配置文件说明</h3><ul>
-<li><p>/etc/profile（建议不修改这个文件）全局（公有）配置，不管是哪个用户，登录时都会读取该文件。</p>
-</li>
-<li><p>/etc/bashrc(一般在这个文件中添加系统级环境变量)全局(公有)配置，bash shell执行时，不管是何种方式，都会读取此文件。</p>
-</li>
-<li><p>~/.bash_profile(一般在这个文件中添加用户级环境变量)每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次!</p>
-</li>
-<li><p>想配置文件立即生效： 运行<code>source .bash_profile</code></p>
-<h3 id="切换shell"><a href="#切换shell" class="headerlink" title="切换shell"></a>切换shell</h3></li>
-<li>若为bash，在终端输入<code>zsh</code>，则切换为zsh</li>
-<li><p>若为zsh，在终端输入<code>bash</code>，则切换为bash</p>
-<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><ul>
-<li><a href="http://www.runoob.com/linux/linux-file-content-manage.html" target="_blank" rel="external">http://www.runoob.com/linux/linux-file-content-manage.html</a></li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1672,7 +1678,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1682,7 +1688,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
