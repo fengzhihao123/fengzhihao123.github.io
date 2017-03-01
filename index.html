@@ -243,6 +243,134 @@
             
               
                 
+                <a class="post-title-link" href="/2017/03/01/FZHProjectInitializer介绍/" itemprop="url">
+                  FZHProjectInitializer介绍
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-01T13:18:47+08:00" content="2017-03-01">
+              2017-03-01
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/01/FZHProjectInitializer介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/01/FZHProjectInitializer介绍/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/03/01/FZHProjectInitializer介绍/" class="leancloud_visitors" data-flag-title="FZHProjectInitializer介绍">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ul>
+<li>实现语言:Swift(3.0)</li>
+<li>当前版本:0.0.2</li>
+</ul>
+<p>该框架主要解决每次创建新项目的时候都要重新搭建项目框架的问题。<br>框架文件如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">--- FZHProjectInitializer</div><div class="line"> --- FZHTabBar.swift </div><div class="line"> --- FZHTabBarButton.swift   </div><div class="line"> --- FZHNavigationController.swift   </div><div class="line"> --- FZHTabBarViewController.swift</div></pre></td></tr></table></figure>
+<ul>
+<li>在 <code>FZHTabBarButton.swift</code> 中重写UIButton，改变title和iamgeView的布局，设置UIButton选中时和未选中时的字体颜色</li>
+<li>在 <code>FZHTabBar.swift</code> 中重写UIView，设置根据传入的控制器数量自动生成button的frame</li>
+<li>在 <code>FZHNavigationController.swift</code> 中，通过重写 <code>pushViewController</code> 和 <code>popViewController</code> 方法来实现隐藏自动TabBar</li>
+<li>在 <code>FZHTabBarViewController.swift</code> 中，实现 <code>setupChildVC(_ childVC: UIViewController,title: String,imageName: String,selectImageName: String)</code> 方法来添加子控制器</li>
+</ul>
+<h3 id="该框架的功能"><a href="#该框架的功能" class="headerlink" title="该框架的功能"></a>该框架的功能</h3><ul>
+<li>快速实现搭建传统框架: UITabBarController + UINavigationController</li>
+<li>当从导航栏的主页面push到子页面时，自动隐藏TabBar(现在有两种隐藏方式:1.直接hidden，类似于微信；2.有动画效果，类似于京东)</li>
+<li>可以通过<code>selectColor</code>和<code>normalColor</code>自定义TabBar按钮的选中状态和未选中的颜色</li>
+</ul>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>这是我的第一个开源框架，可能存在很多问题，希望大家可以在使用的过程中提出自己发现的问题，如果大家有什么后续想加的功能可以在github提issue，我会尽自己最大的努力来实现。如果大家觉得该框架给大家提供了一点便利的话，还请点个star支持一下！！！</p>
+<p><a href="https://github.com/fengzhihao123/FZHProjectInitializer" target="_blank" rel="external">该项目的github地址</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/02/25/将开源项目放到CocoaPods/" itemprop="url">
                   将开源项目放到CocoaPods
                 </a>
@@ -1467,172 +1595,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/23/mysql总结/" itemprop="url">
-                  mysql总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-23T14:23:47+08:00" content="2017-01-23">
-              2017-01-23
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/01/23/mysql总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/23/mysql总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/01/23/mysql总结/" class="leancloud_visitors" data-flag-title="mysql总结">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="系统级命令"><a href="#系统级命令" class="headerlink" title="系统级命令"></a>系统级命令</h3><ul>
-<li>mysql -u root -p</li>
-<li>brew services start mysql:启动mysql服务</li>
-<li>brew services stop mysql:停止mysql服务</li>
-<li>exit:退出mysql环境</li>
-</ul>
-<h3 id="SQL基础语句"><a href="#SQL基础语句" class="headerlink" title="SQL基础语句"></a>SQL基础语句</h3><h4 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h4><ul>
-<li>CREATE DATABASE databasename- 创建新数据库</li>
-<li>ALTER DATABASE - 修改数据库</li>
-<li>CREATE TABLE tablename- 创建新表</li>
-<li>DROP TABLE tablename - 删除表格 </li>
-<li>ALTER TABLE - 变更（改变）数据库表</li>
-<li>DROP TABLE - 删除表</li>
-<li>CREATE INDEX - 创建索引（搜索键）</li>
-<li>DROP INDEX - 删除索引</li>
-</ul>
-<h4 id="DML"><a href="#DML" class="headerlink" title="DML"></a>DML</h4><ul>
-<li><p>增<br>INSERT INTO Persons VALUES (2, ‘Gates’, ‘Bill’, ‘Xuanwumen 10’, ‘Beijing’)</p>
-</li>
-<li><p>删<br>DELETE FROM 表名称 WHERE 列名称 = 值<br>DELETE FROM Person WHERE LastName = ‘Wilson’<br>DELETE FROM table_name or DELETE * FROM table_name:可以在不删除表的情况下删除所有的行。这意味着表的结构、属性和索引都是完整</p>
-</li>
-<li><p>改<br>UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值<br>UPDATE Person SET FirstName = ‘Fred’ WHERE LastName = ‘Wilson’ </p>
-</li>
-<li><p>查<br><code>*</code>代表所有的列<br>SELECT username FROM userinfo</p>
-</li>
-</ul>
-<p>where<br>SELECT * FROM Persons WHERE City=’Beijing’</p>
-<p>and<br>select * from userinfo where username=’fzh’ and departname=’dev’</p>
-<p>distinct<br>SELECT DISTINCT Company FROM Orders :去重查找</p>
-<p>ORDER BY :默认为升序，DESC为降序<br>select username from userinfo order by created</p>
-<h3 id="SQL高级语句"><a href="#SQL高级语句" class="headerlink" title="SQL高级语句"></a>SQL高级语句</h3><ul>
-<li><p>top:限制返回数据的数量<br>SELECT username FROM userinfo LIMIT 3</p>
-</li>
-<li><p>LIKE 操作符用于在 WHERE 子句中搜索列中的指定模式<br>select * from userinfo where username like ‘f%’</p>
-</li>
-</ul>
-<p>通过使用 NOT 关键字来表示否<br>select * from userinfo where username not like ‘%a%’</p>
-<ul>
-<li><p>IN 操作符允许我们在WHERE子句中规定多个值<br>select * from userinfo where username in (‘aaa’,’fzh’)</p>
-</li>
-<li><p>BETWEEN … AND 会选取介于两个值之间的数据范围。这些值可以是数值、文本或者日期<br>select username from userinfo where username between ‘aaa’ and ‘bbb’</p>
-</li>
-</ul>
-<p>请使用 NOT 操作符来表示否<br>select username from userinfo where username not between ‘aaa’ and ‘bbb’</p>
-<ul>
-<li><p>NOT NULL 约束强制字段始终包含值。这意味着，如果不向字段添加值，就无法插入新记录或者更新记录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE Persons</div><div class="line">(</div><div class="line">Id_P int NOT NULL,</div><div class="line">LastName varchar(255) NOT NULL,</div><div class="line">FirstName varchar(255),</div><div class="line">Address varchar(255),</div><div class="line">City varchar(255)</div><div class="line">)</div></pre></td></tr></table></figure>
-</li>
-<li><p>UNIQUE 约束唯一标识数据库表中的每条记录,每个表可以有多个 UNIQUE 约束，但是每个表只能有一个 PRIMARY KEY 约束</p>
-</li>
-</ul>
-<h3 id="MySQL工具"><a href="#MySQL工具" class="headerlink" title="MySQL工具"></a>MySQL工具</h3><ul>
-<li>Sequel Pro<h3 id="用户的相关操作"><a href="#用户的相关操作" class="headerlink" title="用户的相关操作"></a>用户的相关操作</h3></li>
-<li><a href="http://www.jianshu.com/p/d7b9c468f20d" target="_blank" rel="external">http://www.jianshu.com/p/d7b9c468f20d</a></li>
-<li><a href="https://libuchao.com/2013/04/06/mysql-user-and-privilege" target="_blank" rel="external">https://libuchao.com/2013/04/06/mysql-user-and-privilege</a><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3></li>
-<li><a href="http://blog.itpub.net/26148431/viewspace-1466379/" target="_blank" rel="external">http://blog.itpub.net/26148431/viewspace-1466379/</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1678,7 +1640,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1688,7 +1650,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
