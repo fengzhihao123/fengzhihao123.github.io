@@ -100,7 +100,7 @@
 
 该框架主要解决每次创建新项目的时候都要重新搭建项目框架的问题。框架文件如下:
 12345--- FZHProjectInitializer --- FZHTabBar.swift  --- FZHTabBarButton.swift    --- FZHNavigationController.swift    --- FZHTabBa">
-<meta property="og:updated_time" content="2017-03-01T05:55:04.000Z">
+<meta property="og:updated_time" content="2017-03-01T05:58:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FZHProjectInitializer介绍">
 <meta name="twitter:description" content="简介
@@ -333,6 +333,8 @@
 <li>Cocoapods<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod &apos;FZHProjectInitializer&apos;</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><p>Code:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">let fzhTabBar = FZHTabBarViewController()</div><div class="line">fzhTabBar.selectColor = UIColor.red</div><div class="line">fzhTabBar.normalColor = UIColor.brown</div><div class="line">let firstVC = UIViewController()</div><div class="line">let secondVC = UIViewController()</div><div class="line">let thirdVC = UIViewController()</div><div class="line">let fourVC = UIViewController()  </div><div class="line"></div><div class="line">fzhTabBar.setupChildVC(firstVC, title: &quot;first&quot;, imageName: &quot;&quot;, selectImageName: &quot;&quot;)</div><div class="line">fzhTabBar.setupChildVC(secondVC, title: &quot;second&quot;, imageName: &quot;&quot;, selectImageName: &quot;&quot;)</div><div class="line">fzhTabBar.setupChildVC(thirdVC, title: &quot;third&quot;, imageName: &quot;&quot;, selectImageName: &quot;&quot;)</div><div class="line">fzhTabBar.setupChildVC(fourVC, title: &quot;four&quot;, imageName: &quot;&quot;, selectImageName: &quot;&quot;)</div><div class="line">window?.rootViewController = fzhTabBar</div></pre></td></tr></table></figure>
 <h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>这是我的第一个开源框架，可能存在很多问题，希望大家可以在使用的过程中提出自己发现的问题，如果大家有什么后续想加的功能可以在github提issue，我会尽自己最大的努力来实现。如果大家觉得该框架给大家提供了一点便利的话，还请点个star支持一下！！！</p>
 <p><a href="https://github.com/fengzhihao123/FZHProjectInitializer" target="_blank" rel="external">该项目的github地址</a></p>
 
@@ -482,7 +484,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#该框架的功能"><span class="nav-number">2.</span> <span class="nav-text">该框架的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集成到项目"><span class="nav-number">3.</span> <span class="nav-text">集成到项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束语"><span class="nav-number">4.</span> <span class="nav-text">结束语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#该框架的功能"><span class="nav-number">2.</span> <span class="nav-text">该框架的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集成到项目"><span class="nav-number">3.</span> <span class="nav-text">集成到项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用示例"><span class="nav-number">4.</span> <span class="nav-text">使用示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束语"><span class="nav-number">5.</span> <span class="nav-text">结束语</span></a></li></ol></div>
             
           </div>
         </section>
