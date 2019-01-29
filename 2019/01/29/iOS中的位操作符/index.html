@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Question," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -84,31 +84,22 @@
 
 
 
-<meta name="description" content="iOS - 七牛云SDK的使用问题总结1、问题描述
-Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com
-
-7.0 SDK
-
-123456QNUploadManager *upManager = [[QNUploadManager alloc] init];[upManager setValue:@&amp;quot;">
+<meta name="description" content="开篇今天在修改项目的时候，看见enum中出现了&amp;lt;&amp;lt;操作符，之前对这个一直都不了解，在网上查了一下这叫左移操作符(属于位操作的一种)。这次趁着项目比较空闲，全面了解一下位操作。
+位操作位操作一共包含两种操作，一种是位运算，一种是移位。下面就详细的了解一下这两种操作。在此只讨论iOS中的所有位操作的运算符，别的语言的相同含义的操作符号可能不同
+位运算符(以下操作符皆同Objective-C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Qiniu Question">
-<meta property="og:url" content="http://yoursite.com/2017/01/06/Qiniu-Question/index.html">
+<meta property="og:title" content="iOS中的位操作符.md">
+<meta property="og:url" content="http://yoursite.com/2019/01/29/iOS中的位操作符/index.html">
 <meta property="og:site_name" content="冯志浩的个人博客">
-<meta property="og:description" content="iOS - 七牛云SDK的使用问题总结1、问题描述
-Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com
-
-7.0 SDK
-
-123456QNUploadManager *upManager = [[QNUploadManager alloc] init];[upManager setValue:@&amp;quot;">
-<meta property="og:updated_time" content="2017-01-11T13:21:36.000Z">
+<meta property="og:description" content="开篇今天在修改项目的时候，看见enum中出现了&amp;lt;&amp;lt;操作符，之前对这个一直都不了解，在网上查了一下这叫左移操作符(属于位操作的一种)。这次趁着项目比较空闲，全面了解一下位操作。
+位操作位操作一共包含两种操作，一种是位运算，一种是移位。下面就详细的了解一下这两种操作。在此只讨论iOS中的所有位操作的运算符，别的语言的相同含义的操作符号可能不同
+位运算符(以下操作符皆同Objective-C">
+<meta property="og:updated_time" content="2019-01-29T14:16:32.859Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Qiniu Question">
-<meta name="twitter:description" content="iOS - 七牛云SDK的使用问题总结1、问题描述
-Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com
-
-7.0 SDK
-
-123456QNUploadManager *upManager = [[QNUploadManager alloc] init];[upManager setValue:@&amp;quot;">
+<meta name="twitter:title" content="iOS中的位操作符.md">
+<meta name="twitter:description" content="开篇今天在修改项目的时候，看见enum中出现了&amp;lt;&amp;lt;操作符，之前对这个一直都不了解，在网上查了一下这叫左移操作符(属于位操作的一种)。这次趁着项目比较空闲，全面了解一下位操作。
+位操作位操作一共包含两种操作，一种是位运算，一种是移位。下面就详细的了解一下这两种操作。在此只讨论iOS中的所有位操作的运算符，别的语言的相同含义的操作符号可能不同
+位运算符(以下操作符皆同Objective-C">
 
 
 
@@ -126,7 +117,7 @@ Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com
   };
 </script>
 
-  <title> Qiniu Question | 冯志浩的个人博客 </title>
+  <title> iOS中的位操作符.md | 冯志浩的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -256,7 +247,7 @@ Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com
             
             
               
-                Qiniu Question
+                iOS中的位操作符.md
               
             
           </h1>
@@ -268,8 +259,8 @@ Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-06T14:02:47+08:00" content="2017-01-06">
-              2017-01-06
+            <time itemprop="dateCreated" datetime="2019-01-29T21:26:24+08:00" content="2019-01-29">
+              2019-01-29
             </time>
           </span>
 
@@ -279,8 +270,8 @@ Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/01/06/Qiniu-Question/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/06/Qiniu-Question/" itemprop="commentsCount"></span>
+                <a href="/2019/01/29/iOS中的位操作符/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/01/29/iOS中的位操作符/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -290,7 +281,7 @@ Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com
 
           
           
-             <span id="/2017/01/06/Qiniu-Question/" class="leancloud_visitors" data-flag-title="Qiniu Question">
+             <span id="/2019/01/29/iOS中的位操作符/" class="leancloud_visitors" data-flag-title="iOS中的位操作符.md">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -312,17 +303,22 @@ Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com
       
 
       
-        <h2 id="iOS-七牛云SDK的使用问题总结"><a href="#iOS-七牛云SDK的使用问题总结" class="headerlink" title="iOS - 七牛云SDK的使用问题总结"></a>iOS - 七牛云SDK的使用问题总结</h2><p>1、问题描述</p>
-<p>Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com</p>
-<ul>
-<li>7.0 SDK</li>
+        <h2 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h2><p>今天在修改项目的时候，看见enum中出现了<code>&lt;&lt;</code>操作符，之前对这个一直都不了解，在网上查了一下这叫左移操作符(属于位操作的一种)。这次趁着项目比较空闲，全面了解一下位操作。</p>
+<h2 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h2><p>位操作一共包含两种操作，一种是位运算，一种是移位。下面就详细的了解一下这两种操作。<br><code>在此只讨论iOS中的所有位操作的运算符，别的语言的相同含义的操作符号可能不同</code></p>
+<h3 id="位运算符-以下操作符皆同Objective-C"><a href="#位运算符-以下操作符皆同Objective-C" class="headerlink" title="位运算符(以下操作符皆同Objective-C)"></a>位运算符(以下操作符皆同Objective-C)</h3><p>位运算符一种包含下面几种：<br>1、~(取反)<br>它会对目标数字的二进制每位都取反<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let initialBits: UInt8 = 0b00001111</div><div class="line">let invertedBits = ~initialBits  // equals 11110000</div></pre></td></tr></table></figure></p>
+<p>2、|(按位或)<br>它会对两个目标数字的相同位置的数字进行或运算(如0和0为0，0和1为1，1和1为1)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">let targetNum2 = 6 // 110</div><div class="line"></div><div class="line">print(targetNum | targetNum2) //print 7</div><div class="line">//targetNum:  101</div><div class="line">//targetNum2: 110</div><div class="line">//resutl:     111 (十进制 7)</div></pre></td></tr></table></figure></p>
+<p>3、&amp;(按位与)<br>它会对两个目标数字的相同位置的数字进行与运算(如0和0为0，0和1为0，1和1为1)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">let targetNum2 = 6 // 110</div><div class="line">print(targetNum &amp; targetNum2) //print 4</div><div class="line">//targetNum:  101</div><div class="line">//targetNum2: 110</div><div class="line">//resutl:     100 (十进制 4)</div></pre></td></tr></table></figure></p>
+<p>4、^(异或)<br>它会对两个目标数字的相同位置的数字进行异或运算，如果某位不同则该位为1，否则该位为0(如0和0为0，0和1为1，1和1为0)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">let targetNum2 = 6 // 110</div><div class="line">print(targetNum ^ targetNum2) //print 3</div><div class="line">//targetNum:  101</div><div class="line">//targetNum2: 110</div><div class="line">//resutl:     011 (十进制 3)</div></pre></td></tr></table></figure></p>
+<h3 id="移位"><a href="#移位" class="headerlink" title="移位"></a>移位</h3><p>1、&lt;&lt;(右移)<br>它会对目标数字按位右移x位<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">print(targetNum&gt;&gt;2) //print 1</div><div class="line">//targetNum:  101</div><div class="line">//右移2位</div><div class="line">//resutl:     1 (十进制 1)</div></pre></td></tr></table></figure></p>
+<p>2、&gt;&gt;(左移)<br>它会对目标数字按位左移x位(右边补0)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">print(targetNum&lt;&lt;2) //print 20</div><div class="line">//targetNum:  101</div><div class="line">//左移2位</div><div class="line">//resutl:     10100 (十进制 20)</div></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>为什么要在枚举中使用位操作符：在许多古老的微处理器上，位运算比加减运算略快，通常位运算比乘除法运算要快很多。在现代架构中，情况并非如此：位运算的运算速度通常与加法运算相同（仍然快于乘法运算）</li>
+<li>^ (异或)的规则：如果某位不同则该位为1，否则该位为0</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">QNUploadManager *upManager = [[QNUploadManager alloc] init];</div><div class="line">[upManager setValue:@&quot;http://up-z1.qiniu.com/&quot; forKeyPath:@&quot;config.up.address&quot;];</div><div class="line">   [upManager putData:imageData key:nil token:token</div><div class="line">             complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) &#123;</div><div class="line">                 &#125;</div><div class="line">             &#125; option:nil];</div></pre></td></tr></table></figure>
-<ul>
-<li>7.1 SDK:</li>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%93%8D%E4%BD%9C#%E5%8F%96%E5%8F%8D%EF%BC%88NOT%EF%BC%89" target="_blank" rel="external">位操作</a></li>
+<li><a href="https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html" target="_blank" rel="external">Advanced Operators</a></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) &#123;</div><div class="line">        builder.zone = [QNZone zone1];</div><div class="line">    &#125;];</div><div class="line">    QNUploadManager *upManager = [[QNUploadManager alloc] initWithConfiguration:config];</div><div class="line">    [upManager putData:imageData key:nil token:token</div><div class="line">              complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) &#123;</div><div class="line">                  &#125;</div><div class="line">              &#125; option:nil];</div></pre></td></tr></table></figure>
-<p><a href="http://developer.qiniu.com/code/v7/sdk/objc.html#api-reference" target="_blank" rel="external">参考链接</a></p>
 
       
     </div>
@@ -344,7 +340,7 @@ Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com
       
         <div class="post-tags">
           
-            <a href="/tags/Question/" rel="tag">#Question</a>
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
           
         </div>
       
@@ -353,13 +349,13 @@ Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/01/21/Life/读《三国史话》/" rel="next" title="读吕思勉先生的《三国史话》有感">
+                <i class="fa fa-chevron-left"></i> 读吕思勉先生的《三国史话》有感
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/01/06/关于项目的一点思考/" rel="prev" title="关于项目的一点思考">
-                关于项目的一点思考 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -385,8 +381,8 @@ Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/01/06/Qiniu-Question/"
-           data-title="Qiniu Question" data-url="http://yoursite.com/2017/01/06/Qiniu-Question/">
+      <div class="ds-thread" data-thread-key="2019/01/29/iOS中的位操作符/"
+           data-title="iOS中的位操作符.md" data-url="http://yoursite.com/2019/01/29/iOS中的位操作符/">
       </div>
     
   </div>
@@ -470,7 +466,7 @@ Question: code: 400, error: incorrect zone, please use up-z1.qiniu.com
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS-七牛云SDK的使用问题总结"><span class="nav-number">1.</span> <span class="nav-text">iOS - 七牛云SDK的使用问题总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开篇"><span class="nav-number">1.</span> <span class="nav-text">开篇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位操作"><span class="nav-number">2.</span> <span class="nav-text">位操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#位运算符-以下操作符皆同Objective-C"><span class="nav-number">2.1.</span> <span class="nav-text">位运算符(以下操作符皆同Objective-C)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位"><span class="nav-number">2.2.</span> <span class="nav-text">移位</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
         </section>
