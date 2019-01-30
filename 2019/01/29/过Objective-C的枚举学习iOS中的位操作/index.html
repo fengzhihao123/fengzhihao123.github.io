@@ -1,0 +1,777 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="开篇今天在修改项目的时候，看见enum中出现了&amp;lt;&amp;lt;操作符(位操作)，之前对这个一直都不了解。这次趁着项目比较清闲，抽出时间来全面了解一下位操作。
+位操作位操作是对二进制数逐位进行运算或移位。它共包含两种操作：位运算和移位。下面就详细的了解一下这两种操作。在此只讨论iOS中的所有位操作的运算符，别的语言的相同含义的操作符号可能不同
+位运算符(以下操作符皆同Objective-C)位运算符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="过Objective-C的枚举学习iOS中的位操作.md">
+<meta property="og:url" content="http://yoursite.com/2019/01/29/过Objective-C的枚举学习iOS中的位操作/index.html">
+<meta property="og:site_name" content="冯志浩的个人博客">
+<meta property="og:description" content="开篇今天在修改项目的时候，看见enum中出现了&amp;lt;&amp;lt;操作符(位操作)，之前对这个一直都不了解。这次趁着项目比较清闲，抽出时间来全面了解一下位操作。
+位操作位操作是对二进制数逐位进行运算或移位。它共包含两种操作：位运算和移位。下面就详细的了解一下这两种操作。在此只讨论iOS中的所有位操作的运算符，别的语言的相同含义的操作符号可能不同
+位运算符(以下操作符皆同Objective-C)位运算符">
+<meta property="og:updated_time" content="2019-01-30T13:25:19.479Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="过Objective-C的枚举学习iOS中的位操作.md">
+<meta name="twitter:description" content="开篇今天在修改项目的时候，看见enum中出现了&amp;lt;&amp;lt;操作符(位操作)，之前对这个一直都不了解。这次趁着项目比较清闲，抽出时间来全面了解一下位操作。
+位操作位操作是对二进制数逐位进行运算或移位。它共包含两种操作：位运算和移位。下面就详细的了解一下这两种操作。在此只讨论iOS中的所有位操作的运算符，别的语言的相同含义的操作符号可能不同
+位运算符(以下操作符皆同Objective-C)位运算符">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 过Objective-C的枚举学习iOS中的位操作.md | 冯志浩的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?915cf9a0ea53fbd82400bb21c1f4e873";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">冯志浩的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                过Objective-C的枚举学习iOS中的位操作.md
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-01-29T21:26:24+08:00" content="2019-01-29">
+              2019-01-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/01/29/过Objective-C的枚举学习iOS中的位操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/01/29/过Objective-C的枚举学习iOS中的位操作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/01/29/过Objective-C的枚举学习iOS中的位操作/" class="leancloud_visitors" data-flag-title="过Objective-C的枚举学习iOS中的位操作.md">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h2><p>今天在修改项目的时候，看见enum中出现了<code>&lt;&lt;</code>操作符(位操作)，之前对这个一直都不了解。这次趁着项目比较清闲，抽出时间来全面了解一下位操作。</p>
+<h2 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h2><p>位操作是对二进制数逐位进行运算或移位。它共包含两种操作：位运算和移位。下面就详细的了解一下这两种操作。<br><code>在此只讨论iOS中的所有位操作的运算符，别的语言的相同含义的操作符号可能不同</code></p>
+<h3 id="位运算符-以下操作符皆同Objective-C"><a href="#位运算符-以下操作符皆同Objective-C" class="headerlink" title="位运算符(以下操作符皆同Objective-C)"></a>位运算符(以下操作符皆同Objective-C)</h3><p>位运算符一种包含下面几种：</p>
+<ul>
+<li><p><code>~</code>(取反,一元操作符)：它会对目标数字的二进制每位进行取反</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let initialBits: UInt8 = 0b00001111</div><div class="line">let invertedBits = ~initialBits  // equals 11110000</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>|</code>(按位或)：它会对两个目标数字的相同位置数字进行或运算，规则：<code>0和0为0；0和1为1；1和1为1</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">let targetNum2 = 6 // 110</div><div class="line">print(targetNum | targetNum2) //print 7</div><div class="line">//targetNum:  101</div><div class="line">//targetNum2: 110</div><div class="line">//result:     111 (十进制 7)</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>&amp;</code>(按位与)：它会对两个目标数字的相同位置数字进行与运算，规则：<code>0和0为0；0和1为0；1和1为1</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">let targetNum2 = 6 // 110</div><div class="line">print(targetNum &amp; targetNum2) //print 4</div><div class="line">//targetNum:  101</div><div class="line">//targetNum2: 110</div><div class="line">//result:     100 (十进制 4)</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>^</code>(异或)：它会对两个目标数字的相同位置数字进行异或运算，如果不同则该位为1，否则该位为0。规则：<code>如0和0为0；0和1为1；1和1为0</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">let targetNum2 = 6 // 110</div><div class="line">print(targetNum ^ targetNum2) //print 3</div><div class="line">//targetNum:  101</div><div class="line">//targetNum2: 110</div><div class="line">//result:     011 (十进制 3)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="移位"><a href="#移位" class="headerlink" title="移位"></a>移位</h3><ul>
+<li><p><code>&gt;&gt;</code>(右移)：它会对目标数字按位右移x位</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">print(targetNum &gt;&gt; 2) //print 1</div><div class="line">//targetNum:  101</div><div class="line">//右移2位</div><div class="line">//result:     1 (十进制 1)</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>&lt;&lt;</code>(左移)：它会对目标数字按位左移x位(右边补0)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">print(targetNum &lt;&lt; 2) //print 20</div><div class="line">//targetNum:  101</div><div class="line">//左移2位</div><div class="line">//result:     10100 (十进制 20)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="枚举中的位操作"><a href="#枚举中的位操作" class="headerlink" title="枚举中的位操作"></a>枚举中的位操作</h2><p>通过上文我们了解了位操作的具体计算方式，接下来看一下在枚举中的具体应用。</p>
+<h3 id="枚举中的应用"><a href="#枚举中的应用" class="headerlink" title="枚举中的应用"></a>枚举中的应用</h3><h4 id="定义枚举"><a href="#定义枚举" class="headerlink" title="定义枚举"></a>定义枚举</h4><ul>
+<li><p>OC</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">typedef NS_OPTIONS(NSInteger, CellExLineType) &#123;</div><div class="line">    CellExLineTypeTopLong     = 0,  </div><div class="line">    CellExLineTypeTopNone     = 1 &lt;&lt; 0, //十进制 1</div><div class="line">    CellExLineTypeBottomLong  = 1 &lt;&lt; 1, //十进制 2</div><div class="line">    CellExLineTypeBottomNone  = 1 &lt;&lt; 2, //十进制 4</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Swift</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">struct CellExLineType: OptionSet &#123;</div><div class="line">    let rawValue: Int</div><div class="line">    </div><div class="line">    static let topLong = CellExLineType(rawValue: 0)</div><div class="line">    static let topNone = CellExLineType(rawValue: 1 &lt;&lt; 0)</div><div class="line">    static let bottomLong = CellExLineType(rawValue: 1 &lt;&lt; 1)</div><div class="line">    static let bottomNone = CellExLineType(rawValue: 1 &lt;&lt; 2)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="位操作在枚举中的作用"><a href="#位操作在枚举中的作用" class="headerlink" title="位操作在枚举中的作用"></a>位操作在枚举中的作用</h4><ul>
+<li><p>~(取反)：用来剔除某个值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//OC</div><div class="line">self.lineType = CellExLineTypeTopNone;</div><div class="line">self.lineType |= CellExLineTypeBottomNone;</div><div class="line">self.lineType = self.lineType &amp; ~CellExLineTypeTopNone; //self.lineTye 只包含CellExLineTypeBottomNone</div><div class="line"></div><div class="line">//Swift</div><div class="line">var lineType: CellExLineType = [.topNone, .bottomNone]</div><div class="line">lineType.remove(.topNone)</div></pre></td></tr></table></figure>
+</li>
+<li><p>|(按位或)：用来添加某个值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//OC</div><div class="line">self.lineType = CellExLineTypeTopNone; //self.lineType 包含CellExLineTypeTopNone</div><div class="line">self.lineType = self.lineType | CellExLineTypeBottomNone; //self.lineType 包含CellExLineTypeTopNone和CellExLineTypeBottomNone</div><div class="line"></div><div class="line">//Swift</div><div class="line">var lineType: CellExLineType = [.bottomNone]</div><div class="line">lineType.insert(.topNone)</div></pre></td></tr></table></figure>
+</li>
+<li><p>&amp;(按位与)：用来检查是否包含某个值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//OC</div><div class="line">if ((self.lineType &amp; CellExLineTypeTopNone) == CellExLineTypeTopNone) &#123;</div><div class="line">    NSLog(@&quot;包含CellExLineTypeTopNone&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//Swift</div><div class="line">var lineType: CellExLineType = [.topNone, .bottomNone]</div><div class="line">if lineType.contains(.bottomNone) &#123;</div><div class="line">    print(&quot;包含bottomNone&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>^(异或)：用来置反某个值(如果包含则剔除，如果不包含则添加)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//OC</div><div class="line">self.lineType = CellExLineTypeTopNone | CellExLineTypeBottomNone; //self.lineType 包含CellExLineTypeTopNone和CellExLineTypeBottomNone</div><div class="line">self.lineType = self.lineType ^ CellExLineTypeTopNone; //self.lineTye 只包含CellExLineTypeBottomNone</div><div class="line">self.lineType = self.lineType ^ CellExLineTypeTopNone; //self.lineType 包含CellExLineTypeTopNone和CellExLineTypeBottomNone</div><div class="line"></div><div class="line">//Swift</div><div class="line">var lineType: CellExLineType = [.topNone, .bottomNone]</div><div class="line">if lineType.contains(.topNone) &#123;</div><div class="line">    lineType.remove(.topNone)</div><div class="line">&#125; else &#123;</div><div class="line">    lineType.insert(.topNone)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在枚举中使用位操作我们可以方便的给一个属性值赋值多个值，比如下面的代码给<code>lineType</code>赋值了<code>CellExLineTypeTopNone</code>和<code>CellExLineTypeBottomNone</code>属性。这样我们就可以在lineType的set方法里面处理<code>CellExLineTypeTopNone</code>和<code>CellExLineTypeBottomNone</code>的情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//OC</div><div class="line">- (void)setLineType:(CellExLineType)lineType &#123;</div><div class="line">    _lineType = lineType;</div><div class="line">    if (lineType &amp; CellExLineTypeTopNone) &#123;</div><div class="line">        NSLog(@&quot;top none&quot;);</div><div class="line">    &#125;</div><div class="line">    if (lineType &amp; CellExLineTypeBottomNone) &#123;</div><div class="line">        NSLog(@&quot;bottom none&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//Swift</div><div class="line">var lineType: CellExLineType = [.topNone, .bottomNone]</div><div class="line">if lineType.contains(.topNone) &#123;</div><div class="line">    lineType.remove(.topNone)</div><div class="line">&#125;</div><div class="line">if lineType.contains(.bottomNone) &#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在系统中的许多Enum也是这么使用的，如UIViewAutoresizing、UIViewAnimationOptions等。</p>
+<h4 id="为什么要在枚举中使用位操作符"><a href="#为什么要在枚举中使用位操作符" class="headerlink" title="为什么要在枚举中使用位操作符?"></a>为什么要在枚举中使用位操作符?</h4><ul>
+<li>在许多古老的微处理器上，位运算比加减运算略快，通常位运算比乘除法运算要快很多。在现代架构中，情况并非如此：位运算的运算速度通常与加法运算相同（仍然快于乘法运算）</li>
+<li>可以给一个属性同时设置多个值<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2></li>
+<li><code>~</code>(按位取反)：对目标数字按位取反；在枚举中用于剔除某个值</li>
+<li><code>|</code>(按位或)：对两个目标数字同位置上数字进行或运算；在枚举中用于添加某个值</li>
+<li><ul>
+<li><code>&amp;</code>(按位与)：对两个目标数字同位置上数字进行与运算；在枚举中用于判断是否包含某个值</li>
+</ul>
+</li>
+<li><code>^</code>(按位异或)：对两个目标数字同位置上数字进行异或运算；在枚举中置反某个值</li>
+<li><code>&gt;&gt;</code>(右移)：对目标数字按位右移x位</li>
+<li><code>&lt;&lt;</code>(左移)：对目标数字按位左移x位</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://swinden.com/bitwise/" target="_blank" rel="external">Bitwise Operators and Bit Masks</a></li>
+<li><a href="https://stackoverflow.com/questions/30867325/binary-operator-cannot-be-applied-to-two-uiviewautoresizing-operands" target="_blank" rel="external">SO</a></li>
+<li><a href="https://stackoverflow.com/questions/24066170/how-to-create-ns-options-style-bitmask-enumerations-in-swift/24066171#24066171" target="_blank" rel="external">How to create NS_OPTIONS-style bitmask enumerations in Swift?</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%93%8D%E4%BD%9C#%E5%8F%96%E5%8F%8D%EF%BC%88NOT%EF%BC%89" target="_blank" rel="external">位操作</a></li>
+<li><a href="https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html" target="_blank" rel="external">Advanced Operators</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/21/Life/读《三国史话》/" rel="next" title="读吕思勉先生的《三国史话》有感">
+                <i class="fa fa-chevron-left"></i> 读吕思勉先生的《三国史话》有感
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2019/01/29/过Objective-C的枚举学习iOS中的位操作/"
+           data-title="过Objective-C的枚举学习iOS中的位操作.md" data-url="http://yoursite.com/2019/01/29/过Objective-C的枚举学习iOS中的位操作/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="冯志浩" />
+          <p class="site-author-name" itemprop="name">冯志浩</p>
+          <p class="site-description motion-element" itemprop="description">一个不安分的程序猿</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开篇"><span class="nav-number">1.</span> <span class="nav-text">开篇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位操作"><span class="nav-number">2.</span> <span class="nav-text">位操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#位运算符-以下操作符皆同Objective-C"><span class="nav-number">2.1.</span> <span class="nav-text">位运算符(以下操作符皆同Objective-C)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位"><span class="nav-number">2.2.</span> <span class="nav-text">移位</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举中的位操作"><span class="nav-number">3.</span> <span class="nav-text">枚举中的位操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举中的应用"><span class="nav-number">3.1.</span> <span class="nav-text">枚举中的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义枚举"><span class="nav-number">3.1.1.</span> <span class="nav-text">定义枚举</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#位操作在枚举中的作用"><span class="nav-number">3.1.2.</span> <span class="nav-text">位操作在枚举中的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要在枚举中使用位操作符"><span class="nav-number">3.1.3.</span> <span class="nav-text">为什么要在枚举中使用位操作符?</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">冯志浩</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fengzhihao123"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("nCxez2PBEQDAzw3yNwTIjiqq-gzGzoHsz", "MNIIVCp3cdzMk5mUwMmBNvrH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
