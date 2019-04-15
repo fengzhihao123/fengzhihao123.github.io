@@ -1,0 +1,753 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Swift," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言　　在我们的日常开发中，经常会遇到用户断网或者网络较慢的情况，这样用户在一进入页面的时候会显示空白的页面，那么如何避免没网显示空白页面的尴尬呢？答案就是：先在网络好的时候缓存一部分数据，这样当下次网络情况不好的时候，至少用户可以先看到之前缓存的内容，已达到提高APP的用户体验。　　　　SQLite3就是我们实现本地数据缓存的一种方案，SQLite3有以下优点：iOS内嵌SQLite3；经过时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift之SQLite3的基础使用">
+<meta property="og:url" content="http://yoursite.com/2019/04/15/Swift之SQLite3的基础使用/index.html">
+<meta property="og:site_name" content="冯志浩的个人博客">
+<meta property="og:description" content="前言　　在我们的日常开发中，经常会遇到用户断网或者网络较慢的情况，这样用户在一进入页面的时候会显示空白的页面，那么如何避免没网显示空白页面的尴尬呢？答案就是：先在网络好的时候缓存一部分数据，这样当下次网络情况不好的时候，至少用户可以先看到之前缓存的内容，已达到提高APP的用户体验。　　　　SQLite3就是我们实现本地数据缓存的一种方案，SQLite3有以下优点：iOS内嵌SQLite3；经过时间">
+<meta property="og:updated_time" content="2019-04-15T11:28:59.662Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift之SQLite3的基础使用">
+<meta name="twitter:description" content="前言　　在我们的日常开发中，经常会遇到用户断网或者网络较慢的情况，这样用户在一进入页面的时候会显示空白的页面，那么如何避免没网显示空白页面的尴尬呢？答案就是：先在网络好的时候缓存一部分数据，这样当下次网络情况不好的时候，至少用户可以先看到之前缓存的内容，已达到提高APP的用户体验。　　　　SQLite3就是我们实现本地数据缓存的一种方案，SQLite3有以下优点：iOS内嵌SQLite3；经过时间">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Swift之SQLite3的基础使用 | 冯志浩的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?915cf9a0ea53fbd82400bb21c1f4e873";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">冯志浩的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Swift之SQLite3的基础使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-04-15T19:21:22+08:00" content="2019-04-15">
+              2019-04-15
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/04/15/Swift之SQLite3的基础使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/04/15/Swift之SQLite3的基础使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/04/15/Swift之SQLite3的基础使用/" class="leancloud_visitors" data-flag-title="Swift之SQLite3的基础使用">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>　　在我们的日常开发中，经常会遇到用户断网或者网络较慢的情况，这样用户在一进入页面的时候会显示空白的页面，那么如何避免没网显示空白页面的尴尬呢？答案就是：先在网络好的时候缓存一部分数据，这样当下次网络情况不好的时候，至少用户可以先看到之前缓存的内容，已达到提高APP的用户体验。<br>　　<br>　　SQLite3就是我们实现本地数据缓存的一种方案，SQLite3有以下优点：iOS内嵌SQLite3；经过时间的验证；开源；跨平台。<br>OK，废话不多说，现在我们就开始进入SQLite3的体验之旅。当然在开始之前我们要做一点准备工作，毕竟我们不打没有准备的仗。</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><h4 id="创建备用数据"><a href="#创建备用数据" class="headerlink" title="创建备用数据"></a>创建备用数据</h4><ul>
+<li>导入SQLite3:<code>import SQLite3</code></li>
+<li>创建一个Goods的类用来表示数据库存储的数据类型</li>
+<li>创建一个Goods类型的数组</li>
+<li>声明一个dbPath和db的全局变量，声明一个获取<code>libraryDirectory</code>路径的函数（<a href="https://stackoverflow.com/questions/9346760/where-should-i-store-the-sqlite-db-for-my-iphone-app" target="_blank" rel="external">数据库存放路径如何选择</a>）</li>
+</ul>
+<h4 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">class Goods &#123;</div><div class="line">    let name: String!</div><div class="line">    let weight: Int!</div><div class="line">    var price: Double!</div><div class="line">    </div><div class="line">    init(name: String, weight: Int, price: Double) &#123;</div><div class="line">        self.name = name</div><div class="line">        self.weight = weight</div><div class="line">        self.price = price</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let goods = Goods(name: &quot;computer&quot;, weight: 10, price: 2000.0)</div><div class="line">var goodArr = [Goods]()</div><div class="line">var dbPath = &quot;&quot;</div><div class="line">var db: OpaquePointer?</div><div class="line"></div><div class="line">func createData() &#123;</div><div class="line">    for index in 0...4 &#123;</div><div class="line">        let goods = Goods(name: &quot;computer&quot; + &quot;\(index)&quot;, weight: index * 10, price: 20.0)</div><div class="line">        goodArr.append(goods)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">func fetchLibraryPath() &#123;</div><div class="line">    if let libraryPathString = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first &#123;</div><div class="line">        let pathURL = URL(fileURLWithPath: libraryPathString).appendingPathComponent(&quot;goods.sqlite&quot;)</div><div class="line">        dbPath = pathURL.path</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="创建并连接数据库"><a href="#创建并连接数据库" class="headerlink" title="创建并连接数据库"></a>创建并连接数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">func openDatabase() -&gt; OpaquePointer? &#123;</div><div class="line">    var db: OpaquePointer?</div><div class="line">    if sqlite3_open(dbPath, &amp;db) == SQLITE_OK &#123;</div><div class="line">        resultLabel.text = &quot;成功打开数据库，路径：\(dbPath)&quot;</div><div class="line">        return db</div><div class="line">    &#125; else &#123;</div><div class="line">        resultLabel.text = &quot;打开数据库失败&quot;</div><div class="line">        return nil</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　　通过上面的代码我们可以看到，首先声明了一个<code>OpaquePointer</code>类型的可选值<code>db</code>，接下来调用了<code>sqlite3_open()</code>方法，该方法的作用是：如果之前创建了数据库那么直接打开，若没创建会直接创建一个。如果该方法调用成功，他会返回一个<code>OpaquePointer</code>的值赋值给你传递进去的<code>db</code>。<br><code>SQLITE_OK</code>是一个定义在SQLite库中的一个常量，它代表一个Int32的0。SQLite的大多数函数都会返回一个Int32的值，例如<code>SQLITE_ROW (100)</code>、<code>SQLITE_DONE (101)</code>等，详细列表你可以查看<a href="https://www.sqlite.org/rescode.html" target="_blank" rel="external">这里</a>。<br>现在你可以通过调用<code>db = openDatabase()</code>来打开或者创建一个数据库了，正常情况下你会看见<code>成功打开数据库，路径：xxx/xxx.sqlite</code>的输出。<br>现在，我们已经成功的创建了一个名字为<code>goods.sqlite</code>的数据库了，接下来我们要做的就是创建一个表了。</p>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">func createTable() &#123;</div><div class="line">    let createTableString = &quot;&quot;&quot;</div><div class="line">                            CREATE TABLE Computer(</div><div class="line">                            Id INT PRIMARY KEY NOT NULL,</div><div class="line">                            Name CHAR(255),</div><div class="line">                            Weight Int,</div><div class="line">                            Price Float);</div><div class="line">                            &quot;&quot;&quot;</div><div class="line">    var createTableStatement: OpaquePointer?</div><div class="line">    // 第一步</div><div class="line">    if sqlite3_prepare_v2(db, createTableString, -1, &amp;createTableStatement, nil) == SQLITE_OK &#123;</div><div class="line">        // 第二步</div><div class="line">        if sqlite3_step(createTableStatement) == SQLITE_DONE &#123;</div><div class="line">            resultLabel.text = &quot;成功创建表&quot;</div><div class="line">        &#125; else &#123;</div><div class="line">            resultLabel.text = &quot;未成功创建表&quot;</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">            </div><div class="line">    &#125;</div><div class="line">    //第三步</div><div class="line">    sqlite3_finalize(createTableStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="代码说明"><a href="#代码说明" class="headerlink" title="代码说明"></a>代码说明</h4><p>　　首先解释一下<code>createTableString</code>:创建一个名字为Computer的表，Id为主键且不为空，Name不超过255个字符，Weight为Int类型，Price为Float类型。<br>然后创建了一个<code>OpaquePointer?</code>类型的变量用于下面的函数：<code>sqlite3_prepare_v2()</code>。</p>
+<ul>
+<li>第一步：该函数会将<code>createTableString</code>编译为字节代码（byte code）并返回一个status code，这个函数执行成功则表明database已经准备好了执行任意的SQL statement（就是创建的SQL的字符串），该函数执行成功后即会执行<code>sqlite3_step()</code>。</li>
+<li>第二步：<code>sqlite3_step()</code>用来执行编译完成的statement handle(createTableStatement)并返回一个status code。</li>
+<li>第三步：在你每一次的操作完成后你必须调用<code>sqlite3_finalize()</code>去删除你的statement以避免resource leak。注意：一旦一个statement被finalized，你不应该再一次使用它。</li>
+</ul>
+<h3 id="插入一条数据"><a href="#插入一条数据" class="headerlink" title="插入一条数据"></a>插入一条数据</h3><h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">func insertOneData() &#123;</div><div class="line">    let insertRowString = &quot;INSERT INTO Computer (Id, Name, Weight, Price) VALUES (?, ?, ?, ?);&quot;</div><div class="line">    var insertStatement: OpaquePointer?</div><div class="line">    //第一步</div><div class="line">    if sqlite3_prepare_v2(db, insertRowString, -1, &amp;insertStatement, nil) == SQLITE_OK &#123;</div><div class="line">            let id: Int32 = 1</div><div class="line">            //第二步</div><div class="line">            sqlite3_bind_int(insertStatement, 1, id)</div><div class="line">            </div><div class="line">            sqlite3_bind_text(insertStatement, 2, goods.name, -1, nil)</div><div class="line">            </div><div class="line">            sqlite3_bind_int(insertStatement, 3, Int32(goods.weight))</div><div class="line">            </div><div class="line">            sqlite3_bind_double(insertStatement, 4, goods.price)</div><div class="line">            //第三步</div><div class="line">            if sqlite3_step(insertStatement) == SQLITE_DONE &#123;</div><div class="line">                resultLabel.text = &quot;插入数据成功&quot;</div><div class="line">            &#125; else &#123;</div><div class="line">                resultLabel.text = &quot;插入数据失败&quot;</div><div class="line">            &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    //第四步</div><div class="line">    sqlite3_finalize(insertStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="代码说明-1"><a href="#代码说明-1" class="headerlink" title="代码说明"></a>代码说明</h4><ul>
+<li>insertRowString中的<code>?</code>和前面的字段是对应的，它只是占位符的意思，告诉编译器当真正执行该语句的时候会插入相应的值。</li>
+<li>第二步：<code>sqlite3_bind_int()</code>标识你绑定了一个Int类型的值，该函数的第一个参数是你的statement(即insertStatement)，第二个参数是<code>?</code>的位置在你的statement(注意该值是非零的)，在此处也就是1，第三个参数为你想绑定的值。<code>sqlite3_bind_text()</code>函数表示你绑定的是一个text（一般用于比较长的字符串）类型值，该函数比<code>sqlite3_bind_int()</code>多了额外的两个参数，第四个参数的意思是text的字节数，一般穿<code>-1</code>,第五个参数是一个closure回调，处理完string后调用。</li>
+<li>第三步第四步同上</li>
+</ul>
+<h3 id="插入多条数据"><a href="#插入多条数据" class="headerlink" title="插入多条数据"></a>插入多条数据</h3><h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">func insertMutipleData() &#123;</div><div class="line">    let insertRowString = &quot;INSERT INTO Computer (Id, Name, Weight, Price) VALUES (?, ?, ?, ?);&quot;</div><div class="line">    var insertStatement: OpaquePointer?</div><div class="line">    //第一步</div><div class="line">    if sqlite3_prepare_v2(db, insertRowString, -1, &amp;insertStatement, nil) == SQLITE_OK &#123;</div><div class="line">       for (index, good) in goodArr.enumerated() &#123;</div><div class="line">            let id: Int32 = Int32(index + 1)</div><div class="line">            //第二步</div><div class="line">            sqlite3_bind_int(insertStatement, 1, id)</div><div class="line">            </div><div class="line">            sqlite3_bind_text(insertStatement, 2, good.name, -1, nil)</div><div class="line">            </div><div class="line">            sqlite3_bind_int(insertStatement, 3, Int32(good.weight))</div><div class="line">            </div><div class="line">            sqlite3_bind_double(insertStatement, 4, good.price)</div><div class="line">            //第三步</div><div class="line">            if sqlite3_step(insertStatement) == SQLITE_DONE &#123;</div><div class="line">                resultLabel.text = &quot;插入数据成功&quot;</div><div class="line">            &#125; else &#123;</div><div class="line">                resultLabel.text = &quot;插入数据失败&quot;</div><div class="line">            &#125;</div><div class="line">            //第四步</div><div class="line">            sqlite3_reset(insertStatement)</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    //第五步</div><div class="line">    sqlite3_finalize(insertStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="代码说明-2"><a href="#代码说明-2" class="headerlink" title="代码说明"></a>代码说明</h4><ul>
+<li>insertRowString同上。</li>
+<li>第四步：调用<code>sqlite3_reset()</code>函数，以便下次循环再次执行insertStatement</li>
+<li>第一步、第二步、第三步、第五步同上。</li>
+</ul>
+<h3 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h3><h4 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">func updateData() &#123;</div><div class="line">    let updateString = &quot;UPDATE Computer SET Name = &apos;changeComputer&apos; WHERE Id = 2;&quot;</div><div class="line">    var updateStatement: OpaquePointer?</div><div class="line">    //第一步</div><div class="line">    if sqlite3_prepare_v2(db, updateString, -1, &amp;updateStatement, nil) == SQLITE_OK &#123;</div><div class="line">        //第二步</div><div class="line">        if sqlite3_step(updateStatement) == SQLITE_DONE &#123;</div><div class="line">            resultLabel.text = &quot;更新成功&quot;</div><div class="line">        &#125; else &#123;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //第三步</div><div class="line">    sqlite3_finalize(updateStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="代码说明-3"><a href="#代码说明-3" class="headerlink" title="代码说明"></a>代码说明</h4><ul>
+<li>updateString：将<code>Id==2</code>的数据的<code>Name</code>字段改为<code>changeComputer</code>。</li>
+<li><code>sqlite3_prepare_v2()</code>：准备，<code>sqlite3_step()</code>：执行更新statement，<code>sqlite3_finalize()</code>：结束。<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><h4 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">func deleteData() &#123;</div><div class="line">    let deleteString = &quot;DELETE FROM Computer WHERE Id = 2;&quot;</div><div class="line">    var deleteStatement: OpaquePointer?</div><div class="line">    //第一步</div><div class="line">    if sqlite3_prepare_v2(db, deleteString, -1, &amp;deleteStatement, nil) == SQLITE_OK &#123;</div><div class="line">        //第二步</div><div class="line">        if sqlite3_step(deleteStatement) == SQLITE_DONE &#123;</div><div class="line">            resultLabel.text = &quot;删除成功&quot;</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    //第三步</div><div class="line">    sqlite3_finalize(deleteStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="代码说明-4"><a href="#代码说明-4" class="headerlink" title="代码说明"></a>代码说明</h4><ul>
+<li>deleteString：删除表中<code>Id==2</code>的数据。</li>
+<li><code>sqlite3_prepare_v2()</code>：准备，<code>sqlite3_step()</code>：执行删除statement，<code>sqlite3_finalize()</code>：结束。</li>
+</ul>
+<h3 id="查询一条数据"><a href="#查询一条数据" class="headerlink" title="查询一条数据"></a>查询一条数据</h3><h4 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">func queryOneData() &#123;</div><div class="line">    let queryString = &quot;SELECT * FROM Computer WHERE Id == 2;&quot;</div><div class="line">    var queryStatement: OpaquePointer?</div><div class="line">    //第一步</div><div class="line">    if sqlite3_prepare_v2(db, queryString, -1, &amp;queryStatement, nil) == SQLITE_OK &#123;</div><div class="line">        //第二步</div><div class="line">        if sqlite3_step(queryStatement) == SQLITE_ROW &#123;</div><div class="line">            //第三步</div><div class="line">            let id = sqlite3_column_int(queryStatement, 0)</div><div class="line">            </div><div class="line">            let queryResultName = sqlite3_column_text(queryStatement, 1)</div><div class="line">            let name = String(cString: queryResultName!)</div><div class="line">            let weight = sqlite3_column_int(queryStatement, 2)</div><div class="line">            let price = sqlite3_column_double(queryStatement, 3)</div><div class="line">            </div><div class="line">            </div><div class="line">            resultLabel.text = &quot;id: \(id), name: \(name), weight: \(weight), price: \(price)&quot;</div><div class="line">        &#125; else &#123;</div><div class="line">            resultLabel.text = &quot;error&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //第四步</div><div class="line">    sqlite3_finalize(queryStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="代码说明-5"><a href="#代码说明-5" class="headerlink" title="代码说明"></a>代码说明</h4><ul>
+<li>queryString：在<code>Computer</code>表中查找所有<code>Id == 2</code>的数据。</li>
+<li>第二步：注意此时要判断的status code为<code>SQLITE_ROW</code>，如果该判断为true则代表你查询的数据存在在表里。</li>
+<li>第三步：<code>sqlite3_column_int()</code>函数是按照列数取数据，第一个参数是statement，第二个参数则是该字段是第几列(Id 为表里的第一列，从0开始计算)。<code>sqlite3_column_text()</code>要略微复杂一点，他需要转换类型通过<code>String(cString: queryResultName!)</code>。</li>
+<li>第一步、第四步同上</li>
+</ul>
+<h3 id="查询多条数据"><a href="#查询多条数据" class="headerlink" title="查询多条数据"></a>查询多条数据</h3><h4 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">func queryAllData() &#123;</div><div class="line">    let queryString = &quot;SELECT * FROM Computer;&quot;</div><div class="line">    var queryStatement: OpaquePointer?</div><div class="line">    //第一步</div><div class="line">    if sqlite3_prepare_v2(db, queryString, -1, &amp;queryStatement, nil) == SQLITE_OK &#123;</div><div class="line">        //第二步</div><div class="line">        while(sqlite3_step(queryStatement) == SQLITE_ROW) &#123;</div><div class="line">            //第三步</div><div class="line">            let id = sqlite3_column_int(queryStatement, 0)</div><div class="line">            </div><div class="line">            let queryResultName = sqlite3_column_text(queryStatement, 1)</div><div class="line">            let name = String(cString: queryResultName!)</div><div class="line">            let weight = sqlite3_column_int(queryStatement, 2)</div><div class="line">            let price = sqlite3_column_double(queryStatement, 3)</div><div class="line">            </div><div class="line">            </div><div class="line">            resultLabel.text = &quot;id: \(id), name: \(name), weight: \(weight), price: \(price)&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //第四步</div><div class="line">    sqlite3_finalize(queryStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="代码说明-6"><a href="#代码说明-6" class="headerlink" title="代码说明"></a>代码说明</h4><ul>
+<li>第二步：此处为<code>while</code>循环，当查询到最后一行时会返回<code>SQLITE_DONE</code>状态码来结束。</li>
+<li>第一步第三步第四步同上。</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>通过上面我们可以总结出执行一个statement的大概流程:<code>sqlite3_prepare_v2()</code>：准备，<code>sqlite3_step()</code>：执行statement，<code>sqlite3_finalize()</code>：结束。好了，到这里SQLite3的增删改查基本操作也就完事了。下一篇我们来了解一下SQLite的进阶用法。Bye~</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/12/深入理解Swift中的Class和Struct/" rel="next" title="深入理解Swift中的Class和Struct">
+                <i class="fa fa-chevron-left"></i> 深入理解Swift中的Class和Struct
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2019/04/15/Swift之SQLite3的基础使用/"
+           data-title="Swift之SQLite3的基础使用" data-url="http://yoursite.com/2019/04/15/Swift之SQLite3的基础使用/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="冯志浩" />
+          <p class="site-author-name" itemprop="name">冯志浩</p>
+          <p class="site-description motion-element" itemprop="description">一个不安分的程序猿</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建备用数据"><span class="nav-number">2.1.</span> <span class="nav-text">创建备用数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码如下："><span class="nav-number">2.2.</span> <span class="nav-text">代码如下：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建并连接数据库"><span class="nav-number">3.</span> <span class="nav-text">创建并连接数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表"><span class="nav-number">4.</span> <span class="nav-text">创建表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-number">4.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码说明"><span class="nav-number">4.2.</span> <span class="nav-text">代码说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入一条数据"><span class="nav-number">5.</span> <span class="nav-text">插入一条数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-1"><span class="nav-number">5.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码说明-1"><span class="nav-number">5.2.</span> <span class="nav-text">代码说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入多条数据"><span class="nav-number">6.</span> <span class="nav-text">插入多条数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-2"><span class="nav-number">6.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码说明-2"><span class="nav-number">6.2.</span> <span class="nav-text">代码说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新数据"><span class="nav-number">7.</span> <span class="nav-text">更新数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-3"><span class="nav-number">7.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码说明-3"><span class="nav-number">7.2.</span> <span class="nav-text">代码说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据"><span class="nav-number">8.</span> <span class="nav-text">删除数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-4"><span class="nav-number">8.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码说明-4"><span class="nav-number">8.2.</span> <span class="nav-text">代码说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询一条数据"><span class="nav-number">9.</span> <span class="nav-text">查询一条数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-5"><span class="nav-number">9.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码说明-5"><span class="nav-number">9.2.</span> <span class="nav-text">代码说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询多条数据"><span class="nav-number">10.</span> <span class="nav-text">查询多条数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-6"><span class="nav-number">10.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码说明-6"><span class="nav-number">10.2.</span> <span class="nav-text">代码说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">11.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">冯志浩</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fengzhihao123"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("nCxez2PBEQDAzw3yNwTIjiqq-gzGzoHsz", "MNIIVCp3cdzMk5mUwMmBNvrH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
