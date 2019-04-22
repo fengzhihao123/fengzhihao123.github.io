@@ -243,7 +243,7 @@
             
               
                 
-                <a class="post-title-link" href="/2019/04/22/浅谈Swift中的Copy-on-Write/" itemprop="url">
+                <a class="post-title-link" href="/2019/04/22/Swift/浅谈Swift中的Copy-on-Write/" itemprop="url">
                   浅谈Swift中的Copy-on-Write
                 </a>
               
@@ -268,8 +268,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2019/04/22/浅谈Swift中的Copy-on-Write/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/04/22/浅谈Swift中的Copy-on-Write/" itemprop="commentsCount"></span>
+                <a href="/2019/04/22/Swift/浅谈Swift中的Copy-on-Write/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/04/22/Swift/浅谈Swift中的Copy-on-Write/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -279,7 +279,7 @@
 
           
           
-             <span id="/2019/04/22/浅谈Swift中的Copy-on-Write/" class="leancloud_visitors" data-flag-title="浅谈Swift中的Copy-on-Write">
+             <span id="/2019/04/22/Swift/浅谈Swift中的Copy-on-Write/" class="leancloud_visitors" data-flag-title="浅谈Swift中的Copy-on-Write">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -533,7 +533,7 @@
             
               
                 
-                <a class="post-title-link" href="/2019/02/12/深入理解Swift中的Class和Struct/" itemprop="url">
+                <a class="post-title-link" href="/2019/02/12/Swift/深入理解Swift中的Class和Struct/" itemprop="url">
                   深入理解Swift中的Class和Struct
                 </a>
               
@@ -558,8 +558,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2019/02/12/深入理解Swift中的Class和Struct/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/02/12/深入理解Swift中的Class和Struct/" itemprop="commentsCount"></span>
+                <a href="/2019/02/12/Swift/深入理解Swift中的Class和Struct/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/02/12/Swift/深入理解Swift中的Class和Struct/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -569,7 +569,7 @@
 
           
           
-             <span id="/2019/02/12/深入理解Swift中的Class和Struct/" class="leancloud_visitors" data-flag-title="深入理解Swift中的Class和Struct">
+             <span id="/2019/02/12/Swift/深入理解Swift中的Class和Struct/" class="leancloud_visitors" data-flag-title="深入理解Swift中的Class和Struct">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -597,7 +597,7 @@
 <h2 id="理解Class"><a href="#理解Class" class="headerlink" title="理解Class"></a>理解Class</h2><h3 id="Class的定义和使用"><a href="#Class的定义和使用" class="headerlink" title="Class的定义和使用"></a>Class的定义和使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class Animal &#123;</div><div class="line">    var name: String?</div><div class="line">    var weight = 0.0</div><div class="line">&#125;</div><div class="line"></div><div class="line">let cat = Animal()</div><div class="line">cat.name = &quot;cat&quot;</div><div class="line">cat.weight = 10</div><div class="line"></div><div class="line">print(&quot;cat&apos;s name: \(cat.name!), cat&apos;s weight: \(cat.weight)&quot;) //cat&apos;s name: cat, cat&apos;s weight: 10.0</div></pre></td></tr></table></figure>
 <h3 id="Class是引用类型"><a href="#Class是引用类型" class="headerlink" title="Class是引用类型"></a>Class是引用类型</h3><p>当值传递的时候，它是传递对已有instance的引用。下面用代码来解释一下这句话：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">let cat = Animal()</div><div class="line">cat.name = &quot;cat&quot;</div><div class="line">cat.weight = 10</div><div class="line"></div><div class="line">let blackCat = cat</div><div class="line">blackCat.name = &quot;blackCat&quot;</div><div class="line"></div><div class="line">print(&quot;cat&apos;s name: \(cat.name!)&quot;) // cat&apos;s name: blackCat</div></pre></td></tr></table></figure></p>
 <p>通过上面的代码可以了解到，其实<code>cat</code>和<code>blackCat</code>指向的是同一个Animal的instance。它们只是这个instance的两个不同的名字而已。如下图所示：</p>
-<img src="/2019/02/12/深入理解Swift中的Class和Struct/class.png" alt="class" title="class">
+
 <h4 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h4><p>我们看到上述代码把<code>cat</code>和<code>blackCat</code>声明为了<code>let</code>，但是我们依然可以修改它的属性，因为<code>cat</code>和<code>blackCat</code>引用的instance并没有改变，它们还是引用之前instance，我们只是修改的instance的属性。但是不能将<code>cat</code>或者<code>blackCat</code>指向另一个实例，如<code>blackCat = Animal()</code>会提示<code>Cannot assign to value: &#39;blackCat&#39; is a &#39;let&#39; constant</code>的错误。</p>
 <h3 id="Identity-Operators"><a href="#Identity-Operators" class="headerlink" title="Identity Operators"></a>Identity Operators</h3><p>Swift 提供<code>===</code>和<code>!==</code>来判断两个变量或者常量是不是引用同一个instance(只用于class，想一想为什么struct不需要).<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if blackCat === cat &#123;</div><div class="line">    print(&quot;Identical&quot;) //Identical</div><div class="line">&#125; else &#123;</div><div class="line">    print(&quot;Not identical&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h4 id="和-是不一样的。"><a href="#和-是不一样的。" class="headerlink" title="===和==是不一样的。"></a><code>===</code>和<code>==</code>是不一样的。</h4><ul>
@@ -609,7 +609,7 @@
 <h2 id="理解Struct"><a href="#理解Struct" class="headerlink" title="理解Struct"></a>理解Struct</h2><h3 id="Struct的定义和使用"><a href="#Struct的定义和使用" class="headerlink" title="Struct的定义和使用"></a>Struct的定义和使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">struct FPoint &#123;</div><div class="line">    var x = 0.0</div><div class="line">    var y = 0.0</div><div class="line">    //当在struct修改属性的时候需要使用mutating</div><div class="line">    mutating func addX(add: Double) &#123;</div><div class="line">        self.x = self.x + add</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let p1 = FPoint()</div><div class="line">print(&quot;p1&apos;s x : \(p1.x), p1&apos;s y: \(p1.y)&quot;) // p1&apos;s x : 0.0, p1&apos;s y: 0.0</div></pre></td></tr></table></figure>
 <h3 id="Struct是值类型"><a href="#Struct是值类型" class="headerlink" title="Struct是值类型"></a>Struct是值类型</h3><p>当值进行传递的时候，它会copy传递的值。下面用代码来解释一下这句话:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var p2 = p1</div><div class="line">p2.x = 3.0</div><div class="line">print(&quot;p1&apos;s x : \(p1.x), p1&apos;s y: \(p1.y); p2&apos;s x : \(p2.x), p2&apos;s y: \(p2.y)&quot;)</div><div class="line">//p1&apos;s x : 1.0, p1&apos;s y: 2.0; p2&apos;s x : 3.0, p2&apos;s y: 2.0</div></pre></td></tr></table></figure></p>
 <p>通过上述代码我们可以看到，将<code>p1</code>赋值给<code>p2</code>之后改变<code>p2</code>的值并不会影响<code>p1</code>的值，这是因为在将<code>p1</code>赋值给<code>p2</code>的时候是拷贝一个instance<code>值与p1相同</code>，然后将拷贝的instance赋值给<code>p2</code>。如下图所示:</p>
-<img src="/2019/02/12/深入理解Swift中的Class和Struct/struct.png" alt="struct" title="struct">
+
 <h3 id="Note-1"><a href="#Note-1" class="headerlink" title="Note"></a>Note</h3><p>如果struct的instance声明为let，是不能改变instance的值的。如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let p1 = FPoint(x: 1.0, y: 2.0)</div><div class="line">p1.x = 10.0 //报错:Cannot assign to property: &apos;p1&apos; is a &apos;let&apos; constant</div></pre></td></tr></table></figure></p>
 <h2 id="在项目中如何选择Struct和Class"><a href="#在项目中如何选择Struct和Class" class="headerlink" title="在项目中如何选择Struct和Class"></a>在项目中如何选择Struct和Class</h2><ul>
 <li>默认使用struct</li>
@@ -691,7 +691,7 @@
             
               
                 
-                <a class="post-title-link" href="/2019/01/29/通过Objective-C的枚举学习iOS中的位操作/" itemprop="url">
+                <a class="post-title-link" href="/2019/01/29/iOS/通过Objective-C的枚举学习iOS中的位操作/" itemprop="url">
                   通过Objective-C的枚举学习iOS中的位操作.md
                 </a>
               
@@ -716,8 +716,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2019/01/29/通过Objective-C的枚举学习iOS中的位操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/01/29/通过Objective-C的枚举学习iOS中的位操作/" itemprop="commentsCount"></span>
+                <a href="/2019/01/29/iOS/通过Objective-C的枚举学习iOS中的位操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/01/29/iOS/通过Objective-C的枚举学习iOS中的位操作/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -727,7 +727,7 @@
 
           
           
-             <span id="/2019/01/29/通过Objective-C的枚举学习iOS中的位操作/" class="leancloud_visitors" data-flag-title="通过Objective-C的枚举学习iOS中的位操作.md">
+             <span id="/2019/01/29/iOS/通过Objective-C的枚举学习iOS中的位操作/" class="leancloud_visitors" data-flag-title="通过Objective-C的枚举学习iOS中的位操作.md">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -994,7 +994,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/01/FZHProjectInitializer介绍/" itemprop="url">
+                <a class="post-title-link" href="/2017/03/01/iOS/FZHProjectInitializer介绍/" itemprop="url">
                   FZHProjectInitializer介绍
                 </a>
               
@@ -1019,8 +1019,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/03/01/FZHProjectInitializer介绍/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/01/FZHProjectInitializer介绍/" itemprop="commentsCount"></span>
+                <a href="/2017/03/01/iOS/FZHProjectInitializer介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/01/iOS/FZHProjectInitializer介绍/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1030,7 +1030,7 @@
 
           
           
-             <span id="/2017/03/01/FZHProjectInitializer介绍/" class="leancloud_visitors" data-flag-title="FZHProjectInitializer介绍">
+             <span id="/2017/03/01/iOS/FZHProjectInitializer介绍/" class="leancloud_visitors" data-flag-title="FZHProjectInitializer介绍">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1128,7 +1128,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/02/25/将开源项目放到CocoaPods/" itemprop="url">
+                <a class="post-title-link" href="/2017/02/25/iOS/将开源项目放到CocoaPods/" itemprop="url">
                   将开源项目放到CocoaPods
                 </a>
               
@@ -1153,8 +1153,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/02/25/将开源项目放到CocoaPods/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/25/将开源项目放到CocoaPods/" itemprop="commentsCount"></span>
+                <a href="/2017/02/25/iOS/将开源项目放到CocoaPods/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/25/iOS/将开源项目放到CocoaPods/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1164,7 +1164,7 @@
 
           
           
-             <span id="/2017/02/25/将开源项目放到CocoaPods/" class="leancloud_visitors" data-flag-title="将开源项目放到CocoaPods">
+             <span id="/2017/02/25/iOS/将开源项目放到CocoaPods/" class="leancloud_visitors" data-flag-title="将开源项目放到CocoaPods">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1209,123 +1209,6 @@
 <li><a href="http://www.jianshu.com/p/32ba94d41861" target="_blank" rel="external">如何发布自己的开源框架到CocoaPods</a></li>
 <li><a href="http://caibaojian.com/github-create-tag.html" target="_blank" rel="external">如何创建tag</a></li>
 <li><a href="https://onevcat.com/2016/01/create-framework/" target="_blank" rel="external">如何打造一个让人愉快的框架</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/16/BeeGo总结/" itemprop="url">
-                  BeeGo总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-16T15:00:22+08:00" content="2017-02-16">
-              2017-02-16
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/02/16/BeeGo总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/16/BeeGo总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/02/16/BeeGo总结/" class="leancloud_visitors" data-flag-title="BeeGo总结">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>设置primary key  <code>orm:&quot;pk;column(Userid);&quot;</code></li>
-<li><code>Unknown column ‘XXX’ in ‘field list’</code>:重新写字段  <a href="http://docs.wex5.com/bex5-server-question-list-10013/" target="_blank" rel="external">http://docs.wex5.com/bex5-server-question-list-10013/</a></li>
-<li><a href="https://github.com/fatih/structs" target="_blank" rel="external">struct - map</a></li>
-<li><a href="http://blog.ninja911.com/blog-show-blog_id-76.html" target="_blank" rel="external">Go map 嵌套</a></li>
-<li><a href="https://xiequan.info/go%E4%B8%8Ejson-web-token/" target="_blank" rel="external">Go总jwt的使用</a>  <a href="https://godoc.org/github.com/dgrijalva/jwt-go#example-Parse--Hmac" target="_blank" rel="external">官方文档</a></li>
-<li><a href="https://github.com/derekparker/delve" target="_blank" rel="external">Go调试工具</a></li>
 </ul>
 
           
@@ -1503,7 +1386,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/02/10/LeetCode总结/" itemprop="url">
+                <a class="post-title-link" href="/2017/02/10/LeetCode/LeetCode总结/" itemprop="url">
                   LeetCode总结
                 </a>
               
@@ -1528,8 +1411,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/02/10/LeetCode总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/10/LeetCode总结/" itemprop="commentsCount"></span>
+                <a href="/2017/02/10/LeetCode/LeetCode总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/10/LeetCode/LeetCode总结/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1539,7 +1422,7 @@
 
           
           
-             <span id="/2017/02/10/LeetCode总结/" class="leancloud_visitors" data-flag-title="LeetCode总结">
+             <span id="/2017/02/10/LeetCode/LeetCode总结/" class="leancloud_visitors" data-flag-title="LeetCode总结">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1633,11 +1516,167 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/08/杂/网络相关知识点总结/" itemprop="url">
+                  网络相关知识点总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-08T10:23:44+08:00" content="2017-02-08">
+              2017-02-08
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/08/杂/网络相关知识点总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/08/杂/网络相关知识点总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/08/杂/网络相关知识点总结/" class="leancloud_visitors" data-flag-title="网络相关知识点总结">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="名词介绍"><a href="#名词介绍" class="headerlink" title="名词介绍"></a>名词介绍</h3><ul>
+<li>WWW：world wide web（万维网）</li>
+<li>HTML：HyperText Markup Language（超文本标记语言）</li>
+<li>HTTP：HyperText Transfer Protocol（超文本传输协议）</li>
+<li>URL：Uniform Resource Locator（统一资源定位符）</li>
+<li>URI：Uniform Resource Identifier（统一资源标识符）</li>
+<li>FTP：File Transfer Protocol（文件传输协议）</li>
+<li>DNS：Domain Name System（域名系统）</li>
+<li>TCP：Transmission Control Protocol（传输控制协议）</li>
+<li>UDP：User Data Protocol（用户数据包协议）</li>
+<li>NIC：Network Interface Card（网卡）</li>
+<li>IP：Internet Protocol（网际协议）</li>
+<li>MAC：Media Access Control Address（物理地址）</li>
+</ul>
+<h3 id="Source-Code（状态码）"><a href="#Source-Code（状态码）" class="headerlink" title="Source Code（状态码）"></a>Source Code（状态码）</h3><h4 id="2xx"><a href="#2xx" class="headerlink" title="2xx"></a>2xx</h4><ul>
+<li>200 OK：请求正常处理</li>
+<li>204 No Content：请求正常处理，没有内容返回</li>
+<li>206 Partial Content：范围请求</li>
+</ul>
+<h4 id="3xx"><a href="#3xx" class="headerlink" title="3xx"></a>3xx</h4><ul>
+<li>301 Moved Permanently:永久性重定向</li>
+<li>302 Found：临时性重定向</li>
+<li>303 See Other：请求对应的资源存在另一个URI，应该使用GET定向获取资源</li>
+<li>304 Not Modified</li>
+<li>307 Temporary Redirect</li>
+</ul>
+<h4 id="4XX"><a href="#4XX" class="headerlink" title="4XX"></a>4XX</h4><ul>
+<li>400 Bad Request：请求报文中存在语法错误</li>
+<li>403 Forbidden：服务器拒绝对请求资源的访问</li>
+<li>404 Not Found：没有找到资源或服务器拒绝访问</li>
+</ul>
+<h4 id="5XX"><a href="#5XX" class="headerlink" title="5XX"></a>5XX</h4><ul>
+<li>500 Internal Server Error</li>
+<li>502 Bad Gateway</li>
+<li>503 Service Unavailable</li>
+</ul>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><ul>
+<li>GET：获取资源</li>
+<li>POST：修改资源</li>
+<li>PUT：上传文件（一般不适用该方法，因为自身没有验证机制，任何人都可以上传，存在安全性问题）</li>
+<li>DELETE：删除文件，一般不用，原因同上</li>
+</ul>
+<h3 id="HTTP三次握手"><a href="#HTTP三次握手" class="headerlink" title="HTTP三次握手"></a>HTTP三次握手</h3><p>第一次握手：client发送SYN包给server，进入SYN_SEND状态，等待server确认<br>第二次握手：server收到SYN包，确认收到客户的SYN包，同时自己发送一个SYN+ACK包，此时服务器进入SYN_RECV状态<br>第三次握手：client收到server的SYN+ACK包，向服务器发送确认ACK，此包发送完毕，client和server进入ESTABLISHED状态，完成三次握手。</p>
+<ul>
+<li>session/cookie</li>
+<li>json web token</li>
+</ul>
+<h3 id="读书记录-第五章"><a href="#读书记录-第五章" class="headerlink" title="读书记录 第五章"></a>读书记录 第五章</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1678,7 +1717,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
