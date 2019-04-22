@@ -243,6 +243,149 @@
             
               
                 
+                <a class="post-title-link" href="/2017/02/08/Sublime3上Markdown插件-MarkdownEditing的安装和用法-译/" itemprop="url">
+                  Sublime3上Markdown插件-MarkdownEditing的安装和用法(译)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-08T13:50:35+08:00" content="2017-02-08">
+              2017-02-08
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/08/Sublime3上Markdown插件-MarkdownEditing的安装和用法-译/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/08/Sublime3上Markdown插件-MarkdownEditing的安装和用法-译/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/08/Sublime3上Markdown插件-MarkdownEditing的安装和用法-译/" class="leancloud_visitors" data-flag-title="Sublime3上Markdown插件-MarkdownEditing的安装和用法(译)">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本文基于:<br>系统：Mac os<br>软件：Sublime text3<br>插件：MarkdownEditing</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="通过Package-Control"><a href="#通过Package-Control" class="headerlink" title="通过Package Control"></a>通过Package Control</h3><ul>
+<li>首先<a href="https://packagecontrol.io/installation" target="_blank" rel="external">安装Package Control</a></li>
+<li>在sublime中，使用快捷键 <code>CMD+SHIFT+P</code> 打开Package Control</li>
+<li>在弹出的输入框中输入 <code>install package</code> 然后点击匹配项。这时候一个可用的包列表将会显示</li>
+<li>在可用列表的输入框中输入 <code>MarkdownEditing</code> 然后点击匹配项，该插件将会被下载</li>
+<li>重启Sublime完成安装</li>
+</ul>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
+<li>星号和下滑线自动配对来修饰选择文本<br>  1.如果你输入一个空白对(如<code>* *</code>)然后点击backspace，两个元素都会被删除<br>  2.如果你输入一个空白对然后点击space，右边的元素会被删除</li>
+<li>倒引号(Backticks)成对出现 </li>
+<li>在项目列表的尾部，按 <code>Enter</code> 将会自动添加新的项目列表符号<br>  1.在空白的项目列表点击 <code>Tab</code> 将会缩进项目列表符号，并且将项目列表符号切换为另一个(循环列表为 <code>*</code>, <code>-</code>, <code>+</code>)<br>  2.在空白列表按 <code>Shift</code> + <code>Tab</code> 将不会缩进，项目列表符号切换如上(我这并没有切换)<br>  3.支持顺序 <code>Tab</code> s 或 <code>Shift</code> + <code>Tab</code> s<br>  4.你可以在你的设置文件中将列表项目符号的自动切换撤销或者选择使用哪一个项目符号列表<br>  5.如果项目列表包含一个<a href="https://help.github.com/categories/writing-on-github/" target="_blank" rel="external">GFM</a> 任务, 在行尾按 <code>Enter</code> 将会以一个新的空白任务继续</li>
+<li>在块引用(blockquote)的结尾，按 <code>Enter</code> 将自动延续引用</li>
+<li>选中某些文本按 <code>&gt;</code> (我是按<code>shift</code> + <code>&gt;</code>)会将选中文本改为块引用，不必选中从第一行到最后一行的全部内容，部分选中也会生效</li>
+<li>修改左侧括号可以消除选择，将光标放在你可以插入一个链接的<code>[]</code> 或 <code>()</code> 的地方(Left bracket pairing is modified to eliminate the selection and leave the cursor at a point where you can insert a <code>[]</code> or <code>()</code> pair for a link)</li>
+<li>在项目符号中显示Markdown标题(<code>Ctrl</code> + <code>Shift</code> + <code>R</code>). 它们以 <code>#</code> 开始，所以你看一眼就知道它们属于markdown文件，由于 <code>#</code> 的优先级，它们将在列表的顶部</li>
+<li><code>~</code> 将使用 <code>~~</code>(删除线:strikethrough)包含选中文本</li>
+<li>当你想将选中的内容当做标题的时候，你可以输入 <code>#</code> ，多次输入可以改变标题的等级，一旦你输入6个，它将在下一次输入时重置为0，<code>mde.match_header_hashes</code> 决定 <code>#</code> 是在两边还是在行首 </li>
+<li>在以hashmarks开头的行末尾键入return将在标题中插入关闭hashmarks。 这不是Markdown要求的，只是更加美观，你可以在你的setting中改变<code>mde.match_header_hashes</code>来撤销此功能</li>
+<li>Setext-style的标题可以通过 <code>Tab</code> 完成. 在一行仅包含<code>=</code> 或 <code>-</code> 字符按tab将会添加或者删除足够的字符去匹配上面的长度</li>
+<li>新的文档将根据第一个标题自动命名</li>
+</ul>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><ul>
+<li>command + option + v : 创建或者粘贴剪切板上的内容作为选中文本的内联链接</li>
+<li>command + option + r : 创建或者粘贴剪切板上的内容作为引用链接</li>
+<li>command + shift + k : 创建或者粘贴剪切板上的内容作为选择文本的内联图片</li>
+<li>command + option + b/i : b代表粗体，i代表斜体。无论选不选中它们都会产生作用，如果没有选中，它们只会转变光标下的词，如果选中的字体已经加粗或者斜体，使用该功能会取消选种字体的加粗或者斜体。</li>
+<li>command + control + 1…6 : 创建1-6级标题</li>
+<li>option + shift + 6 : 添加脚注</li>
+<li>command + tab : 折叠或者展开当前部分(此快捷键和mac自带切换程序快捷键冲突)</li>
+<li>command + shift + tab : 折叠一定层级下的所有部分</li>
+<li>command + option + pageup/pagedown : 去当前/下一个的同等级或者更高等级的heading</li>
+<li>command + shift + pageup/pagedown : 去当前/下一个heading</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/02/08/网络相关知识点总结/" itemprop="url">
                   网络相关知识点总结
                 </a>
@@ -1482,120 +1625,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/12/Sublime3-总结/" itemprop="url">
-                  Sublime3 总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-12T18:20:01+08:00" content="2017-01-12">
-              2017-01-12
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/01/12/Sublime3-总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/12/Sublime3-总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/01/12/Sublime3-总结/" class="leancloud_visitors" data-flag-title="Sublime3 总结">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Markdown-插件"><a href="#Markdown-插件" class="headerlink" title="Markdown 插件"></a>Markdown 插件</h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1636,7 +1670,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
