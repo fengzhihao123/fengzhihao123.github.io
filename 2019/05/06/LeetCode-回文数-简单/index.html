@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Swift," />
+  <meta name="keywords" content="LeetCode," />
 
 
 
@@ -84,19 +84,16 @@
 
 
 
-<meta name="description" content="开篇在Swift中，有两种传值方式：引用类型(Class)和值类型(Struct/Enum)。而值类型有一个copy的操作，它的意思是当你传递一个值类型的变量的时候(给一个变量赋值，或者函数中的参数传值)，它会拷贝一份新的值让你进行传递。你会得到拥有相同内容的两个变量，分别指向两块内存。
-这样的话，在你频繁操作占用内存比较大的变量的时候就会带来严重的性能问题，Swift也意识到了这个问题，所以推出">
+<meta name="description" content="题目简介12345678910111213141516判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。示例 1:输入: 121输出: true示例 2:输入: -121输出: false解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。示例 3:输入: 10输出: false解释: 从右向左读, 为 01 。因此它不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈Swift中的Copy-on-Write">
-<meta property="og:url" content="http://yoursite.com/2019/04/22/Swift/浅谈Swift中的Copy-on-Write/index.html">
+<meta property="og:title" content="LeetCode-回文数-简单">
+<meta property="og:url" content="http://yoursite.com/2019/05/06/LeetCode-回文数-简单/index.html">
 <meta property="og:site_name" content="冯志浩的个人博客">
-<meta property="og:description" content="开篇在Swift中，有两种传值方式：引用类型(Class)和值类型(Struct/Enum)。而值类型有一个copy的操作，它的意思是当你传递一个值类型的变量的时候(给一个变量赋值，或者函数中的参数传值)，它会拷贝一份新的值让你进行传递。你会得到拥有相同内容的两个变量，分别指向两块内存。
-这样的话，在你频繁操作占用内存比较大的变量的时候就会带来严重的性能问题，Swift也意识到了这个问题，所以推出">
-<meta property="og:updated_time" content="2019-04-22T07:18:59.235Z">
+<meta property="og:description" content="题目简介12345678910111213141516判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。示例 1:输入: 121输出: true示例 2:输入: -121输出: false解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。示例 3:输入: 10输出: false解释: 从右向左读, 为 01 。因此它不">
+<meta property="og:updated_time" content="2019-05-06T03:40:32.187Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈Swift中的Copy-on-Write">
-<meta name="twitter:description" content="开篇在Swift中，有两种传值方式：引用类型(Class)和值类型(Struct/Enum)。而值类型有一个copy的操作，它的意思是当你传递一个值类型的变量的时候(给一个变量赋值，或者函数中的参数传值)，它会拷贝一份新的值让你进行传递。你会得到拥有相同内容的两个变量，分别指向两块内存。
-这样的话，在你频繁操作占用内存比较大的变量的时候就会带来严重的性能问题，Swift也意识到了这个问题，所以推出">
+<meta name="twitter:title" content="LeetCode-回文数-简单">
+<meta name="twitter:description" content="题目简介12345678910111213141516判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。示例 1:输入: 121输出: true示例 2:输入: -121输出: false解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。示例 3:输入: 10输出: false解释: 从右向左读, 为 01 。因此它不">
 
 
 
@@ -114,7 +111,7 @@
   };
 </script>
 
-  <title> 浅谈Swift中的Copy-on-Write | 冯志浩的个人博客 </title>
+  <title> LeetCode-回文数-简单 | 冯志浩的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -244,7 +241,7 @@
             
             
               
-                浅谈Swift中的Copy-on-Write
+                LeetCode-回文数-简单
               
             
           </h1>
@@ -256,8 +253,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2019-04-22T15:18:12+08:00" content="2019-04-22">
-              2019-04-22
+            <time itemprop="dateCreated" datetime="2019-05-06T11:14:35+08:00" content="2019-05-06">
+              2019-05-06
             </time>
           </span>
 
@@ -267,8 +264,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2019/04/22/Swift/浅谈Swift中的Copy-on-Write/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/04/22/Swift/浅谈Swift中的Copy-on-Write/" itemprop="commentsCount"></span>
+                <a href="/2019/05/06/LeetCode-回文数-简单/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/05/06/LeetCode-回文数-简单/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -278,7 +275,7 @@
 
           
           
-             <span id="/2019/04/22/Swift/浅谈Swift中的Copy-on-Write/" class="leancloud_visitors" data-flag-title="浅谈Swift中的Copy-on-Write">
+             <span id="/2019/05/06/LeetCode-回文数-简单/" class="leancloud_visitors" data-flag-title="LeetCode-回文数-简单">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -300,25 +297,16 @@
       
 
       
-        <h3 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h3><p>在Swift中，有两种传值方式：引用类型(Class)和值类型(Struct/Enum)。而值类型有一个copy的操作，它的意思是当你传递一个值类型的变量的时候(给一个变量赋值，或者函数中的参数传值)，它会拷贝一份新的值让你进行传递。你会得到拥有相同内容的两个变量，分别指向两块内存。</p>
-<p>这样的话，在你频繁操作占用内存比较大的变量的时候就会带来严重的性能问题，Swift也意识到了这个问题，所以推出了Copy-on-Write机制，用来提升性能。下面我们来说一下什么是Copy-on-Write。</p>
-<h3 id="什么是Copy-on-Write"><a href="#什么是Copy-on-Write" class="headerlink" title="什么是Copy-on-Write"></a>什么是Copy-on-Write</h3><p>当你有一个占用内存很大的一个值类型，并且不得不将它赋值给另一个变量或者当做函数的参数传递的时候，拷贝它的值是一个非常消耗内存的操作，因为你不得不拷贝它所有的东西放置在另一块内存中。</p>
-<p>为了优化这个问题，Swift对于一些特定的值类型(集合类型：Array、Dictionary、Set)做了一些优化，在对于Array进行拷贝的时候，当传递的值进行改变的时候才会发生真正的拷贝。而对于String、Int等值类型，在赋值的时候就会发生拷贝。下面来看代码验证一下：</p>
-<h4 id="先看一下基本类型-Int、String等"><a href="#先看一下基本类型-Int、String等" class="headerlink" title="先看一下基本类型(Int、String等)"></a>先看一下基本类型(Int、String等)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var num1 = 10</div><div class="line">var num2 = num1</div><div class="line">print(address(of: &amp;num1)) //0x7ffee0c29828</div><div class="line">print(address(of: &amp;num2)) //0x7ffee0c29820</div><div class="line"></div><div class="line">var str1 = &quot;abc&quot;          </div><div class="line">var str2 = str1</div><div class="line">print(address(of: &amp;str1)) //0x7ffee0c29810</div><div class="line">print(address(of: &amp;str2)) //0x7ffee0c29800</div><div class="line"></div><div class="line">//打印内存地址</div><div class="line">func address(of object: UnsafeRawPointer) -&gt; String &#123;</div><div class="line">    let addr = Int(bitPattern: object)</div><div class="line">    return String(format: &quot;%p&quot;, addr)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><code>从上面的打印我们可以看出基本类型在进行赋值的时候就发生了拷贝操作</code></p>
-<h4 id="在看一下集合类型"><a href="#在看一下集合类型" class="headerlink" title="在看一下集合类型"></a>在看一下集合类型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var arr1 = [1,2,3,4,5]</div><div class="line">var arr2 = arr1</div><div class="line">print(address(of: &amp;arr1)) //0x6000023b06b0</div><div class="line">print(address(of: &amp;arr2)) //0x6000023b06b0</div><div class="line"></div><div class="line">arr2[2] = 4</div><div class="line">print(address(of: &amp;arr1)) //0x6000023b06b0</div><div class="line">print(address(of: &amp;arr2)) //0x6000023b11f0</div></pre></td></tr></table></figure>
-<p><code>从上面代码我们可以看出，当arr1赋值给arr2时并没有发生拷贝操作，当arr2的值改变的时候才发生了拷贝操作</code></p>
-<p>Copy-on-Write是一种非常好的方式去优化值类型的拷贝，虽然对于这套底层逻辑我们不用实现，但是了解这个机制对于我们来说还是非常必要的。通过上面的代码我们看到了Copy-on-Write机制是如何发生作用的，但是知道它如何应用是不够的，我们要做到知其然并且知其所以然。所以，接下来我们看一下Swift源代码是如何实现这一机制的。</p>
-<h3 id="Copy-on-Write如何实现的"><a href="#Copy-on-Write如何实现的" class="headerlink" title="Copy-on-Write如何实现的"></a>Copy-on-Write如何实现的</h3><p>你可以在<a href="https://github.com/apple/swift/blob/master/docs/OptimizationTips.rst" target="_blank" rel="external">OptimizationTips.rst</a>里发现如下代码:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">final class Ref&lt;T&gt; &#123;</div><div class="line">  var val : T</div><div class="line">  init(_ v : T) &#123;val = v&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">struct Box&lt;T&gt; &#123;</div><div class="line">    var ref : Ref&lt;T&gt;</div><div class="line">    init(_ x : T) &#123; ref = Ref(x) &#125;</div><div class="line"></div><div class="line">    var value: T &#123;</div><div class="line">        get &#123; return ref.val &#125;</div><div class="line">        set &#123;</div><div class="line">          if (!isUniquelyReferencedNonObjC(&amp;ref)) &#123;</div><div class="line">            ref = Ref(newValue)</div><div class="line">            return</div><div class="line">          &#125;</div><div class="line">          ref.val = newValue</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>该例子显示了如何用一个引用类型去实现一个拥有copy-on-write特性的泛型值类型T。具体逻辑就是当你进行set的时候判断是否有多个reference，如果是多个reference则进行拷贝，反之则不会。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>Copy-on-Write是一种用来优化占用内存大的值类型的拷贝操作的机制。</li>
-<li>对于Int、String等基本类型的值类型，它们在赋值的时候就会发生拷贝，它们没有Copy-on-Write这一特性（因为Copy-on-Write带来的开销往往比直接复制的开销要大）。</li>
-<li>对于Array、Dictionary、Set类型，当它们赋值的时候不会发生拷贝，只有在修改的之后才会发生拷贝，即Copy-on-Write。</li>
+        <h3 id="题目简介"><a href="#题目简介" class="headerlink" title="题目简介"></a>题目简介</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</div><div class="line"></div><div class="line">示例 1:</div><div class="line"></div><div class="line">输入: 121</div><div class="line">输出: true</div><div class="line">示例 2:</div><div class="line"></div><div class="line">输入: -121</div><div class="line">输出: false</div><div class="line">解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</div><div class="line">示例 3:</div><div class="line"></div><div class="line">输入: 10</div><div class="line">输出: false</div><div class="line">解释: 从右向左读, 为 01 。因此它不是一个回文数。</div></pre></td></tr></table></figure>
+<h3 id="我的解题思路"><a href="#我的解题思路" class="headerlink" title="我的解题思路"></a>我的解题思路</h3><p>看到该题，脑中思考出的第一解题思路就是将数字分解为两个数组，一个正序一个倒序，再比较两个数组是否一致。</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">func isPalindrome(_ x: Int) -&gt; Bool &#123;</div><div class="line">    //0-9肯定为回文数</div><div class="line">    if x &lt;= 9 &amp;&amp; x &gt;= 0 &#123;</div><div class="line">        return true</div><div class="line">    &#125;</div><div class="line">    //负数和10、100、1000等肯定不是</div><div class="line">    if x &lt; 0 || (x % 10 == 0 &amp;&amp; x != 0) &#123;</div><div class="line">        return false</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    var tempX = x</div><div class="line">    var normalNums = [Int]()</div><div class="line">    var reversedNums = [Int]()</div><div class="line">    </div><div class="line">    while tempX &gt; 0 &#123;</div><div class="line">        let num = tempX % 10</div><div class="line">        normalNums.append(num)</div><div class="line">        reversedNums.insert(num, at: 0)</div><div class="line">        </div><div class="line">        tempX = tempX / 10</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    for idx in normalNums.indices &#123;</div><div class="line">        if normalNums[idx] != reversedNums[idx] &#123;</div><div class="line">            return false</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return true</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="算法复杂度"><a href="#算法复杂度" class="headerlink" title="算法复杂度"></a>算法复杂度</h4><ul>
+<li>时间复杂度：O(n),还需要使用两个数组的内存开销</li>
 </ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="https://medium.com/@lucianoalmeida1/understanding-swift-copy-on-write-mechanisms-52ac31d68f2f" target="_blank" rel="external">Understanding Swift Copy-on-Write mechanisms</a></li>
+<h3 id="最优解题思路"><a href="#最优解题思路" class="headerlink" title="最优解题思路"></a>最优解题思路</h3><p>最优的解题思路为反转一般的数字，因为如果是回文数的话它反转的一半肯定是等于前一半的。</p>
+<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">func isPalindrome(_ x: Int) -&gt; Bool &#123;</div><div class="line">    if x &lt;= 9 &amp;&amp; x &gt;= 0 &#123;</div><div class="line">        return true</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if x &lt; 0 || (x % 10 == 0 &amp;&amp; x != 0) &#123;</div><div class="line">        return false</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var origin = x</div><div class="line">    var reversed = 0</div><div class="line">    while origin &gt; reversed &#123;</div><div class="line">        reversed = reversed * 10 + origin % 10</div><div class="line">        origin = origin / 10</div><div class="line">    &#125;</div><div class="line">    // 当数字长度为奇数时，我们可以通过 reversed / 10 去除处于中位的数字。</div><div class="line">    // 例如，当输入为 12321 时，在 while 循环的末尾我们可以得到 x = 12，reversed = 123，</div><div class="line">    // 由于处于中位的数字不影响回文（它总是与自己相等），所以我们可以简单地将其去除。</div><div class="line">    return origin == reversed || origin == reversed / 10</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="算法复杂度-1"><a href="#算法复杂度-1" class="headerlink" title="算法复杂度"></a>算法复杂度</h4><ul>
+<li>时间复杂度：O(\log_{10}(n))</li>
 </ul>
 
       
@@ -341,7 +329,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Swift/" rel="tag">#Swift</a>
+            <a href="/tags/LeetCode/" rel="tag">#LeetCode</a>
           
         </div>
       
@@ -350,17 +338,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/15/Swift之SQLite3的基础使用/" rel="next" title="Swift之SQLite3的基础使用">
-                <i class="fa fa-chevron-left"></i> Swift之SQLite3的基础使用
+              <a href="/2019/04/30/Swift/帮你成为更好的Swift开发者的10个Tips（译）/" rel="next" title="帮你成为更好的Swift开发者的10个Tips（译）">
+                <i class="fa fa-chevron-left"></i> 帮你成为更好的Swift开发者的10个Tips（译）
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/30/Swift/帮你成为更好的Swift开发者的10个Tips（译）/" rel="prev" title="帮你成为更好的Swift开发者的10个Tips（译）">
-                帮你成为更好的Swift开发者的10个Tips（译） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -386,8 +370,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2019/04/22/Swift/浅谈Swift中的Copy-on-Write/"
-           data-title="浅谈Swift中的Copy-on-Write" data-url="http://yoursite.com/2019/04/22/Swift/浅谈Swift中的Copy-on-Write/">
+      <div class="ds-thread" data-thread-key="2019/05/06/LeetCode-回文数-简单/"
+           data-title="LeetCode-回文数-简单" data-url="http://yoursite.com/2019/05/06/LeetCode-回文数-简单/">
       </div>
     
   </div>
@@ -471,7 +455,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#开篇"><span class="nav-number">1.</span> <span class="nav-text">开篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Copy-on-Write"><span class="nav-number">2.</span> <span class="nav-text">什么是Copy-on-Write</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先看一下基本类型-Int、String等"><span class="nav-number">2.1.</span> <span class="nav-text">先看一下基本类型(Int、String等)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在看一下集合类型"><span class="nav-number">2.2.</span> <span class="nav-text">在看一下集合类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Copy-on-Write如何实现的"><span class="nav-number">3.</span> <span class="nav-text">Copy-on-Write如何实现的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目简介"><span class="nav-number">1.</span> <span class="nav-text">题目简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的解题思路"><span class="nav-number">2.</span> <span class="nav-text">我的解题思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现"><span class="nav-number">2.1.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法复杂度"><span class="nav-number">2.2.</span> <span class="nav-text">算法复杂度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最优解题思路"><span class="nav-number">3.</span> <span class="nav-text">最优解题思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现-1"><span class="nav-number">3.1.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法复杂度-1"><span class="nav-number">3.2.</span> <span class="nav-text">算法复杂度</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
