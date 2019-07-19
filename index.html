@@ -243,6 +243,180 @@
             
               
                 
+                <a class="post-title-link" href="/2019/07/19/Swift/Swift进阶-更高效的使用集合/" itemprop="url">
+                  Swift进阶-更高效的使用集合
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-07-19T10:04:03+08:00" content="2019-07-19">
+              2019-07-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/07/19/Swift/Swift进阶-更高效的使用集合/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/07/19/Swift/Swift进阶-更高效的使用集合/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/07/19/Swift/Swift进阶-更高效的使用集合/" class="leancloud_visitors" data-flag-title="Swift进阶-更高效的使用集合">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>集合是极大简化我们工作效率的一种类型，我们可以通过它存储同类型的多条数据(Array)；可以存储同类型且唯一的多条数据(Set)；也可以存储多条键值对(Dictionary)。学会高效的使用集合，不仅可以提高我们代码的性能，还可以极大地节约我们的开发时间。</p>
+<p>下面，让我们开始吧！</p>
+<h3 id="获取集合的元素"><a href="#获取集合的元素" class="headerlink" title="获取集合的元素"></a>获取集合的元素</h3><h4 id="获取第一个元素"><a href="#获取第一个元素" class="headerlink" title="获取第一个元素"></a>获取第一个元素</h4><p>在日常开发中，我们会经常获取数组的元素，那么我们应该如何获取集合的第一个元素呢？</p>
+<p>可以通过以下三种方式：</p>
+<ul>
+<li>通过下标：<code>arr[0]</code></li>
+<li>通过index：<code>arr[arr.startIndex]</code></li>
+<li>通过调用： <code>first</code> </li>
+</ul>
+<p>通过下标：我们只能应用于 Array ，对于 Set 或者 Dictionary 是不能用的，而且如果数组为空会 crash。</p>
+<p>通过index：可以应用于 Array 、 Set 、 Dictionary 。但数组为空也会 crash。</p>
+<p>通过 <code>first</code> ：可以应用于 Array 、 Set 、 Dictionary 。而且它返回的是一个可选值，如果集合为空不会 crash。</p>
+<p>结论：通过上面的对比，我们知道应该使用 <code>first</code> 来安全的获取第一个元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">let nums = Array(1...10)</div><div class="line">if let first = nums.first &#123;</div><div class="line">    print(first)</div><div class="line">&#125;</div><div class="line">// 因为 Set 和Dictionary 是无序的，所以打印的第一个元素只是本次存储空间第一个位置的元素，多次运行结果会不一致。</div><div class="line">let set: Set = [1,2,3,4]</div><div class="line">if let first = set.first &#123;</div><div class="line">    print(first)</div><div class="line">&#125;</div><div class="line"></div><div class="line">let dict = [&quot;name&quot;: &quot;fzh&quot;, &quot;age&quot;: &quot;18&quot;]</div><div class="line">if let first = dict.first &#123;</div><div class="line">    print(first)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>说完了安全的获取第一个元素，下面我们来看一下如何获取第二个元素(放心，不会有如何获取第三个元素啦)。</p>
+<h4 id="获取第二个元素"><a href="#获取第二个元素" class="headerlink" title="获取第二个元素"></a>获取第二个元素</h4><p>首先，下标的方式是肯定不行的，我们来看使用 index 的方式如何获取集合的第二个元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">extension Collection &#123;</div><div class="line">    var second: Element? &#123;</div><div class="line">        //集合是否为空</div><div class="line">        guard self.startIndex != self.endIndex else &#123; return nil&#125;</div><div class="line">        //获取第二个元素的index</div><div class="line">        let index = self.index(after: self.startIndex)</div><div class="line">        //index 是否有效</div><div class="line">        guard index != self.endIndex else &#123; return nil &#125;</div><div class="line">        //返回第二个元素</div><div class="line">        return self[index]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看出，上面的代码看着还是比较多的。这种情况下，我们可能会想到标准库是否有 <code>second</code> 属性？但是很抱歉，没有。那么我们有简化上面的代码的方式吗？这个是可以有的。我们可以通过切片(Slice)的方式来获取。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">extension Collection &#123;</div><div class="line">    var second: Element? &#123;</div><div class="line">    // dropFirst()：丢掉第一个元素 生成一个切片；再访问切片的第一个元素，也就是 second 了</div><div class="line">        return self.dropFirst().first</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<img src="/2019/07/19/Swift/Swift进阶-更高效的使用集合/slice.png" alt="slice" title="slice">
+<h3 id="切片-Slice"><a href="#切片-Slice" class="headerlink" title="切片(Slice)"></a>切片(Slice)</h3><p>切片是一个集合的子集。它主要用来进行一些临时的操作，比如获取连续的几个元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 获取前半段的元素</div><div class="line">var array = Array(1...8)</div><div class="line">var firstHalf = array.dropLast(array.count/2)</div><div class="line">print(firstHalf) // [1, 2, 3, 4]</div></pre></td></tr></table></figure></p>
+<p>新建一个切片，并不会新建内存地址，将原集合的元素拷贝过来。它只是指向原集合的一个指针，因此创建一个slice 复杂度是O(1)。</p>
+<p>而且，只要原集合没有改变，切片和集合的索引就是一致的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">print(array[2], firstHalf[2]) // 3 3</div><div class="line">// 原集合改变，不影响已生成的切片</div><div class="line">array[2] = -1</div><div class="line">print(array[2], firstHalf[2]) // -1 3</div></pre></td></tr></table></figure></p>
+<p>如果我们将切片转换为数组的话，就会新建内存地址将切片范围中的元素拷贝到新的内存地址：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// 这一句会开辟内存，将值拷贝过来</div><div class="line">let copy = Array(firstHalf)</div><div class="line">print(copy)  // [1, 2, 3, 4]</div></pre></td></tr></table></figure></p>
+
+<p>我们应该只在进行临时操作的时候使用切片，因为即使原集合的生命周期已经结束，切片还是可能对原集合强引用。因此，长时间使用切片可能会导致内存泄漏。想详细了解切片的请移步<a href="https://developer.apple.com/documentation/swift/slice" target="_blank" rel="external">此处</a>。</p>
+<h4 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h4><p>我们在使用切片时，要注意索引的问题，比如下面的代码就会 crash ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var array = Array(1...8)</div><div class="line">let slice = array[2...5]</div><div class="line">print(slice[0])</div></pre></td></tr></table></figure>
+<p>对于上述例子，不要使用 <code>slice[0]</code> 来获取切片的第一个元素，因为我们的切片的索引只包含<code>[2...5]</code>，所以调用 <code>slice[0]</code> 会 crash。我们可以将它转为数组，再用 <code>[0]</code> 获取第一个元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var subArr = Array(slice)</div><div class="line">print(subArr[0]) // 3</div></pre></td></tr></table></figure></p>
+<h3 id="Lazy-Function"><a href="#Lazy-Function" class="headerlink" title="Lazy Function"></a>Lazy Function</h3><p>在我们对集合进行运算的时候，我们可能会写下面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let items = (1...4000).map &#123; $0 * 2 &#125;.filter &#123; return $0 &lt; 10 &#125;</div><div class="line"></div><div class="line">print(items.first) // Optional(2)</div></pre></td></tr></table></figure></p>
+<p>虽然我们可能需要的只是 items 的第一个元素，但是代码还是会对集合的所有元素进行 map 和 filter 操作。</p>
+<p>那么，我们如何能只对想要的元素进行map 和 filter 操作呢？答案就是 lazy Function。我们可以将上面的代码改为下面的样子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let items = (1...4000).lazy.map &#123; $0 * 2 &#125;.filter &#123; return $0 &lt; 10 &#125;</div><div class="line"></div><div class="line">print(items.first) // Optional(2)</div></pre></td></tr></table></figure></p>
+<h4 id="什么时候使用"><a href="#什么时候使用" class="headerlink" title="什么时候使用"></a>什么时候使用</h4><ul>
+<li>在进行链式运算的时候</li>
+<li>只需要结果中的一部分元素</li>
+<li>没有副作用</li>
+</ul>
+<h3 id="如何有效的避免集合-crash"><a href="#如何有效的避免集合-crash" class="headerlink" title="如何有效的避免集合 crash"></a>如何有效的避免集合 crash</h3><h4 id="是否在改变集合"><a href="#是否在改变集合" class="headerlink" title="是否在改变集合"></a>是否在改变集合</h4><p>下面是改变集合发生 crash 的一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var array = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;]</div><div class="line">let index = array.firstIndex(of: &quot;E&quot;)!</div><div class="line">array.remove(at: array.startIndex)</div><div class="line">print(array[index])</div></pre></td></tr></table></figure></p>
+<p>因为在执行 remove 操作后，数组的长度发生了变化，而 index 恰好是原数组的最后一个元素，所以会数组越界。</p>
+<p>我们可以通过下面这种方式，安全的使用集合：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var array = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;]</div><div class="line">array.remove(at: array.startIndex)</div><div class="line">if let index = array.firstIndex(of: &quot;E&quot;) &#123;</div><div class="line">    print(array[index]) // E</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们只要记住一点就可以避免上面的问题：<code>要在改变集合之后在获取 index 来得到数据</code>。</p>
+<h4 id="是否多线程访问集合"><a href="#是否多线程访问集合" class="headerlink" title="是否多线程访问集合"></a>是否多线程访问集合</h4><p>集合为了优化性能默认是单线程访问的，如果多条线程同时访问集合而又没有添加锁或者使用串行队列的话可能会发生出人意料的行为。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// thread 1</div><div class="line">var sleepingBeears = [String]()</div><div class="line">let queue = DispatchQueue.global()</div><div class="line">// thread 2</div><div class="line">queue.async &#123;</div><div class="line">    sleepingBeears.append(&quot;Grandpa&quot;)</div><div class="line">&#125;</div><div class="line">// thread 3</div><div class="line">queue.async &#123;</div><div class="line">    sleepingBeears.append(&quot;Cub&quot;)</div><div class="line">&#125;</div><div class="line">// thread 4</div><div class="line">print(sleepingBeears)</div></pre></td></tr></table></figure></p>
+<p>上面的代码会产生如下的结果：</p>
+<img src="/2019/07/19/Swift/Swift进阶-更高效的使用集合/error.png" alt="error" title="error">
+<p>我们可以使用串行队列来避免上面的问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var sleepingBeears = [String]()</div><div class="line">let queue = DispatchQueue(label: &quot;Bear-Cave&quot;)</div><div class="line"></div><div class="line">queue.async &#123; sleepingBeears.append(&quot;Grandpa&quot;) &#125;</div><div class="line">queue.async &#123; sleepingBeears.append(&quot;Cub&quot;) &#125;</div><div class="line"></div><div class="line">queue.async &#123; print(sleepingBeears) &#125;</div><div class="line">//[&quot;Grandpa&quot;, &quot;Cub&quot;]</div></pre></td></tr></table></figure></p>
+<p>所以，我们在多线程操作集合的时候，要注意适当的时候添加锁来确保集合的正确性。</p>
+<h3 id="尽量使用不可变集合"><a href="#尽量使用不可变集合" class="headerlink" title="尽量使用不可变集合"></a>尽量使用不可变集合</h3><p>优点：</p>
+<ul>
+<li>可读性更高</li>
+<li>bug更少</li>
+<li>可以使用切片和lazy来进行可变集合的操作</li>
+<li>编译器性能更高</li>
+</ul>
+<p>在我们能提前预估使用集合的大概长度的时候，我们可以通过以下的方式来创建固定容量的结合：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// Array reserveCapacity(_:)</div><div class="line">var num = [Int]()</div><div class="line">num.reserveCapacity(120)</div><div class="line">for _ in 0...100 &#123;</div><div class="line">    num.append(0)</div><div class="line">&#125;</div><div class="line"></div><div class="line">//Set Set(minimumCapacity:)</div><div class="line">var set = Set&lt;Int&gt;(minimumCapacity: 10)</div><div class="line"></div><div class="line">//Dictionary Dictionary(minimumCapacity:)</div><div class="line">var dict = Dictionary&lt;String, String&gt;(minimumCapacity: 10)</div></pre></td></tr></table></figure></p>
+<p>优点：如果你知道要添加到集合中多少个元素，使用此方法可以避免多次重新分配。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>我们应该尽可能的使用<code>first</code>来访问集合的第一个元素</li>
+<li>切片是对原集合的强引用，不要长时间使用它，可能会造成内存泄漏</li>
+<li>我们在进行大量的链式运算而且只获取结果的部分数据时，我们可以使用 lazy functions</li>
+<li>要在改变集合之后在获取 index 来得到数据</li>
+<li>在多线程操作集合的时候，要注意适当的时候添加锁来确保集合的正确性</li>
+</ul>
+<p>好了，到这里这篇文章就结束了。希望通过本篇文章让大家能在使用集合的时候更加得心应手，更加安全高效。Happy Day！</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://developer.apple.com/documentation/swift/slice" target="_blank" rel="external">Slice</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2018/229/" target="_blank" rel="external">WWDC</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2019/05/30/Swift/深入了解Swift中的初始化/" itemprop="url">
                   深入了解Swift中的初始化
                 </a>
@@ -1430,7 +1604,7 @@
 <h2 id="理解Class"><a href="#理解Class" class="headerlink" title="理解Class"></a>理解Class</h2><h3 id="Class的定义和使用"><a href="#Class的定义和使用" class="headerlink" title="Class的定义和使用"></a>Class的定义和使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class Animal &#123;</div><div class="line">    var name: String?</div><div class="line">    var weight = 0.0</div><div class="line">&#125;</div><div class="line"></div><div class="line">let cat = Animal()</div><div class="line">cat.name = &quot;cat&quot;</div><div class="line">cat.weight = 10</div><div class="line"></div><div class="line">print(&quot;cat&apos;s name: \(cat.name!), cat&apos;s weight: \(cat.weight)&quot;) //cat&apos;s name: cat, cat&apos;s weight: 10.0</div></pre></td></tr></table></figure>
 <h3 id="Class是引用类型"><a href="#Class是引用类型" class="headerlink" title="Class是引用类型"></a>Class是引用类型</h3><p>当值传递的时候，它是传递对已有instance的引用。下面用代码来解释一下这句话：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">let cat = Animal()</div><div class="line">cat.name = &quot;cat&quot;</div><div class="line">cat.weight = 10</div><div class="line"></div><div class="line">let blackCat = cat</div><div class="line">blackCat.name = &quot;blackCat&quot;</div><div class="line"></div><div class="line">print(&quot;cat&apos;s name: \(cat.name!)&quot;) // cat&apos;s name: blackCat</div></pre></td></tr></table></figure></p>
 <p>通过上面的代码可以了解到，其实<code>cat</code>和<code>blackCat</code>指向的是同一个Animal的instance。它们只是这个instance的两个不同的名字而已。如下图所示：</p>
-
+<img src="/2019/02/12/Swift/深入理解Swift中的Class和Struct/class.png" alt="class" title="class">
 <h4 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h4><p>我们看到上述代码把<code>cat</code>和<code>blackCat</code>声明为了<code>let</code>，但是我们依然可以修改它的属性，因为<code>cat</code>和<code>blackCat</code>引用的instance并没有改变，它们还是引用之前instance，我们只是修改的instance的属性。但是不能将<code>cat</code>或者<code>blackCat</code>指向另一个实例，如<code>blackCat = Animal()</code>会提示<code>Cannot assign to value: &#39;blackCat&#39; is a &#39;let&#39; constant</code>的错误。</p>
 <h3 id="Identity-Operators"><a href="#Identity-Operators" class="headerlink" title="Identity Operators"></a>Identity Operators</h3><p>Swift 提供<code>===</code>和<code>!==</code>来判断两个变量或者常量是不是引用同一个instance(只用于class，想一想为什么struct不需要).<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if blackCat === cat &#123;</div><div class="line">    print(&quot;Identical&quot;) //Identical</div><div class="line">&#125; else &#123;</div><div class="line">    print(&quot;Not identical&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h4 id="和-是不一样的。"><a href="#和-是不一样的。" class="headerlink" title="===和==是不一样的。"></a><code>===</code>和<code>==</code>是不一样的。</h4><ul>
@@ -1442,7 +1616,7 @@
 <h2 id="理解Struct"><a href="#理解Struct" class="headerlink" title="理解Struct"></a>理解Struct</h2><h3 id="Struct的定义和使用"><a href="#Struct的定义和使用" class="headerlink" title="Struct的定义和使用"></a>Struct的定义和使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">struct FPoint &#123;</div><div class="line">    var x = 0.0</div><div class="line">    var y = 0.0</div><div class="line">    //当在struct修改属性的时候需要使用mutating</div><div class="line">    mutating func addX(add: Double) &#123;</div><div class="line">        self.x = self.x + add</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let p1 = FPoint()</div><div class="line">print(&quot;p1&apos;s x : \(p1.x), p1&apos;s y: \(p1.y)&quot;) // p1&apos;s x : 0.0, p1&apos;s y: 0.0</div></pre></td></tr></table></figure>
 <h3 id="Struct是值类型"><a href="#Struct是值类型" class="headerlink" title="Struct是值类型"></a>Struct是值类型</h3><p>当值进行传递的时候，它会copy传递的值。下面用代码来解释一下这句话:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var p2 = p1</div><div class="line">p2.x = 3.0</div><div class="line">print(&quot;p1&apos;s x : \(p1.x), p1&apos;s y: \(p1.y); p2&apos;s x : \(p2.x), p2&apos;s y: \(p2.y)&quot;)</div><div class="line">//p1&apos;s x : 1.0, p1&apos;s y: 2.0; p2&apos;s x : 3.0, p2&apos;s y: 2.0</div></pre></td></tr></table></figure></p>
 <p>通过上述代码我们可以看到，将<code>p1</code>赋值给<code>p2</code>之后改变<code>p2</code>的值并不会影响<code>p1</code>的值，这是因为在将<code>p1</code>赋值给<code>p2</code>的时候是拷贝一个instance<code>值与p1相同</code>，然后将拷贝的instance赋值给<code>p2</code>。如下图所示:</p>
-
+<img src="/2019/02/12/Swift/深入理解Swift中的Class和Struct/struct.png" alt="struct" title="struct">
 <h3 id="Note-1"><a href="#Note-1" class="headerlink" title="Note"></a>Note</h3><p>如果struct的instance声明为let，是不能改变instance的值的。如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let p1 = FPoint(x: 1.0, y: 2.0)</div><div class="line">p1.x = 10.0 //报错:Cannot assign to property: &apos;p1&apos; is a &apos;let&apos; constant</div></pre></td></tr></table></figure></p>
 <h2 id="在项目中如何选择Struct和Class"><a href="#在项目中如何选择Struct和Class" class="headerlink" title="在项目中如何选择Struct和Class"></a>在项目中如何选择Struct和Class</h2><ul>
 <li>默认使用struct</li>
@@ -1682,130 +1856,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/01/21/Life/读《三国史话》/" itemprop="url">
-                  读吕思勉先生的《三国史话》有感
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2019-01-21T22:12:04+08:00" content="2019-01-21">
-              2019-01-21
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2019/01/21/Life/读《三国史话》/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/01/21/Life/读《三国史话》/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2019/01/21/Life/读《三国史话》/" class="leancloud_visitors" data-flag-title="读吕思勉先生的《三国史话》有感">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="关于三国你可能不知道的一些事"><a href="#关于三国你可能不知道的一些事" class="headerlink" title="关于三国你可能不知道的一些事"></a>关于三国你可能不知道的一些事</h3><ul>
-<li>宦官并不是特指被阉割的人，它在后汉之前特指的办事的公务人员，相当于现在的公务员。在后汉专用阉割的人来担任宦官，才成了这类人的专称。</li>
-<li>古代五刑：墨（脸上刺字）、劓（割掉鼻子）、剕（截去足趾）、宫（男阉割，女囚禁）、大刑（杀头）</li>
-<li>后汉的祸源：外戚和宦官的冲突</li>
-<li>华雄是被孙坚所杀，并不是关羽</li>
-<li>曹操是一个真英雄，而不是一个奸雄</li>
-<li>刘备征孙权并不是因为和关羽的兄弟情，因为<code>关羽败于建安二十四年，而刘备是建安二十六年征吴的</code></li>
-<li>魏延是一个很有才能的人</li>
-</ul>
-<h3 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h3><ul>
-<li>史书不一定是对的，要辩证的看待问题，多思考</li>
-<li>对一些大家认可的道理根据自己的经验和思考提出自己的质疑，比如<code>当局者迷旁观者清</code>这句话，这句话是比较不负责任的，因为我们当做旁观者是无法与当局者一样全面看待问题的，当看待片面的事实的时候总是容易做出做决定的</li>
-<li><code>分久必合合久必分</code>这句话侧重了时间的轮回，而忽略了人的本身，是一种片面的说法</li>
-<li>自古以来，大家总是将人的精神寄予神话</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1851,7 +1901,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-count">28</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -1,0 +1,772 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="集合是极大简化我们工作效率的一种类型，我们可以通过它存储同类型的多条数据(Array)；可以存储同类型且唯一的多条数据(Set)；也可以存储多条键值对(Dictionary)。学会高效的使用集合，不仅可以提高我们代码的性能，还可以极大地节约我们的开发时间。
+下面，让我们开始吧！
+获取集合的元素获取第一个元素在日常开发中，我们会经常获取数组的元素，那么我们应该如何获取集合的第一个元素呢？
+可以通过以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift进阶-更高效的使用集合">
+<meta property="og:url" content="http://yoursite.com/2019/07/19/Swift/Swift进阶-更高效的使用集合/index.html">
+<meta property="og:site_name" content="冯志浩的个人博客">
+<meta property="og:description" content="集合是极大简化我们工作效率的一种类型，我们可以通过它存储同类型的多条数据(Array)；可以存储同类型且唯一的多条数据(Set)；也可以存储多条键值对(Dictionary)。学会高效的使用集合，不仅可以提高我们代码的性能，还可以极大地节约我们的开发时间。
+下面，让我们开始吧！
+获取集合的元素获取第一个元素在日常开发中，我们会经常获取数组的元素，那么我们应该如何获取集合的第一个元素呢？
+可以通过以">
+<meta property="og:image" content="http://yoursite.com/2019/07/19/Swift/Swift进阶-更高效的使用集合/slice.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/19/Swift/Swift进阶-更高效的使用集合/error.png">
+<meta property="og:updated_time" content="2019-07-19T02:14:05.246Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift进阶-更高效的使用集合">
+<meta name="twitter:description" content="集合是极大简化我们工作效率的一种类型，我们可以通过它存储同类型的多条数据(Array)；可以存储同类型且唯一的多条数据(Set)；也可以存储多条键值对(Dictionary)。学会高效的使用集合，不仅可以提高我们代码的性能，还可以极大地节约我们的开发时间。
+下面，让我们开始吧！
+获取集合的元素获取第一个元素在日常开发中，我们会经常获取数组的元素，那么我们应该如何获取集合的第一个元素呢？
+可以通过以">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/19/Swift/Swift进阶-更高效的使用集合/slice.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Swift进阶-更高效的使用集合 | 冯志浩的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?915cf9a0ea53fbd82400bb21c1f4e873";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">冯志浩的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Swift进阶-更高效的使用集合
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-07-19T10:04:03+08:00" content="2019-07-19">
+              2019-07-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/07/19/Swift/Swift进阶-更高效的使用集合/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/07/19/Swift/Swift进阶-更高效的使用集合/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/07/19/Swift/Swift进阶-更高效的使用集合/" class="leancloud_visitors" data-flag-title="Swift进阶-更高效的使用集合">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>集合是极大简化我们工作效率的一种类型，我们可以通过它存储同类型的多条数据(Array)；可以存储同类型且唯一的多条数据(Set)；也可以存储多条键值对(Dictionary)。学会高效的使用集合，不仅可以提高我们代码的性能，还可以极大地节约我们的开发时间。</p>
+<p>下面，让我们开始吧！</p>
+<h3 id="获取集合的元素"><a href="#获取集合的元素" class="headerlink" title="获取集合的元素"></a>获取集合的元素</h3><h4 id="获取第一个元素"><a href="#获取第一个元素" class="headerlink" title="获取第一个元素"></a>获取第一个元素</h4><p>在日常开发中，我们会经常获取数组的元素，那么我们应该如何获取集合的第一个元素呢？</p>
+<p>可以通过以下三种方式：</p>
+<ul>
+<li>通过下标：<code>arr[0]</code></li>
+<li>通过index：<code>arr[arr.startIndex]</code></li>
+<li>通过调用： <code>first</code> </li>
+</ul>
+<p>通过下标：我们只能应用于 Array ，对于 Set 或者 Dictionary 是不能用的，而且如果数组为空会 crash。</p>
+<p>通过index：可以应用于 Array 、 Set 、 Dictionary 。但数组为空也会 crash。</p>
+<p>通过 <code>first</code> ：可以应用于 Array 、 Set 、 Dictionary 。而且它返回的是一个可选值，如果集合为空不会 crash。</p>
+<p>结论：通过上面的对比，我们知道应该使用 <code>first</code> 来安全的获取第一个元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">let nums = Array(1...10)</div><div class="line">if let first = nums.first &#123;</div><div class="line">    print(first)</div><div class="line">&#125;</div><div class="line">// 因为 Set 和Dictionary 是无序的，所以打印的第一个元素只是本次存储空间第一个位置的元素，多次运行结果会不一致。</div><div class="line">let set: Set = [1,2,3,4]</div><div class="line">if let first = set.first &#123;</div><div class="line">    print(first)</div><div class="line">&#125;</div><div class="line"></div><div class="line">let dict = [&quot;name&quot;: &quot;fzh&quot;, &quot;age&quot;: &quot;18&quot;]</div><div class="line">if let first = dict.first &#123;</div><div class="line">    print(first)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>说完了安全的获取第一个元素，下面我们来看一下如何获取第二个元素(放心，不会有如何获取第三个元素啦)。</p>
+<h4 id="获取第二个元素"><a href="#获取第二个元素" class="headerlink" title="获取第二个元素"></a>获取第二个元素</h4><p>首先，下标的方式是肯定不行的，我们来看使用 index 的方式如何获取集合的第二个元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">extension Collection &#123;</div><div class="line">    var second: Element? &#123;</div><div class="line">        //集合是否为空</div><div class="line">        guard self.startIndex != self.endIndex else &#123; return nil&#125;</div><div class="line">        //获取第二个元素的index</div><div class="line">        let index = self.index(after: self.startIndex)</div><div class="line">        //index 是否有效</div><div class="line">        guard index != self.endIndex else &#123; return nil &#125;</div><div class="line">        //返回第二个元素</div><div class="line">        return self[index]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看出，上面的代码看着还是比较多的。这种情况下，我们可能会想到标准库是否有 <code>second</code> 属性？但是很抱歉，没有。那么我们有简化上面的代码的方式吗？这个是可以有的。我们可以通过切片(Slice)的方式来获取。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">extension Collection &#123;</div><div class="line">    var second: Element? &#123;</div><div class="line">    // dropFirst()：丢掉第一个元素 生成一个切片；再访问切片的第一个元素，也就是 second 了</div><div class="line">        return self.dropFirst().first</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<img src="/2019/07/19/Swift/Swift进阶-更高效的使用集合/slice.png" alt="slice" title="slice">
+<h3 id="切片-Slice"><a href="#切片-Slice" class="headerlink" title="切片(Slice)"></a>切片(Slice)</h3><p>切片是一个集合的子集。它主要用来进行一些临时的操作，比如获取连续的几个元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 获取前半段的元素</div><div class="line">var array = Array(1...8)</div><div class="line">var firstHalf = array.dropLast(array.count/2)</div><div class="line">print(firstHalf) // [1, 2, 3, 4]</div></pre></td></tr></table></figure></p>
+<p>新建一个切片，并不会新建内存地址，将原集合的元素拷贝过来。它只是指向原集合的一个指针，因此创建一个slice 复杂度是O(1)。</p>
+<p>而且，只要原集合没有改变，切片和集合的索引就是一致的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">print(array[2], firstHalf[2]) // 3 3</div><div class="line">// 原集合改变，不影响已生成的切片</div><div class="line">array[2] = -1</div><div class="line">print(array[2], firstHalf[2]) // -1 3</div></pre></td></tr></table></figure></p>
+<p>如果我们将切片转换为数组的话，就会新建内存地址将切片范围中的元素拷贝到新的内存地址：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// 这一句会开辟内存，将值拷贝过来</div><div class="line">let copy = Array(firstHalf)</div><div class="line">print(copy)  // [1, 2, 3, 4]</div></pre></td></tr></table></figure></p>
+
+<p>我们应该只在进行临时操作的时候使用切片，因为即使原集合的生命周期已经结束，切片还是可能对原集合强引用。因此，长时间使用切片可能会导致内存泄漏。想详细了解切片的请移步<a href="https://developer.apple.com/documentation/swift/slice" target="_blank" rel="external">此处</a>。</p>
+<h4 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h4><p>我们在使用切片时，要注意索引的问题，比如下面的代码就会 crash ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var array = Array(1...8)</div><div class="line">let slice = array[2...5]</div><div class="line">print(slice[0])</div></pre></td></tr></table></figure>
+<p>对于上述例子，不要使用 <code>slice[0]</code> 来获取切片的第一个元素，因为我们的切片的索引只包含<code>[2...5]</code>，所以调用 <code>slice[0]</code> 会 crash。我们可以将它转为数组，再用 <code>[0]</code> 获取第一个元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var subArr = Array(slice)</div><div class="line">print(subArr[0]) // 3</div></pre></td></tr></table></figure></p>
+<h3 id="Lazy-Function"><a href="#Lazy-Function" class="headerlink" title="Lazy Function"></a>Lazy Function</h3><p>在我们对集合进行运算的时候，我们可能会写下面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let items = (1...4000).map &#123; $0 * 2 &#125;.filter &#123; return $0 &lt; 10 &#125;</div><div class="line"></div><div class="line">print(items.first) // Optional(2)</div></pre></td></tr></table></figure></p>
+<p>虽然我们可能需要的只是 items 的第一个元素，但是代码还是会对集合的所有元素进行 map 和 filter 操作。</p>
+<p>那么，我们如何能只对想要的元素进行map 和 filter 操作呢？答案就是 lazy Function。我们可以将上面的代码改为下面的样子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let items = (1...4000).lazy.map &#123; $0 * 2 &#125;.filter &#123; return $0 &lt; 10 &#125;</div><div class="line"></div><div class="line">print(items.first) // Optional(2)</div></pre></td></tr></table></figure></p>
+<h4 id="什么时候使用"><a href="#什么时候使用" class="headerlink" title="什么时候使用"></a>什么时候使用</h4><ul>
+<li>在进行链式运算的时候</li>
+<li>只需要结果中的一部分元素</li>
+<li>没有副作用</li>
+</ul>
+<h3 id="如何有效的避免集合-crash"><a href="#如何有效的避免集合-crash" class="headerlink" title="如何有效的避免集合 crash"></a>如何有效的避免集合 crash</h3><h4 id="是否在改变集合"><a href="#是否在改变集合" class="headerlink" title="是否在改变集合"></a>是否在改变集合</h4><p>下面是改变集合发生 crash 的一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var array = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;]</div><div class="line">let index = array.firstIndex(of: &quot;E&quot;)!</div><div class="line">array.remove(at: array.startIndex)</div><div class="line">print(array[index])</div></pre></td></tr></table></figure></p>
+<p>因为在执行 remove 操作后，数组的长度发生了变化，而 index 恰好是原数组的最后一个元素，所以会数组越界。</p>
+<p>我们可以通过下面这种方式，安全的使用集合：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var array = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;]</div><div class="line">array.remove(at: array.startIndex)</div><div class="line">if let index = array.firstIndex(of: &quot;E&quot;) &#123;</div><div class="line">    print(array[index]) // E</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们只要记住一点就可以避免上面的问题：<code>要在改变集合之后在获取 index 来得到数据</code>。</p>
+<h4 id="是否多线程访问集合"><a href="#是否多线程访问集合" class="headerlink" title="是否多线程访问集合"></a>是否多线程访问集合</h4><p>集合为了优化性能默认是单线程访问的，如果多条线程同时访问集合而又没有添加锁或者使用串行队列的话可能会发生出人意料的行为。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// thread 1</div><div class="line">var sleepingBeears = [String]()</div><div class="line">let queue = DispatchQueue.global()</div><div class="line">// thread 2</div><div class="line">queue.async &#123;</div><div class="line">    sleepingBeears.append(&quot;Grandpa&quot;)</div><div class="line">&#125;</div><div class="line">// thread 3</div><div class="line">queue.async &#123;</div><div class="line">    sleepingBeears.append(&quot;Cub&quot;)</div><div class="line">&#125;</div><div class="line">// thread 4</div><div class="line">print(sleepingBeears)</div></pre></td></tr></table></figure></p>
+<p>上面的代码会产生如下的结果：</p>
+<img src="/2019/07/19/Swift/Swift进阶-更高效的使用集合/error.png" alt="error" title="error">
+<p>我们可以使用串行队列来避免上面的问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var sleepingBeears = [String]()</div><div class="line">let queue = DispatchQueue(label: &quot;Bear-Cave&quot;)</div><div class="line"></div><div class="line">queue.async &#123; sleepingBeears.append(&quot;Grandpa&quot;) &#125;</div><div class="line">queue.async &#123; sleepingBeears.append(&quot;Cub&quot;) &#125;</div><div class="line"></div><div class="line">queue.async &#123; print(sleepingBeears) &#125;</div><div class="line">//[&quot;Grandpa&quot;, &quot;Cub&quot;]</div></pre></td></tr></table></figure></p>
+<p>所以，我们在多线程操作集合的时候，要注意适当的时候添加锁来确保集合的正确性。</p>
+<h3 id="尽量使用不可变集合"><a href="#尽量使用不可变集合" class="headerlink" title="尽量使用不可变集合"></a>尽量使用不可变集合</h3><p>优点：</p>
+<ul>
+<li>可读性更高</li>
+<li>bug更少</li>
+<li>可以使用切片和lazy来进行可变集合的操作</li>
+<li>编译器性能更高</li>
+</ul>
+<p>在我们能提前预估使用集合的大概长度的时候，我们可以通过以下的方式来创建固定容量的结合：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// Array reserveCapacity(_:)</div><div class="line">var num = [Int]()</div><div class="line">num.reserveCapacity(120)</div><div class="line">for _ in 0...100 &#123;</div><div class="line">    num.append(0)</div><div class="line">&#125;</div><div class="line"></div><div class="line">//Set Set(minimumCapacity:)</div><div class="line">var set = Set&lt;Int&gt;(minimumCapacity: 10)</div><div class="line"></div><div class="line">//Dictionary Dictionary(minimumCapacity:)</div><div class="line">var dict = Dictionary&lt;String, String&gt;(minimumCapacity: 10)</div></pre></td></tr></table></figure></p>
+<p>优点：如果你知道要添加到集合中多少个元素，使用此方法可以避免多次重新分配。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>我们应该尽可能的使用<code>first</code>来访问集合的第一个元素</li>
+<li>切片是对原集合的强引用，不要长时间使用它，可能会造成内存泄漏</li>
+<li>我们在进行大量的链式运算而且只获取结果的部分数据时，我们可以使用 lazy functions</li>
+<li>要在改变集合之后在获取 index 来得到数据</li>
+<li>在多线程操作集合的时候，要注意适当的时候添加锁来确保集合的正确性</li>
+</ul>
+<p>好了，到这里这篇文章就结束了。希望通过本篇文章让大家能在使用集合的时候更加得心应手，更加安全高效。Happy Day！</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://developer.apple.com/documentation/swift/slice" target="_blank" rel="external">Slice</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2018/229/" target="_blank" rel="external">WWDC</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/30/Swift/深入了解Swift中的初始化/" rel="next" title="深入了解Swift中的初始化">
+                <i class="fa fa-chevron-left"></i> 深入了解Swift中的初始化
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2019/07/19/Swift/Swift进阶-更高效的使用集合/"
+           data-title="Swift进阶-更高效的使用集合" data-url="http://yoursite.com/2019/07/19/Swift/Swift进阶-更高效的使用集合/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="冯志浩" />
+          <p class="site-author-name" itemprop="name">冯志浩</p>
+          <p class="site-description motion-element" itemprop="description">一个不安分的程序猿</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取集合的元素"><span class="nav-number">1.</span> <span class="nav-text">获取集合的元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取第一个元素"><span class="nav-number">1.1.</span> <span class="nav-text">获取第一个元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取第二个元素"><span class="nav-number">1.2.</span> <span class="nav-text">获取第二个元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切片-Slice"><span class="nav-number">2.</span> <span class="nav-text">切片(Slice)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Note"><span class="nav-number">2.1.</span> <span class="nav-text">Note</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lazy-Function"><span class="nav-number">3.</span> <span class="nav-text">Lazy Function</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么时候使用"><span class="nav-number">3.1.</span> <span class="nav-text">什么时候使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何有效的避免集合-crash"><span class="nav-number">4.</span> <span class="nav-text">如何有效的避免集合 crash</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#是否在改变集合"><span class="nav-number">4.1.</span> <span class="nav-text">是否在改变集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#是否多线程访问集合"><span class="nav-number">4.2.</span> <span class="nav-text">是否多线程访问集合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尽量使用不可变集合"><span class="nav-number">5.</span> <span class="nav-text">尽量使用不可变集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">冯志浩</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fengzhihao123"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("nCxez2PBEQDAzw3yNwTIjiqq-gzGzoHsz", "MNIIVCp3cdzMk5mUwMmBNvrH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
