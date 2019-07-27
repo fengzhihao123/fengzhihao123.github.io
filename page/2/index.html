@@ -243,6 +243,185 @@
             
               
                 
+                <a class="post-title-link" href="/2019/01/29/iOS/通过Objective-C的枚举学习iOS中的位操作/" itemprop="url">
+                  通过Objective-C的枚举学习iOS中的位操作.md
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-01-29T21:26:24+08:00" content="2019-01-29">
+              2019-01-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/01/29/iOS/通过Objective-C的枚举学习iOS中的位操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/01/29/iOS/通过Objective-C的枚举学习iOS中的位操作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/01/29/iOS/通过Objective-C的枚举学习iOS中的位操作/" class="leancloud_visitors" data-flag-title="通过Objective-C的枚举学习iOS中的位操作.md">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h2><p>今天在修改项目的时候，看见enum中出现了<code>&lt;&lt;</code>操作符(位操作)，之前对这个一直都不了解。这次趁着项目比较清闲，抽出时间来全面了解一下位操作。</p>
+<h2 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h2><p>位操作是对二进制数逐位进行运算或移位。它共包含两种操作：位运算和移位。下面就详细的了解一下这两种操作。<br><code>在此只讨论iOS中的所有位操作的运算符，别的语言的相同含义的操作符号可能不同</code></p>
+<h3 id="位运算符-以下操作符皆同Objective-C"><a href="#位运算符-以下操作符皆同Objective-C" class="headerlink" title="位运算符(以下操作符皆同Objective-C)"></a>位运算符(以下操作符皆同Objective-C)</h3><p>位运算符一种包含下面几种：</p>
+<ul>
+<li><p><code>~</code>(取反,一元操作符)：它会对目标数字的二进制每位进行取反</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let initialBits: UInt8 = 0b00001111</div><div class="line">let invertedBits = ~initialBits  // equals 11110000</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>|</code>(按位或)：它会对两个目标数字的相同位置数字进行或运算，规则：<code>0和0为0；0和1为1；1和1为1</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">let targetNum2 = 6 // 110</div><div class="line">print(targetNum | targetNum2) //print 7</div><div class="line">//targetNum:  101</div><div class="line">//targetNum2: 110</div><div class="line">//result:     111 (十进制 7)</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>&amp;</code>(按位与)：它会对两个目标数字的相同位置数字进行与运算，规则：<code>0和0为0；0和1为0；1和1为1</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">let targetNum2 = 6 // 110</div><div class="line">print(targetNum &amp; targetNum2) //print 4</div><div class="line">//targetNum:  101</div><div class="line">//targetNum2: 110</div><div class="line">//result:     100 (十进制 4)</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>^</code>(异或)：它会对两个目标数字的相同位置数字进行异或运算，如果不同则该位为1，否则该位为0。规则：<code>如0和0为0；0和1为1；1和1为0</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">let targetNum2 = 6 // 110</div><div class="line">print(targetNum ^ targetNum2) //print 3</div><div class="line">//targetNum:  101</div><div class="line">//targetNum2: 110</div><div class="line">//result:     011 (十进制 3)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="移位"><a href="#移位" class="headerlink" title="移位"></a>移位</h3><ul>
+<li><p><code>&gt;&gt;</code>(右移)：它会对目标数字按位右移x位</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">print(targetNum &gt;&gt; 2) //print 1</div><div class="line">//targetNum:  101</div><div class="line">//右移2位</div><div class="line">//result:     1 (十进制 1)</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>&lt;&lt;</code>(左移)：它会对目标数字按位左移x位(右边补0)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let targetNum = 5  // 101</div><div class="line">print(targetNum &lt;&lt; 2) //print 20</div><div class="line">//targetNum:  101</div><div class="line">//左移2位</div><div class="line">//result:     10100 (十进制 20)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="枚举中的位操作"><a href="#枚举中的位操作" class="headerlink" title="枚举中的位操作"></a>枚举中的位操作</h2><p>通过上文我们了解了位操作的具体计算方式，接下来看一下在枚举中的具体应用。</p>
+<h3 id="枚举中的应用"><a href="#枚举中的应用" class="headerlink" title="枚举中的应用"></a>枚举中的应用</h3><h4 id="定义枚举"><a href="#定义枚举" class="headerlink" title="定义枚举"></a>定义枚举</h4><ul>
+<li><p>OC</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">typedef NS_OPTIONS(NSInteger, CellExLineType) &#123;</div><div class="line">    CellExLineTypeTopLong     = 0,  </div><div class="line">    CellExLineTypeTopNone     = 1 &lt;&lt; 0, //十进制 1</div><div class="line">    CellExLineTypeBottomLong  = 1 &lt;&lt; 1, //十进制 2</div><div class="line">    CellExLineTypeBottomNone  = 1 &lt;&lt; 2, //十进制 4</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Swift</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">struct CellExLineType: OptionSet &#123;</div><div class="line">    let rawValue: Int</div><div class="line">    </div><div class="line">    static let topLong = CellExLineType(rawValue: 0)</div><div class="line">    static let topNone = CellExLineType(rawValue: 1 &lt;&lt; 0)</div><div class="line">    static let bottomLong = CellExLineType(rawValue: 1 &lt;&lt; 1)</div><div class="line">    static let bottomNone = CellExLineType(rawValue: 1 &lt;&lt; 2)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="位操作在枚举中的作用"><a href="#位操作在枚举中的作用" class="headerlink" title="位操作在枚举中的作用"></a>位操作在枚举中的作用</h4><ul>
+<li><p>~(取反)：用来剔除某个值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//OC</div><div class="line">self.lineType = CellExLineTypeTopNone;</div><div class="line">self.lineType |= CellExLineTypeBottomNone;</div><div class="line">self.lineType = self.lineType &amp; ~CellExLineTypeTopNone; //self.lineTye 只包含CellExLineTypeBottomNone</div><div class="line"></div><div class="line">//Swift</div><div class="line">var lineType: CellExLineType = [.topNone, .bottomNone]</div><div class="line">lineType.remove(.topNone)</div></pre></td></tr></table></figure>
+</li>
+<li><p>|(按位或)：用来添加某个值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//OC</div><div class="line">self.lineType = CellExLineTypeTopNone; //self.lineType 包含CellExLineTypeTopNone</div><div class="line">self.lineType = self.lineType | CellExLineTypeBottomNone; //self.lineType 包含CellExLineTypeTopNone和CellExLineTypeBottomNone</div><div class="line"></div><div class="line">//Swift</div><div class="line">var lineType: CellExLineType = [.bottomNone]</div><div class="line">lineType.insert(.topNone)</div></pre></td></tr></table></figure>
+</li>
+<li><p>&amp;(按位与)：用来检查是否包含某个值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//OC</div><div class="line">if ((self.lineType &amp; CellExLineTypeTopNone) == CellExLineTypeTopNone) &#123;</div><div class="line">    NSLog(@&quot;包含CellExLineTypeTopNone&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//Swift</div><div class="line">var lineType: CellExLineType = [.topNone, .bottomNone]</div><div class="line">if lineType.contains(.bottomNone) &#123;</div><div class="line">    print(&quot;包含bottomNone&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>^(异或)：用来置反某个值(如果包含则剔除，如果不包含则添加)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//OC</div><div class="line">self.lineType = CellExLineTypeTopNone | CellExLineTypeBottomNone; //self.lineType 包含CellExLineTypeTopNone和CellExLineTypeBottomNone</div><div class="line">self.lineType = self.lineType ^ CellExLineTypeTopNone; //self.lineTye 只包含CellExLineTypeBottomNone</div><div class="line">self.lineType = self.lineType ^ CellExLineTypeTopNone; //self.lineType 包含CellExLineTypeTopNone和CellExLineTypeBottomNone</div><div class="line"></div><div class="line">//Swift</div><div class="line">var lineType: CellExLineType = [.topNone, .bottomNone]</div><div class="line">if lineType.contains(.topNone) &#123;</div><div class="line">    lineType.remove(.topNone)</div><div class="line">&#125; else &#123;</div><div class="line">    lineType.insert(.topNone)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在枚举中使用位操作我们可以方便的给一个属性值赋值多个值，比如下面的代码给<code>lineType</code>赋值了<code>CellExLineTypeTopNone</code>和<code>CellExLineTypeBottomNone</code>属性。这样我们就可以在lineType的set方法里面处理<code>CellExLineTypeTopNone</code>和<code>CellExLineTypeBottomNone</code>的情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//OC</div><div class="line">- (void)setLineType:(CellExLineType)lineType &#123;</div><div class="line">    _lineType = lineType;</div><div class="line">    if (lineType &amp; CellExLineTypeTopNone) &#123;</div><div class="line">        NSLog(@&quot;top none&quot;);</div><div class="line">    &#125;</div><div class="line">    if (lineType &amp; CellExLineTypeBottomNone) &#123;</div><div class="line">        NSLog(@&quot;bottom none&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//Swift</div><div class="line">var lineType: CellExLineType = [.topNone, .bottomNone]</div><div class="line">if lineType.contains(.topNone) &#123;</div><div class="line">    lineType.remove(.topNone)</div><div class="line">&#125;</div><div class="line">if lineType.contains(.bottomNone) &#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在系统中的许多Enum也是这么使用的，如UIViewAutoresizing、UIViewAnimationOptions等。</p>
+<h4 id="为什么要在枚举中使用位操作符"><a href="#为什么要在枚举中使用位操作符" class="headerlink" title="为什么要在枚举中使用位操作符?"></a>为什么要在枚举中使用位操作符?</h4><ul>
+<li>在许多古老的微处理器上，位运算比加减运算略快，通常位运算比乘除法运算要快很多。在现代架构中，情况并非如此：位运算的运算速度通常与加法运算相同（仍然快于乘法运算）</li>
+<li>可以给一个属性同时设置多个值<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2></li>
+<li><code>~</code>(按位取反)：对目标数字按位取反；在枚举中用于剔除某个值</li>
+<li><code>|</code>(按位或)：对两个目标数字同位置上数字进行或运算；在枚举中用于添加某个值</li>
+<li><ul>
+<li><code>&amp;</code>(按位与)：对两个目标数字同位置上数字进行与运算；在枚举中用于判断是否包含某个值</li>
+</ul>
+</li>
+<li><code>^</code>(按位异或)：对两个目标数字同位置上数字进行异或运算；在枚举中置反某个值</li>
+<li><code>&gt;&gt;</code>(右移)：对目标数字按位右移x位</li>
+<li><code>&lt;&lt;</code>(左移)：对目标数字按位左移x位</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://swinden.com/bitwise/" target="_blank" rel="external">Bitwise Operators and Bit Masks</a></li>
+<li><a href="https://stackoverflow.com/questions/30867325/binary-operator-cannot-be-applied-to-two-uiviewautoresizing-operands" target="_blank" rel="external">SO</a></li>
+<li><a href="https://stackoverflow.com/questions/24066170/how-to-create-ns-options-style-bitmask-enumerations-in-swift/24066171#24066171" target="_blank" rel="external">How to create NS_OPTIONS-style bitmask enumerations in Swift?</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%93%8D%E4%BD%9C#%E5%8F%96%E5%8F%8D%EF%BC%88NOT%EF%BC%89" target="_blank" rel="external">位操作</a></li>
+<li><a href="https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html" target="_blank" rel="external">Advanced Operators</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2019/01/21/Life/读《三国史话》/" itemprop="url">
                   读吕思勉先生的《三国史话》有感
                 </a>
@@ -710,157 +889,6 @@
 <li><a href="http://www.cnblogs.com/ludashi/p/6160898.html" target="_blank" rel="external">Swift3.0服务端开发(二) 静态文件添加、路由配置以及表单提交</a></li>
 <li><a href="http://www.cocoachina.com/swift/20160318/15712.html" target="_blank" rel="external">Hello，服务端 Swift</a></li>
 </ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/10/LeetCode/LeetCode总结/" itemprop="url">
-                  LeetCode总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-10T13:07:13+08:00" content="2017-02-10">
-              2017-02-10
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/02/10/LeetCode/LeetCode总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/10/LeetCode/LeetCode总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/02/10/LeetCode/LeetCode总结/" class="leancloud_visitors" data-flag-title="LeetCode总结">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h2><p>1.Two Sum</p>
-<p>Example:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Given nums = [2, 7, 11, 15], target = 9,</div><div class="line">Because nums[0] + nums[1] = 2 + 7 = 9,</div><div class="line">return [0, 1].</div></pre></td></tr></table></figure>
-<p>Code(Swift):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">func twoSum(_ nums: [Int], _ target: Int) -&gt; [Int] &#123;</div><div class="line">    if nums.count &lt;= 1 &#123;</div><div class="line">        return [0]</div><div class="line">    &#125;</div><div class="line">    for index1 in 0..&lt;nums.count &#123;</div><div class="line">        for index2 in index1+1..&lt;nums.count &#123;</div><div class="line">            if nums[index1] + nums[index2] == target &#123;</div><div class="line">                return [index1, index2]</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return [1]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>2.Reverse Integer</p>
-<p>Example1: x = 123, return 321<br>Example2: x = -123, return -321</p>
-<p>Code:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">func reverse(_ x: Int) -&gt; Int &#123;</div><div class="line">    var reverse = 0</div><div class="line">    var n = x</div><div class="line">    </div><div class="line">    while n != 0 &#123;</div><div class="line">        reverse = reverse * 10 + n % 10</div><div class="line">        n = n / 10</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    if reverse &gt; 2147483647 || reverse &lt; -2147483647 &#123;</div><div class="line">        return 0</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    return reverse</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>Palindrome Number</li>
-</ol>
-<p>Code:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">func isPalindrome(_ x: Int) -&gt; Bool &#123;</div><div class="line">        if x &lt; 0 &#123;</div><div class="line">            return false</div><div class="line">        &#125;</div><div class="line">        if x == 0 &#123;</div><div class="line">            return true</div><div class="line">        &#125;</div><div class="line">    </div><div class="line">        var temp = x</div><div class="line">        var y = 0</div><div class="line">        while temp != 0 &#123;</div><div class="line">            y =  y * 10 + temp % 10</div><div class="line">            temp = temp / 10</div><div class="line">        &#125;</div><div class="line">        if y == x &#123;</div><div class="line">            return true</div><div class="line">        &#125; else &#123;</div><div class="line">            return false</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h2><p>1.Combine Two Tables</p>
-<p>Code(MySQL):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select a.FirstName,a.LastName,b.City,b.State from Person a left join Address b on a.PersonId = b.PersonId</div></pre></td></tr></table></figure>
-<p>考察知识点：<br><a href="http://www.w3school.com.cn/sql/sql_join.asp" target="_blank" rel="external">join</a></p>
-<p>2.Second Highest Salary</p>
-<p>Code(MySQL):</p>
-<p>第一种解法:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SELECT max(Salary) as SecondHighestSalary</div><div class="line">From Employee</div><div class="line">WHERE Salary not in (SELECT max(Salary) FROM Employee)</div></pre></td></tr></table></figure>
-<p>第二种解法:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">select (</div><div class="line">  select distinct num from test order by num Desc limit 1 offset 1</div><div class="line">)as second</div></pre></td></tr></table></figure>
-<p>考察知识点: max函数</p>
-<ol>
-<li>Employees Earning More Than Their Managers</li>
-</ol>
-<p>Code(MySQL):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SELECT E1.Name as Employee</div><div class="line">FROM Employee as E1, Employee as E2</div><div class="line">WHERE E1.ManagerId = E2.id and E1.Salary &gt; E2.Salary</div></pre></td></tr></table></figure>
-<p>4.Duplicate Emails</p>
-<p>Code(MySQL):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT email as `Email` FROM Person GROUP BY email HAVING count(*) &gt; 1</div></pre></td></tr></table></figure>
-<p>5.Customers Who Never Order</p>
-<p>Code(MySQL):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">select a.Name as Customers from Customers a </div><div class="line">left join Orders o on(o.CustomerId = a.Id)</div><div class="line">where o.Id is null</div></pre></td></tr></table></figure>
-<p>6.Delete Duplicate Emails</p>
-<p>Code(MySQL):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DELETE p1</div><div class="line">FROM Person p1, Person p2</div><div class="line">WHERE p1.Email = p2.Email AND</div><div class="line">p1.Id &gt; p2.Id</div></pre></td></tr></table></figure>
-<p>7.Rising Temperature</p>
-<p>Code(MySQL):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">select w1.Id from Weather w1, Weather w2</div><div class="line">where subdate(w1.Date, 1) = w2.Date </div><div class="line">and w1.Temperature &gt; w2.Temperature</div><div class="line"></div><div class="line">select w1.Id</div><div class="line">from Weather w1, Weather w2</div><div class="line">where w1.Temperature &gt; w2.Temperature</div><div class="line">and to_days(w1.DATE) - to_days(w2.date) = 1;</div></pre></td></tr></table></figure></p>
-<p><a href="https://github.com/scottszb1987/LeetCodeInCSharp" target="_blank" rel="external">解题思路</a><br><a href="http://www.cnblogs.com/0201zcr/p/4820706.html" target="_blank" rel="external">http://www.cnblogs.com/0201zcr/p/4820706.html</a></p>
 
           
         

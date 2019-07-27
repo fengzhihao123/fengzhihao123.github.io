@@ -1,0 +1,813 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="LeetCode," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="数组从排序数组中删除重复项关键词：排序 原地修改输入数组
+思路：将重复元素与第一个非重复的元素值交换，保存当前最后一个非重复值的 index。该 index 即数组的长度。
+
+Swift5
+123456789101112131415161718func removeDuplicates(_ nums: inout [Int]) -&amp;gt; Int &amp;#123;    if nums.count &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode-初级算法-数组">
+<meta property="og:url" content="http://yoursite.com/2019/07/27/LeetCode/LeetCode-初级算法-数组/index.html">
+<meta property="og:site_name" content="冯志浩的个人博客">
+<meta property="og:description" content="数组从排序数组中删除重复项关键词：排序 原地修改输入数组
+思路：将重复元素与第一个非重复的元素值交换，保存当前最后一个非重复值的 index。该 index 即数组的长度。
+
+Swift5
+123456789101112131415161718func removeDuplicates(_ nums: inout [Int]) -&amp;gt; Int &amp;#123;    if nums.count &amp;">
+<meta property="og:updated_time" content="2019-07-27T09:32:39.821Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode-初级算法-数组">
+<meta name="twitter:description" content="数组从排序数组中删除重复项关键词：排序 原地修改输入数组
+思路：将重复元素与第一个非重复的元素值交换，保存当前最后一个非重复值的 index。该 index 即数组的长度。
+
+Swift5
+123456789101112131415161718func removeDuplicates(_ nums: inout [Int]) -&amp;gt; Int &amp;#123;    if nums.count &amp;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> LeetCode-初级算法-数组 | 冯志浩的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?915cf9a0ea53fbd82400bb21c1f4e873";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">冯志浩的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LeetCode-初级算法-数组
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-07-27T17:31:12+08:00" content="2019-07-27">
+              2019-07-27
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/07/27/LeetCode/LeetCode-初级算法-数组/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/07/27/LeetCode/LeetCode-初级算法-数组/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/07/27/LeetCode/LeetCode-初级算法-数组/" class="leancloud_visitors" data-flag-title="LeetCode-初级算法-数组">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="从排序数组中删除重复项"><a href="#从排序数组中删除重复项" class="headerlink" title="从排序数组中删除重复项"></a>从排序数组中删除重复项</h3><p>关键词：<code>排序</code> <code>原地修改输入数组</code></p>
+<p>思路：将重复元素与第一个非重复的元素值交换，保存当前最后一个非重复值的 index。该 index 即数组的长度。</p>
+<ul>
+<li><p>Swift5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">func removeDuplicates(_ nums: inout [Int]) -&gt; Int &#123;</div><div class="line">    if nums.count &lt;= 1 &#123;</div><div class="line">        return nums.count</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    var cIndex = 1</div><div class="line">    var cIndexValue = nums[0]</div><div class="line">    </div><div class="line">    for index in 1..&lt;nums.count &#123;</div><div class="line">        if nums[index] != cIndexValue &#123;</div><div class="line">            (nums[cIndex], nums[index]) = (nums[index], nums[cIndex])</div><div class="line">            cIndexValue = nums[cIndex]</div><div class="line">            cIndex += 1</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    return cIndex</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Python3 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">def removeDuplicates(self, nums: [int]) -&gt; int:</div><div class="line">    if len(nums) &lt;= 1:</div><div class="line">        return len(nums)</div><div class="line">    </div><div class="line">    cIndex = 1</div><div class="line">    cIndexValue = nums[0]</div><div class="line">    </div><div class="line">    for index in range(1, len(nums)):</div><div class="line">        if nums[index] != cIndexValue:</div><div class="line">            nums[index], nums[cIndex] = nums[cIndex], nums[index]</div><div class="line">            cIndexValue = nums[cIndex]</div><div class="line">            cIndex += 1</div><div class="line">    return cIndex</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="买卖股票的最佳时机-II"><a href="#买卖股票的最佳时机-II" class="headerlink" title="买卖股票的最佳时机 II"></a>买卖股票的最佳时机 II</h3><p>关键词：<code>最大利润</code> <code>不能同时参与多笔交易</code></p>
+<p>思路：计算每个峰值，将峰值累加即为最大利润</p>
+<ul>
+<li><p>Swift5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">func maxProfit(_ prices: [Int]) -&gt; Int &#123;</div><div class="line">    if prices.count &lt;= 1 &#123;</div><div class="line">        return 0</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    var maxProfit = 0</div><div class="line">    </div><div class="line">    for index in 1..&lt;prices.count &#123;</div><div class="line">        if prices[index] &gt; prices[index - 1] &#123;</div><div class="line">            maxProfit += prices[index] - prices[index - 1]</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return maxProfit</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Python3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">def maxProfit(self, prices: [int]) -&gt; int:</div><div class="line">    if len(prices) &lt;= 1:</div><div class="line">        return 0</div><div class="line">    </div><div class="line">    max_profit = 0</div><div class="line">    for index in range(1, len(prices)):</div><div class="line">        if prices[index] &gt; prices[index - 1]:</div><div class="line">            max_profit += prices[index] - prices[index - 1]</div><div class="line">    </div><div class="line">    return max_profit</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="旋转数组"><a href="#旋转数组" class="headerlink" title="旋转数组"></a>旋转数组</h3><p>思路：依次将最后一个元素插入到数组当做第一个元素，再将最后一个元素移除</p>
+<ul>
+<li><p>Swift5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">func rotate(_ nums: inout [Int], _ k: Int) &#123;</div><div class="line">    var count = k % nums.count</div><div class="line">    while count &gt; 0 &#123;</div><div class="line">        nums.insert(nums.last!, at: 0)</div><div class="line">        nums.removeLast()</div><div class="line">        count -= 1</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Python3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">def rotate(self, nums: [int], k: int):</div><div class="line">    count = k % len(nums)</div><div class="line">    </div><div class="line">    while count &gt; 0:</div><div class="line">        nums.insert(0, nums.pop())</div><div class="line">        count -= 1</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="存在重复"><a href="#存在重复" class="headerlink" title="存在重复"></a>存在重复</h3><p>思路：利用 Set 数据结构</p>
+<ul>
+<li><p>Swift5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func containsDuplicate(_ nums: [Int]) -&gt; Bool &#123;</div><div class="line">    return Set(nums).count != nums.count</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Python3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">def containsDuplicate(self, nums: [int]) -&gt; bool:</div><div class="line">    return len(set(nums)) != len(nums)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="只出现一次的数字"><a href="#只出现一次的数字" class="headerlink" title="只出现一次的数字"></a>只出现一次的数字</h3><p>思路：利用异或操作符: <code>^</code></p>
+<ul>
+<li><p>Swift5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">func singleNumber(_ nums: [Int]) -&gt; Int &#123;</div><div class="line">    var result = 0</div><div class="line">    for num in nums &#123;</div><div class="line">        result = result ^ num</div><div class="line">    &#125;</div><div class="line">    return result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Python3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">def singleNumber(nums: [int]) -&gt; int:</div><div class="line">    result = 0</div><div class="line">    for num in nums:</div><div class="line">        result = result ^ num</div><div class="line">    return result</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="两个数组的交集-II"><a href="#两个数组的交集-II" class="headerlink" title="两个数组的交集 II"></a>两个数组的交集 II</h3><p>思路：先排序，再用快慢指针法</p>
+<ul>
+<li><p>Swift5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">func intersect(_ nums1: [Int], _ nums2: [Int]) -&gt; [Int] &#123;</div><div class="line">    var result = [Int]()</div><div class="line">    var tNum1 = nums1.sorted()</div><div class="line">    var tNum2 = nums2.sorted()</div><div class="line">    </div><div class="line">    var i = 0</div><div class="line">    var j = 0</div><div class="line">    </div><div class="line">    while i &lt; tNum1.count &amp;&amp; j &lt; tNum2.count &#123;</div><div class="line">        if tNum1[i] &gt; tNum2[j] &#123;</div><div class="line">            j += 1</div><div class="line">        &#125; else if tNum1[i] &lt; tNum2[j] &#123;</div><div class="line">            i += 1</div><div class="line">        &#125; else &#123;</div><div class="line">            result.append(tNum1[i])</div><div class="line">            </div><div class="line">            i += 1</div><div class="line">            j += 1</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    return result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Python3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">def intersect(nums1: [int], nums2: [int]) -&gt; [int]:</div><div class="line">    l1 = sorted(nums1)</div><div class="line">    l2 = sorted(nums2)</div><div class="line"></div><div class="line">    res = []</div><div class="line"></div><div class="line">    i = 0</div><div class="line">    j = 0</div><div class="line"></div><div class="line">    while i &lt; len(l1) and j &lt; len(l2):</div><div class="line">    if l1[i] &gt; l2[j]:</div><div class="line">        j += 1</div><div class="line">    elif l1[i] &lt; l2[j]:</div><div class="line">        i += 1</div><div class="line">    else:</div><div class="line">        res.append(l1[i])</div><div class="line">        i += 1</div><div class="line">        j += 1</div><div class="line"></div><div class="line">    return res</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="加一"><a href="#加一" class="headerlink" title="加一"></a>加一</h3><p>思路：遍历</p>
+<ul>
+<li><p>Swift5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">func plusOne(_ digits: [Int]) -&gt; [Int] &#123;</div><div class="line">    var result = [Int]()</div><div class="line">    var carry = 1</div><div class="line">    </div><div class="line">    for i in 0..&lt;digits.count &#123;</div><div class="line">        let num = digits[digits.count - i - 1]</div><div class="line">        </div><div class="line">        if num + carry == 10 &#123;</div><div class="line">            result.insert(0, at: 0)</div><div class="line">            if i == digits.count - 1 &#123;</div><div class="line">                result.insert(1, at: 0)</div><div class="line">            &#125;</div><div class="line">        &#125; else &#123;</div><div class="line">            result.insert(num + carry, at: 0)</div><div class="line">            carry = 0</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    return result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Python3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">def plusOne(digits: [int]) -&gt; [int]:</div><div class="line">    res = []</div><div class="line">    carry = 1</div><div class="line"></div><div class="line">    for i in range(len(digits)):</div><div class="line">        num = digits[len(digits) - i - 1]</div><div class="line"></div><div class="line">        if num + carry == 10:</div><div class="line">            res.insert(0, 0)</div><div class="line">            if i == len(digits) - 1:</div><div class="line">                res.insert(0, 1)</div><div class="line">        else:</div><div class="line">            res.insert(0, num + carry)</div><div class="line">            carry = 0</div><div class="line"></div><div class="line">    return res</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="移动零"><a href="#移动零" class="headerlink" title="移动零"></a>移动零</h3><p>思路：快慢指针</p>
+<ul>
+<li><p>Swift5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">func moveZeroes(_ nums: inout [Int]) &#123;</div><div class="line">    var fast = 0</div><div class="line">    var slow = 0</div><div class="line"></div><div class="line">    while fast &lt; nums.count &amp;&amp; slow &lt; nums.count &#123;</div><div class="line">        if nums[fast] == 0 &#123;</div><div class="line">            fast += 1</div><div class="line">        &#125; else &#123;</div><div class="line">            if slow != fast &#123;</div><div class="line">                (nums[slow], nums[fast]) = (nums[fast], nums[slow])</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            slow += 1</div><div class="line">            fast += 1</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Python3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">def moveZeroes(nums: [int]):</div><div class="line">    fast = 0</div><div class="line">    slow = 0</div><div class="line">    length = len(nums)</div><div class="line">    while fast &lt; length and slow &lt; length:</div><div class="line">    if nums[fast] == 0:</div><div class="line">        fast += 1</div><div class="line">    else:</div><div class="line">        if slow != fast:</div><div class="line">            nums[slow], nums[fast] = nums[fast], nums[slow]</div><div class="line">        slow += 1</div><div class="line">        fast += 1</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h3><p>思路：利用<code>字典</code>的数据结构</p>
+<ul>
+<li><p>Swift5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">func twoSum(_ nums: [Int], _ target: Int) -&gt; [Int] &#123;</div><div class="line">    var dict = [Int : Int]()</div><div class="line">    for (i, num) in nums.enumerated() &#123;</div><div class="line">        if let value = dict[target - num] &#123;</div><div class="line">            return [value, i]</div><div class="line">        &#125; else &#123;</div><div class="line">            dict[num] = i</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    return []</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Python3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">def twoSum(nums: [int], target: int) -&gt; [int]:</div><div class="line">    kv = &#123;&#125;</div><div class="line">    for i, v in enumerate(nums):</div><div class="line">        if target - v in kv:</div><div class="line">            return [kv[target - v], i]</div><div class="line">        else:</div><div class="line">            kv[v] = i</div><div class="line">    return []</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="有效的数独"><a href="#有效的数独" class="headerlink" title="有效的数独"></a>有效的数独</h3><p>思路：按每行、每列、每个3x3判断 (Swift 版)。Python3为官方解题思路</p>
+<ul>
+<li><p>Swift5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">func isValidSudoku(_ board: [[Character]]) -&gt; Bool &#123;</div><div class="line">    // 每一行</div><div class="line">    for chars in board &#123;</div><div class="line">        var tChars = chars</div><div class="line">        tChars.removeAll(where: &#123; $0 == &quot;.&quot;&#125;)</div><div class="line">        if tChars.count != Set(tChars).count &#123;</div><div class="line">        return false</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //每一列</div><div class="line">    for i in 0..&lt;9 &#123;</div><div class="line">        var column = [Character]()</div><div class="line">        for j in 0..&lt;9 &#123;</div><div class="line">            if board[j][i] != &quot;.&quot; &#123;</div><div class="line">                column.append(board[j][i])</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        if column.count != Set(column).count &#123;</div><div class="line">            return false</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //每个3x3</div><div class="line">    var t = [Character]()</div><div class="line">    var count = 0</div><div class="line">    </div><div class="line">    for i in 0..&lt;9 &#123;</div><div class="line">        for j in 0..&lt;9 &#123;</div><div class="line">            let x = 3 * (i/3) + j/3</div><div class="line">            let y = 3 * (i%3) + j%3</div><div class="line">            if board[x][y] != &quot;.&quot; &#123;</div><div class="line">                t.append(board[x][y])</div><div class="line">            &#125;</div><div class="line">            count += 1</div><div class="line">            if count == 9 &#123;</div><div class="line">                if t.count != Set(t).count &#123;</div><div class="line">                    t.removeAll()</div><div class="line">                    return false</div><div class="line">                &#125;</div><div class="line">                t.removeAll()</div><div class="line">                count = 0</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return true</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Python3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">def isValidSudoku(self, board: List[List[str]]) -&gt; bool:</div><div class="line">    # init data</div><div class="line">    rows = [&#123;&#125; for i in range(9)]</div><div class="line">    columns = [&#123;&#125; for i in range(9)]</div><div class="line">    boxes = [&#123;&#125; for i in range(9)]</div><div class="line"></div><div class="line">    # validate a board</div><div class="line">    for i in range(9):</div><div class="line">        for j in range(9):</div><div class="line">            num = board[i][j]</div><div class="line">            if num != &apos;.&apos;:</div><div class="line">                num = int(num)</div><div class="line">                box_index = (i // 3 ) * 3 + j // 3</div><div class="line">                    </div><div class="line">                # keep the current cell value</div><div class="line">                rows[i][num] = rows[i].get(num, 0) + 1</div><div class="line">                columns[j][num] = columns[j].get(num, 0) + 1</div><div class="line">                boxes[box_index][num] = boxes[box_index].get(num, 0) + 1</div><div class="line">                    </div><div class="line">                # check if this value has been already seen before</div><div class="line">                if rows[i][num] &gt; 1 or columns[j][num] &gt; 1 or boxes[box_index][num] &gt; 1:</div><div class="line">                    return False         </div><div class="line">    return True</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="旋转图像"><a href="#旋转图像" class="headerlink" title="旋转图像"></a>旋转图像</h3><p>思路：官方题解</p>
+<ul>
+<li><p>Swift5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">func rotate(_ matrix: inout [[Int]]) &#123;</div><div class="line">    let n = matrix[0].count</div><div class="line">    for i in 0..&lt;(n / 2 + n % 2) &#123;</div><div class="line">        for j in 0..&lt;(n / 2) &#123;</div><div class="line">            let tmp = matrix[n - 1 - j][i]</div><div class="line">            matrix[n - 1 - j][i] = matrix[n - 1 - i][n - j - 1]</div><div class="line">            matrix[n - 1 - i][n - j - 1] = matrix[j][n - 1 - i]</div><div class="line">            matrix[j][n - 1 - i] = matrix[i][j]</div><div class="line">            matrix[i][j] = tmp</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Python3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">def rotate(self, matrix: List[List[int]]) -&gt; None:</div><div class="line">    n = len(matrix[0])</div><div class="line">    for i in range(n // 2 + n % 2):</div><div class="line">        for j in range(n // 2):</div><div class="line">            tmp = [0] * 4</div><div class="line">            row, col = i, j</div><div class="line">            # store 4 elements in tmp</div><div class="line">            for k in range(4):</div><div class="line">                tmp[k] = matrix[row][col]</div><div class="line">                row, col = col, n - 1 - row</div><div class="line">            # rotate 4 elements   </div><div class="line">            for k in range(4):</div><div class="line">                matrix[row][col] = tmp[(k - 1) % 4]</div><div class="line">                row, col = col, n - 1 - row</div></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag">#LeetCode</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/19/Swift/Swift进阶-更高效的使用集合/" rel="next" title="Swift进阶-更高效的使用集合">
+                <i class="fa fa-chevron-left"></i> Swift进阶-更高效的使用集合
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2019/07/27/LeetCode/LeetCode-初级算法-数组/"
+           data-title="LeetCode-初级算法-数组" data-url="http://yoursite.com/2019/07/27/LeetCode/LeetCode-初级算法-数组/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="冯志浩" />
+          <p class="site-author-name" itemprop="name">冯志浩</p>
+          <p class="site-description motion-element" itemprop="description">一个不安分的程序猿</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">1.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从排序数组中删除重复项"><span class="nav-number">1.1.</span> <span class="nav-text">从排序数组中删除重复项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#买卖股票的最佳时机-II"><span class="nav-number">1.2.</span> <span class="nav-text">买卖股票的最佳时机 II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转数组"><span class="nav-number">1.3.</span> <span class="nav-text">旋转数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存在重复"><span class="nav-number">1.4.</span> <span class="nav-text">存在重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#只出现一次的数字"><span class="nav-number">1.5.</span> <span class="nav-text">只出现一次的数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两个数组的交集-II"><span class="nav-number">1.6.</span> <span class="nav-text">两个数组的交集 II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加一"><span class="nav-number">1.7.</span> <span class="nav-text">加一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动零"><span class="nav-number">1.8.</span> <span class="nav-text">移动零</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两数之和"><span class="nav-number">1.9.</span> <span class="nav-text">两数之和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有效的数独"><span class="nav-number">1.10.</span> <span class="nav-text">有效的数独</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转图像"><span class="nav-number">1.11.</span> <span class="nav-text">旋转图像</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">冯志浩</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fengzhihao123"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("nCxez2PBEQDAzw3yNwTIjiqq-gzGzoHsz", "MNIIVCp3cdzMk5mUwMmBNvrH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
