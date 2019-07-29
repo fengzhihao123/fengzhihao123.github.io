@@ -1,0 +1,760 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Core Animation," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Core Animation 的基础Core Animation 提供一个通用的系统来对你 App 的视图或者其他可视化元素做动画。Core Animation 并不是替换你 App 的视图，Core Animation 是一种与视图集成的技术，用来给视图内容的动画制作提供更好的性能和支持。Core Animation 通过缓存视图内容转换为图形硬件能直接操作的位图来实现这一行为。在某些情况下，为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Core Animation 编程指南 - Core Animation 的基础">
+<meta property="og:url" content="http://yoursite.com/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/index.html">
+<meta property="og:site_name" content="冯志浩的个人博客">
+<meta property="og:description" content="Core Animation 的基础Core Animation 提供一个通用的系统来对你 App 的视图或者其他可视化元素做动画。Core Animation 并不是替换你 App 的视图，Core Animation 是一种与视图集成的技术，用来给视图内容的动画制作提供更好的性能和支持。Core Animation 通过缓存视图内容转换为图形硬件能直接操作的位图来实现这一行为。在某些情况下，为">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-1.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-3.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-4.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-5.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-6.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-7.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-8.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-9.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-10.png">
+<meta property="og:updated_time" content="2019-07-29T14:29:04.011Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Core Animation 编程指南 - Core Animation 的基础">
+<meta name="twitter:description" content="Core Animation 的基础Core Animation 提供一个通用的系统来对你 App 的视图或者其他可视化元素做动画。Core Animation 并不是替换你 App 的视图，Core Animation 是一种与视图集成的技术，用来给视图内容的动画制作提供更好的性能和支持。Core Animation 通过缓存视图内容转换为图形硬件能直接操作的位图来实现这一行为。在某些情况下，为">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Core Animation 编程指南 - Core Animation 的基础 | 冯志浩的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?915cf9a0ea53fbd82400bb21c1f4e873";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">冯志浩的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Core Animation 编程指南 - Core Animation 的基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-07-29T22:06:24+08:00" content="2019-07-29">
+              2019-07-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/" class="leancloud_visitors" data-flag-title="Core Animation 编程指南 - Core Animation 的基础">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Core-Animation-的基础"><a href="#Core-Animation-的基础" class="headerlink" title="Core Animation 的基础"></a>Core Animation 的基础</h2><p>Core Animation 提供一个通用的系统来对你 App 的视图或者其他可视化元素做动画。Core Animation 并不是替换你 App 的视图，Core Animation 是一种与视图集成的技术，用来给视图内容的动画制作提供更好的性能和支持。Core Animation 通过缓存视图内容转换为图形硬件能直接操作的位图来实现这一行为。在某些情况下，为了缓存视图内容，Core Animation 还定义了一种方法来指定任意可见内容，将该内容与你的视图集成，并将其与其他所有内容一起进行动画。</p>
+<p>你使用 Core Animation 来对你 App 的视图和可视对象的改变进行动画。大多数的改变是和你修改的可视化对象的属性相关联的。例如：你可能使用 Core Animation 去使视图的 position size 或 opacity 的改变进行动画。当你进行类似的改变时，Core Animation 会在该属性的当前值和你指定的新值之间做动画。通常，你不会像动画片一样，使用 Core Animation 每秒60次来替换视图的内容。实际上，你会使用 Core Animation 去移动屏幕上视图的内容，淡入淡出内容，对视图应用任意图形形变，或者改变视图的其他可视属性。</p>
+<h3 id="图层-提供-Drawing-和-Animations-的基础"><a href="#图层-提供-Drawing-和-Animations-的基础" class="headerlink" title="图层 提供 Drawing 和 Animations 的基础"></a>图层 提供 Drawing 和 Animations 的基础</h3><p>图层对象是由 3D 空间管理的 2D surface，它也是 Core Animation的灵魂。和视图相同的是，图层管理 surface 的几何信息，内容，和它可视化属性。和视图不同的是，图层不定义它们自己的外观。图层 对象仅管理位图的状态信息。位图可以是视图绘制自身的结果，也可以是你指定的 image。为此，<code>你在 App 中使用的 main layers 被认为是模型对象，因为它们主要是管理数据</code>。这个概念很重要，因为它影响动画的行文。</p>
+<h4 id="基于图层的绘制模型"><a href="#基于图层的绘制模型" class="headerlink" title="基于图层的绘制模型"></a>基于图层的绘制模型</h4><p>你的 App 中大多数的图层不会做实际的绘制工作，图层对象会捕获你的 App 中提供的内容，然后将内容缓存为位图，有时也被称为 backing store。当你后面再修改图层的属性时，你所做的只是改变与图层对象相关联的状态信息。当改变触发一个动画时，Core Animation 会将图层的位图和状态信息传递给图形硬件，图形硬件使用新的信息来进行渲染，如图1-1。硬件操作位图进行动画要比软件快得多。</p>
+<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-1.png" alt="图1-1 Core Animation 如何绘制内容" title="图1-1 Core Animation 如何绘制内容">
+<p>因为它操作的是静态的位图，所以基于图层的绘制与传统的基于视图的绘制技术有很大的不同。基于视图的绘制，通过调用视图的 <code>drawRect:</code> 方法去使用新的参数去重绘内容来作为视图本身改变的结果。但是使用这种方法是非常耗性能的，因为他在主线程上使用 CPU 。Core Animation 通过硬件直接操作缓存的位图去实现同样的或者类似的效果，来避免性能上的消耗。</p>
+<p>虽然 Core Animation 尽可能的使用缓存的内容，但是你的 APP 必须提供初始的内容并且不时的更新它。你的 App 有几种方法来提供图层对象的内容，详情请见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/SettingUpLayerObjects/SettingUpLayerObjects.html#//apple_ref/doc/uid/TP40004514-CH13-SW4" target="_blank" rel="external">此处</a>。</p>
+<h4 id="基于图层的动画"><a href="#基于图层的动画" class="headerlink" title="基于图层的动画"></a>基于图层的动画</h4><p>layer 对象的数据和状态信息是与屏幕上 layer 的视觉显示分离的。这种分离赋予 Core Animation 一种方式去干预自己，并且对旧状态到新状态的改变进行动画。例如，改变 layer 的 position 属性 会导致 Core Animation 将 layer 从当前位置移动到新的指定位置。同样的，改变其他的属性也会导致恰当的改变。如图1-2。layer 属性触发动画机制的列表，可参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/AnimatableProperties/AnimatableProperties.html#//apple_ref/doc/uid/TP40004514-CH11-SW1" target="_blank" rel="external">此处</a>。</p>
+<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-2.png" alt="图1-2 你可以在 layers 上执行的动画的例子" title="图1-2 你可以在 layers 上执行的动画的例子">
+<p>在一个动画执行的过程中，Core Animation 会在硬件中完成所有的逐帧绘制。你所需要做的就是：给动画制定一个开始值和一个结束值，剩下的就可以交给 Core Animation 了。你也可以自定义你所需要的时间信息和动画参数，如果你不自定义，Core Animation 会提供合适的默认值。</p>
+<p>关于如何初始化动画和配置动画参数的更多信息，可以参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/CreatingBasicAnimations/CreatingBasicAnimations.html#//apple_ref/doc/uid/TP40004514-CH3-SW1" target="_blank" rel="external">此处</a>。</p>
+<h3 id="Layer-对象定义它们自己的几何图形"><a href="#Layer-对象定义它们自己的几何图形" class="headerlink" title="Layer 对象定义它们自己的几何图形"></a>Layer 对象定义它们自己的几何图形</h3><p>layer 的工作之一就是管理其内容的视觉几何(visual geometry)。视觉几何包含其内容的 bounds、在屏幕的 position 和 layer 是否被旋转、缩放、形变。和 view 一样，layer 也有 frame、bounds 属性用来定位图层的位置和内容。layer 还有 view 没有的属性，例如 锚点(anchor point)：它定义了操作发生的点。<br>指定 layer 几何图形的某些方面的方式也与为 view 指定信息的方式不同。</p>
+<h4 id="layer-使用两种类型的坐标系"><a href="#layer-使用两种类型的坐标系" class="headerlink" title="layer 使用两种类型的坐标系"></a>layer 使用两种类型的坐标系</h4><p>Layers 利用基于点坐标系(point-based coordinate systems)和单位坐标系(unit coordinate systems)来指定内容的位置。使用哪一个坐标系取决于传递信息的类型。当指定的值直接映射到屏幕坐标或必须指定相关联的另一个 layer 的值时，使用基于点坐标系。例如 layer 的 <code>position</code> 属性。当值不应与屏幕坐标相关联，因为它与其他值相关联时，使用单位坐标系。例如： layer 的 <code>anchorPoint</code> 属性指一个与 layer 本身的 bounds 相关联的点，该点是可以改变的。</p>
+<p>基于点坐标系最常见的用法就是使用 layer 的 <code>bounds</code> 和 <code>position</code> 属性指定 layer 的 size 和 position 。bounds 定义了它自身的坐标系，并包含了它在屏幕上的 size。position 定义了 layer 在它父坐标系上的位置。虽然 layer 有 frame 的属性，但该值实际是由 bounds 和 position 属性计算出来的，并且 layer 不会经常使用 frame。</p>
+<p>layer 的 bounds 和 frame 属性的方向总是和底层平台的方向一致。下图展示了 iOS 和 OS X 系统的默认方向。在 iOS 中，默认的原点是 layer 的左上角，而在 OS X 系统上，默认是左下角。如果你想在两个系统上用一套 Core Animation 代码，你必须考虑到这些差异。</p>
+<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-3.png" alt="图1-3 iOS 和 OS X 默认的 layer 几何" title="图1-3 iOS 和 OS X 默认的 layer 几何">
+<p>在图1-3中，需要注意的是， position 属性是位于图层的中间。position 是基于 layer 的 anchorPoint 属性的值改变的几个属性之一。锚点表示坐标的起始点，更多详细信息请看<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/CoreAnimationBasics/CoreAnimationBasics.html#//apple_ref/doc/uid/TP40004514-CH2-SW17" target="_blank" rel="external">此处</a>。</p>
+<p>锚点是使用单位坐标系指定的几个属性之一。 Core Animation 使用单位坐标系表示当 layer 的尺寸发生改变时，值可能改变的属性。你可以将单位坐标系视为指定总可能值得百分比。单位坐标中每个单位坐标的值的范围都是 0.0 到 1.0 。例如，在 x 轴，左边缘的坐标是 0.0 ，右边缘的坐标是 1.0 。在 y 轴，单位坐标值的方向改变取决于所在平台，如图1-4所示：</p>
+<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-4.png" alt="图1-4 iOS 和 OS X 上默认的单位坐标系" title="图1-4 iOS 和 OS X 上默认的单位坐标系">
+<p>OS X 10.8 之前，当你需要的时候，可以使用 <code>geometryFlipped</code> 属性去改变 layer y 轴上的默认方向。当涉及到 filp 形变的时候，必须使用该属性去帮助 layer 得到正确的方向。例如：如果父视图使用 flip 形变，它的子视图的内容(以及与它们绑定的 layers)往往会倒置。在这种情况下，将子图层的 <code>geometryFilpped</code> 属性设置为 YES ，是一种简单有效的解决办法。在 OS X 10.8 以后，AppKit 将会自动处理该属性，不需要你再修改。对于 iOS 来说，推荐你不要使用 <code>geometryFlipped</code> 属性。</p>
+<p>所有的坐标值，无论是点还是单位坐标值都是浮点数。使用浮点数可以允许你在正常的坐标值之间指定精确的位置。使用浮点数是很便捷的，尤其在输出或者绘制 Retina 显示器时，一个点是由多个像素点绘制的。浮点数使你可以忽略底层设备分辨率而专注于你所需精度的具体值。</p>
+<h4 id="锚点影响几何操作"><a href="#锚点影响几何操作" class="headerlink" title="锚点影响几何操作"></a>锚点影响几何操作</h4><p>layer 的几何操作的发生于 layer 的锚点相关联，你可以使用 <code>anchorPoint</code> 属性来访问 layer 的锚点。当操作 layer 的 position 或 transform 属性时，锚点的影响是非常显著地。position 属性总是和 layer 的锚点相关联的，你应用到 layer 上的任何形变效果也是和锚点相关联的。</p>
+<p>图1-5 演示了锚点从默认值改变为一个不同的值时，layer 的 position 属性是如何变化的。即使 layer 没有在它的父边界中没有移动，将 layer 的锚点从中心移动到边界的原点也会改变 position 的值。</p>
+<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-5.png" alt="图1-5 锚点如何影响 position 属性" title="图1-5 锚点如何影响 position 属性">
+<p>图1-6 展示了改变锚点的值是如何影响形变在 layer 上的应用。当你在 layer 上应用一个旋转的形变，旋转发生在锚点的周围。因为锚点默认是在 layer 的中间，这通常会创建一个你期待的旋转行为，如果你改变锚点，旋转的结果是不同的。</p>
+<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-6.png" alt="图1-6 锚点是如何影响形变" title="图1-6 锚点是如何影响形变">
+<h4 id="Layers-可以在三维空间中操作"><a href="#Layers-可以在三维空间中操作" class="headerlink" title="Layers 可以在三维空间中操作"></a>Layers 可以在三维空间中操作</h4><p>每个 layer 有两个形变矩阵，你可以用这两个矩阵去操作 layer 和它的内容。CALayer 的 <code>transform</code> 指的是你想应用在它和它的 sublayers 上形变。在你想改变 layer 本身的时候使用该属性。例如，你可能想使用该属性去缩放、旋转或者暂时改变它的 position。<code>sublayerTransform</code> 属性只应用于 sublayers，它通常用于向场景内容添加透视效果。</p>
+<p>通过将坐标值乘以数字矩阵来进行形变工作，以获得表示原始点形变版本的新坐标。因为 Core Animation 的值可以在三维空间中指定，每个坐标点有四个值，坐标点必须和一个 4x4 矩阵相乘，如图1-7所示。在 Core Animation，图中的形变是通过 CATransformD 类型俩表示的。幸运的是，你不必去修改矩阵结构的字段来执行标准的形变。Core Animation 提供了丰富的函数去创建缩放、平移和旋转矩阵去做矩阵比较。为了使用函数来操作形变，Core Animation 延伸了键值编码支持，使你可以使用键来修改形变。查看<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/Key-ValueCodingExtensions/Key-ValueCodingExtensions.html#//apple_ref/doc/uid/TP40004514-CH12-SW1" target="_blank" rel="external">此处</a>获悉你可修改的键。</p>
+<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-7.png" alt="图1-7 使用矩阵运算来转换坐标" title="图1-7 使用矩阵运算来转换坐标">
+<p>图1-8 显示了一些常见形变的矩阵配置。任何坐标乘以 identity 矩阵返回坐标本身。对于其他形变，坐标的修改完全取决于你改变的矩阵元素。例如，沿 x轴平移，你可以将形变矩阵的 tx 设为非零值，将 ty 和 tz 设为0。对于旋转，你可以提供目标旋转角度响应的正弦值和余弦值。</p>
+<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-8.png" alt="图1-8 常见的形变矩阵配置" title="图1-8 常见的形变矩阵配置">
+<h3 id="图层树反映了动画状态的不同方面"><a href="#图层树反映了动画状态的不同方面" class="headerlink" title="图层树反映了动画状态的不同方面"></a>图层树反映了动画状态的不同方面</h3><p>App 使用 Core Animation 有三组图层对象。每组的 layer 对象对将你的 App 的内容显示在屏幕上都有不同的作用：</p>
+<ul>
+<li>模型图层树(图层树 - layer tree)中的对象是与你的 App 交互最多的。该树上的模型对象存储任何动画的目标值。每当你改变 layer 的属性时，都使用了其中一个对象。</li>
+<li>表现树(presentation tree)中的对象包含了任何正在执行的动画的当前值。<br>虽然图层树对象包含动画的目标值，但表示树中的对象会反映屏幕上显示的当前值。你永远不要修改该树中的对象。你可以使用该树的对象来获取当前动画的值，也许你需要使用这些值来创建一个新的动画。</li>
+<li>渲染树(render tree)中的对象用来执行实际的动画，并且它是 Core Animation 的私有对象。</li>
+</ul>
+<p>每组图层对象都被组织成一个分层结构，就像 App 中的视图。实际上，<br>对于为其所有视图启用图层的 App，每个树的初始结构完全匹配视图层次结构。但是，App 可以根据需要将其他图层对象（即与视图无关的图层）添加到图层层次结构中。你可以在这种情况下执行此操作，以针对不需要视图的所有开销的内容优化应用程序的性能。图1-9显示了在简单的iOS应用程序中找到的图层细分。示例中的 window 包含一个内容视图，该视图本身包含一个按钮视图和两个独立的图层对象。每个视图都有一个对应的图层对象，它构成图层层次结构的一部分。</p>
+<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-9.png" alt="图1-9 与 window 关联的图层" title="图1-9 与 window 关联的图层">
+<p>图层树中的每个对象，都在表示树和渲染树中有一个与之匹配的对象，如图1-10 所示。如上所述， App 主要使用图层树中的对象，但有时也会访问表示树种的对象。具体而言，访问图层树中的对象的 <code>presentationLayer</code> 属性来获取表示树种与之关联的对象。你可能需要访问对象来获取动画中间过程的属性的值。</p>
+<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-10.png" alt="图1-10 window 的图层树" title="图1-10 window 的图层树">
+<p><code>你应该只在动画执行中的时候去访问表示树中的对象。当动画正在进行时，表示树包含当时在屏幕上显示的图层值。这个行为不同于图层树，图层树重视反映你的代码设置的最后的值，并且等同于动画的最终状态。</code></p>
+<h3 id="图层和视图的关系"><a href="#图层和视图的关系" class="headerlink" title="图层和视图的关系"></a>图层和视图的关系</h3><p>图层不能替代你 App 中的视图，即你不能仅基于图层来创建视觉页面。图层提供视图的基础结构。图层使绘制和动画视图的内容更加容易高效，并且保持高帧速率。然而，图层也有很多事情处理不了。图层不能处理事件、绘制内容、参与响应链，和其它很多事情。基于此，每个 App 必须有一个或者多个视图来处理上述类型的交互。</p>
+<p>在 iOS 中，每个视图底层都由图层对象支持，但是在 OS X 你必须决定哪个视图有图层。在 OS X v10.8 以后的版本，给所有的视图添加图层可能是有意义的。然而，你不被要求必须这么做，你可以在不需要或者不想的地方使图层失效。图层会使你的内存开销增加，但是它们的优点远远超过这个缺点。在禁用图层支持之前，最好先测试 App 的性能。</p>
+<p>当你的视图支持图层的时候，你创建了一个图层支持的视图(layer-backed view)。对于图层支持的视图，系统会在底层创建一个图层对象，并且保持图层和视图同步。 iOS 的所有视图和大部分的 OS X 视图是图层支持的视图。然而，在 OS X 中，你也可以创建图层托管视图(layer-hosting view)，即你自己创建图层对象的视图。对于图层托管视图，AppKit采用了一种不干涉的方法来管理该层，并且不会根据视图的变化来修改它。</p>
+<p><code>对于图层支持视图，无论何时，推荐你操作视图，而不是图层。在 iOS ，视图只是图层的一种封装，所以，你在图层上做的任何操作通常会正常工作。但是在 iOS 和 OS X 中都存在这样的情况：操纵图层而不是视图可能无法产生预期的结果。只要有可能，本文档指出了这些陷阱，并试图提供方法来帮助你解决这些问题。</code></p>
+<p>除了与视图关联的图层之外，还可以创建没有相应视图的图层对象。你可以将这些独立的图层对象嵌入到 App 中的任何其他图层对象中，包括那些与视图相关联的图层对象。你通常使用独立的图层对象作为特定优化路径的一部分。例如，如果你想在多个地方使用相同的图像，你可以加载图像一次，并将其与多个独立的图层对象相关联，然后将这些对象添加到图层树中。然后，每个层引用源图像，而不是试图在内存中创建自己的图像副本。</p>
+<p>有关如何为应用程序视图启用图层支持的信息，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/SettingUpLayerObjects/SettingUpLayerObjects.html#//apple_ref/doc/uid/TP40004514-CH13-SW5" target="_blank" rel="external">此处</a>。有关如何创建图层对象层次结构的信息，以及何时创建图层对象层次结构的提示，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/BuildingaLayerHierarchy/BuildingaLayerHierarchy.html#//apple_ref/doc/uid/TP40004514-CH6-SW2" target="_blank" rel="external">此处</a>。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Core-Animation/" rel="tag">#Core Animation</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/27/LeetCode/LeetCode-初级算法-数组/" rel="next" title="LeetCode-初级算法-数组">
+                <i class="fa fa-chevron-left"></i> LeetCode-初级算法-数组
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/"
+           data-title="Core Animation 编程指南 - Core Animation 的基础" data-url="http://yoursite.com/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="冯志浩" />
+          <p class="site-author-name" itemprop="name">冯志浩</p>
+          <p class="site-description motion-element" itemprop="description">一个不安分的程序猿</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Core-Animation-的基础"><span class="nav-number">1.</span> <span class="nav-text">Core Animation 的基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图层-提供-Drawing-和-Animations-的基础"><span class="nav-number">1.1.</span> <span class="nav-text">图层 提供 Drawing 和 Animations 的基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于图层的绘制模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">基于图层的绘制模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于图层的动画"><span class="nav-number">1.1.2.</span> <span class="nav-text">基于图层的动画</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Layer-对象定义它们自己的几何图形"><span class="nav-number">1.2.</span> <span class="nav-text">Layer 对象定义它们自己的几何图形</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#layer-使用两种类型的坐标系"><span class="nav-number">1.2.1.</span> <span class="nav-text">layer 使用两种类型的坐标系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#锚点影响几何操作"><span class="nav-number">1.2.2.</span> <span class="nav-text">锚点影响几何操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Layers-可以在三维空间中操作"><span class="nav-number">1.2.3.</span> <span class="nav-text">Layers 可以在三维空间中操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图层树反映了动画状态的不同方面"><span class="nav-number">1.3.</span> <span class="nav-text">图层树反映了动画状态的不同方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图层和视图的关系"><span class="nav-number">1.4.</span> <span class="nav-text">图层和视图的关系</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">冯志浩</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fengzhihao123"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("nCxez2PBEQDAzw3yNwTIjiqq-gzGzoHsz", "MNIIVCp3cdzMk5mUwMmBNvrH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
