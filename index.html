@@ -331,7 +331,61 @@
 <p><b>例 2-2 </b> 创建一个图层托管视图<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// Create myView...</div><div class="line"></div><div class="line">[myView setWantsLayer:YES];</div><div class="line">CATiledLayer *hostedLayer = [CATiledLayer layer];</div><div class="line">[myView setLayer:hostedLayer];</div><div class="line"></div><div class="line">// Add myView to a view hierarchy.</div></pre></td></tr></table></figure></p>
 <p>如果你选择使用图层托管视图，你必须自己设置 <code>contentsScale</code> 属性，并且在合适的时机提供高分辨率的内容。关于高分辨率内容和倍率的更多内容，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/SettingUpLayerObjects/SettingUpLayerObjects.html#//apple_ref/doc/uid/TP40004514-CH13-SW6" target="_blank" rel="external">此处</a>。</p>
 <h4 id="不同的图层类提供专门的行为"><a href="#不同的图层类提供专门的行为" class="headerlink" title="不同的图层类提供专门的行为"></a>不同的图层类提供专门的行为</h4><p>Core Animation 定义了很多标准图层类，这些类都是为某种特定的情况定义使用的。CALayer 是所有图层类对象的父类。它定义了所有图层对象必须支持的行为，且它是图层支持视图默认的图层类型。其它具体图层类可参见表 2-1。</p>
-<p><b>表</b> 2-1  CALayer 的子类和它们的使用<br>| 类名   | 具体用途 |<br>| —— | —— |<br>| CAEmitterLayer | 用于实现基于核心动画的粒子发射器系统。发射器层对象控制粒子的生成及其来源 |<br>| CAGradientLayer | 用于绘制填充图层形状的颜色渐变(在任何圆角的边界内)|<br>| CAMetalLayer | 用于设置和提供可绘制纹理，以使用 Metal 渲染图层内容|<br>| CAEAGLLayer/CAOpenGLLayer | 用于使用OpenGL ES (iOS) 或 OpenGL (OS X)设置渲染层内容的后备存储和上下文 |<br>| CAReplicatorLayer | 用于当你想自动拷贝一个或者多个子图层时。拷贝器会为你制作副本，并且使用你指定的属性值去修改副本的外观或属性|<br>| CAScrollLayer |用于管理一个由多个子图层组成的大的、可滑动的区域 |<br>| CAShapeLayer | 用于绘制立方形的贝斯曲线。 Shape layers 有利于绘制基于路径的形状，因为它们总是产生清晰的路径，而不是绘制到层的后备存储中的路径，后者在缩放时看起来不太好。然而，清晰的结果确实包括在主线程上渲染形状和缓存结果 |<br>| CATextLayer | 用于绘制文本或者富文本|<br>| CATiledLayer | 用于管理大图像，该图像可分为较小的图块，并通过支持放大和缩小内容来单独呈现|<br>| CATransformLayer | 用于渲染真正的3D图层层次，而不是由其他图层类实现的2D图层层次 |<br>| QCCompositionLayer | 用于渲染 Quartz Composer 结构(仅限 OS X)|</p>
+<p><b>表</b> 2-1  CALayer 的子类和它们的使用</p>
+<table>
+<thead>
+<tr>
+<th>类名</th>
+<th>具体用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CAEmitterLayer</td>
+<td>用于实现基于核心动画的粒子发射器系统。发射器层对象控制粒子的生成及其来源</td>
+</tr>
+<tr>
+<td>CAGradientLayer</td>
+<td>用于绘制填充图层形状的颜色渐变(在任何圆角的边界内)</td>
+</tr>
+<tr>
+<td>CAMetalLayer</td>
+<td>用于设置和提供可绘制纹理，以使用 Metal 渲染图层内容</td>
+</tr>
+<tr>
+<td>CAEAGLLayer/CAOpenGLLayer</td>
+<td>用于使用OpenGL ES (iOS) 或 OpenGL (OS X)设置渲染层内容的后备存储和上下文</td>
+</tr>
+<tr>
+<td>CAReplicatorLayer</td>
+<td>用于当你想自动拷贝一个或者多个子图层时。拷贝器会为你制作副本，并且使用你指定的属性值去修改副本的外观或属性</td>
+</tr>
+<tr>
+<td>CAScrollLayer</td>
+<td>用于管理一个由多个子图层组成的大的、可滑动的区域</td>
+</tr>
+<tr>
+<td>CAShapeLayer</td>
+<td>用于绘制立方形的贝斯曲线。 Shape layers 有利于绘制基于路径的形状，因为它们总是产生清晰的路径，而不是绘制到层的后备存储中的路径，后者在缩放时看起来不太好。然而，清晰的结果确实包括在主线程上渲染形状和缓存结果</td>
+</tr>
+<tr>
+<td>CATextLayer</td>
+<td>用于绘制文本或者富文本</td>
+</tr>
+<tr>
+<td>CATiledLayer</td>
+<td>用于管理大图像，该图像可分为较小的图块，并通过支持放大和缩小内容来单独呈现</td>
+</tr>
+<tr>
+<td>CATransformLayer</td>
+<td>用于渲染真正的3D图层层次，而不是由其他图层类实现的2D图层层次</td>
+</tr>
+<tr>
+<td>QCCompositionLayer</td>
+<td>用于渲染 Quartz Composer 结构(仅限 OS X)</td>
+</tr>
+</tbody>
+</table>
 <h3 id="提供图层的内容"><a href="#提供图层的内容" class="headerlink" title="提供图层的内容"></a>提供图层的内容</h3><p>图层是管理由你 app 提供的内容的数据对象。图层的内容由包含要显示的视觉数据的位图组成。你可以通过下面三种的任意一种方式来提供包含内容的位图：</p>
 <ul>
 <li>直接给图层对象的 <code>contents</code> 属性赋值一个 image 对象。(该方法适用于图层内容不改变或者很少改变的情况)</li>
@@ -408,38 +462,20 @@
 <table>
 <thead>
 <tr>
-<th></th>
 <th>策略</th>
 <th>用法</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
 <td>NSViewLayerContentsRedrawOnSetNeedsDisplay</td>
 <td>这是推荐的策略。用该策略，视图几何图形的改变不会自动造成视图去更新图层的内容。取而代之的是，拉伸和操纵图层的现有内容，以方便几何图形的更改。想强制视图重绘它自身，并更新图层的内容，你必须显示的调用图层的 <code>setNeedsDisplay</code> 方法。 该策略最接近于 Core Animation 图层的标准行为。但是，它不是默认策略，必须显式设置。</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>NSViewLayerContentsRedrawDuringViewResize</td>
-<td>这是默认的重绘策略。该策略通过无论何时视图几何图形改变，都会重新缓存图层的内容的方法，与传统 AppKit 绘制保持了最大的兼容性。该行为会造成视图的 <code>drawRect:</code> 方法在重新设置尺寸期间在 app 主线程多次调用。</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>NSViewLayerContentsRedrawBeforeViewResize</td>
-<td>使用该策略，在任何调整尺寸的操作之前，AppKit 以最终尺寸绘制图层，并缓存该位图。调整尺寸操作使用缓存位图作为起始图像，缩放它以适应旧的边界矩形。然后，它将位图动画化为最终尺寸。这种行为会导致视图内容在动画开始时出现拉伸或扭曲，在初始外观不重要或不明显的情况下效果会更好。</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>NSViewLayerContentsRedrawNever</td>
-<td>使用策略，即使调用 <code>setNeedsDisplay:</code> 方法，AppKit 也不会更新图层。此策略最适合内容从不改变的视图，以及视图大小很少改变(如果有的话)的视图。例如，你可以将它用于显示固定大小内容或背景元素的视图。</td>
-<td></td>
 </tr>
 </tbody>
 </table>
+<p>|NSViewLayerContentsRedrawDuringViewResize | 这是默认的重绘策略。该策略通过无论何时视图几何图形改变，都会重新缓存图层的内容的方法，与传统 AppKit 绘制保持了最大的兼容性。该行为会造成视图的 <code>drawRect:</code> 方法在重新设置尺寸期间在 app 主线程多次调用。|</p>
+<p>|NSViewLayerContentsRedrawBeforeViewResize |使用该策略，在任何调整尺寸的操作之前，AppKit 以最终尺寸绘制图层，并缓存该位图。调整尺寸操作使用缓存位图作为起始图像，缩放它以适应旧的边界矩形。然后，它将位图动画化为最终尺寸。这种行为会导致视图内容在动画开始时出现拉伸或扭曲，在初始外观不重要或不明显的情况下效果会更好。|</p>
+<p>|NSViewLayerContentsRedrawNever| 使用策略，即使调用 <code>setNeedsDisplay:</code> 方法，AppKit 也不会更新图层。此策略最适合内容从不改变的视图，以及视图大小很少改变(如果有的话)的视图。例如，你可以将它用于显示固定大小内容或背景元素的视图。|</p>
 <p>视图重绘策略减轻了使用独立子图层来提高绘图性能的需要。在引入视图重绘策略之前，有些图层支持视图比需要的绘制频率更高，从而导致性能问题。解决这些性能问题的方法是使用子图层来呈现视图内容中不需要定期重绘的部分。随着重绘策略在 OS X v10.6 中的引入，现在建议将图层层支持视图的重绘策略设置为适当的值，而不是创建显式子图层结构。</p>
 <h3 id="给图层添加自定义属性"><a href="#给图层添加自定义属性" class="headerlink" title="给图层添加自定义属性"></a>给图层添加自定义属性</h3><p>CAAnimation 和 CALayer 类延伸了键值编码约定来支持自定义属性。你可以使用该行为来给图层添加数据，然后使用你自定义的键来获取。你甚至可以给你的自定义属性关联事件，以至于当你改变属性时，可以执行响应的动画。</p>
 <p>有关如何设置和获取自定义属性的信息，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/Key-ValueCodingExtensions/Key-ValueCodingExtensions.html#//apple_ref/doc/uid/TP40004514-CH12-SW3" target="_blank" rel="external">此处</a>。有关向图层对象添加动作的信息，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/ReactingtoLayerChanges/ReactingtoLayerChanges.html#//apple_ref/doc/uid/TP40004514-CH7-SW1" target="_blank" rel="external">此处</a>。</p>
