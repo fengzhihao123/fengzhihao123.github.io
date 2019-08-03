@@ -243,7 +243,261 @@
             
               
                 
-                <a class="post-title-link" href="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/" itemprop="url">
+                <a class="post-title-link" href="/2019/08/03/iOS/Core Animation/译-Core-Animation-编程指南-设置图层对象/" itemprop="url">
+                  [译] Core Animation 编程指南 - 设置图层对象
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-08-03T10:41:03+08:00" content="2019-08-03">
+              2019-08-03
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/08/03/iOS/Core Animation/译-Core-Animation-编程指南-设置图层对象/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/08/03/iOS/Core Animation/译-Core-Animation-编程指南-设置图层对象/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/08/03/iOS/Core Animation/译-Core-Animation-编程指南-设置图层对象/" class="leancloud_visitors" data-flag-title="[译] Core Animation 编程指南 - 设置图层对象">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>图层对象是你用 Core Animation 所做的一切事情的核心。图层管理你 app 的视觉内容，提供视觉内容样式和视觉外观的修改选项。虽然 iOS app 内嵌自动支持图层，但是 OS X 上面的 app 开发者必须在利用图层的性能优势前手动让图层生效。一旦生效，你需要理解如何配置和操作你 app 的图层，来获取你想要的效果。</p>
+<h3 id="让你的-App-支持-Core-Animation"><a href="#让你的-App-支持-Core-Animation" class="headerlink" title="让你的 App 支持 Core Animation"></a>让你的 App 支持 Core Animation</h3><p>在 iOS 的 app 中， Core Animation 总是自动生效的，并且每个视图是由图层支持的。在 OS X 中，app 必须通过下面的操作来使 Core Animation 生效：</p>
+<ul>
+<li>与 QuartCore 框架链接（iOS app 只有在明确使用 Core Animation 的时候才必须与该框架链接）</li>
+<li>通过以下操作来使你的 NSView 对象支持图层：<ul>
+<li>在你的 nib 文件，使用 View Effects 检查器来使你的视图支持图层。该检查器显示选中视图及子视图的复选框。推荐你尽可能的将你的视图修改为图层支持的视图。</li>
+<li>如果你用代码创建的视图，调用视图的 <code>setWantsLayer:</code> 方法传递 YES 来说明该视图应该使用图层。</li>
+</ul>
+</li>
+<li>通过上面的任意一种方法都可以创建图层支持的视图。使用图层支持的视图，系统会管理创建底层的图层对象，保持图层的更新。在 OS X 上面，你也可以创建图层托管视图，由此，你的 app 实际会创建和管理底层的图层对象。（你不能在 iOS 上面创建图层托管视图）关于如何创建图层托管视图的更多信息，可参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/SettingUpLayerObjects/SettingUpLayerObjects.html#//apple_ref/doc/uid/TP40004514-CH13-SW2" target="_blank" rel="external">此处</a>。</li>
+</ul>
+<h3 id="改变视图关联的图层对象"><a href="#改变视图关联的图层对象" class="headerlink" title="改变视图关联的图层对象"></a>改变视图关联的图层对象</h3><p>图层支持的视图默认会创建 CALayer 的实例，多数情况下你不需要去改变图层对象的类型。但，Core Animation 提供了一些不同的图层类，每一个提供的图层类都是很有用处的。选择不同的图层类可能会提高你的代码性能，或者通过简单的方式支持一种指定的内容类型。例如， CATiledLayer 类通过高效的方式用来优化大型图片的显示。</p>
+<h4 id="改变视图使用的图层类"><a href="#改变视图使用的图层类" class="headerlink" title="改变视图使用的图层类"></a>改变视图使用的图层类</h4><p>你可以通过重写视图的 <code>layerClass</code> 方法返回一个不同的类对象，来改变 iOS 上视图使用的图层类。大多数的 iOS 视图创建一个 CALayer 对象，并使用该对象支持存储它的内容。对于你的大多数视图，默认的选择是不错的，你不需要去改变它。但是在某些情况下，你会发现一个不同的图层类是更加合适的。例如，以下几种情况你可能想改变图层类：</p>
+<ul>
+<li>你的视图使用 Metal 或者 OpenGL ES 来绘制内容，这种情况下，你应该使用 CAMetalLayer 或者 CAEAGLLayer 对象。</li>
+<li>有特定类型的图层对象可以提供更好的性能。</li>
+<li>你想使用一些特定的 Core Animation 图层类，例如粒子发射器（particle emitters）或复制器（replicators）。</li>
+</ul>
+<p>改变视图的图层类是非常简单的；可以参见 例2-1 的例子。你需要做的就是重写 <code>layerClass</code> 方法，返回一个你想使用的类对象。显示之前，视图会调用 <code>layerClass</code> 方法，使用返回的类创建一个新的图层对象。视图的图层对象一旦被创建，就不可修改。</p>
+<p><b>例 2-1</b>  改变视图的图层类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// OC</div><div class="line">+ (Class) layerClass &#123;</div><div class="line">   return [CAMetalLayer class];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Swift</div><div class="line">override class var layerClass: AnyClass &#123;</div><div class="line">    return CAMetalLayer.self</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>关于图层类的列表和你如何使用它们，可参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/SettingUpLayerObjects/SettingUpLayerObjects.html#//apple_ref/doc/uid/TP40004514-CH13-SW25" target="_blank" rel="external">此处</a>。</p>
+<h4 id="改变-NSView-的图层类"><a href="#改变-NSView-的图层类" class="headerlink" title="改变 NSView 的图层类"></a>改变 NSView 的图层类</h4><p>你可以通过重写 NSView 对象的 <code>makeBackingLayer</code> 方法来改变它的默认图层类。在该方法里，创建、返回一个你想 AppKit 去用来支持你自定义视图的图层对象。你可能以下情况需要重写该方法：使用类似滚动图层（scrolling）或者平铺图层（tiled layer）的自定义图层。关于图层类的列表和你如何使用它们，可参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/SettingUpLayerObjects/SettingUpLayerObjects.html#//apple_ref/doc/uid/TP40004514-CH13-SW25" target="_blank" rel="external">此处</a>。</p>
+<h4 id="图层托管允许你改变-OS-X-上的图层对象"><a href="#图层托管允许你改变-OS-X-上的图层对象" class="headerlink" title="图层托管允许你改变 OS X 上的图层对象"></a>图层托管允许你改变 OS X 上的图层对象</h4><p>图层托管视图：你自己创建、管理底层的图层的 NSView 对象。如果你想自己控制视图的图层类型，你需要使用图层托管。例如，你可以创建一个图层托管视图，这样你可以分配一个不同的图层类，而不是默认的 CALayer 。你想使用一个单独的视图去管理独立图层的层级结构时，也可以创建图层托管视图。</p>
+<p>当你的视图调用 <code>setLayer:</code> 方法并且提供了一个图层对象时，AppKit 将不会管理该图层对象。通常，AppKit 会更新视图的图层对象，但对于图层托管的视图，大多数属性不会更新。</p>
+<p>为了创建一个图层托管视图，你需要创建自己的图层对象，并在视图在屏幕显示之前将图层和视图关联起来，如例 2-2 中代码所示。为了设置图层对象，你必须调用 <code>setWantsLayer:</code> 方法让视图知道它应该使用图层。</p>
+<p><b>例 2-2 </b> 创建一个图层托管视图<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// Create myView...</div><div class="line"></div><div class="line">[myView setWantsLayer:YES];</div><div class="line">CATiledLayer *hostedLayer = [CATiledLayer layer];</div><div class="line">[myView setLayer:hostedLayer];</div><div class="line"></div><div class="line">// Add myView to a view hierarchy.</div></pre></td></tr></table></figure></p>
+<p>如果你选择使用图层托管视图，你必须自己设置 <code>contentsScale</code> 属性，并且在合适的时机提供高分辨率的内容。关于高分辨率内容和倍率的更多内容，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/SettingUpLayerObjects/SettingUpLayerObjects.html#//apple_ref/doc/uid/TP40004514-CH13-SW6" target="_blank" rel="external">此处</a>。</p>
+<h4 id="不同的图层类提供专门的行为"><a href="#不同的图层类提供专门的行为" class="headerlink" title="不同的图层类提供专门的行为"></a>不同的图层类提供专门的行为</h4><p>Core Animation 定义了很多标准图层类，这些类都是为某种特定的情况定义使用的。CALayer 是所有图层类对象的父类。它定义了所有图层对象必须支持的行为，且它是图层支持视图默认的图层类型。其它具体图层类可参见表 2-1。</p>
+<p><b>表</b> 2-1  CALayer 的子类和它们的使用<br>| 类名   | 具体用途 |<br>| —— | —— |<br>| CAEmitterLayer | 用于实现基于核心动画的粒子发射器系统。发射器层对象控制粒子的生成及其来源 |<br>| CAGradientLayer | 用于绘制填充图层形状的颜色渐变(在任何圆角的边界内)|<br>| CAMetalLayer | 用于设置和提供可绘制纹理，以使用 Metal 渲染图层内容|<br>| CAEAGLLayer/CAOpenGLLayer | 用于使用OpenGL ES (iOS) 或 OpenGL (OS X)设置渲染层内容的后备存储和上下文 |<br>| CAReplicatorLayer | 用于当你想自动拷贝一个或者多个子图层时。拷贝器会为你制作副本，并且使用你指定的属性值去修改副本的外观或属性|<br>| CAScrollLayer |用于管理一个由多个子图层组成的大的、可滑动的区域 |<br>| CAShapeLayer | 用于绘制立方形的贝斯曲线。 Shape layers 有利于绘制基于路径的形状，因为它们总是产生清晰的路径，而不是绘制到层的后备存储中的路径，后者在缩放时看起来不太好。然而，清晰的结果确实包括在主线程上渲染形状和缓存结果 |<br>| CATextLayer | 用于绘制文本或者富文本|<br>| CATiledLayer | 用于管理大图像，该图像可分为较小的图块，并通过支持放大和缩小内容来单独呈现|<br>| CATransformLayer | 用于渲染真正的3D图层层次，而不是由其他图层类实现的2D图层层次 |<br>| QCCompositionLayer | 用于渲染 Quartz Composer 结构(仅限 OS X)|</p>
+<h3 id="提供图层的内容"><a href="#提供图层的内容" class="headerlink" title="提供图层的内容"></a>提供图层的内容</h3><p>图层是管理由你 app 提供的内容的数据对象。图层的内容由包含要显示的视觉数据的位图组成。你可以通过下面三种的任意一种方式来提供包含内容的位图：</p>
+<ul>
+<li>直接给图层对象的 <code>contents</code> 属性赋值一个 image 对象。(该方法适用于图层内容不改变或者很少改变的情况)</li>
+<li>给图层赋值一个委托对象（delegate object），让委托对象去绘制图层的内容。（该方法适用于图层内容周期性改变，并且可以由外部对象提供，例如视图。即 <code>视图为图层的 delegate</code>）</li>
+<li>定义图层子类，通过重写它的绘制方法来自己提供图层内容。（如果你不得不创建自定义的图层类，或者你想改变图层的底层绘制行为，你应该用该方法）</li>
+</ul>
+<p>你仅需要自己创建图层对象的时候去考虑为图层提供内容。如果你的 app 中都是图层支持的视图，你不需要担心使用上面提到的方法。图层支持视图会用高效的方法自动提供关联图层的内容。</p>
+<h4 id="使用-Image-作为图层的内容"><a href="#使用-Image-作为图层的内容" class="headerlink" title="使用 Image 作为图层的内容"></a>使用 Image 作为图层的内容</h4><p>因为图层只是管理位图图像（bitmap image）的一个容器，你可以直接给图层的 <code>contents</code> 属性赋值 image 对象。给图层赋值一个 image 是非常容易的，并且允许你指定想显示在屏幕上确切的 image 。图层使用你直接提供的 image 对象，不会试图创建 image 的副本。当你在多个地方使用同一个 image 时，这种行为会节省你的内存。</p>
+<p>你赋值给图层的 image 必须是 <code>CGImageRef</code> 类型（在 OS X v10.6 及以后，你也可以赋值 <code>NSImage</code> 对象）。当赋值 image 时，记住需提供与本机分辨率匹配的图像。对于 Retina 显示屏，可能需要你去调整 image 对象 <code>contentsScale</code> 属性的值。关于对图层使用高分辨率内容的更多信息，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/SettingUpLayerObjects/SettingUpLayerObjects.html#//apple_ref/doc/uid/TP40004514-CH13-SW6" target="_blank" rel="external">此处</a>。</p>
+<h4 id="使用-Delegate-给图层提供内容"><a href="#使用-Delegate-给图层提供内容" class="headerlink" title="使用 Delegate 给图层提供内容"></a>使用 Delegate 给图层提供内容</h4><p>如果图层内容动态改变，你可以在需要的时候使用 delegate 对象来提供、更新图层内容。在显示时间，图层会调用 delegate 的方法去提供的需要的内容：</p>
+<ul>
+<li>如果 delegate 实现了 <code>displayLayer:</code> 方法，该方法会创建位图并将它赋值给图层的 <code>contents</code> 属性。</li>
+<li>如果 delegate 实现了 <code>drawLayer:inContext:</code> 方法，Core Animation 会创建位图，然后创建一个图形上下文(graphics context)来绘制该位图，最后调用 delegate 方法填充位图。delegate 方法必须在绘制到提供的图形上下文中。</li>
+</ul>
+<p>delegate 对象必须实现 <code>displayLayer:</code> 或 <code>drawLayer:inContext:</code> 方法。如果 delegate 实现了这两个方法，图层只会调用 <code>displayLayer:</code> 方法。</p>
+<p>当 app 去加载或者创建想显示的位图时，重写 <code>displayLayer:</code> 方法是非常适合的。例 2-3 简单展示了如何实现 <code>displayLayer:</code> 方法。在该例中，delegate 使用了 helper 对象去加载显示它需要的 image。delegate 基于它内部状态来选择显示哪个 image，在该例中，内部状态是叫做 <code>displayYesImage</code> 的自定义属性。 </p>
+<p><b>例 2-3</b>  直接设置图层内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (void)displayLayer:(CALayer *)theLayer &#123;</div><div class="line">    // Check the value of some state property</div><div class="line">    if (self.displayYesImage) &#123;</div><div class="line">        // Display the Yes image</div><div class="line">        theLayer.contents = [someHelperObject loadStateYesImage];</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        // Display the No image</div><div class="line">        theLayer.contents = [someHelperObject loadStateNoImage];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果你没有预渲染的 image 或者 helper 对象去创建位图，delegate 可以使用 <code>drawLayer:inContext:</code> 方法动态绘制图层内容。例 2-4 展示了关于 <code>drawLayer:inContext:</code> 方法实现的简单例子。在该例中，delegate 使用固宽和当前渲染颜色绘制了一个简单的曲线路径。</p>
+<p><b>例 2-4</b> 绘制图层内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">- (void)drawLayer:(CALayer *)theLayer inContext:(CGContextRef)theContext &#123;</div><div class="line">    CGMutablePathRef thePath = CGPathCreateMutable();</div><div class="line"> </div><div class="line">    CGPathMoveToPoint(thePath,NULL,15.0f,15.f);</div><div class="line">    CGPathAddCurveToPoint(thePath,</div><div class="line">                          NULL,</div><div class="line">                          15.f,250.0f,</div><div class="line">                          295.0f,250.0f,</div><div class="line">                          295.0f,15.0f);</div><div class="line"> </div><div class="line">    CGContextBeginPath(theContext);</div><div class="line">    CGContextAddPath(theContext, thePath);</div><div class="line"> </div><div class="line">    CGContextSetLineWidth(theContext, 5);</div><div class="line">    CGContextStrokePath(theContext);</div><div class="line"> </div><div class="line">    // Release the path</div><div class="line">    CFRelease(thePath);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对有自定义内容的图层支持视图，应该继续重写视图的方法来做绘制。图层支持视图自动将自己设置为关联图层的 delegate，并且实现了需要实现的方法，你不应改变配置。你应该实现 <code>drawRect:</code> 方法来绘制你的内容。</p>
+<p>在 OS X v10.8及以后的版本，绘图的另一个选择是：通过重写视图的 <code>wantsUpdateLayer</code> 和 <code>updateLayer</code> 方法提供位图。重写 <code>wantsUpdateLayer</code> 并返回 YES ，因为 NSView 类遵循备用渲染路径。代替调用 <code>drawRect:</code> ，视图调用 <code>updateLayer</code> 方法，该方法必须直接给图层 <code>contents</code> 属性赋值位图。在这种情况下，AppKit 希望直接设置视图图层对象的内容。</p>
+<h4 id="通过子类提供图层内容"><a href="#通过子类提供图层内容" class="headerlink" title="通过子类提供图层内容"></a>通过子类提供图层内容</h4><p>如果你实现了自定义图层类，你可以重写你图层类的绘制方法来做任何绘制。对图层对象来说，生成本身自定义内容并不常见，但图层当然可以管理显示的内容。例如，CATiledLayer 类通过将大图像分割成若干小图像（因此可以独立管理和渲染它们）的方法来管理大图像。因为只有图层知道哪一个小图像在给定的时间上被渲染，所以图层直接管理绘制行为。</p>
+<p>当创建自定义子类时，可以通过下面的两种方法来绘制图层内容：</p>
+<ul>
+<li>重写图层的 <code>display</code> 方法，使用该方法直接给图层的 contents 属性赋值。</li>
+<li>重写图层的 <code>drawInContext:</code> 方法，使用该方法绘制到提供的图形上线文中。</li>
+</ul>
+<p>重写哪一个方法取决于你需要控制多少绘制过程。 <code>display</code> 方法是更新图层内容的主入口点，所以重写该方法可以完整的控制绘制过程。重写 <code>display</code> 方法也意味着你需要创建赋值给 <code>contents</code> 属性的 <code>CGImageRef</code> 类型的对象。如果你只是想绘制内容(或者让图层管理绘制操作)你可以重写 <code>drawInContext:</code> 方法，让图层创建备用存储(backing store)给你。</p>
+<h4 id="旋转你提供的内容"><a href="#旋转你提供的内容" class="headerlink" title="旋转你提供的内容"></a>旋转你提供的内容</h4><p>当你给图层的 <code>contents</code> 属性赋值图像时，图层的 <code>contentsGravity</code> 属性决定如何操作图像以配当前边界的。默认情况下，如果图像比当前边界更大或者更小，图层对象会将图像调整到有效空间内。如果图层边界的宽高比(aspect ratio)与图像的宽高比不同，会造成图像的变形。你可以使用 <code>contentsGravity</code> 属性确保内容得到了最好的展示。</p>
+<p>可以赋给 <code>contentsGravity</code> 属性的值被分为两个类：</p>
+<ul>
+<li>基于位置的重力常数：允许你将图像固定到图层特定的边缘或角上，而无需缩放图像。</li>
+<li>基于缩放的重力常数：允许你使用选项去缩放图像，一些保持了宽高比，一些没有。</li>
+</ul>
+<p>图 2-1 展示了基于位置的重力设置如何影响图像。除了 kCAGravityCenter 常量之外，每个常量都将图像固定在图层边界矩形的特定边缘或角上。kCAGravityCenter 常量将图像置于图层中心。这些常数都不会使图像缩放，所以图像总是以原尺寸进行渲染。如果图像比图层的边界大，可能会造成图像的部分内容被裁减；如果图像比图层的边界小，图层未被图像覆盖的部分会填充图层的背景色(如果设置的话)。</p>
+<img src="/2019/08/03/iOS/Core%20Animation/译-Core-Animation-编程指南-设置图层对象/2-1.png" alt="图2-1 图层基于位置的重力常数" title="图2-1 图层基于位置的重力常数">
+<p>图 2-2 显示了基于缩放的重力常量如何影响你的图像。如果图像尺寸没有完全和图层的尺寸一致的话，所有的常量都会缩放图像。它们直接的不同就是如何影响图像的原始宽高比。一些会保持宽高比，一些则不会。默认情况下，图层的 <code>contentsGravity</code> 属性设置为 <code>kCAGravityResize</code> 常量，它是唯一一个不保持图片宽高比的常量。</p>
+<img src="/2019/08/03/iOS/Core%20Animation/译-Core-Animation-编程指南-设置图层对象/2-2.png" alt="图 2-2 图层基于缩放的重力常数" title="图 2-2 图层基于缩放的重力常数">
+<h4 id="使用高分辨率的图像"><a href="#使用高分辨率的图像" class="headerlink" title="使用高分辨率的图像"></a>使用高分辨率的图像</h4><p>图层对于设备屏幕的分辨率一无所知。图层只存储了位图的指针，用给定的可用像素尽可能最好的方式显示它。如果你给图层的 <code>contents</code> 属性赋值了图像，你必须告诉 Core Animation 由图层 <code>contentsScale</code> 属性设定的合适的值来决定的图像分辨率。该属性默认值为 1.0 ，对于显示在标准分辨率屏幕上的图像来说，它是一个合适的值。如果你的图像放在 Retina 屏上，应该把值设置为 2.0。</p>
+<p>仅在你直接给图层赋值位图的时候修改 <code>contentsScale</code> 属性的值。UIKit 和 AppKit 里图层支持的视图会基于屏幕分辨率和视图管理的内容自动给图层的设置一个合适的比例值。例如，如果你给 OS X 的图层 contents 属性值赋值 NSImage 对象，APPKit 会观察图像是否包含标准和高分辨两个类型的图像。如果有，APPKit 会使用正确的图像以适配当前屏幕，也会给 <code>contentsScale</code> 属性设置适配当前屏幕的值。</p>
+<p>在 OS X 里，基于位置的重力常数会影响从指定给图层的图像对象中选择图像表示的方式。因为这些常数不会导致图像缩放，所以 Core Animation 依赖于 <code>contentsScale</code> 属性来选择具有最合适像素密度的图像表示。</p>
+<p>在 OS X 里，图层的 delegate 可以实现 <code>layer:shouldInheritContentsScale:fromWindow:</code> 方法，并使用该方法去改变比例值。无论何时给定 window 的分辨率改变，AppKit 都会自动调用该方法， 这是可能的，因为图像会在标准分辨率和高分辨率的屏幕上移动。如果 delegate 支持改变图层图像的分辨率，那实现方法应该返回 YES 。当需要去反应新的分辨率时，该方法应该及时更新图层的内容。</p>
+<h3 id="调整图层的视觉样式和外观"><a href="#调整图层的视觉样式和外观" class="headerlink" title="调整图层的视觉样式和外观"></a>调整图层的视觉样式和外观</h3><p>图层对象有内嵌的视觉装饰，例如你可以在图层的主内容上添加边界线和背景色。因为这些视觉装饰不要求你做任何的渲染，所以它们使得在某些情况下可以将图层用作独立实体。你所需要做的就是设置图层的属性值，涂岑会处理必要的绘制，包括任何动画。有关这些视觉装饰如何影响图层外观的其他说明，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/LayerStyleProperties/LayerStyleProperties.html#//apple_ref/doc/uid/TP40004514-CH10-SW1" target="_blank" rel="external">此处</a>。</p>
+<h4 id="图层有它们自己的背景和边界线"><a href="#图层有它们自己的背景和边界线" class="headerlink" title="图层有它们自己的背景和边界线"></a>图层有它们自己的背景和边界线</h4><p>图层可以在基于图像的内容上显示填充满的背景色和描绘边框。背景色在图像内容后面绘制，边界线会在图像的上方绘制，如图 2-3 所示。如果图层包含子图层，它们也会出现在边界线的下方。因为背景色位于图像的后面，所以它会透过任何图像透明的部分。</p>
+<img src="/2019/08/03/iOS/Core%20Animation/译-Core-Animation-编程指南-设置图层对象/2-3.png" alt="图 2-3 给图层添加背景和边界线" title="图 2-3 给图层添加背景和边界线">
+<p>例 2-5 展示了设置图层背景色和边界线所需的代码。这些都是可以进行动画的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">例 2-5  设置图层的背景色和边界线</div><div class="line">// OC</div><div class="line">myLayer.backgroundColor = [NSColor greenColor].CGColor;</div><div class="line">myLayer.borderColor = [NSColor blackColor].CGColor;</div><div class="line">myLayer.borderWidth = 3.0;</div><div class="line"></div><div class="line">//Swift </div><div class="line">myLayer.backgroundColor = NSColor.green.cgColor</div><div class="line">myLayer.borderColor = NSColor.black.cgColorlor</div><div class="line">myLayer.borderWidth = 3.0</div></pre></td></tr></table></figure></p>
+<p><code>注意：对图层的背景色你可以使用任意类型的颜色，包括有透明度的颜色或者使用图案图像。当使用图案图像(pattern image)时， 要注意到Core Graphics 会使用标准坐标系处理图案图像的渲染，这和 iOS 上默认的坐标系是不同的。因此，除非你反转坐标，否则在 iOS 上渲染的图像默认会颠倒显示。</code></p>
+<p>如果你给图层背景色设置了不透明颜色，考虑将图层的 opaque 属性设置为 YES 。这样做可以提高屏幕合成图层时的性能，并消除图层后台存储管理 alpha 通道的需要。但是，如果图层的角半径也非零，则不能将其标记为不透明。</p>
+<h4 id="图层支持设置角半径"><a href="#图层支持设置角半径" class="headerlink" title="图层支持设置角半径"></a>图层支持设置角半径</h4><p>你可以通过给图层添加一个角半径来实现矩形圆角的效果。角半径是视觉修饰，通过遮罩图层边界角的一部分来允许底层内容的显示，如图 2-4 显示。因为它涉及透明遮罩，所以角半径不会硬性图层 <code>contents</code> 属性的 image，除非 masksToBounds 属性值为 YES 。但，角半径总是会影响图层的背景色和边线的绘制。</p>
+<img src="/2019/08/03/iOS/Core%20Animation/译-Core-Animation-编程指南-设置图层对象/2-4.png" alt="图 2-4 图层上的圆角" title="图 2-4 图层上的圆角">
+<p>设置图层 <code>cornerRadius</code> 属性的值可以为图层设置角半径。你指定的半径值使用点为单位，并且在图层显示前会应用到图层的四个角。</p>
+<h4 id="图层支持内嵌阴影"><a href="#图层支持内嵌阴影" class="headerlink" title="图层支持内嵌阴影"></a>图层支持内嵌阴影</h4><p>CALayer 包含几个属性可以用来配置阴影效果。阴影通过使图层看起来像漂浮在底层内容之上来增加图层的深度。这是另一个视觉装饰，在某些情况下这是非常有用的。通过图层，你可以控制阴影的颜色、相对于图层内容的位置、透明度和形状。</p>
+<p>图层阴影的透明度的值默认为 0，这会有效的隐藏阴影。将透明度改成一个非零值，会使 Core Animation 绘制阴影。因为阴影默认的位置是在图层下面的，在你看到它之前，需要你改变阴影的偏移量。记住下面这一点是很重要的，你指定阴影的偏移量是使用图层原始坐标系来应用的，而 iOS 和 OS X 是不同的。图 2-5 显示了在右下方有阴影的图层。在 iOS 上，y 轴的值应该是正数，而在 OS X 上面 y 轴的值应该为负数。</p>
+<img src="/2019/08/03/iOS/Core%20Animation/译-Core-Animation-编程指南-设置图层对象/2-5.png" alt="图 2-5 在图层上应用阴影" title="图 2-5 在图层上应用阴影">
+<p>当在图层上添加阴影时，阴影是图层内容的一部分，但实际上它会延展到图层边界之外。因此，如果你将图层的 <code>masksToBounds</code> 属性设置为 YES ，边界之外阴影的效果也会被剪切掉。如果你的图层包含任何透明内容，会造成一个奇怪的效果：在图层下面阴影的部分仍然可见，但是在图层边界之外的是不可见的。如果你想同时使用阴影和边界蒙版，你应该用两个图层来代替。对包含你内容的图层应用蒙版，再将该图层嵌入到有阴影效果的完全相同尺寸的图层中。</p>
+<p>关于如何对图层应用阴影的例子，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/LayerStyleProperties/LayerStyleProperties.html#//apple_ref/doc/uid/TP40004514-CH10-SW18" target="_blank" rel="external">此处</a>。</p>
+<h4 id="给-OS-X-视图添加过滤器视觉效果"><a href="#给-OS-X-视图添加过滤器视觉效果" class="headerlink" title="给 OS X 视图添加过滤器视觉效果"></a>给 OS X 视图添加过滤器视觉效果</h4><p>在 OS X app 里，你可以直接对图层内容应用 Core Image 过滤器。你可以通过过滤器来使图层内容模糊或者锐化，去改变颜色、扭曲内容、执行很多其他类型的操作。例如，图像处理程序可能会使用过滤器无损的修改图像，视频编辑程序可能使用它们实现不同类型的视频过渡效果。并且因为过滤器是用硬件应用在图层内容上的，所以渲染是很快且平滑的。</p>
+<p><code>注意：你不能给 iOS 上的图层添加过滤器。</code></p>
+<p>对于给定的图层，你可以对图层内容的前景和背景应用过滤器。前景内容由图层自己包含的所有内容组成，包含 contents 属性的图像、背景色、边界线和子图层的内容。背景内容是直接位于图层下方但实际上不是图层本身的一部分的内容。大多数图层的背景内容是它的直接父图层，其父图层可能整个或者部分被其遮罩。例如，当你想用户专注于图层前景内容时，会对图层背景应用模糊过滤器。</p>
+<p>你可以通过下面的图层属性来添加 CIFilter 类型的指定过滤器：</p>
+<ul>
+<li><code>filters</code> 属性包含一个数组，数组元素为仅能影响图层前景的过滤器。</li>
+<li><code>backgroundFilters</code> 属性包含一个数组，数组元素为仅能影响图层背景的过滤器。</li>
+<li><code>compositingFilter</code> 属性定义了图层的前景和背景内容如何被组合在一起。 </li>
+</ul>
+<p>为了给图层添加过滤器，你必须定位、创建 CIFilter 对象，并在对象添加到图层之前将它配置好。 CIFilter 类包含几个用来定位可用 Core Image 过滤器的类方法，如 <code>filterWithName:</code> 。创建过滤器只是第一步，很多过滤器有定义过滤器如何修改图像的参数。例如，盒子模糊过滤器有一个输入半径的参数，该参数用于应用的过滤器的数量。作为过滤器配置过程的一部分，你应该始终提供这些参数的值。但是，一个不需要指定的常见参数是输入图像，它由图层本身提供。</p>
+<p>当向图层添加过滤器时，最好在过滤器添加到图层之前配置过滤器的参数。主要原因是：一旦将过滤器添加到图层上，你就不能 CIFilter 对象本身来修改它了。但是，在添加到图层之后，你可以使用图层的 <code>setValue:forKeyPath:</code>方法来修改。</p>
+<p>例 2-6 展示了如何创建收缩失真滤波器并将其应用到图层上。此滤镜向内收缩图层的源像素，最大程度地扭曲最靠近指定中心点的像素。注意在该例中你不需要指定过滤器的输入图像，因为图层的图像会被自动使用。</p>
+<p>例 2-6  对图层应用过滤器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CIFilter* aFilter = [CIFilter filterWithName:@&quot;CIPinchDistortion&quot;];</div><div class="line">[aFilter setValue:[NSNumber numberWithFloat:500.0] forKey:@&quot;inputRadius&quot;];</div><div class="line">[aFilter setValue:[NSNumber numberWithFloat:1.25] forKey:@&quot;inputScale&quot;];</div><div class="line">[aFilter setValue:[CIVector vectorWithX:250.0 Y:150.0] forKey:@&quot;inputCenter&quot;];</div><div class="line"> </div><div class="line">myLayer.filters = [NSArray arrayWithObject:aFilter];</div></pre></td></tr></table></figure></p>
+<p>有关可用 Core Image 过滤器的信息，请参见<a href="https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html#//apple_ref/doc/uid/TP40004346" target="_blank" rel="external">此处</a>。</p>
+<h3 id="OS-X-的视图图层重绘策略会影响性能"><a href="#OS-X-的视图图层重绘策略会影响性能" class="headerlink" title="OS X 的视图图层重绘策略会影响性能"></a>OS X 的视图图层重绘策略会影响性能</h3><p>在 OS X 里，图层支持视图支持几个不同的策略，用来决定何时更新底部图层的内容。因为原生 AppKit 绘制模型和由 Core Animation 介绍的方法是不同的，这些策略使你将老代码迁移到 Core Animation 技术上变得更加简单。你可以逐个视图地配置这些策略，以确保每个视图的最佳性能。</p>
+<p>每个视图都定义了 <code>layerContentsRedrawPolicy</code> 方法，用来返回是图图层的重绘策略。你可以使用 <code>setLayerContentsRedrawPolicy</code> 方法来设置策略。为了保持与传统绘图模型的兼容性，AppKit 默认情况下会将重绘策略设置为 <code>NSViewLayerContentsRedrawDuringViewResize</code>。但是，你可以将策略改为表 2-2 的任意一个值。注意推荐的重绘策略并不是默认的那个。</p>
+<p><b>表 2-2 </b> OS X 视图的图层重绘策略  </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>策略</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>NSViewLayerContentsRedrawOnSetNeedsDisplay</td>
+<td>这是推荐的策略。用该策略，视图几何图形的改变不会自动造成视图去更新图层的内容。取而代之的是，拉伸和操纵图层的现有内容，以方便几何图形的更改。想强制视图重绘它自身，并更新图层的内容，你必须显示的调用图层的 <code>setNeedsDisplay</code> 方法。 该策略最接近于 Core Animation 图层的标准行为。但是，它不是默认策略，必须显式设置。</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>NSViewLayerContentsRedrawDuringViewResize</td>
+<td>这是默认的重绘策略。该策略通过无论何时视图几何图形改变，都会重新缓存图层的内容的方法，与传统 AppKit 绘制保持了最大的兼容性。该行为会造成视图的 <code>drawRect:</code> 方法在重新设置尺寸期间在 app 主线程多次调用。</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>NSViewLayerContentsRedrawBeforeViewResize</td>
+<td>使用该策略，在任何调整尺寸的操作之前，AppKit 以最终尺寸绘制图层，并缓存该位图。调整尺寸操作使用缓存位图作为起始图像，缩放它以适应旧的边界矩形。然后，它将位图动画化为最终尺寸。这种行为会导致视图内容在动画开始时出现拉伸或扭曲，在初始外观不重要或不明显的情况下效果会更好。</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>NSViewLayerContentsRedrawNever</td>
+<td>使用策略，即使调用 <code>setNeedsDisplay:</code> 方法，AppKit 也不会更新图层。此策略最适合内容从不改变的视图，以及视图大小很少改变(如果有的话)的视图。例如，你可以将它用于显示固定大小内容或背景元素的视图。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>视图重绘策略减轻了使用独立子图层来提高绘图性能的需要。在引入视图重绘策略之前，有些图层支持视图比需要的绘制频率更高，从而导致性能问题。解决这些性能问题的方法是使用子图层来呈现视图内容中不需要定期重绘的部分。随着重绘策略在 OS X v10.6 中的引入，现在建议将图层层支持视图的重绘策略设置为适当的值，而不是创建显式子图层结构。</p>
+<h3 id="给图层添加自定义属性"><a href="#给图层添加自定义属性" class="headerlink" title="给图层添加自定义属性"></a>给图层添加自定义属性</h3><p>CAAnimation 和 CALayer 类延伸了键值编码约定来支持自定义属性。你可以使用该行为来给图层添加数据，然后使用你自定义的键来获取。你甚至可以给你的自定义属性关联事件，以至于当你改变属性时，可以执行响应的动画。</p>
+<p>有关如何设置和获取自定义属性的信息，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/Key-ValueCodingExtensions/Key-ValueCodingExtensions.html#//apple_ref/doc/uid/TP40004514-CH12-SW3" target="_blank" rel="external">此处</a>。有关向图层对象添加动作的信息，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/ReactingtoLayerChanges/ReactingtoLayerChanges.html#//apple_ref/doc/uid/TP40004514-CH7-SW1" target="_blank" rel="external">此处</a>。</p>
+<h3 id="打印图层支持视图的内容"><a href="#打印图层支持视图的内容" class="headerlink" title="打印图层支持视图的内容"></a>打印图层支持视图的内容</h3><p>在打印过程中，图层会根据需要重新绘制其内容，以适应打印环境。Core Animation 通常在渲染到屏幕上时依赖于缓存的位图，但在打印时会重绘该内容。特别是，如果一个图层支持视图使用 <code>drawRect:</code> 方法来提供图层内容，Core Animation 在打印过程中再次调用 <code>drawRect:</code> 来生成打印的图层内容。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><ul>
+<li><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/SettingUpLayerObjects/SettingUpLayerObjects.html#//apple_ref/doc/uid/TP40004514-CH13-SW12" target="_blank" rel="external">原文链接</a></li>
+<li>下片预告：动画化图层的内容</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/07/29/iOS/Core Animation/Core-Animation-编程指南-Core-Animation-的基础/" itemprop="url">
                   Core Animation 编程指南 - Core Animation 的基础
                 </a>
               
@@ -268,8 +522,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/" itemprop="commentsCount"></span>
+                <a href="/2019/07/29/iOS/Core Animation/Core-Animation-编程指南-Core-Animation-的基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/07/29/iOS/Core Animation/Core-Animation-编程指南-Core-Animation-的基础/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -279,7 +533,7 @@
 
           
           
-             <span id="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/" class="leancloud_visitors" data-flag-title="Core Animation 编程指南 - Core Animation 的基础">
+             <span id="/2019/07/29/iOS/Core Animation/Core-Animation-编程指南-Core-Animation-的基础/" class="leancloud_visitors" data-flag-title="Core Animation 编程指南 - Core Animation 的基础">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -308,33 +562,33 @@
 <p>你使用 Core Animation 来对你 App 的视图和可视对象的改变进行动画。大多数的改变是和你修改的可视化对象的属性相关联的。例如：你可能使用 Core Animation 去使视图的 position size 或 opacity 的改变进行动画。当你进行类似的改变时，Core Animation 会在该属性的当前值和你指定的新值之间做动画。通常，你不会像动画片一样，使用 Core Animation 每秒60次来替换视图的内容。实际上，你会使用 Core Animation 去移动屏幕上视图的内容，淡入淡出内容，对视图应用任意图形形变，或者改变视图的其他可视属性。</p>
 <h3 id="图层-提供-Drawing-和-Animations-的基础"><a href="#图层-提供-Drawing-和-Animations-的基础" class="headerlink" title="图层 提供 Drawing 和 Animations 的基础"></a>图层 提供 Drawing 和 Animations 的基础</h3><p>图层对象是由 3D 空间管理的 2D surface，它也是 Core Animation的灵魂。和视图相同的是，图层管理 surface 的几何信息，内容，和它可视化属性。和视图不同的是，图层不定义它们自己的外观。图层 对象仅管理位图的状态信息。位图可以是视图绘制自身的结果，也可以是你指定的 image。为此，<code>你在 App 中使用的 main layers 被认为是模型对象，因为它们主要是管理数据</code>。这个概念很重要，因为它影响动画的行文。</p>
 <h4 id="基于图层的绘制模型"><a href="#基于图层的绘制模型" class="headerlink" title="基于图层的绘制模型"></a>基于图层的绘制模型</h4><p>你的 App 中大多数的图层不会做实际的绘制工作，图层对象会捕获你的 App 中提供的内容，然后将内容缓存为位图，有时也被称为 backing store。当你后面再修改图层的属性时，你所做的只是改变与图层对象相关联的状态信息。当改变触发一个动画时，Core Animation 会将图层的位图和状态信息传递给图形硬件，图形硬件使用新的信息来进行渲染，如图1-1。硬件操作位图进行动画要比软件快得多。</p>
-<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-1.png" alt="图1-1 Core Animation 如何绘制内容" title="图1-1 Core Animation 如何绘制内容">
+<img src="/2019/07/29/iOS/Core%20Animation/Core-Animation-编程指南-Core-Animation-的基础/1-1.png" alt="图1-1 Core Animation 如何绘制内容" title="图1-1 Core Animation 如何绘制内容">
 <p>因为它操作的是静态的位图，所以基于图层的绘制与传统的基于视图的绘制技术有很大的不同。基于视图的绘制，通过调用视图的 <code>drawRect:</code> 方法去使用新的参数去重绘内容来作为视图本身改变的结果。但是使用这种方法是非常耗性能的，因为他在主线程上使用 CPU 。Core Animation 通过硬件直接操作缓存的位图去实现同样的或者类似的效果，来避免性能上的消耗。</p>
 <p>虽然 Core Animation 尽可能的使用缓存的内容，但是你的 APP 必须提供初始的内容并且不时的更新它。你的 App 有几种方法来提供图层对象的内容，详情请见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/SettingUpLayerObjects/SettingUpLayerObjects.html#//apple_ref/doc/uid/TP40004514-CH13-SW4" target="_blank" rel="external">此处</a>。</p>
 <h4 id="基于图层的动画"><a href="#基于图层的动画" class="headerlink" title="基于图层的动画"></a>基于图层的动画</h4><p>图层对象的数据和状态信息是与屏幕上图层的视觉显示分离的。这种分离赋予 Core Animation 一种方式去干预自己，并且对旧状态到新状态的改变进行动画。例如，改变图层的 position 属性 会导致 Core Animation 将图层从当前位置移动到新的指定位置。同样的，改变其他的属性也会导致恰当的改变。如图1-2。图层 属性触发动画机制的列表，可参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/AnimatableProperties/AnimatableProperties.html#//apple_ref/doc/uid/TP40004514-CH11-SW1" target="_blank" rel="external">此处</a>。</p>
-<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-2.png" alt="图1-2 你可以在图层上执行的动画的例子" title="图1-2 你可以在图层上执行的动画的例子">
+<img src="/2019/07/29/iOS/Core%20Animation/Core-Animation-编程指南-Core-Animation-的基础/1-2.png" alt="图1-2 你可以在图层上执行的动画的例子" title="图1-2 你可以在图层上执行的动画的例子">
 <p>在一个动画执行的过程中，Core Animation 会在硬件中完成所有的逐帧绘制。你所需要做的就是：给动画制定一个开始值和一个结束值，剩下的就可以交给 Core Animation 了。你也可以自定义你所需要的时间信息和动画参数，如果你不自定义，Core Animation 会提供合适的默认值。</p>
 <p>关于如何初始化动画和配置动画参数的更多信息，可以参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/CreatingBasicAnimations/CreatingBasicAnimations.html#//apple_ref/doc/uid/TP40004514-CH3-SW1" target="_blank" rel="external">此处</a>。</p>
 <h3 id="图层对象定义它们自己的几何图形"><a href="#图层对象定义它们自己的几何图形" class="headerlink" title="图层对象定义它们自己的几何图形"></a>图层对象定义它们自己的几何图形</h3><p>图层的工作之一就是管理其内容的视觉几何(visual geometry)。视觉几何包含其内容的 bounds、在屏幕的 position 和图层是否被旋转、缩放、形变。和视图一样，图层也有 frame、bounds 属性用来定位图层的位置和内容。图层还有视图没有的属性，例如 锚点(anchor point)：它定义了操作发生的点。<br>指定图层几何图形的某些方面的方式也与为视图指定信息的方式不同。</p>
 <h4 id="图层使用两种类型的坐标系"><a href="#图层使用两种类型的坐标系" class="headerlink" title="图层使用两种类型的坐标系"></a>图层使用两种类型的坐标系</h4><p>图层利用基于点坐标系(point-based coordinate systems)和单位坐标系(unit coordinate systems)来指定内容的位置。使用哪一个坐标系取决于传递信息的类型。当指定的值直接映射到屏幕坐标或必须指定相关联的另一个图层的值时，使用基于点坐标系。例如图层的 <code>position</code> 属性。当值不应与屏幕坐标相关联，因为它与其他值相关联时，使用单位坐标系。例如：图层的 <code>anchorPoint</code> 属性指一个与图层本身的 bounds 相关联的点，该点是可以改变的。</p>
 <p>基于点坐标系最常见的用法就是使用图层的 <code>bounds</code> 和 <code>position</code> 属性指定图层的 size 和 position 。bounds 定义了它自身的坐标系，并包含了它在屏幕上的 size。position 定义了图层在它父坐标系上的位置。虽然图层有 frame 的属性，但该值实际是由 bounds 和 position 属性计算出来的，并且图层不会经常使用 frame。</p>
 <p>layer 的 bounds 和 frame 属性的方向总是和底层平台的方向一致。下图展示了 iOS 和 OS X 系统的默认方向。在 iOS 中，默认的原点是图层的左上角，而在 OS X 系统上，默认是左下角。如果你想在两个系统上用一套 Core Animation 代码，你必须考虑到这些差异。</p>
-<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-3.png" alt="图1-3 iOS 和 OS X 默认的图层几何" title="图1-3 iOS 和 OS X 默认的图层几何">
+<img src="/2019/07/29/iOS/Core%20Animation/Core-Animation-编程指南-Core-Animation-的基础/1-3.png" alt="图1-3 iOS 和 OS X 默认的图层几何" title="图1-3 iOS 和 OS X 默认的图层几何">
 <p>在图1-3中，需要注意的是， position 属性是位于图层的中间。position 是基于图层的 anchorPoint 属性的值改变的几个属性之一。锚点表示坐标的起始点，更多详细信息请看<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/CoreAnimationBasics/CoreAnimationBasics.html#//apple_ref/doc/uid/TP40004514-CH2-SW17" target="_blank" rel="external">此处</a>。</p>
 <p>锚点是使用单位坐标系指定的几个属性之一。 Core Animation 使用单位坐标系表示当图层的尺寸发生改变时，值可能改变的属性。你可以将单位坐标系视为指定总可能值得百分比。单位坐标中每个单位坐标的值的范围都是 0.0 到 1.0 。例如，在 x 轴，左边缘的坐标是 0.0 ，右边缘的坐标是 1.0 。在 y 轴，单位坐标值的方向改变取决于所在平台，如图1-4所示：</p>
-<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-4.png" alt="图1-4 iOS 和 OS X 上默认的单位坐标系" title="图1-4 iOS 和 OS X 上默认的单位坐标系">
+<img src="/2019/07/29/iOS/Core%20Animation/Core-Animation-编程指南-Core-Animation-的基础/1-4.png" alt="图1-4 iOS 和 OS X 上默认的单位坐标系" title="图1-4 iOS 和 OS X 上默认的单位坐标系">
 <p>OS X 10.8 之前，当你需要的时候，可以使用 <code>geometryFlipped</code> 属性去改变图层y 轴上的默认方向。当涉及到 filp 形变的时候，必须使用该属性去帮助图层得到正确的方向。例如：如果父视图使用 flip 形变，它的子视图的内容(以及与它们绑定的 layers)往往会倒置。在这种情况下，将子图层的 <code>geometryFilpped</code> 属性设置为 YES ，是一种简单有效的解决办法。在 OS X 10.8 以后，AppKit 将会自动处理该属性，不需要你再修改。对于 iOS 来说，推荐你不要使用 <code>geometryFlipped</code> 属性。</p>
 <p>所有的坐标值，无论是点还是单位坐标值都是浮点数。使用浮点数可以允许你在正常的坐标值之间指定精确的位置。使用浮点数是很便捷的，尤其在输出或者绘制 Retina 显示器时，一个点是由多个像素点绘制的。浮点数使你可以忽略底层设备分辨率而专注于你所需精度的具体值。</p>
 <h4 id="锚点影响几何操作"><a href="#锚点影响几何操作" class="headerlink" title="锚点影响几何操作"></a>锚点影响几何操作</h4><p>layer 的几何操作的发生于图层的锚点相关联，你可以使用 <code>anchorPoint</code> 属性来访问图层的锚点。当操作图层的 position 或 transform 属性时，锚点的影响是非常显著地。position 属性总是和图层的锚点相关联的，你应用到图层上的任何形变效果也是和锚点相关联的。</p>
 <p>图1-5 演示了锚点从默认值改变为一个不同的值时，图层的 position 属性是如何变化的。即使图层没有在它的父边界中没有移动，将图层的锚点从中心移动到边界的原点也会改变 position 的值。</p>
-<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-5.png" alt="图1-5 锚点如何影响 position 属性" title="图1-5 锚点如何影响 position 属性">
+<img src="/2019/07/29/iOS/Core%20Animation/Core-Animation-编程指南-Core-Animation-的基础/1-5.png" alt="图1-5 锚点如何影响 position 属性" title="图1-5 锚点如何影响 position 属性">
 <p>图1-6 展示了改变锚点的值是如何影响形变在图层上的应用。当你在图层上应用一个旋转的形变，旋转发生在锚点的周围。因为锚点默认是在图层的中间，这通常会创建一个你期待的旋转行为，如果你改变锚点，旋转的结果是不同的。</p>
-<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-6.png" alt="图1-6 锚点是如何影响形变" title="图1-6 锚点是如何影响形变">
+<img src="/2019/07/29/iOS/Core%20Animation/Core-Animation-编程指南-Core-Animation-的基础/1-6.png" alt="图1-6 锚点是如何影响形变" title="图1-6 锚点是如何影响形变">
 <h4 id="Layers-可以在三维空间中操作"><a href="#Layers-可以在三维空间中操作" class="headerlink" title="Layers 可以在三维空间中操作"></a>Layers 可以在三维空间中操作</h4><p>每个图层有两个形变矩阵，你可以用这两个矩阵去操作图层和它的内容。CALayer 的 <code>transform</code> 指的是你想应用在它和它的 sublayers 上形变。在你想改变图层本身的时候使用该属性。例如，你可能想使用该属性去缩放、旋转或者暂时改变它的 position。<code>sublayerTransform</code> 属性只应用于 sublayers，它通常用于向场景内容添加透视效果。</p>
 <p>通过将坐标值乘以数字矩阵来进行形变工作，以获得表示原始点形变版本的新坐标。因为 Core Animation 的值可以在三维空间中指定，每个坐标点有四个值，坐标点必须和一个 4x4 矩阵相乘，如图1-7所示。在 Core Animation，图中的形变是通过 CATransformD 类型俩表示的。幸运的是，你不必去修改矩阵结构的字段来执行标准的形变。Core Animation 提供了丰富的函数去创建缩放、平移和旋转矩阵去做矩阵比较。为了使用函数来操作形变，Core Animation 延伸了键值编码支持，使你可以使用键来修改形变。查看<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/Key-ValueCodingExtensions/Key-ValueCodingExtensions.html#//apple_ref/doc/uid/TP40004514-CH12-SW1" target="_blank" rel="external">此处</a>获悉你可修改的键。</p>
-<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-7.png" alt="图1-7 使用矩阵运算来转换坐标" title="图1-7 使用矩阵运算来转换坐标">
+<img src="/2019/07/29/iOS/Core%20Animation/Core-Animation-编程指南-Core-Animation-的基础/1-7.png" alt="图1-7 使用矩阵运算来转换坐标" title="图1-7 使用矩阵运算来转换坐标">
 <p>图1-8 显示了一些常见形变的矩阵配置。任何坐标乘以 identity 矩阵返回坐标本身。对于其他形变，坐标的修改完全取决于你改变的矩阵元素。例如，沿 x轴平移，你可以将形变矩阵的 tx 设为非零值，将 ty 和 tz 设为0。对于旋转，你可以提供目标旋转角度响应的正弦值和余弦值。</p>
-<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-8.png" alt="图1-8 常见的形变矩阵配置" title="图1-8 常见的形变矩阵配置">
+<img src="/2019/07/29/iOS/Core%20Animation/Core-Animation-编程指南-Core-Animation-的基础/1-8.png" alt="图1-8 常见的形变矩阵配置" title="图1-8 常见的形变矩阵配置">
 <h3 id="图层树反映了动画状态的不同方面"><a href="#图层树反映了动画状态的不同方面" class="headerlink" title="图层树反映了动画状态的不同方面"></a>图层树反映了动画状态的不同方面</h3><p>App 使用 Core Animation 有三组图层对象。每组的图层对象对将你的 App 的内容显示在屏幕上都有不同的作用：</p>
 <ul>
 <li>模型图层树(图层树 -图层tree)中的对象是与你的 App 交互最多的。该树上的模型对象存储任何动画的目标值。每当你改变图层的属性时，都使用了其中一个对象。</li>
@@ -342,9 +596,9 @@
 <li>渲染树(render tree)中的对象用来执行实际的动画，并且它是 Core Animation 的私有对象。</li>
 </ul>
 <p>每组图层对象都被组织成一个分层结构，就像 App 中的视图。实际上，<br>对于为其所有视图启用图层的 App，每个树的初始结构完全匹配视图层次结构。但是，App 可以根据需要将其他图层对象（即与视图无关的图层）添加到图层层次结构中。你可以在这种情况下执行此操作，以针对不需要视图的所有开销的内容优化应用程序的性能。图1-9显示了在简单的iOS应用程序中找到的图层细分。示例中的 window 包含一个内容视图，该视图本身包含一个按钮视图和两个独立的图层对象。每个视图都有一个对应的图层对象，它构成图层层次结构的一部分。</p>
-<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-9.png" alt="图1-9 与 window 关联的图层" title="图1-9 与 window 关联的图层">
+<img src="/2019/07/29/iOS/Core%20Animation/Core-Animation-编程指南-Core-Animation-的基础/1-9.png" alt="图1-9 与 window 关联的图层" title="图1-9 与 window 关联的图层">
 <p>图层树中的每个对象，都在表示树和渲染树中有一个与之匹配的对象，如图1-10 所示。如上所述， App 主要使用图层树中的对象，但有时也会访问表示树中的对象。具体而言，访问图层树中的对象的 <code>presentationLayer</code> 属性来获取表示树中与之关联的对象。你可能需要访问对象来获取动画中间过程的属性的值。</p>
-<img src="/2019/07/29/iOS/Core-Animation-编程指南-Core-Animation-的基础/1-10.png" alt="图1-10 window 的图层树" title="图1-10 window 的图层树">
+<img src="/2019/07/29/iOS/Core%20Animation/Core-Animation-编程指南-Core-Animation-的基础/1-10.png" alt="图1-10 window 的图层树" title="图1-10 window 的图层树">
 <p><code>你应该只在动画执行中的时候去访问表示树中的对象。当动画正在进行时，表示树包含当时在屏幕上显示的图层值。这个行为不同于图层树，图层树重视反映你的代码设置的最后的值，并且等同于动画的最终状态。</code></p>
 <h3 id="图层和视图的关系"><a href="#图层和视图的关系" class="headerlink" title="图层和视图的关系"></a>图层和视图的关系</h3><p>图层不能替代你 App 中的视图，即你不能仅基于图层来创建视觉页面。图层提供视图的基础结构。图层使绘制和动画视图的内容更加容易高效，并且保持高帧速率。然而，图层也有很多事情处理不了。图层不能处理事件、绘制内容、参与响应链，和其它很多事情。基于此，每个 App 必须有一个或者多个视图来处理上述类型的交互。</p>
 <p>在 iOS 中，每个视图底层都由图层对象支持，但是在 OS X 你必须决定哪个视图有图层。在 OS X v10.8 以后的版本，给所有的视图添加图层可能是有意义的。然而，你不被要求必须这么做，你可以在不需要或者不想的地方使图层失效。图层会使你的内存开销增加，但是它们的优点远远超过这个缺点。在禁用图层支持之前，最好先测试 App 的性能。</p>
@@ -352,8 +606,9 @@
 <p><code>对于图层支持视图，无论何时，推荐你操作视图，而不是图层。在 iOS ，视图只是图层的一种封装，所以，你在图层上做的任何操作通常会正常工作。但是在 iOS 和 OS X 中都存在这样的情况：操纵图层而不是视图可能无法产生预期的结果。只要有可能，本文档指出了这些陷阱，并试图提供方法来帮助你解决这些问题。</code></p>
 <p>除了与视图关联的图层之外，还可以创建没有相应视图的图层对象。你可以将这些独立的图层对象嵌入到 App 中的任何其他图层对象中，包括那些与视图相关联的图层对象。你通常使用独立的图层对象作为特定优化路径的一部分。例如，如果你想在多个地方使用相同的图像，你可以加载图像一次，并将其与多个独立的图层对象相关联，然后将这些对象添加到图层树中。然后，每个层引用源图像，而不是试图在内存中创建自己的图像副本。</p>
 <p>有关如何为应用程序视图启用图层支持的信息，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/SettingUpLayerObjects/SettingUpLayerObjects.html#//apple_ref/doc/uid/TP40004514-CH13-SW5" target="_blank" rel="external">此处</a>。有关如何创建图层对象层次结构的信息，以及何时创建图层对象层次结构的提示，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/BuildingaLayerHierarchy/BuildingaLayerHierarchy.html#//apple_ref/doc/uid/TP40004514-CH6-SW2" target="_blank" rel="external">此处</a>。</p>
-<ul>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><ul>
 <li><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/CoreAnimationBasics/CoreAnimationBasics.html#//apple_ref/doc/uid/TP40004514-CH2-SW3" target="_blank" rel="external">原文链接</a></li>
+<li><a href="">下篇预告-设置图层对象</a></li>
 </ul>
 
           
@@ -1728,167 +1983,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/04/15/Swift/Swift之SQLite3的基础使用/" itemprop="url">
-                  Swift之SQLite3的基础使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2019-04-15T19:21:22+08:00" content="2019-04-15">
-              2019-04-15
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2019/04/15/Swift/Swift之SQLite3的基础使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/04/15/Swift/Swift之SQLite3的基础使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2019/04/15/Swift/Swift之SQLite3的基础使用/" class="leancloud_visitors" data-flag-title="Swift之SQLite3的基础使用">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>　　在我们的日常开发中，经常会遇到用户断网或者网络较慢的情况，这样用户在一进入页面的时候会显示空白的页面，那么如何避免没网显示空白页面的尴尬呢？答案就是：先在网络好的时候缓存一部分数据，这样当下次网络情况不好的时候，至少用户可以先看到之前缓存的内容，已达到提高APP的用户体验。<br>　　<br>　　SQLite3就是我们实现本地数据缓存的一种方案，SQLite3有以下优点：iOS内嵌SQLite3；经过时间的验证；开源；跨平台。<br>OK，废话不多说，现在我们就开始进入SQLite3的体验之旅。当然在开始之前我们要做一点准备工作，毕竟我们不打没有准备的仗。</p>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><h4 id="创建备用数据"><a href="#创建备用数据" class="headerlink" title="创建备用数据"></a>创建备用数据</h4><ul>
-<li>导入SQLite3:<code>import SQLite3</code></li>
-<li>创建一个Goods的类用来表示数据库存储的数据类型</li>
-<li>创建一个Goods类型的数组</li>
-<li>声明一个dbPath和db的全局变量，声明一个获取<code>libraryDirectory</code>路径的函数（<a href="https://stackoverflow.com/questions/9346760/where-should-i-store-the-sqlite-db-for-my-iphone-app" target="_blank" rel="external">数据库存放路径如何选择</a>）</li>
-</ul>
-<h4 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">class Goods &#123;</div><div class="line">    let name: String!</div><div class="line">    let weight: Int!</div><div class="line">    var price: Double!</div><div class="line">    </div><div class="line">    init(name: String, weight: Int, price: Double) &#123;</div><div class="line">        self.name = name</div><div class="line">        self.weight = weight</div><div class="line">        self.price = price</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let goods = Goods(name: &quot;computer&quot;, weight: 10, price: 2000.0)</div><div class="line">var goodArr = [Goods]()</div><div class="line">var dbPath = &quot;&quot;</div><div class="line">var db: OpaquePointer?</div><div class="line"></div><div class="line">func createData() &#123;</div><div class="line">    for index in 0...4 &#123;</div><div class="line">        let goods = Goods(name: &quot;computer&quot; + &quot;\(index)&quot;, weight: index * 10, price: 20.0)</div><div class="line">        goodArr.append(goods)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">func fetchLibraryPath() &#123;</div><div class="line">    if let libraryPathString = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first &#123;</div><div class="line">        let pathURL = URL(fileURLWithPath: libraryPathString).appendingPathComponent(&quot;goods.sqlite&quot;)</div><div class="line">        dbPath = pathURL.path</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="创建并连接数据库"><a href="#创建并连接数据库" class="headerlink" title="创建并连接数据库"></a>创建并连接数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">func openDatabase() -&gt; OpaquePointer? &#123;</div><div class="line">    var db: OpaquePointer?</div><div class="line">    if sqlite3_open(dbPath, &amp;db) == SQLITE_OK &#123;</div><div class="line">        resultLabel.text = &quot;成功打开数据库，路径：\(dbPath)&quot;</div><div class="line">        return db</div><div class="line">    &#125; else &#123;</div><div class="line">        resultLabel.text = &quot;打开数据库失败&quot;</div><div class="line">        return nil</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>　　通过上面的代码我们可以看到，首先声明了一个<code>OpaquePointer</code>类型的可选值<code>db</code>，接下来调用了<code>sqlite3_open()</code>方法，该方法的作用是：如果之前创建了数据库那么直接打开，若没创建会直接创建一个。如果该方法调用成功，他会返回一个<code>OpaquePointer</code>的值赋值给你传递进去的<code>db</code>。<br><code>SQLITE_OK</code>是一个定义在SQLite库中的一个常量，它代表一个Int32的0。SQLite的大多数函数都会返回一个Int32的值，例如<code>SQLITE_ROW (100)</code>、<code>SQLITE_DONE (101)</code>等，详细列表你可以查看<a href="https://www.sqlite.org/rescode.html" target="_blank" rel="external">这里</a>。<br>现在你可以通过调用<code>db = openDatabase()</code>来打开或者创建一个数据库了，正常情况下你会看见<code>成功打开数据库，路径：xxx/xxx.sqlite</code>的输出。<br>现在，我们已经成功的创建了一个名字为<code>goods.sqlite</code>的数据库了，接下来我们要做的就是创建一个表了。</p>
-<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">func createTable() &#123;</div><div class="line">    let createTableString = &quot;&quot;&quot;</div><div class="line">                            CREATE TABLE Computer(</div><div class="line">                            Id INT PRIMARY KEY NOT NULL,</div><div class="line">                            Name CHAR(255),</div><div class="line">                            Weight Int,</div><div class="line">                            Price Float);</div><div class="line">                            &quot;&quot;&quot;</div><div class="line">    var createTableStatement: OpaquePointer?</div><div class="line">    // 第一步</div><div class="line">    if sqlite3_prepare_v2(db, createTableString, -1, &amp;createTableStatement, nil) == SQLITE_OK &#123;</div><div class="line">        // 第二步</div><div class="line">        if sqlite3_step(createTableStatement) == SQLITE_DONE &#123;</div><div class="line">            resultLabel.text = &quot;成功创建表&quot;</div><div class="line">        &#125; else &#123;</div><div class="line">            resultLabel.text = &quot;未成功创建表&quot;</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">            </div><div class="line">    &#125;</div><div class="line">    //第三步</div><div class="line">    sqlite3_finalize(createTableStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="代码说明"><a href="#代码说明" class="headerlink" title="代码说明"></a>代码说明</h4><p>　　首先解释一下<code>createTableString</code>:创建一个名字为Computer的表，Id为主键且不为空，Name不超过255个字符，Weight为Int类型，Price为Float类型。<br>然后创建了一个<code>OpaquePointer?</code>类型的变量用于下面的函数：<code>sqlite3_prepare_v2()</code>。</p>
-<ul>
-<li>第一步：该函数会将<code>createTableString</code>编译为字节代码（byte code）并返回一个status code，这个函数执行成功则表明database已经准备好了执行任意的SQL statement（就是创建的SQL的字符串），该函数执行成功后即会执行<code>sqlite3_step()</code>。</li>
-<li>第二步：<code>sqlite3_step()</code>用来执行编译完成的statement handle(createTableStatement)并返回一个status code。</li>
-<li>第三步：在你每一次的操作完成后你必须调用<code>sqlite3_finalize()</code>去删除你的statement以避免resource leak。注意：一旦一个statement被finalized，你不应该再一次使用它。</li>
-</ul>
-<h3 id="插入一条数据"><a href="#插入一条数据" class="headerlink" title="插入一条数据"></a>插入一条数据</h3><h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">func insertOneData() &#123;</div><div class="line">    let insertRowString = &quot;INSERT INTO Computer (Id, Name, Weight, Price) VALUES (?, ?, ?, ?);&quot;</div><div class="line">    var insertStatement: OpaquePointer?</div><div class="line">    //第一步</div><div class="line">    if sqlite3_prepare_v2(db, insertRowString, -1, &amp;insertStatement, nil) == SQLITE_OK &#123;</div><div class="line">            let id: Int32 = 1</div><div class="line">            //第二步</div><div class="line">            sqlite3_bind_int(insertStatement, 1, id)</div><div class="line">            </div><div class="line">            sqlite3_bind_text(insertStatement, 2, goods.name, -1, nil)</div><div class="line">            </div><div class="line">            sqlite3_bind_int(insertStatement, 3, Int32(goods.weight))</div><div class="line">            </div><div class="line">            sqlite3_bind_double(insertStatement, 4, goods.price)</div><div class="line">            //第三步</div><div class="line">            if sqlite3_step(insertStatement) == SQLITE_DONE &#123;</div><div class="line">                resultLabel.text = &quot;插入数据成功&quot;</div><div class="line">            &#125; else &#123;</div><div class="line">                resultLabel.text = &quot;插入数据失败&quot;</div><div class="line">            &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    //第四步</div><div class="line">    sqlite3_finalize(insertStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="代码说明-1"><a href="#代码说明-1" class="headerlink" title="代码说明"></a>代码说明</h4><ul>
-<li>insertRowString中的<code>?</code>和前面的字段是对应的，它只是占位符的意思，告诉编译器当真正执行该语句的时候会插入相应的值。</li>
-<li>第二步：<code>sqlite3_bind_int()</code>标识你绑定了一个Int类型的值，该函数的第一个参数是你的statement(即insertStatement)，第二个参数是<code>?</code>的位置在你的statement(注意该值是非零的)，在此处也就是1，第三个参数为你想绑定的值。<code>sqlite3_bind_text()</code>函数表示你绑定的是一个text（一般用于比较长的字符串）类型值，该函数比<code>sqlite3_bind_int()</code>多了额外的两个参数，第四个参数的意思是text的字节数，一般穿<code>-1</code>,第五个参数是一个closure回调，处理完string后调用。</li>
-<li>第三步第四步同上</li>
-</ul>
-<h3 id="插入多条数据"><a href="#插入多条数据" class="headerlink" title="插入多条数据"></a>插入多条数据</h3><h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">func insertMutipleData() &#123;</div><div class="line">    let insertRowString = &quot;INSERT INTO Computer (Id, Name, Weight, Price) VALUES (?, ?, ?, ?);&quot;</div><div class="line">    var insertStatement: OpaquePointer?</div><div class="line">    //第一步</div><div class="line">    if sqlite3_prepare_v2(db, insertRowString, -1, &amp;insertStatement, nil) == SQLITE_OK &#123;</div><div class="line">       for (index, good) in goodArr.enumerated() &#123;</div><div class="line">            let id: Int32 = Int32(index + 1)</div><div class="line">            //第二步</div><div class="line">            sqlite3_bind_int(insertStatement, 1, id)</div><div class="line">            </div><div class="line">            sqlite3_bind_text(insertStatement, 2, good.name, -1, nil)</div><div class="line">            </div><div class="line">            sqlite3_bind_int(insertStatement, 3, Int32(good.weight))</div><div class="line">            </div><div class="line">            sqlite3_bind_double(insertStatement, 4, good.price)</div><div class="line">            //第三步</div><div class="line">            if sqlite3_step(insertStatement) == SQLITE_DONE &#123;</div><div class="line">                resultLabel.text = &quot;插入数据成功&quot;</div><div class="line">            &#125; else &#123;</div><div class="line">                resultLabel.text = &quot;插入数据失败&quot;</div><div class="line">            &#125;</div><div class="line">            //第四步</div><div class="line">            sqlite3_reset(insertStatement)</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    //第五步</div><div class="line">    sqlite3_finalize(insertStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="代码说明-2"><a href="#代码说明-2" class="headerlink" title="代码说明"></a>代码说明</h4><ul>
-<li>insertRowString同上。</li>
-<li>第四步：调用<code>sqlite3_reset()</code>函数，以便下次循环再次执行insertStatement</li>
-<li>第一步、第二步、第三步、第五步同上。</li>
-</ul>
-<h3 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h3><h4 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">func updateData() &#123;</div><div class="line">    let updateString = &quot;UPDATE Computer SET Name = &apos;changeComputer&apos; WHERE Id = 2;&quot;</div><div class="line">    var updateStatement: OpaquePointer?</div><div class="line">    //第一步</div><div class="line">    if sqlite3_prepare_v2(db, updateString, -1, &amp;updateStatement, nil) == SQLITE_OK &#123;</div><div class="line">        //第二步</div><div class="line">        if sqlite3_step(updateStatement) == SQLITE_DONE &#123;</div><div class="line">            resultLabel.text = &quot;更新成功&quot;</div><div class="line">        &#125; else &#123;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //第三步</div><div class="line">    sqlite3_finalize(updateStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="代码说明-3"><a href="#代码说明-3" class="headerlink" title="代码说明"></a>代码说明</h4><ul>
-<li>updateString：将<code>Id==2</code>的数据的<code>Name</code>字段改为<code>changeComputer</code>。</li>
-<li><code>sqlite3_prepare_v2()</code>：准备，<code>sqlite3_step()</code>：执行更新statement，<code>sqlite3_finalize()</code>：结束。<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><h4 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">func deleteData() &#123;</div><div class="line">    let deleteString = &quot;DELETE FROM Computer WHERE Id = 2;&quot;</div><div class="line">    var deleteStatement: OpaquePointer?</div><div class="line">    //第一步</div><div class="line">    if sqlite3_prepare_v2(db, deleteString, -1, &amp;deleteStatement, nil) == SQLITE_OK &#123;</div><div class="line">        //第二步</div><div class="line">        if sqlite3_step(deleteStatement) == SQLITE_DONE &#123;</div><div class="line">            resultLabel.text = &quot;删除成功&quot;</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    //第三步</div><div class="line">    sqlite3_finalize(deleteStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="代码说明-4"><a href="#代码说明-4" class="headerlink" title="代码说明"></a>代码说明</h4><ul>
-<li>deleteString：删除表中<code>Id==2</code>的数据。</li>
-<li><code>sqlite3_prepare_v2()</code>：准备，<code>sqlite3_step()</code>：执行删除statement，<code>sqlite3_finalize()</code>：结束。</li>
-</ul>
-<h3 id="查询一条数据"><a href="#查询一条数据" class="headerlink" title="查询一条数据"></a>查询一条数据</h3><h4 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">func queryOneData() &#123;</div><div class="line">    let queryString = &quot;SELECT * FROM Computer WHERE Id == 2;&quot;</div><div class="line">    var queryStatement: OpaquePointer?</div><div class="line">    //第一步</div><div class="line">    if sqlite3_prepare_v2(db, queryString, -1, &amp;queryStatement, nil) == SQLITE_OK &#123;</div><div class="line">        //第二步</div><div class="line">        if sqlite3_step(queryStatement) == SQLITE_ROW &#123;</div><div class="line">            //第三步</div><div class="line">            let id = sqlite3_column_int(queryStatement, 0)</div><div class="line">            </div><div class="line">            let queryResultName = sqlite3_column_text(queryStatement, 1)</div><div class="line">            let name = String(cString: queryResultName!)</div><div class="line">            let weight = sqlite3_column_int(queryStatement, 2)</div><div class="line">            let price = sqlite3_column_double(queryStatement, 3)</div><div class="line">            </div><div class="line">            </div><div class="line">            resultLabel.text = &quot;id: \(id), name: \(name), weight: \(weight), price: \(price)&quot;</div><div class="line">        &#125; else &#123;</div><div class="line">            resultLabel.text = &quot;error&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //第四步</div><div class="line">    sqlite3_finalize(queryStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="代码说明-5"><a href="#代码说明-5" class="headerlink" title="代码说明"></a>代码说明</h4><ul>
-<li>queryString：在<code>Computer</code>表中查找所有<code>Id == 2</code>的数据。</li>
-<li>第二步：注意此时要判断的status code为<code>SQLITE_ROW</code>，如果该判断为true则代表你查询的数据存在在表里。</li>
-<li>第三步：<code>sqlite3_column_int()</code>函数是按照列数取数据，第一个参数是statement，第二个参数则是该字段是第几列(Id 为表里的第一列，从0开始计算)。<code>sqlite3_column_text()</code>要略微复杂一点，他需要转换类型通过<code>String(cString: queryResultName!)</code>。</li>
-<li>第一步、第四步同上</li>
-</ul>
-<h3 id="查询多条数据"><a href="#查询多条数据" class="headerlink" title="查询多条数据"></a>查询多条数据</h3><h4 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">func queryAllData() &#123;</div><div class="line">    let queryString = &quot;SELECT * FROM Computer;&quot;</div><div class="line">    var queryStatement: OpaquePointer?</div><div class="line">    //第一步</div><div class="line">    if sqlite3_prepare_v2(db, queryString, -1, &amp;queryStatement, nil) == SQLITE_OK &#123;</div><div class="line">        //第二步</div><div class="line">        while(sqlite3_step(queryStatement) == SQLITE_ROW) &#123;</div><div class="line">            //第三步</div><div class="line">            let id = sqlite3_column_int(queryStatement, 0)</div><div class="line">            </div><div class="line">            let queryResultName = sqlite3_column_text(queryStatement, 1)</div><div class="line">            let name = String(cString: queryResultName!)</div><div class="line">            let weight = sqlite3_column_int(queryStatement, 2)</div><div class="line">            let price = sqlite3_column_double(queryStatement, 3)</div><div class="line">            </div><div class="line">            </div><div class="line">            resultLabel.text = &quot;id: \(id), name: \(name), weight: \(weight), price: \(price)&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //第四步</div><div class="line">    sqlite3_finalize(queryStatement)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="代码说明-6"><a href="#代码说明-6" class="headerlink" title="代码说明"></a>代码说明</h4><ul>
-<li>第二步：此处为<code>while</code>循环，当查询到最后一行时会返回<code>SQLITE_DONE</code>状态码来结束。</li>
-<li>第一步第三步第四步同上。</li>
-</ul>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>通过上面我们可以总结出执行一个statement的大概流程:<code>sqlite3_prepare_v2()</code>：准备，<code>sqlite3_step()</code>：执行statement，<code>sqlite3_finalize()</code>：结束。好了，到这里SQLite3的增删改查基本操作也就完事了。下一篇我们来了解一下SQLite的进阶用法。Bye~</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1934,7 +2028,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
