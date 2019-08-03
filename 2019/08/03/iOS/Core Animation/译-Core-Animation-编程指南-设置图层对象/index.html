@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/03/iOS/Core%20Animation/译-Core-Animation-编程指南-设置图层对象/2-3.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/03/iOS/Core%20Animation/译-Core-Animation-编程指南-设置图层对象/2-4.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/03/iOS/Core%20Animation/译-Core-Animation-编程指南-设置图层对象/2-5.png">
-<meta property="og:updated_time" content="2019-08-03T02:51:44.682Z">
+<meta property="og:updated_time" content="2019-08-03T02:52:51.951Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[译] Core Animation 编程指南 - 设置图层对象">
 <meta name="twitter:description" content="图层对象是你用 Core Animation 所做的一切事情的核心。图层管理你 app 的视觉内容，提供视觉内容样式和视觉外观的修改选项。虽然 iOS app 内嵌自动支持图层，但是 OS X 上面的 app 开发者必须在利用图层的性能优势前手动让图层生效。一旦生效，你需要理解如何配置和操作你 app 的图层，来获取你想要的效果。
@@ -474,11 +474,20 @@
 <td>NSViewLayerContentsRedrawOnSetNeedsDisplay</td>
 <td>这是推荐的策略。用该策略，视图几何图形的改变不会自动造成视图去更新图层的内容。取而代之的是，拉伸和操纵图层的现有内容，以方便几何图形的更改。想强制视图重绘它自身，并更新图层的内容，你必须显示的调用图层的 <code>setNeedsDisplay</code> 方法。 该策略最接近于 Core Animation 图层的标准行为。但是，它不是默认策略，必须显式设置。</td>
 </tr>
+<tr>
+<td>NSViewLayerContentsRedrawDuringViewResize</td>
+<td>这是默认的重绘策略。该策略通过无论何时视图几何图形改变，都会重新缓存图层的内容的方法，与传统 AppKit 绘制保持了最大的兼容性。该行为会造成视图的 <code>drawRect:</code> 方法在重新设置尺寸期间在 app 主线程多次调用。</td>
+</tr>
+<tr>
+<td>NSViewLayerContentsRedrawBeforeViewResize</td>
+<td>使用该策略，在任何调整尺寸的操作之前，AppKit 以最终尺寸绘制图层，并缓存该位图。调整尺寸操作使用缓存位图作为起始图像，缩放它以适应旧的边界矩形。然后，它将位图动画化为最终尺寸。这种行为会导致视图内容在动画开始时出现拉伸或扭曲，在初始外观不重要或不明显的情况下效果会更好。</td>
+</tr>
+<tr>
+<td>NSViewLayerContentsRedrawNever</td>
+<td>使用策略，即使调用 <code>setNeedsDisplay:</code> 方法，AppKit 也不会更新图层。此策略最适合内容从不改变的视图，以及视图大小很少改变(如果有的话)的视图。例如，你可以将它用于显示固定大小内容或背景元素的视图。</td>
+</tr>
 </tbody>
 </table>
-<p>|NSViewLayerContentsRedrawDuringViewResize | 这是默认的重绘策略。该策略通过无论何时视图几何图形改变，都会重新缓存图层的内容的方法，与传统 AppKit 绘制保持了最大的兼容性。该行为会造成视图的 <code>drawRect:</code> 方法在重新设置尺寸期间在 app 主线程多次调用。|</p>
-<p>|NSViewLayerContentsRedrawBeforeViewResize |使用该策略，在任何调整尺寸的操作之前，AppKit 以最终尺寸绘制图层，并缓存该位图。调整尺寸操作使用缓存位图作为起始图像，缩放它以适应旧的边界矩形。然后，它将位图动画化为最终尺寸。这种行为会导致视图内容在动画开始时出现拉伸或扭曲，在初始外观不重要或不明显的情况下效果会更好。|</p>
-<p>|NSViewLayerContentsRedrawNever| 使用策略，即使调用 <code>setNeedsDisplay:</code> 方法，AppKit 也不会更新图层。此策略最适合内容从不改变的视图，以及视图大小很少改变(如果有的话)的视图。例如，你可以将它用于显示固定大小内容或背景元素的视图。|</p>
 <p>视图重绘策略减轻了使用独立子图层来提高绘图性能的需要。在引入视图重绘策略之前，有些图层支持视图比需要的绘制频率更高，从而导致性能问题。解决这些性能问题的方法是使用子图层来呈现视图内容中不需要定期重绘的部分。随着重绘策略在 OS X v10.6 中的引入，现在建议将图层层支持视图的重绘策略设置为适当的值，而不是创建显式子图层结构。</p>
 <h3 id="给图层添加自定义属性"><a href="#给图层添加自定义属性" class="headerlink" title="给图层添加自定义属性"></a>给图层添加自定义属性</h3><p>CAAnimation 和 CALayer 类延伸了键值编码约定来支持自定义属性。你可以使用该行为来给图层添加数据，然后使用你自定义的键来获取。你甚至可以给你的自定义属性关联事件，以至于当你改变属性时，可以执行响应的动画。</p>
 <p>有关如何设置和获取自定义属性的信息，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/Key-ValueCodingExtensions/Key-ValueCodingExtensions.html#//apple_ref/doc/uid/TP40004514-CH12-SW3" target="_blank" rel="external">此处</a>。有关向图层对象添加动作的信息，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/ReactingtoLayerChanges/ReactingtoLayerChanges.html#//apple_ref/doc/uid/TP40004514-CH7-SW1" target="_blank" rel="external">此处</a>。</p>
