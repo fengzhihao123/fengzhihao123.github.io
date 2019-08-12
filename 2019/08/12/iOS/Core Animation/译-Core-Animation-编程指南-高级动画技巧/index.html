@@ -1,0 +1,736 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="有很多方法去配置基于属性或者关键帧的动画，来为你做更多的事情。Apps 需要同时或顺序执行多个动画可以使用高级行为去同步多个动画的时间或将它们串在一起。你可以使用动画对象的其他类型去创建视觉形变和其它有意思的动画效果。
+过渡动画支持更改图层可见性如上述标题所示，过渡动画对象会为图层创建视觉过渡动画效果。过渡对象最常见的用法就是动画的显示一个图层，隐藏另一个图层。不像基于属性的动画，动画图层的某个属">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[译] Core Animation 编程指南 - 高级动画技巧">
+<meta property="og:url" content="http://yoursite.com/2019/08/12/iOS/Core Animation/译-Core-Animation-编程指南-高级动画技巧/index.html">
+<meta property="og:site_name" content="冯志浩的个人博客">
+<meta property="og:description" content="有很多方法去配置基于属性或者关键帧的动画，来为你做更多的事情。Apps 需要同时或顺序执行多个动画可以使用高级行为去同步多个动画的时间或将它们串在一起。你可以使用动画对象的其他类型去创建视觉形变和其它有意思的动画效果。
+过渡动画支持更改图层可见性如上述标题所示，过渡动画对象会为图层创建视觉过渡动画效果。过渡对象最常见的用法就是动画的显示一个图层，隐藏另一个图层。不像基于属性的动画，动画图层的某个属">
+<meta property="og:updated_time" content="2019-08-12T12:12:44.165Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[译] Core Animation 编程指南 - 高级动画技巧">
+<meta name="twitter:description" content="有很多方法去配置基于属性或者关键帧的动画，来为你做更多的事情。Apps 需要同时或顺序执行多个动画可以使用高级行为去同步多个动画的时间或将它们串在一起。你可以使用动画对象的其他类型去创建视觉形变和其它有意思的动画效果。
+过渡动画支持更改图层可见性如上述标题所示，过渡动画对象会为图层创建视觉过渡动画效果。过渡对象最常见的用法就是动画的显示一个图层，隐藏另一个图层。不像基于属性的动画，动画图层的某个属">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> [译] Core Animation 编程指南 - 高级动画技巧 | 冯志浩的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?915cf9a0ea53fbd82400bb21c1f4e873";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">冯志浩的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [译] Core Animation 编程指南 - 高级动画技巧
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-08-12T20:11:07+08:00" content="2019-08-12">
+              2019-08-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/08/12/iOS/Core Animation/译-Core-Animation-编程指南-高级动画技巧/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/08/12/iOS/Core Animation/译-Core-Animation-编程指南-高级动画技巧/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/08/12/iOS/Core Animation/译-Core-Animation-编程指南-高级动画技巧/" class="leancloud_visitors" data-flag-title="[译] Core Animation 编程指南 - 高级动画技巧">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>有很多方法去配置基于属性或者关键帧的动画，来为你做更多的事情。Apps 需要同时或顺序执行多个动画可以使用高级行为去同步多个动画的时间或将它们串在一起。你可以使用动画对象的其他类型去创建视觉形变和其它有意思的动画效果。</p>
+<h3 id="过渡动画支持更改图层可见性"><a href="#过渡动画支持更改图层可见性" class="headerlink" title="过渡动画支持更改图层可见性"></a>过渡动画支持更改图层可见性</h3><p>如上述标题所示，过渡动画对象会为图层创建视觉过渡动画效果。过渡对象最常见的用法就是动画的显示一个图层，隐藏另一个图层。不像基于属性的动画，动画图层的某个属性，过渡动画操作图层的缓存图像去创建视觉效果，这个仅通过改变属性是很难或者不可能实现的。过渡的标准类型允许你执行显示、推动、移动或交叉渐变动画。在 OS X上，你也可以使用 Core Image 过滤器去创建过渡动画，可实现如擦拭、页面卷曲、波纹或自定义效果。</p>
+<p>执行过渡动画，你需要创建一个 <code>CATransition</code> 对象，并将它添加到涉及过渡动画的图层上。你使用过渡对象去指定需要执行的过渡类型，即动画的起点和终点。你也不需要整个过渡动画。在动画期间，过渡对象允许你指定开始和结束的过程值。这些值允许你在动画的中点开始或者结束动画。</p>
+<p>例 5-1 展示了实现两个视图之间创建一个推动过渡动画的代码。在该例中，<code>myView1</code> 和 <code>myView2</code> 在同一父视图的同一个位置，但仅 <code>myView1</code> 可见。推动过渡动画会导致 <code>myView1</code> 向左边滑动消失，同时 <code>myView2</code> 从右向左滑动显示。更新两个视图的 <code>hidden</code> 属性确保在动画结束时两个视图的可见性是正确的。</p>
+<p>例 5-1  在 iOS 上给两个视图添加过渡动画<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">CATransition* transition = [CATransition animation];</div><div class="line">transition.startProgress = 0;</div><div class="line">transition.endProgress = 1.0;</div><div class="line">transition.type = kCATransitionPush;</div><div class="line">transition.subtype = kCATransitionFromRight;</div><div class="line">transition.duration = 1.0;</div><div class="line"> </div><div class="line">// 给两个图层添加过渡动画</div><div class="line">[myView1.layer addAnimation:transition forKey:@&quot;transition&quot;];</div><div class="line">[myView2.layer addAnimation:transition forKey:@&quot;transition&quot;];</div><div class="line"> </div><div class="line">// 最后，改变图层的可见性</div><div class="line">myView1.hidden = YES;</div><div class="line">myView2.hidden = NO;</div><div class="line"></div><div class="line">// Swift </div><div class="line">let transition = CATransition()</div><div class="line">transition.startProgress = 0.0</div><div class="line">transition.endProgress = 1.0</div><div class="line">transition.type = .push</div><div class="line">transition.subtype = .fromRight</div><div class="line">transition.duration = 3.0</div><div class="line"></div><div class="line">myView1.layer.add(transition, forKey: &quot;transition&quot;)</div><div class="line">myView2.layer.add(transition, forKey: &quot;transition&quot;)</div><div class="line"></div><div class="line">myView1.isHidden = true</div><div class="line">myView2.isHidden = false</div></pre></td></tr></table></figure></p>
+<p>下方为译者补全的 例 5-1 测试代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">class ViewController: UIViewController &#123;</div><div class="line">    var myView1: UIView!</div><div class="line">    var myView2: UIView!</div><div class="line">    </div><div class="line">    override func viewDidLoad() &#123;</div><div class="line">        super.viewDidLoad()</div><div class="line">        setupSubviews()</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    override func touchesBegan(_ touches: Set&lt;UITouch&gt;, with event: UIEvent?) &#123;</div><div class="line">        let transition = CATransition()</div><div class="line">        transition.startProgress = 0.0</div><div class="line">        transition.endProgress = 1.0</div><div class="line">        transition.type = .push</div><div class="line">        transition.subtype = .fromRight</div><div class="line">        transition.duration = 3.0</div><div class="line"></div><div class="line">        myView1.layer.add(transition, forKey: &quot;transition&quot;)</div><div class="line">        myView2.layer.add(transition, forKey: &quot;transition&quot;)</div><div class="line"></div><div class="line">        myView1.isHidden = true</div><div class="line">        myView2.isHidden = false</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">extension ViewController &#123;</div><div class="line">    func setupSubviews() &#123;</div><div class="line">        myView2 = UIView(frame: CGRect(x: 100, y: 100, width: 50, height: 50))</div><div class="line">        myView2.backgroundColor = UIColor.blue</div><div class="line">        view.addSubview(myView2)</div><div class="line">        </div><div class="line">        myView1 = UIView(frame: CGRect(x: 100, y: 100, width: 50, height: 50))</div><div class="line">        myView1.backgroundColor = UIColor.red</div><div class="line">        view.addSubview(myView1)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当一个过渡包含两个图层时，你可以对两个图层使用同一个过渡对象。使用同一个过渡对象可以简化你的代码。但是，如果每个图层的过渡参数是不同的，你就必须对它们使用不同的过渡对象了。</p>
+<p>例 5-2 展示了如何使用 Core Image 过滤器在 OS X 上实现过渡效果。在用你需要的参数配置完过滤器后，将它赋值给过渡对象的 <code>filter</code> 属性。在这之后，应用动画的过程就和其它类型动画对象一致了。</p>
+<p>例 5-2  使用 Core Image 过滤器在 OS X 上实现过渡动画<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// Create the Core Image filter, setting several key parameters.</div><div class="line">CIFilter* aFilter = [CIFilter filterWithName:@&quot;CIBarsSwipeTransition&quot;];</div><div class="line">[aFilter setValue:[NSNumber numberWithFloat:3.14] forKey:@&quot;inputAngle&quot;];</div><div class="line">[aFilter setValue:[NSNumber numberWithFloat:30.0] forKey:@&quot;inputWidth&quot;];</div><div class="line">[aFilter setValue:[NSNumber numberWithFloat:10.0] forKey:@&quot;inputBarOffset&quot;];</div><div class="line"> </div><div class="line">// Create the transition object</div><div class="line">CATransition* transition = [CATransition animation];</div><div class="line">transition.startProgress = 0;</div><div class="line">transition.endProgress = 1.0;</div><div class="line">transition.filter = aFilter;</div><div class="line">transition.duration = 1.0;</div><div class="line"> </div><div class="line">[self.imageView2 setHidden:NO];</div><div class="line">[self.imageView.layer addAnimation:transition forKey:@&quot;transition&quot;];</div><div class="line">[self.imageView2.layer addAnimation:transition forKey:@&quot;transition&quot;];</div><div class="line">[self.imageView setHidden:YES];</div></pre></td></tr></table></figure></p>
+<p>注意：当在动画中使用 Core Image 过滤器时，最棘手的部分就是配置过滤器。例如，使用条形滑动过渡，如果输入角度过高或者过低都可能会导致过渡效果没有发生一样。如果你没有看见你期待的动画效果，可以调整过滤器的参数来看一下结果是否会发生变化。</p>
+<h3 id="自定义动画的时间"><a href="#自定义动画的时间" class="headerlink" title="自定义动画的时间"></a>自定义动画的时间</h3><p>时间是动画重要的一部分，使用 Core Animation ，你可以通过 <code>CAMediaTiming</code> 协议的方法和属性给你的动画指定的精确时间信息。两个 Core Animation 类遵守该协议。<code>CAAnimation</code> 类遵守它，所以你可以给你的动画对象指定时间信息。<code>CALayer</code> 遵守它，所以你可以给你的隐式动画配置一些事件相关的特性，即使隐式过渡对象包含的动画通常提供优先的默认时间信息。</p>
+<p>当讨论时间和动画时，理解图层对象是如何与时间协作是非常重要的。每个图层有它们自己的本地时间，来管理动画时间。通常，两个不同图层的本地时间足够接近，你可以给两个图层指定相同的时间值，用户通常不会察觉。但是，图层的本地时间可以被它的父图层修改，或者它自己的时间参数。例如，改变图层的 <code>speed</code> 属性会导致图层（包括它的子图层）上的动画持续时间按比例变化。</p>
+<p>为协助你确保给定图层的时间值是合适的，CALayer 类定义了 <code>convertTime:fromLayer:</code> 和 <code>convertTime:toLayer:</code> 方法。你可以使用这些方法将固定时间转为图层的本地时间，或将时间值从一个图层转到另一个图层。这些方法考虑了可能影响层的本地时间的媒体定时属性，并返回一个可以与另一层一起使用的值。在例 5-3 中，展示了如何使用常规方法获取图层的本地时间。<code>CACurrentMediaTime()</code> 是一个返回计算机当前时钟时间的便利函数,该方法获取时钟时间并将它转为图层的本地时间。</p>
+<p>例 5-3 获得图层的当前本地时间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CFTimeInterval localLayerTime = [myLayer convertTime:CACurrentMediaTime() fromLayer:nil];</div></pre></td></tr></table></figure></p>
+<p>一旦你获得了图层的本地时间值，你可以使用该值去更新动画对象或图层的时间相关属性。通过这些时间属性，你可以实现一些有意思的动画行为，包含：</p>
+<ul>
+<li>使用 beginTime 属性设置动画的开始时间。通常，动画在下一个更新循环期间开始。你可以使用 beginTime 参数将动画的开始时间延迟几秒钟。将两个动画串在一起的方式是：将一个动画的开始时间设置为另一个动画的结束时间。如果你延迟了动画的开始，你可能还想把 <code>fillMode</code> 属性值设置为 <code>kCAFillModeBackwards</code> 。该填充模式会造成图层显示动画的开始值，即使图层树中的图层对象包含不同的值。不用该填充模式，你将会看到在动画执行之前调到结束值。其他的模式也是有效的。</li>
+<li><code>autoreverses</code> 属性会使动画在指定期间内执行，然后返回到动画初始值状态。你可以将该属性和 repeatCount 属性联合使用，在开始值和结束值之间来回动画显示。将自动复制动画的重复计数设置为整数(如1.0)，会导致动画在其起始值停止。添加额外的半步(例如重复计数为1.5)会导致动画在其结束值停止。</li>
+<li>组动画使用 timeOffset 属性可以在比其它动画更晚的时间开始一些动画。</li>
+</ul>
+<h3 id="暂停、恢复动画"><a href="#暂停、恢复动画" class="headerlink" title="暂停、恢复动画"></a>暂停、恢复动画</h3><p>为了暂停动画，你可以利用图层遵守 CAMediaTiming 协议的事实，将图层动画的速率设置为 0.0。将速率改为非零值即恢复动画。例 5-4 展示了如何暂停恢复图层动画的代码实现。</p>
+<p><b>例 5-4</b> 暂停重启图层的动画<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (void)pauseLayer:(CALayer*)layer &#123;</div><div class="line">   CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];</div><div class="line">   layer.speed = 0.0;</div><div class="line">   layer.timeOffset = pausedTime;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">- (void)resumeLayer:(CALayer*)layer &#123;</div><div class="line">   CFTimeInterval pausedTime = [layer timeOffset];</div><div class="line">   layer.speed = 1.0;</div><div class="line">   layer.timeOffset = 0.0;</div><div class="line">   layer.beginTime = 0.0;</div><div class="line">   CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;</div><div class="line">   layer.beginTime = timeSincePause;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="显示事务允许你改变动画参数"><a href="#显示事务允许你改变动画参数" class="headerlink" title="显示事务允许你改变动画参数"></a>显示事务允许你改变动画参数</h3><p>你做的每个图层的改变必须是事务的一部分。CATransaction 类管理动画的创建和组织，让它们在合适的时间执行。在多数情况下，你不需要创建自己的事务。无论何时你给图层添加隐式或显示动画，Core Animation 都会自动创建隐式事务。然而，你也可以创建显式事务来更精确的管理动画。</p>
+<p>你使用 <code>CATransaction</code> 类的方法去创建管理事务。调用 <code>begin</code> 类方法去开始新的事务；调用 <code>commit</code> 类方法去终止事务。在这两个方法之间是你想要的事务改变的部分。例如，改变图层的两个属性，你可以使用例 5-5 的代码。</p>
+<p>例 5-5 创建显式事务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[CATransaction begin];</div><div class="line">theLayer.zPosition=200.0;</div><div class="line">theLayer.opacity=0.0;</div><div class="line">[CATransaction commit];</div></pre></td></tr></table></figure></p>
+<p>使用事务的一个主要原因是，在显式事务范围内，你可以修改持续时间，时间函数，和其它的参数。你也可以赋值一个 completion block 去获取事务，当组动画完成的时候，使你的 app 可以被通知。使用 <code>setValue:forKey:</code> 方法和事务字典包含的键来改变响应的动画参数。例如，将默认的持续时间改为 10 秒，你将改变  <code>kCATransactionAnimationDuration</code> 键的值，如例 5-6 所示。</p>
+<p>例 5-6 改变动画默认的持续时间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[CATransaction begin];</div><div class="line">[CATransaction setValue:[NSNumber numberWithFloat:10.0f]</div><div class="line">                 forKey:kCATransactionAnimationDuration];</div><div class="line">// Perform the animations</div><div class="line">[CATransaction commit];</div></pre></td></tr></table></figure></p>
+<p>在你想给集合中不同动画设置不同值得时候，你可以嵌入事务。将事务嵌入到另一个事务，只需再调一次 <code>begin</code> 类方法即可。每一次 <code>begin</code> 方法的调用都要有相匹配的 <code>commit</code> 方法的调用。只有在提交最外层事务的更改后，Core Animation 才会开始相关的动画。</p>
+<p>例 5-7 展示了将一个事务嵌入到另一个事务的例子。在该例中，内部事务更改与外部事务相同的动画参数，但使用不同的值。</p>
+<p><b>例 5-7</b> 嵌套显式事务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">[CATransaction begin]; // Outer transaction</div><div class="line"> </div><div class="line">// Change the animation duration to two seconds</div><div class="line">[CATransaction setValue:[NSNumber numberWithFloat:2.0f]</div><div class="line">                forKey:kCATransactionAnimationDuration];</div><div class="line">// Move the layer to a new position</div><div class="line">theLayer.position = CGPointMake(0.0,0.0);</div><div class="line"> </div><div class="line">[CATransaction begin]; // Inner transaction</div><div class="line">// Change the animation duration to five seconds</div><div class="line">[CATransaction setValue:[NSNumber numberWithFloat:5.0f]</div><div class="line">                 forKey:kCATransactionAnimationDuration];</div><div class="line"> </div><div class="line">// Change the zPosition and opacity</div><div class="line">theLayer.zPosition=200.0;</div><div class="line">theLayer.opacity=0.0;</div><div class="line"> </div><div class="line">[CATransaction commit]; // Inner transaction</div><div class="line"> </div><div class="line">[CATransaction commit]; // Outer transaction</div></pre></td></tr></table></figure></p>
+<h3 id="给动画添加透视效果"><a href="#给动画添加透视效果" class="headerlink" title="给动画添加透视效果"></a>给动画添加透视效果</h3><p>Apps 可以在三维空间中操作图层，但是为了简单起见，Core Animation  使用平行投影显示图层，这基本上将场景展平为二维平面。这种默认行为会导致具有不同 <code>zPosition</code> 值的大小相同的图层显示为相同的大小，即使它们在z轴上相距很远。你通常会看到三维场景的点已经消失了。但是，你可以通过修改图层的转换矩阵以包含透视信息来更改该行为。</p>
+<p>修改场景透视图时，需要修改包含正在查看的图层的最高层的 <code>sublayerTransform</code> 矩阵。通过将相同的透视信息应用于所有子层，修改最高级简化了你必须写的代码。它还确保透视正确应用于在不同平面中彼此重叠的同级子图层。 </p>
+<p>例 5-8 展示了为父图层创建简单透视变换的方法。在这种情况下，<code>eyePosition</code> 变量指定沿 z 轴查看图层的相对距离。通常，你为 <code>eyePosition</code> 指定一个正值，以保持图层以预期的方式定向。值越大，场景越平坦，而值越小，图层间的视觉差异越大。</p>
+<p><b>例 5-8</b>  给父图层添加透视形变<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CATransform3D perspective = CATransform3DIdentity;</div><div class="line">perspective.m34 = -1.0/eyePosition;</div><div class="line"> </div><div class="line">// Apply the transform to a parent layer.</div><div class="line">myParentLayer.sublayerTransform = perspective;</div></pre></td></tr></table></figure></p>
+<p>通过父图层的配置，你可以改变任何子图层的 <code>zPosition</code> 属性，观察它们的大小如何基于它们与眼的相对距离而变化的。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><ul>
+<li><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/AdvancedAnimationTricks/AdvancedAnimationTricks.html#//apple_ref/doc/uid/TP40004514-CH8-SW1" target="_blank" rel="external">原文链接</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/06/iOS/Core Animation/译-Core-Animation-编程指南-动画图层内容/" rel="next" title="[译] Core Animation 编程指南 - 动画图层内容">
+                <i class="fa fa-chevron-left"></i> [译] Core Animation 编程指南 - 动画图层内容
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2019/08/12/iOS/Core Animation/译-Core-Animation-编程指南-高级动画技巧/"
+           data-title="[译] Core Animation 编程指南 - 高级动画技巧" data-url="http://yoursite.com/2019/08/12/iOS/Core Animation/译-Core-Animation-编程指南-高级动画技巧/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="冯志浩" />
+          <p class="site-author-name" itemprop="name">冯志浩</p>
+          <p class="site-description motion-element" itemprop="description">一个不安分的程序猿</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#过渡动画支持更改图层可见性"><span class="nav-number">1.</span> <span class="nav-text">过渡动画支持更改图层可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义动画的时间"><span class="nav-number">2.</span> <span class="nav-text">自定义动画的时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暂停、恢复动画"><span class="nav-number">3.</span> <span class="nav-text">暂停、恢复动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示事务允许你改变动画参数"><span class="nav-number">4.</span> <span class="nav-text">显示事务允许你改变动画参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给动画添加透视效果"><span class="nav-number">5.</span> <span class="nav-text">给动画添加透视效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">冯志浩</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fengzhihao123"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("nCxez2PBEQDAzw3yNwTIjiqq-gzGzoHsz", "MNIIVCp3cdzMk5mUwMmBNvrH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

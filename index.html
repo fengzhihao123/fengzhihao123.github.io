@@ -243,6 +243,153 @@
             
               
                 
+                <a class="post-title-link" href="/2019/08/12/iOS/Core Animation/译-Core-Animation-编程指南-高级动画技巧/" itemprop="url">
+                  [译] Core Animation 编程指南 - 高级动画技巧
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-08-12T20:11:07+08:00" content="2019-08-12">
+              2019-08-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/08/12/iOS/Core Animation/译-Core-Animation-编程指南-高级动画技巧/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/08/12/iOS/Core Animation/译-Core-Animation-编程指南-高级动画技巧/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/08/12/iOS/Core Animation/译-Core-Animation-编程指南-高级动画技巧/" class="leancloud_visitors" data-flag-title="[译] Core Animation 编程指南 - 高级动画技巧">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>有很多方法去配置基于属性或者关键帧的动画，来为你做更多的事情。Apps 需要同时或顺序执行多个动画可以使用高级行为去同步多个动画的时间或将它们串在一起。你可以使用动画对象的其他类型去创建视觉形变和其它有意思的动画效果。</p>
+<h3 id="过渡动画支持更改图层可见性"><a href="#过渡动画支持更改图层可见性" class="headerlink" title="过渡动画支持更改图层可见性"></a>过渡动画支持更改图层可见性</h3><p>如上述标题所示，过渡动画对象会为图层创建视觉过渡动画效果。过渡对象最常见的用法就是动画的显示一个图层，隐藏另一个图层。不像基于属性的动画，动画图层的某个属性，过渡动画操作图层的缓存图像去创建视觉效果，这个仅通过改变属性是很难或者不可能实现的。过渡的标准类型允许你执行显示、推动、移动或交叉渐变动画。在 OS X上，你也可以使用 Core Image 过滤器去创建过渡动画，可实现如擦拭、页面卷曲、波纹或自定义效果。</p>
+<p>执行过渡动画，你需要创建一个 <code>CATransition</code> 对象，并将它添加到涉及过渡动画的图层上。你使用过渡对象去指定需要执行的过渡类型，即动画的起点和终点。你也不需要整个过渡动画。在动画期间，过渡对象允许你指定开始和结束的过程值。这些值允许你在动画的中点开始或者结束动画。</p>
+<p>例 5-1 展示了实现两个视图之间创建一个推动过渡动画的代码。在该例中，<code>myView1</code> 和 <code>myView2</code> 在同一父视图的同一个位置，但仅 <code>myView1</code> 可见。推动过渡动画会导致 <code>myView1</code> 向左边滑动消失，同时 <code>myView2</code> 从右向左滑动显示。更新两个视图的 <code>hidden</code> 属性确保在动画结束时两个视图的可见性是正确的。</p>
+<p>例 5-1  在 iOS 上给两个视图添加过渡动画<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">CATransition* transition = [CATransition animation];</div><div class="line">transition.startProgress = 0;</div><div class="line">transition.endProgress = 1.0;</div><div class="line">transition.type = kCATransitionPush;</div><div class="line">transition.subtype = kCATransitionFromRight;</div><div class="line">transition.duration = 1.0;</div><div class="line"> </div><div class="line">// 给两个图层添加过渡动画</div><div class="line">[myView1.layer addAnimation:transition forKey:@&quot;transition&quot;];</div><div class="line">[myView2.layer addAnimation:transition forKey:@&quot;transition&quot;];</div><div class="line"> </div><div class="line">// 最后，改变图层的可见性</div><div class="line">myView1.hidden = YES;</div><div class="line">myView2.hidden = NO;</div><div class="line"></div><div class="line">// Swift </div><div class="line">let transition = CATransition()</div><div class="line">transition.startProgress = 0.0</div><div class="line">transition.endProgress = 1.0</div><div class="line">transition.type = .push</div><div class="line">transition.subtype = .fromRight</div><div class="line">transition.duration = 3.0</div><div class="line"></div><div class="line">myView1.layer.add(transition, forKey: &quot;transition&quot;)</div><div class="line">myView2.layer.add(transition, forKey: &quot;transition&quot;)</div><div class="line"></div><div class="line">myView1.isHidden = true</div><div class="line">myView2.isHidden = false</div></pre></td></tr></table></figure></p>
+<p>下方为译者补全的 例 5-1 测试代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">class ViewController: UIViewController &#123;</div><div class="line">    var myView1: UIView!</div><div class="line">    var myView2: UIView!</div><div class="line">    </div><div class="line">    override func viewDidLoad() &#123;</div><div class="line">        super.viewDidLoad()</div><div class="line">        setupSubviews()</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    override func touchesBegan(_ touches: Set&lt;UITouch&gt;, with event: UIEvent?) &#123;</div><div class="line">        let transition = CATransition()</div><div class="line">        transition.startProgress = 0.0</div><div class="line">        transition.endProgress = 1.0</div><div class="line">        transition.type = .push</div><div class="line">        transition.subtype = .fromRight</div><div class="line">        transition.duration = 3.0</div><div class="line"></div><div class="line">        myView1.layer.add(transition, forKey: &quot;transition&quot;)</div><div class="line">        myView2.layer.add(transition, forKey: &quot;transition&quot;)</div><div class="line"></div><div class="line">        myView1.isHidden = true</div><div class="line">        myView2.isHidden = false</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">extension ViewController &#123;</div><div class="line">    func setupSubviews() &#123;</div><div class="line">        myView2 = UIView(frame: CGRect(x: 100, y: 100, width: 50, height: 50))</div><div class="line">        myView2.backgroundColor = UIColor.blue</div><div class="line">        view.addSubview(myView2)</div><div class="line">        </div><div class="line">        myView1 = UIView(frame: CGRect(x: 100, y: 100, width: 50, height: 50))</div><div class="line">        myView1.backgroundColor = UIColor.red</div><div class="line">        view.addSubview(myView1)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当一个过渡包含两个图层时，你可以对两个图层使用同一个过渡对象。使用同一个过渡对象可以简化你的代码。但是，如果每个图层的过渡参数是不同的，你就必须对它们使用不同的过渡对象了。</p>
+<p>例 5-2 展示了如何使用 Core Image 过滤器在 OS X 上实现过渡效果。在用你需要的参数配置完过滤器后，将它赋值给过渡对象的 <code>filter</code> 属性。在这之后，应用动画的过程就和其它类型动画对象一致了。</p>
+<p>例 5-2  使用 Core Image 过滤器在 OS X 上实现过渡动画<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// Create the Core Image filter, setting several key parameters.</div><div class="line">CIFilter* aFilter = [CIFilter filterWithName:@&quot;CIBarsSwipeTransition&quot;];</div><div class="line">[aFilter setValue:[NSNumber numberWithFloat:3.14] forKey:@&quot;inputAngle&quot;];</div><div class="line">[aFilter setValue:[NSNumber numberWithFloat:30.0] forKey:@&quot;inputWidth&quot;];</div><div class="line">[aFilter setValue:[NSNumber numberWithFloat:10.0] forKey:@&quot;inputBarOffset&quot;];</div><div class="line"> </div><div class="line">// Create the transition object</div><div class="line">CATransition* transition = [CATransition animation];</div><div class="line">transition.startProgress = 0;</div><div class="line">transition.endProgress = 1.0;</div><div class="line">transition.filter = aFilter;</div><div class="line">transition.duration = 1.0;</div><div class="line"> </div><div class="line">[self.imageView2 setHidden:NO];</div><div class="line">[self.imageView.layer addAnimation:transition forKey:@&quot;transition&quot;];</div><div class="line">[self.imageView2.layer addAnimation:transition forKey:@&quot;transition&quot;];</div><div class="line">[self.imageView setHidden:YES];</div></pre></td></tr></table></figure></p>
+<p>注意：当在动画中使用 Core Image 过滤器时，最棘手的部分就是配置过滤器。例如，使用条形滑动过渡，如果输入角度过高或者过低都可能会导致过渡效果没有发生一样。如果你没有看见你期待的动画效果，可以调整过滤器的参数来看一下结果是否会发生变化。</p>
+<h3 id="自定义动画的时间"><a href="#自定义动画的时间" class="headerlink" title="自定义动画的时间"></a>自定义动画的时间</h3><p>时间是动画重要的一部分，使用 Core Animation ，你可以通过 <code>CAMediaTiming</code> 协议的方法和属性给你的动画指定的精确时间信息。两个 Core Animation 类遵守该协议。<code>CAAnimation</code> 类遵守它，所以你可以给你的动画对象指定时间信息。<code>CALayer</code> 遵守它，所以你可以给你的隐式动画配置一些事件相关的特性，即使隐式过渡对象包含的动画通常提供优先的默认时间信息。</p>
+<p>当讨论时间和动画时，理解图层对象是如何与时间协作是非常重要的。每个图层有它们自己的本地时间，来管理动画时间。通常，两个不同图层的本地时间足够接近，你可以给两个图层指定相同的时间值，用户通常不会察觉。但是，图层的本地时间可以被它的父图层修改，或者它自己的时间参数。例如，改变图层的 <code>speed</code> 属性会导致图层（包括它的子图层）上的动画持续时间按比例变化。</p>
+<p>为协助你确保给定图层的时间值是合适的，CALayer 类定义了 <code>convertTime:fromLayer:</code> 和 <code>convertTime:toLayer:</code> 方法。你可以使用这些方法将固定时间转为图层的本地时间，或将时间值从一个图层转到另一个图层。这些方法考虑了可能影响层的本地时间的媒体定时属性，并返回一个可以与另一层一起使用的值。在例 5-3 中，展示了如何使用常规方法获取图层的本地时间。<code>CACurrentMediaTime()</code> 是一个返回计算机当前时钟时间的便利函数,该方法获取时钟时间并将它转为图层的本地时间。</p>
+<p>例 5-3 获得图层的当前本地时间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CFTimeInterval localLayerTime = [myLayer convertTime:CACurrentMediaTime() fromLayer:nil];</div></pre></td></tr></table></figure></p>
+<p>一旦你获得了图层的本地时间值，你可以使用该值去更新动画对象或图层的时间相关属性。通过这些时间属性，你可以实现一些有意思的动画行为，包含：</p>
+<ul>
+<li>使用 beginTime 属性设置动画的开始时间。通常，动画在下一个更新循环期间开始。你可以使用 beginTime 参数将动画的开始时间延迟几秒钟。将两个动画串在一起的方式是：将一个动画的开始时间设置为另一个动画的结束时间。如果你延迟了动画的开始，你可能还想把 <code>fillMode</code> 属性值设置为 <code>kCAFillModeBackwards</code> 。该填充模式会造成图层显示动画的开始值，即使图层树中的图层对象包含不同的值。不用该填充模式，你将会看到在动画执行之前调到结束值。其他的模式也是有效的。</li>
+<li><code>autoreverses</code> 属性会使动画在指定期间内执行，然后返回到动画初始值状态。你可以将该属性和 repeatCount 属性联合使用，在开始值和结束值之间来回动画显示。将自动复制动画的重复计数设置为整数(如1.0)，会导致动画在其起始值停止。添加额外的半步(例如重复计数为1.5)会导致动画在其结束值停止。</li>
+<li>组动画使用 timeOffset 属性可以在比其它动画更晚的时间开始一些动画。</li>
+</ul>
+<h3 id="暂停、恢复动画"><a href="#暂停、恢复动画" class="headerlink" title="暂停、恢复动画"></a>暂停、恢复动画</h3><p>为了暂停动画，你可以利用图层遵守 CAMediaTiming 协议的事实，将图层动画的速率设置为 0.0。将速率改为非零值即恢复动画。例 5-4 展示了如何暂停恢复图层动画的代码实现。</p>
+<p><b>例 5-4</b> 暂停重启图层的动画<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (void)pauseLayer:(CALayer*)layer &#123;</div><div class="line">   CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];</div><div class="line">   layer.speed = 0.0;</div><div class="line">   layer.timeOffset = pausedTime;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">- (void)resumeLayer:(CALayer*)layer &#123;</div><div class="line">   CFTimeInterval pausedTime = [layer timeOffset];</div><div class="line">   layer.speed = 1.0;</div><div class="line">   layer.timeOffset = 0.0;</div><div class="line">   layer.beginTime = 0.0;</div><div class="line">   CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;</div><div class="line">   layer.beginTime = timeSincePause;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="显示事务允许你改变动画参数"><a href="#显示事务允许你改变动画参数" class="headerlink" title="显示事务允许你改变动画参数"></a>显示事务允许你改变动画参数</h3><p>你做的每个图层的改变必须是事务的一部分。CATransaction 类管理动画的创建和组织，让它们在合适的时间执行。在多数情况下，你不需要创建自己的事务。无论何时你给图层添加隐式或显示动画，Core Animation 都会自动创建隐式事务。然而，你也可以创建显式事务来更精确的管理动画。</p>
+<p>你使用 <code>CATransaction</code> 类的方法去创建管理事务。调用 <code>begin</code> 类方法去开始新的事务；调用 <code>commit</code> 类方法去终止事务。在这两个方法之间是你想要的事务改变的部分。例如，改变图层的两个属性，你可以使用例 5-5 的代码。</p>
+<p>例 5-5 创建显式事务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[CATransaction begin];</div><div class="line">theLayer.zPosition=200.0;</div><div class="line">theLayer.opacity=0.0;</div><div class="line">[CATransaction commit];</div></pre></td></tr></table></figure></p>
+<p>使用事务的一个主要原因是，在显式事务范围内，你可以修改持续时间，时间函数，和其它的参数。你也可以赋值一个 completion block 去获取事务，当组动画完成的时候，使你的 app 可以被通知。使用 <code>setValue:forKey:</code> 方法和事务字典包含的键来改变响应的动画参数。例如，将默认的持续时间改为 10 秒，你将改变  <code>kCATransactionAnimationDuration</code> 键的值，如例 5-6 所示。</p>
+<p>例 5-6 改变动画默认的持续时间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[CATransaction begin];</div><div class="line">[CATransaction setValue:[NSNumber numberWithFloat:10.0f]</div><div class="line">                 forKey:kCATransactionAnimationDuration];</div><div class="line">// Perform the animations</div><div class="line">[CATransaction commit];</div></pre></td></tr></table></figure></p>
+<p>在你想给集合中不同动画设置不同值得时候，你可以嵌入事务。将事务嵌入到另一个事务，只需再调一次 <code>begin</code> 类方法即可。每一次 <code>begin</code> 方法的调用都要有相匹配的 <code>commit</code> 方法的调用。只有在提交最外层事务的更改后，Core Animation 才会开始相关的动画。</p>
+<p>例 5-7 展示了将一个事务嵌入到另一个事务的例子。在该例中，内部事务更改与外部事务相同的动画参数，但使用不同的值。</p>
+<p><b>例 5-7</b> 嵌套显式事务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">[CATransaction begin]; // Outer transaction</div><div class="line"> </div><div class="line">// Change the animation duration to two seconds</div><div class="line">[CATransaction setValue:[NSNumber numberWithFloat:2.0f]</div><div class="line">                forKey:kCATransactionAnimationDuration];</div><div class="line">// Move the layer to a new position</div><div class="line">theLayer.position = CGPointMake(0.0,0.0);</div><div class="line"> </div><div class="line">[CATransaction begin]; // Inner transaction</div><div class="line">// Change the animation duration to five seconds</div><div class="line">[CATransaction setValue:[NSNumber numberWithFloat:5.0f]</div><div class="line">                 forKey:kCATransactionAnimationDuration];</div><div class="line"> </div><div class="line">// Change the zPosition and opacity</div><div class="line">theLayer.zPosition=200.0;</div><div class="line">theLayer.opacity=0.0;</div><div class="line"> </div><div class="line">[CATransaction commit]; // Inner transaction</div><div class="line"> </div><div class="line">[CATransaction commit]; // Outer transaction</div></pre></td></tr></table></figure></p>
+<h3 id="给动画添加透视效果"><a href="#给动画添加透视效果" class="headerlink" title="给动画添加透视效果"></a>给动画添加透视效果</h3><p>Apps 可以在三维空间中操作图层，但是为了简单起见，Core Animation  使用平行投影显示图层，这基本上将场景展平为二维平面。这种默认行为会导致具有不同 <code>zPosition</code> 值的大小相同的图层显示为相同的大小，即使它们在z轴上相距很远。你通常会看到三维场景的点已经消失了。但是，你可以通过修改图层的转换矩阵以包含透视信息来更改该行为。</p>
+<p>修改场景透视图时，需要修改包含正在查看的图层的最高层的 <code>sublayerTransform</code> 矩阵。通过将相同的透视信息应用于所有子层，修改最高级简化了你必须写的代码。它还确保透视正确应用于在不同平面中彼此重叠的同级子图层。 </p>
+<p>例 5-8 展示了为父图层创建简单透视变换的方法。在这种情况下，<code>eyePosition</code> 变量指定沿 z 轴查看图层的相对距离。通常，你为 <code>eyePosition</code> 指定一个正值，以保持图层以预期的方式定向。值越大，场景越平坦，而值越小，图层间的视觉差异越大。</p>
+<p><b>例 5-8</b>  给父图层添加透视形变<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CATransform3D perspective = CATransform3DIdentity;</div><div class="line">perspective.m34 = -1.0/eyePosition;</div><div class="line"> </div><div class="line">// Apply the transform to a parent layer.</div><div class="line">myParentLayer.sublayerTransform = perspective;</div></pre></td></tr></table></figure></p>
+<p>通过父图层的配置，你可以改变任何子图层的 <code>zPosition</code> 属性，观察它们的大小如何基于它们与眼的相对距离而变化的。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><ul>
+<li><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/AdvancedAnimationTricks/AdvancedAnimationTricks.html#//apple_ref/doc/uid/TP40004514-CH8-SW1" target="_blank" rel="external">原文链接</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2019/08/06/iOS/Core Animation/译-Core-Animation-编程指南-动画图层内容/" itemprop="url">
                   [译] Core Animation 编程指南 - 动画图层内容
                 </a>
@@ -1868,236 +2015,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/04/30/Swift/帮你成为更好的Swift开发者的10个Tips（译）/" itemprop="url">
-                  帮你成为更好的Swift开发者的10个Tips（译）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2019-04-30T17:30:16+08:00" content="2019-04-30">
-              2019-04-30
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2019/04/30/Swift/帮你成为更好的Swift开发者的10个Tips（译）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/04/30/Swift/帮你成为更好的Swift开发者的10个Tips（译）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2019/04/30/Swift/帮你成为更好的Swift开发者的10个Tips（译）/" class="leancloud_visitors" data-flag-title="帮你成为更好的Swift开发者的10个Tips（译）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>你是否已经用Swift开发了几个月，现在，你想成为一个更好的Swift开发者？少年，你来对了地方，我这里有一本失传多年的武林秘籍传授于你。<br><code>不要在意代码的格式，我想尽我所能保持代码的简洁。以至于可以是你方便的拷贝到playground来进行代码验证</code>。</p>
-<p>废话不多说，让我们愉快的开始一段Swift体验之旅吧。</p>
-<h3 id="1、Extension"><a href="#1、Extension" class="headerlink" title="1、Extension"></a>1、Extension</h3><h4 id="求平方"><a href="#求平方" class="headerlink" title="求平方"></a>求平方</h4><ul>
-<li><p>普通版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func square(x: Int) -&gt; Int &#123; return x * x &#125;</div><div class="line">var squaredOFFive = square(x: 5)</div><div class="line">square(x:squaredOFFive) // 625</div></pre></td></tr></table></figure>
-</li>
-<li><p>进阶版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">extension Int &#123; </div><div class="line">    var squared: Int &#123; return self * self &#125;</div><div class="line">&#125;</div><div class="line">5.squared // 25</div><div class="line">5.squared.squared // 625</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>普通版本如果想要对同一个数进行多次求平方，还需要创建多余的局部变量，而且代码比较冗余。</li>
-<li>进阶版本通过给<code>Int</code>添加一个extension，然后在extension中给<code>Int</code>添加一个<code>计算属性</code>。这样无需创建多余的局部变量即可获取平方值。<a href="https://docs.swift.org/swift-book/LanguageGuide/Properties.html" target="_blank" rel="external">关于计算属性相关知识可以点此了解</a></li>
-</ul>
-<h3 id="2、Generics"><a href="#2、Generics" class="headerlink" title="2、Generics"></a>2、Generics</h3><ul>
-<li><p>普通版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var stringArray = [&quot;Bob&quot;, &quot;Bobby&quot;, &quot;SangJoon&quot;]</div><div class="line">var intArray = [1, 3, 4, 5, 6]</div><div class="line">var doubleArray = [1.0, 2.0, 3.0]</div><div class="line">func printStringArray(a: [String]) &#123; for s in a &#123; print(s) &#125; &#125;</div><div class="line">func printIntArray(a: [Int]) &#123; for i in a &#123; print(i) &#125; &#125;</div><div class="line">func printDoubleArray(a: [Double]) &#123;for d in a &#123; print(d) &#125; &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>进阶版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">func printElementFromArray&lt;T&gt;(a: [T]) &#123;</div><div class="line"> for element in a &#123; print(element) &#125; &#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>普通版本：每个类型都要定义一个function，但是每个function的功能都是一样的，这样就造成了代码冗余。</li>
-<li>进阶版本：只定义一个function，每个类型都可以使用。</li>
-</ul>
-<h3 id="3、For-Loop-vs-While-Loop"><a href="#3、For-Loop-vs-While-Loop" class="headerlink" title="3、For Loop vs While Loop"></a>3、For Loop vs While Loop</h3><h4 id="输出“Count”5次"><a href="#输出“Count”5次" class="headerlink" title="输出“Count”5次"></a>输出“Count”5次</h4><ul>
-<li><p>普通版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var i = 0</div><div class="line">while 5 &gt; i &#123;</div><div class="line">print(&quot;Count&quot;)</div><div class="line">i += 1 &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>进阶版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">for _ in 1...5 &#123; print(&quot;Count&quot;) &#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>当我们不需要使用循环中的变量时，我们可以使用<code>For Loop</code>和<code>_</code>来代替<code>While Loop</code>。</li>
-<li>记住：变量越多-&gt;问题越多-&gt;bug越多。</li>
-</ul>
-<h3 id="4、Optional-Unwrapping"><a href="#4、Optional-Unwrapping" class="headerlink" title="4、Optional Unwrapping"></a>4、Optional Unwrapping</h3><h4 id="Gaurd-let-vs-if-let-新用户登录逻辑"><a href="#Gaurd-let-vs-if-let-新用户登录逻辑" class="headerlink" title="Gaurd let vs if let(新用户登录逻辑)"></a>Gaurd let vs if let(新用户登录逻辑)</h4><ul>
-<li><p>普通版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var myUsername: Double?</div><div class="line">var myPassword: Double?</div><div class="line">// Hideous Code</div><div class="line">func userLogIn() &#123;</div><div class="line"> if let username = myUsername &#123;</div><div class="line">  if let password = myPassword &#123;</div><div class="line">   print(&quot;Welcome, \(username)&quot;!)</div><div class="line">  &#125;</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>进阶版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func userLogIn() &#123;</div><div class="line"> guard let username = myUsername, let password = myPassword </div><div class="line">  else &#123; return &#125; </div><div class="line"> print(&quot;Welcome, \(username)!&quot;) &#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>译者注：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//上述的普通版本也可写成这种形式</div><div class="line">if let username = myUsername, let password = myPassword &#123;</div><div class="line">   print(&quot;Welcome, \(username)&quot;!)</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
-<h4 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>普通版本代码结构嵌套冗余，进阶版本更加一目了然。</li>
-<li>在判断一些前提必要条件的时候，推荐使用<code>guard let</code>，<a href="https://docs.swift.org/swift-book/ReferenceManual/Statements.html" target="_blank" rel="external">详情参见文档</a></li>
-</ul>
-<h3 id="5、Computed-Property-vs-Function"><a href="#5、Computed-Property-vs-Function" class="headerlink" title="5、Computed Property vs Function"></a>5、Computed Property vs Function</h3><h4 id="计算直径"><a href="#计算直径" class="headerlink" title="计算直径"></a>计算直径</h4><ul>
-<li><p>普通版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 💩 Code</div><div class="line">func getDiameter(radius: Double) -&gt; Double &#123; return radius * 2&#125;</div><div class="line">func getRadius(diameter: Double) -&gt; Double &#123; return diameter / 2&#125;</div><div class="line"></div><div class="line">getDiameter(radius: 10) // return 20</div><div class="line">getRadius(diameter: 200) // return 100</div><div class="line">getRadius(diameter: 600) // return 300</div><div class="line"></div><div class="line">//译者注</div><div class="line">var radi = 10.0</div><div class="line">var dia = getDiameter(radius: radi) // 20</div><div class="line">dia = 30.0 // 30</div><div class="line">radi // 10.0 此处必须调用getRadius函数radius的值才会改变</div></pre></td></tr></table></figure>
-</li>
-<li><p>进阶版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// Good Code</div><div class="line">var radius: Double = 10</div><div class="line"></div><div class="line">var diameter: Double &#123;</div><div class="line"> get &#123; return radius * 2&#125;</div><div class="line"> set &#123; radius = newValue / 2&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">radius // 10</div><div class="line">diameter // 20</div><div class="line">diameter = 1000</div><div class="line">radius // 500</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>普通版本：创建了两个互转函数，代码冗余且没有对radius和diameter建立内在联系。当你修改diameter的时候，相应的radius并没有跟着修改。</li>
-<li>进阶版本：通过计算属性实现两者内在逻辑关联，当diameter改变的时候，radius会跟随相应改变。</li>
-</ul>
-<h3 id="6、Enum-to-Type-Safe"><a href="#6、Enum-to-Type-Safe" class="headerlink" title="6、Enum to Type Safe"></a>6、Enum to Type Safe</h3><h4 id="买票"><a href="#买票" class="headerlink" title="买票"></a>买票</h4><ul>
-<li><p>普通版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">switch person &#123;</div><div class="line"> case &quot;Adult&quot;: print(&quot;Pay $7&quot;)</div><div class="line"> case &quot;Child&quot;: print(&quot;Pay $3&quot;)</div><div class="line"> case &quot;Senior&quot;: print(&quot;Pay $4&quot;)</div><div class="line"> default: print(&quot;You alive, bruh?&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>进阶版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">enum People &#123; case adult, child, senior &#125;</div><div class="line">var person = People.adult</div><div class="line">switch person &#123;</div><div class="line"> case .adult: print(&quot;Pay $7&quot;)</div><div class="line"> case .child: print(&quot;Pay $3&quot;)</div><div class="line"> case .senior: print(&quot;Pay $4&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="总结-5"><a href="#总结-5" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>普通版本：通过硬编码的方式来判断字符串，不易维护且代码可读性不高。很可能漏掉某个条件而造成bug。</li>
-<li>进阶版本：创建<code>enum</code>来实现所有条件，当你在switch中漏掉某个case的时候，编译器会提示错误，强制你判断所有case。这样可以减少bug，使代码更健壮。</li>
-</ul>
-<h3 id="7、Nil-Coalescing"><a href="#7、Nil-Coalescing" class="headerlink" title="7、Nil Coalescing"></a>7、Nil Coalescing</h3><h4 id="选择颜色"><a href="#选择颜色" class="headerlink" title="选择颜色"></a>选择颜色</h4><ul>
-<li><p>普通版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var userChosenColor: String?</div><div class="line">var defaultColor = &quot;Red&quot;</div><div class="line">var colorToUse = &quot;&quot;</div><div class="line"></div><div class="line">if let Color = userChosenColor &#123; colorToUse = Color &#125; else</div><div class="line"> &#123; colorToUse = defaultColor &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>进阶版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var colorToUse = userChosenColor ?? defaultColor</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="总结-6"><a href="#总结-6" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>使用<code>??</code>设置可选类型变量的默认值，减少冗余代码。</li>
-</ul>
-<h3 id="8、Conditional-Coalescing"><a href="#8、Conditional-Coalescing" class="headerlink" title="8、Conditional Coalescing"></a>8、Conditional Coalescing</h3><h4 id="计算height"><a href="#计算height" class="headerlink" title="计算height"></a>计算height</h4><ul>
-<li><p>普通版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// Simply Verbose</div><div class="line">var currentHeight = 185</div><div class="line">var hasSpikyHair = true</div><div class="line">var finalHeight = 0</div><div class="line"></div><div class="line">if hasSpikyHair &#123; finalHeight = currentHeight + 5&#125;</div><div class="line"> else &#123; finalHeight = currentHeight &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>进阶版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// Lovely Code</div><div class="line">finalHeight = currentHeight + (hasSpikyHair ? 5: 0)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="总结-7"><a href="#总结-7" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>通过三目运算符来减少代码量，使逻辑更加清晰。</li>
-</ul>
-<h3 id="9、Functional-Programming"><a href="#9、Functional-Programming" class="headerlink" title="9、Functional Programming"></a>9、Functional Programming</h3><h4 id="获取偶数值"><a href="#获取偶数值" class="headerlink" title="获取偶数值"></a>获取偶数值</h4><ul>
-<li><p>普通版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// Imperative (a.k.a boring)</div><div class="line">var newEvens = [Int]()</div><div class="line"></div><div class="line">for i in 1...10 &#123;</div><div class="line"> if i % 2 == 0 &#123; newEvens.append(i) &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">print(newEvens) // [2, 4, 6, 8, 10]</div></pre></td></tr></table></figure>
-</li>
-<li><p>进阶版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var evens = Array(1...10).filter &#123; $0 % 2 == 0 &#125;</div><div class="line">print(evens) // [2, 4, 6, 8, 10]</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="总结-8"><a href="#总结-8" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>使用<code>filter</code>替代上面的<code>For-Loop</code>。这里也推荐大家更多的使用高阶函数。</li>
-<li><a href="https://developer.apple.com/documentation/swift/array" target="_blank" rel="external">更多高阶函数的使用请参见 Transforming an Array section</a>。</li>
-</ul>
-<h3 id="10、Closure-vs-Func"><a href="#10、Closure-vs-Func" class="headerlink" title="10、Closure vs Func"></a>10、Closure vs Func</h3><ul>
-<li><p>普通版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// Normal Function</div><div class="line">func sum(x: Int, y: Int) -&gt; Int &#123; return x + y &#125;</div><div class="line">var result = sum(x: 5, y: 6) // 11</div></pre></td></tr></table></figure>
-</li>
-<li><p>进阶版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// Closure</div><div class="line">var sumUsingClosure: (Int, Int) -&gt; (Int) = &#123; $0 + $1 &#125;</div><div class="line">sumUsingClosure(5, 6) // 11</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>希望这篇文章能给大家带来一点收获，让大家对Swift有更深的了解。<br>最后祝福大家五一快乐！</p>
-<h3 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a>原文链接</h3><ul>
-<li><a href="https://www.bobthedeveloper.io/blog/10-tips-to-become-a-better-swift-developer" target="_blank" rel="external">10 Tips to become a better Swift Developer</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2143,7 +2060,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
