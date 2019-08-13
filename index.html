@@ -243,6 +243,154 @@
             
               
                 
+                <a class="post-title-link" href="/2019/08/13/iOS/Core Animation/译-Core-Animation-编程指南-改变图层默认行为/" itemprop="url">
+                  [译] Core Animation 编程指南 - 改变图层默认行为
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-08-13T22:26:44+08:00" content="2019-08-13">
+              2019-08-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/08/13/iOS/Core Animation/译-Core-Animation-编程指南-改变图层默认行为/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/08/13/iOS/Core Animation/译-Core-Animation-编程指南-改变图层默认行为/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/08/13/iOS/Core Animation/译-Core-Animation-编程指南-改变图层默认行为/" class="leancloud_visitors" data-flag-title="[译] Core Animation 编程指南 - 改变图层默认行为">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Core Animation 使用 action 对象实现图层的隐式动画行为。action 对象遵守 <code>CAAction</code> 协议，并定义一些在图层上执行的相关行为。所有的 CAAnimation 对象实现了该协议，并且这些对象通常被分配在图层属性改变时执行。</p>
+<p>动画属性是 action 的一种类型，你也可以定义任何包含你想要的行为的 action 。但为了实现该目的，你必须定义自己的 action 对象，并将它们与你 app 的图层对象关联。</p>
+<h3 id="自定义的-Action-对象遵守-CAAction-协议"><a href="#自定义的-Action-对象遵守-CAAction-协议" class="headerlink" title="自定义的 Action 对象遵守 CAAction 协议"></a>自定义的 Action 对象遵守 CAAction 协议</h3><p>去创建你自己的 action 对象，使你的类遵守 CAAction 协议，并实现 <code>runActionForKey:object:arguments:</code> 方法。在该方法中，使用可用的信息去执行你想在图层上应用的 actions 。你可能使用该方法给图层添加一个动画对象，或执行其他的任务。</p>
+<p>当你定义 action 对象时，你必须决定 action 怎样被触发。触发器为 action 定义键，后面你使用该键注册 action。Action 对象在下面的情况下会被触发：</p>
+<ul>
+<li>图层的属性值改变时，可以是图层的任意属性，不仅是可以动画的属性。（你也可以将你给图层添加的自定义属性与 action 关联。）识别 action 的键就是属性的名字。</li>
+<li>图层变为可见的或被添加到图层层级结构中。识别 action 的键是 <code>kCAOnOrderIn</code> 。</li>
+<li>图层从图层层级结构中被移除。识别 action 的键是 <code>kCAOnOrderOut</code> 。</li>
+<li>图层即将参与过渡动画。识别 action 的键是 <code>kCATransition</code> 。</li>
+</ul>
+<h3 id="Action-对象必须安装在图层上才能生效"><a href="#Action-对象必须安装在图层上才能生效" class="headerlink" title="Action 对象必须安装在图层上才能生效"></a>Action 对象必须安装在图层上才能生效</h3><p>在 action 可被执行之前，图层对象需要寻找响应的 action 对象去执行。图层相关的 actions 的键是被修改属性的名字，或可识别 action 的一个特别的字符串。当图层上发生合适的事件时，图层会调用 <code>actionForKey:</code> 方法去用于 action 对象关联的键去搜索 action 对象。在搜索过程中，你的 app 可以在几个点插入自己，并为该键提供相关的 action 对象。</p>
+<p>Core Animation 通过下面的顺序查找 action 对象：</p>
+<ol>
+<li><p>如果图层有 delegate，并且 delegate 实现了 <code>actionForLayer:forKey:</code> 方法，图层调用该方法。delegate 必须做下面的其中一个：</p>
+<ol>
+<li>通过给的键返回 action 对象。</li>
+<li>如果它没有处理 action，返回 nil。该情况下搜索继续。</li>
+<li>返回 NSNull 对象，该情况下搜索立即结束。</li>
+</ol>
+</li>
+<li><p>图层在图层 actions 字典中查询给定的键。</p>
+</li>
+<li>图层在 <code>style</code> 字典中查询包含键的 actions 字典。（换言之，<code>style</code> 字典包含 <code>actions</code> 键，其值也是字典 。图层在第二个字典中，用给定的键去查询。）</li>
+<li>图层调用 <code>defaultActionForKey:</code> 类方法。</li>
+<li>图层执行由 Core Animation 定义的隐式 action （如果有的话）。</li>
+</ol>
+<p>如果你在任意合适的搜索点提供了一个 action 对象，图层会停止搜索，并执行返回的 action 对象。它发现一个 action 对象时，图层调用对象的 <code>runActionForKey:object:arguments:</code> 方法去执行该 action。如果你对于给定的键定义的 action 已经是 <code>CAAnimation</code> 的实例，你可以使用默认的实现去执行动画。如果你定义你自己的自定义对象遵守了 <code>CAAction</code> 协议，你必须使用该方法的对象实现来采取任何适当的操作。</p>
+<p>你在哪安装 action 对象取决于你想如何修改图层。</p>
+<ul>
+<li>对于只想应用某些具体情况的 action，或已经使用 delegate 对象的图层，提供 delegate 并实现它的 <code>actionForLayer:forKey:</code> 方法。</li>
+<li>对于通常不使用委托的图层对象，请将 action 添加到图层的 <code>actions</code> 字典中。</li>
+<li>对于与在图层对象上定义的自定义属性相关的 action ，请将该 action 包含在图层的 <code>style</code> 字典中。</li>
+<li>对于对图层行为至关重要的 action，对图层进行子类化，并重写 <code>defaultActionForKey:</code> 方法。</li>
+</ul>
+<p>例 6-1 展示了使用提供的 action 对象的 delegate 方法的实现。在这种情况下，delegate 查找图层 <code>contents</code> 属性的改变，并且使用过渡动画将新内容交换到相应位置。</p>
+<p>例 6-1  使用图层委托对象提供<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (id&lt;CAAction&gt;)actionForLayer:(CALayer *)theLayer</div><div class="line">                        forKey:(NSString *)theKey &#123;</div><div class="line">    CATransition *theAnimation=nil;</div><div class="line"> </div><div class="line">    if ([theKey isEqualToString:@&quot;contents&quot;]) &#123;</div><div class="line"> </div><div class="line">        theAnimation = [[CATransition alloc] init];</div><div class="line">        theAnimation.duration = 1.0;</div><div class="line">        theAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];</div><div class="line">        theAnimation.type = kCATransitionPush;</div><div class="line">        theAnimation.subtype = kCATransitionFromRight;</div><div class="line">    &#125;</div><div class="line">    return theAnimation;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="使用-CATransaction-类将-Actions-暂时禁用"><a href="#使用-CATransaction-类将-Actions-暂时禁用" class="headerlink" title="使用 CATransaction 类将 Actions 暂时禁用"></a>使用 CATransaction 类将 Actions 暂时禁用</h3><p>你可以使用 CATransaction 类暂时禁用图层的 actions 。你改变图层属性时， Core Animation 通常创建一个隐式事务对象去动画改变。如果你不想动画改变，你可以通过创建一个显式事务，并且将 <code>kCATransactionDisableActions</code> 属性设置为 true 来禁用隐式动画。例 6-2 展示了从图层树移除指定图层时，如果用代码禁用动画。</p>
+<p>例 6-2  暂时禁用图层的 actions<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[CATransaction begin];</div><div class="line">[CATransaction setValue:(id)kCFBooleanTrue</div><div class="line">                 forKey:kCATransactionDisableActions];</div><div class="line">[aLayer removeFromSuperlayer];</div><div class="line">[CATransaction commit];</div></pre></td></tr></table></figure></p>
+<p>关于使用事务对象管理动画行为的更多信息，请参见<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/AdvancedAnimationTricks/AdvancedAnimationTricks.html#//apple_ref/doc/uid/TP40004514-CH8-SW3" target="_blank" rel="external">显示事务允许你改变动画参数</a>。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2019/08/12/iOS/Core Animation/译-Core-Animation-编程指南-高级动画技巧/" itemprop="url">
                   [译] Core Animation 编程指南 - 高级动画技巧
                 </a>
@@ -1895,126 +2043,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/05/06/LeetCode/LeetCode-回文数-简单/" itemprop="url">
-                  LeetCode-回文数-简单
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2019-05-06T11:14:35+08:00" content="2019-05-06">
-              2019-05-06
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2019/05/06/LeetCode/LeetCode-回文数-简单/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/05/06/LeetCode/LeetCode-回文数-简单/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2019/05/06/LeetCode/LeetCode-回文数-简单/" class="leancloud_visitors" data-flag-title="LeetCode-回文数-简单">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="题目简介"><a href="#题目简介" class="headerlink" title="题目简介"></a>题目简介</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</div><div class="line"></div><div class="line">示例 1:</div><div class="line"></div><div class="line">输入: 121</div><div class="line">输出: true</div><div class="line">示例 2:</div><div class="line"></div><div class="line">输入: -121</div><div class="line">输出: false</div><div class="line">解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</div><div class="line">示例 3:</div><div class="line"></div><div class="line">输入: 10</div><div class="line">输出: false</div><div class="line">解释: 从右向左读, 为 01 。因此它不是一个回文数。</div></pre></td></tr></table></figure>
-<h3 id="我的解题思路"><a href="#我的解题思路" class="headerlink" title="我的解题思路"></a>我的解题思路</h3><p>看到该题，脑中思考出的第一解题思路就是将数字分解为两个数组，一个正序一个倒序，再比较两个数组是否一致。</p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">func isPalindrome(_ x: Int) -&gt; Bool &#123;</div><div class="line">    //0-9肯定为回文数</div><div class="line">    if x &lt;= 9 &amp;&amp; x &gt;= 0 &#123;</div><div class="line">        return true</div><div class="line">    &#125;</div><div class="line">    //负数和10、100、1000等肯定不是</div><div class="line">    if x &lt; 0 || (x % 10 == 0 &amp;&amp; x != 0) &#123;</div><div class="line">        return false</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    var tempX = x</div><div class="line">    var normalNums = [Int]()</div><div class="line">    var reversedNums = [Int]()</div><div class="line">    </div><div class="line">    while tempX &gt; 0 &#123;</div><div class="line">        let num = tempX % 10</div><div class="line">        normalNums.append(num)</div><div class="line">        reversedNums.insert(num, at: 0)</div><div class="line">        </div><div class="line">        tempX = tempX / 10</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    for idx in normalNums.indices &#123;</div><div class="line">        if normalNums[idx] != reversedNums[idx] &#123;</div><div class="line">            return false</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return true</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="算法复杂度"><a href="#算法复杂度" class="headerlink" title="算法复杂度"></a>算法复杂度</h4><ul>
-<li>时间复杂度：O(n),还需要使用两个数组的内存开销</li>
-</ul>
-<h3 id="最优解题思路"><a href="#最优解题思路" class="headerlink" title="最优解题思路"></a>最优解题思路</h3><p>最优的解题思路为反转一般的数字，因为如果是回文数的话它反转的一半肯定是等于前一半的。</p>
-<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">func isPalindrome(_ x: Int) -&gt; Bool &#123;</div><div class="line">    if x &lt;= 9 &amp;&amp; x &gt;= 0 &#123;</div><div class="line">        return true</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if x &lt; 0 || (x % 10 == 0 &amp;&amp; x != 0) &#123;</div><div class="line">        return false</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var origin = x</div><div class="line">    var reversed = 0</div><div class="line">    while origin &gt; reversed &#123;</div><div class="line">        reversed = reversed * 10 + origin % 10</div><div class="line">        origin = origin / 10</div><div class="line">    &#125;</div><div class="line">    // 当数字长度为奇数时，我们可以通过 reversed / 10 去除处于中位的数字。</div><div class="line">    // 例如，当输入为 12321 时，在 while 循环的末尾我们可以得到 x = 12，reversed = 123，</div><div class="line">    // 由于处于中位的数字不影响回文（它总是与自己相等），所以我们可以简单地将其去除。</div><div class="line">    return origin == reversed || origin == reversed / 10</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="算法复杂度-1"><a href="#算法复杂度-1" class="headerlink" title="算法复杂度"></a>算法复杂度</h4><ul>
-<li>时间复杂度：O(\log_{10}(n))</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2060,7 +2088,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
