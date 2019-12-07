@@ -243,6 +243,161 @@
             
               
                 
+                <a class="post-title-link" href="/2019/05/22/Swift/小结Swift文档-Generics/" itemprop="url">
+                  小结Swift文档-Generics
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-05-22T20:38:24+08:00" content="2019-05-22">
+              2019-05-22
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/05/22/Swift/小结Swift文档-Generics/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/05/22/Swift/小结Swift文档-Generics/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/05/22/Swift/小结Swift文档-Generics/" class="leancloud_visitors" data-flag-title="小结Swift文档-Generics">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>本文基于Swift5.0版本官方文档，阅读大概需要20min，可以对泛型有一个清晰的认识。</code></p>
+<h3 id="什么是泛型-Generics"><a href="#什么是泛型-Generics" class="headerlink" title="什么是泛型(Generics)"></a>什么是泛型(Generics)</h3><p>泛型：指的就是在你定义的时候放置一个占位符类型名，告诉系统使用的类型现在不确定，我先占个位置。这样编译的时候系统不会报错。然后在你使用的时候才会真正地确定类型。</p>
+<p>语言表达起来可能不是那么直观，让我们看一段代码直观的了解一下什么是泛型。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//定义一个打印任意类型变量的函数</div><div class="line">func printSomething&lt;T&gt;(value1: T, value2: T) &#123;</div><div class="line">    print(value1, value2)</div><div class="line">&#125;</div><div class="line"></div><div class="line">printSomething(value1: 1, value2: 2) // Int: 1 2</div><div class="line">printSomething(value1: &quot;a&quot;, value2: &quot;b&quot;) //String: a b</div></pre></td></tr></table></figure></p>
+<p>通过上面的代码我们可以看出，通过在函数名字后面添加<code>&lt;T&gt;</code>来表明添加了一个泛型类型，<code>&lt;&gt;</code>告诉编译器<code>T</code>是一个占位符类型，不需要真正的查找叫做<code>T</code>的类型。</p>
+<h4 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h4><ul>
+<li><code>&lt;T&gt;</code>中的T可以是任意字符或者单词，但是要使用大写字母或者大写开头的驼峰命名法(如：<code>V</code>、<code>U</code>、<code>MyTypeParameter</code>)。</li>
+<li><code>&lt;&gt;</code>里面不止可以写一个类型占位符，也可以写多个:<code>&lt;T, U&gt;</code>。</li>
+</ul>
+<p>现在我们初步了解泛型是什么，那么肯定会有人问道：我们为什么要是使用泛型呢？下面我们看一下为什么要使用泛型。</p>
+<h3 id="为什么要用泛型"><a href="#为什么要用泛型" class="headerlink" title="为什么要用泛型"></a>为什么要用泛型</h3><h4 id="泛型类型函数"><a href="#泛型类型函数" class="headerlink" title="泛型类型函数"></a>泛型类型函数</h4><p>在日常工作中，我们会经常遇到在某些条件下交换两个变量的值的情况。如果需要交换两个<code>Int</code>的值得话，我们可以很轻易的写下下面的函数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">func swapTwoIntValue(_ num1: inout Int, _ num2: inout Int) &#123;</div><div class="line">    (num1, num2) = (num2, num1)</div><div class="line">&#125;</div><div class="line"></div><div class="line">var num1 = 10</div><div class="line">var num2 = 20</div><div class="line"></div><div class="line">swapTwoIntValue(&amp;num1, &amp;num2)</div><div class="line">print(num1, num2) // 20 10</div></pre></td></tr></table></figure></p>
+<p>这个函数很简洁，也很正确，但是如果我们还需要交换<code>String</code>、<code>Double</code>等等类型的变量呢，再写<code>swapTwoStringValue(_:_:)</code>、<code>swapTwoDoubleValue(_:_:)</code>的函数吗？再定义两个这样的函数当然没有问题，但是我们会发现这三个函数内部实现都是一样的，区别只是参数的类型不同。这时候就轮到泛型出马了，我们可以用泛型写一个使用任意Swift基本类型的交换函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">func swapTwoValue&lt;T&gt;(_ num1: inout T, _ num2: inout T) &#123;</div><div class="line">    (num1, num2) = (num2, num1)</div><div class="line">&#125;</div><div class="line"></div><div class="line">var num1 = 10</div><div class="line">var num2 = 20</div><div class="line"></div><div class="line">swapTwoValue(&amp;num1, &amp;num2)</div><div class="line">print(num1, num2) // 20 10</div><div class="line"></div><div class="line">var str1 = &quot;hello&quot;</div><div class="line">var str2 = &quot;world&quot;</div><div class="line"></div><div class="line">swapTwoValue(&amp;str1, &amp;str2)</div><div class="line">print(str1, str2) // world hello</div></pre></td></tr></table></figure></p>
+<h4 id="小结-为什么要用泛型"><a href="#小结-为什么要用泛型" class="headerlink" title="小结-为什么要用泛型"></a>小结-为什么要用泛型</h4><ul>
+<li>可以写出更加灵活可复用的函数。</li>
+<li>使代码更加简洁明了。</li>
+</ul>
+<h4 id="Note-1"><a href="#Note-1" class="headerlink" title="Note"></a>Note</h4><ul>
+<li>上面的<code>swapTwoValue(_:_:)</code>函数只是举个例子说明泛型类型函数的用法，如果你想使用交换两个变量的值得功能，你可以使用官方的<code>swap(_:_:)</code>函数。</li>
+<li>注意交换函数两个变量的类型都是<code>T</code>，虽然<code>T</code>可以表示任意类型，但两个变量必须是同一类型，Swift不允许两个不同类型的变量交换值，因为Swift是一门类型安全的语言。</li>
+</ul>
+<p>我们现在知道可以通过定义泛型类型的函数来达到减少代码冗余的问题，那么泛型的用处仅仅如此吗？作为Swift最强大的特性之一，肯定不会只是实现一个泛型类型函数这么简单的。下面让我们看一下泛型还能做什么？</p>
+<h3 id="我们能用它做什么"><a href="#我们能用它做什么" class="headerlink" title="我们能用它做什么"></a>我们能用它做什么</h3><h4 id="实现泛型的数据结构"><a href="#实现泛型的数据结构" class="headerlink" title="实现泛型的数据结构"></a>实现泛型的数据结构</h4><p>我们可以通过泛型来实现一个支持多种类型的栈。具体代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">struct Stack&lt;Element&gt; &#123;</div><div class="line">    var items = [Element]()</div><div class="line">    </div><div class="line">    mutating func push(_ item: Element) &#123;</div><div class="line">        items.append(item)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    mutating func pop(_ item: Element) -&gt; Element &#123;</div><div class="line">        return items.removeLast()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Stack可以放入<code>Int</code>/<code>String</code>等多种类型的数据。此处有个地方要注意：<code>在我们给Stack扩展计算属性或者方法的时候，不需要我们在声明类型参数，Stack中的泛型在extension中依然有效</code>。具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 不需要再用&lt;Element&gt;来声明泛型</div><div class="line">extension Stack &#123;</div><div class="line">    var topItem: Element? &#123;</div><div class="line">        return items.isEmpty ? nil : items[items.count - 1]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="通过类型约束-Type-Constraints-来实现遵守protocol的任意类型参数的函数"><a href="#通过类型约束-Type-Constraints-来实现遵守protocol的任意类型参数的函数" class="headerlink" title="通过类型约束(Type Constraints)来实现遵守protocol的任意类型参数的函数"></a>通过类型约束(Type Constraints)来实现遵守protocol的任意类型参数的函数</h4><p>日常开发中，我们会经常需要实现在一个数组中查找某个值的索引的功能，如果我们将数组的元素类型写死的话，我们声明的函数只能用于某一种类型，这时候我们应该怎么办呢？对了，就是将类型声明为泛型类型。通过上面的介绍，我们可能会写下以下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">func findIndex&lt;T&gt;(_ target: T, _ array: [T]) -&gt; Int? &#123;</div><div class="line">    for (index, value) in array.enumerated() &#123;</div><div class="line">        if value == target &#123;</div><div class="line">            return index</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return nil</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个函数创建的很不错，但是很可惜它编译会报错：<code>Binary operator &#39;==&#39; cannot be applied to two &#39;T&#39; operands</code>，该报错表示我们声明的类型占位符<code>T</code>不能使用<code>==</code>运算符。那么如何正确的实现该函数呢？这就要使用类型约束(Type Constraints)来实现了。具体的做法就是将<code>findIndex&lt;T&gt;</code>改为<code>&lt;T: Equatable&gt;</code>，这句话的意思是<code>T</code>只支持实现了<code>Equatable</code>协议的类型使用。具体代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">func findIndex&lt;T: Equatable&gt;(_ target: T, _ array: [T]) -&gt; Int? &#123;</div><div class="line">    for (index, value) in array.enumerated() &#123;</div><div class="line">        if value == target &#123;</div><div class="line">            return index</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return nil</div><div class="line">&#125;</div><div class="line"></div><div class="line">if let index = findIndex(&quot;person0&quot;, arr) &#123;</div><div class="line">    print(&quot;person0 index is \(index)&quot;) //person0 index is 0</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="Protocol中的联合类型"><a href="#Protocol中的联合类型" class="headerlink" title="Protocol中的联合类型"></a>Protocol中的联合类型</h4><p>现在我们知道可以在函数参数中使用泛型，那么我能在<code>protocol</code>中实现类似的功能吗？答案是：当然可以。我们可以用<code>associatedtype</code>关键字来告诉编译器该类型为泛型，在真正使用的时候再检查它的类型。</p>
+<p>假如我们要实现一个<code>Container</code>的Protocol，该协议包含了<code>append(_)</code>添加元素的函数、获取长度的计算属性<code>count</code>、根据下标获取元素的函数<code>subscript(_)</code>。这时候如果我们将Item的类型写死的话就说明了只有这一种类型能够遵守该Protocol，那么如何让更多的类型能够遵守呢？这时候就轮到<code>associatedtype</code>出场了。下面为具体代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">protocol Container &#123;</div><div class="line">    associatedtype Item</div><div class="line">    mutating func append(_ item: Item)</div><div class="line">    var count: Int &#123; get &#125;</div><div class="line">    subscript(i: Int) -&gt; Item &#123; get &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们可以使<code>Stack</code>遵守该协议，看一下具体使用。代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">extension Stack: Container &#123;</div><div class="line">    mutating func append(_ item: Element) &#123;</div><div class="line">        push(item)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    var count: Int &#123;return items.count &#125;</div><div class="line">    </div><div class="line">    subscript (_ i: Int) -&gt; Element &#123;</div><div class="line">        return items[i]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var s1 = Stack(items: [1,2,3,4])</div><div class="line">var s2 = Stack(items: [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;])</div><div class="line">s1.append(5)</div><div class="line">print(s1.items) //[1,2,3,4,5]</div><div class="line">print(s1.count) //5</div><div class="line">print(s1[2])    // 3</div><div class="line"></div><div class="line">s2.append(&quot;f&quot;)</div><div class="line">print(s2.items) //[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;f&quot;]</div><div class="line">print(s2.count) //5</div><div class="line">print(s2[2])    //&quot;f&quot;</div></pre></td></tr></table></figure></p>
+<h4 id="Protocol中的联合类型添加类型约束"><a href="#Protocol中的联合类型添加类型约束" class="headerlink" title="Protocol中的联合类型添加类型约束"></a>Protocol中的联合类型添加类型约束</h4><p>在上面我们看到Protocol中可以使用联合类型来实现泛型，那么我们也可以给联合类型添加类型约束来实现泛型遵守某个Protocol、或者遵守某种条件(比如类型相同等)。具体代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">protocol Container &#123;</div><div class="line">    //该行代码表示Item必须是遵守Equatable的类型</div><div class="line">    associatedtype Item: Equatable</div><div class="line">    mutating func append(_ item: Item)</div><div class="line">    var count: Int &#123; get &#125;</div><div class="line">    subscript(_ i: Int) -&gt; Item &#123; get &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="Protocol中的联合类型添加多个类型约束"><a href="#Protocol中的联合类型添加多个类型约束" class="headerlink" title="Protocol中的联合类型添加多个类型约束"></a>Protocol中的联合类型添加多个类型约束</h4><p>我们知道可以给联合类型添加类型约束，可以用<code>associatedtype Item: Equatable</code>来使Item遵守Equatable协议，那如果我想让Item遵守Equatable的同时，又约束它必须是某一种类型呢？这时候我们可以使用<code>where</code>语句来实现。具体代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">protocol SuffixableContainer: Container &#123;</div><div class="line">    //该行代码表示Suffix必须遵守SuffixableContainer，并且它的Item类型必须和Container的Item类型一致</div><div class="line">    associatedtype Suffix: SuffixableContainer where Suffix.Item == Item</div><div class="line">    func suffix(_ size: Int) -&gt; Suffix</div><div class="line">&#125;</div><div class="line">//Stack相当于上面的Suffix，它遵守了SuffixableContainer协议</div><div class="line">extension Stack: SuffixableContainer &#123;</div><div class="line">    func suffix(_ size: Int) -&gt; Stack &#123;</div><div class="line">        var result = Stack()</div><div class="line">        for index in (count-size)..&lt;count &#123;</div><div class="line">            result.append(self[index])</div><div class="line">        &#125;</div><div class="line">        return result</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">var stackOfInts = Stack&lt;Int&gt;()</div><div class="line">stackOfInts.append(10)</div><div class="line">stackOfInts.append(20)</div><div class="line">stackOfInts.append(30)</div><div class="line">let suffix = stackOfInts.suffix(2)</div><div class="line">// suffix 包含 20 和 30</div></pre></td></tr></table></figure></p>
+<p>上面的代码<code>SuffixableContainer</code>实现了一个获取某个位置到最后的一段数据。</p>
+<h4 id="Extension中使用类型约束"><a href="#Extension中使用类型约束" class="headerlink" title="Extension中使用类型约束"></a>Extension中使用类型约束</h4><p>同Protocol，我们也可以在Extension中通过<code>where</code>来实现类型约束。<br><code>如果我们不让Element遵守Equatable协议的话，是会编译错误的，因为在该函数中我们使用了 == 操作符</code>。代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">extension Stack where Element: Equatable &#123;</div><div class="line">    func isTop(_ item: Element) -&gt; Bool &#123;</div><div class="line">        guard let topItem = items.last else &#123;</div><div class="line">            return false</div><div class="line">        &#125;</div><div class="line">        return topItem == item</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if stackOfStrings.isTop(&quot;tres&quot;) &#123;</div><div class="line">    print(&quot;Top element is tres.&quot;)</div><div class="line">&#125; else &#123;</div><div class="line">    print(&quot;Top element is something else.&quot;)</div><div class="line">&#125;</div><div class="line">// Prints &quot;Top element is tres.&quot;</div></pre></td></tr></table></figure></p>
+<p>当然，我们也可以在扩展Protocol的时候来使用类型约束。代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">extension Array: Container where Element: Equatable &#123; &#125;</div><div class="line"></div><div class="line">// 扩展Container，并且Item是遵守Equatable协议的</div><div class="line">extension Container where Item: Equatable &#123;</div><div class="line">    func startsWith(_ item: Item) -&gt; Bool &#123;</div><div class="line">        return count &gt;= 1 &amp;&amp; self[0] == item</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if [9, 9, 9].startsWith(42) &#123;</div><div class="line">    print(&quot;Starts with 42.&quot;)</div><div class="line">&#125; else &#123;</div><div class="line">    print(&quot;Starts with something else.&quot;)</div><div class="line">&#125;</div><div class="line">//&quot;Starts with something else.&quot;</div></pre></td></tr></table></figure></p>
+<p>除了强制泛型元素遵守某个协议外，我们也可以强制泛型元素为特定的某个类型。代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">extension Array: Container where Element: Equatable &#123; &#125;</div><div class="line"></div><div class="line">extension Container where Item == Double &#123;</div><div class="line">    func average() -&gt; Double &#123;</div><div class="line">        var sum = 0.0</div><div class="line">        for index in 0..&lt;count &#123;</div><div class="line">            sum += self[index]</div><div class="line">        &#125;</div><div class="line">        return sum / Double(count)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">print([1260.0, 1200.0, 98.6, 37.0].average()) //648.9</div></pre></td></tr></table></figure></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>上面就是关于泛型的讲解，下面来看一下关于泛型的总结。</p>
+<ul>
+<li>类型占位符要使用大写的字母或者大写开头的驼峰命名法。</li>
+<li>泛型使代码更加灵活可复用、更加简洁明了。</li>
+<li><code>类型参数</code>或<code>有类型约束的参数</code>可以在泛型函数、泛型下标、泛型类型中使用。</li>
+<li>泛型的<code>where</code>语句可以使你的联合类型必须遵守某个协议或者满足某些条件。</li>
+</ul>
+<p>到这里，关于泛型的讲解就结束了。希望大家通过本文能对泛型有一个全新的、深刻的认识。让我们在项目中愉快的使用泛型吧！</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://docs.swift.org/swift-book/LanguageGuide/Generics.html" target="_blank" rel="external">Apple Document</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2019/05/06/抽茧剥丝系列-Kingfisher/" itemprop="url">
                   抽茧剥丝系列-Kingfisher
                 </a>
@@ -1573,137 +1728,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/25/iOS/将开源项目放到CocoaPods/" itemprop="url">
-                  将开源项目放到CocoaPods
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-25T11:31:10+08:00" content="2017-02-25">
-              2017-02-25
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/02/25/iOS/将开源项目放到CocoaPods/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/25/iOS/将开源项目放到CocoaPods/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/02/25/iOS/将开源项目放到CocoaPods/" class="leancloud_visitors" data-flag-title="将开源项目放到CocoaPods">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="pod-相关命令"><a href="#pod-相关命令" class="headerlink" title="pod 相关命令"></a>pod 相关命令</h3><ul>
-<li><a href="http://stackoverflow.com/questions/32304421/whats-the-different-between-pod-spec-lint-and-pod-lib-lint" target="_blank" rel="external">what’s the different between ‘pod spec lint’ and ‘pod lib lint’</a></li>
-</ul>
-<h3 id="中途遇到的错误"><a href="#中途遇到的错误" class="headerlink" title="中途遇到的错误"></a>中途遇到的错误</h3><ul>
-<li>error:ERROR:While executing gem … (Errno::EPERM)Operation not permitted - /usr/bin/pod.<a href="http://stackoverflow.com/questions/30812777/cannot-install-cocoa-pods-after-uninstalling-results-in-error/30851030#30851030" target="_blank" rel="external">answer</a></li>
-<li>error: Unable to find a pod with name, author, summary, or description matching <code>FZHInitialize</code> <a href="http://blog.cocoachina.com/article/29127" target="_blank" rel="external">answer</a></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pod setup成功后，依然不能pod search，是因为之前你执行pod search生成了search_index.json，此时需要删掉。</div><div class="line">终端输入：rm ~/Library/Caches/CocoaPods/search_index.json</div><div class="line">删除成功后，再执行pod search。</div></pre></td></tr></table></figure>
-<ul>
-<li>error:ERROR | [iOS] file patterns: The <code>source_files</code> pattern did not match any file.</li>
-</ul>
-<p>可能原因:</p>
-<ul>
-<li>This was also driving me nuts for ‘hours’. I then discovered that the files and tags must be present in the source git repo. So make sure you push your code and your tags to the remote repo</li>
-</ul>
-<p>我的情况的最终解决办法：将<code>s.source</code>中的tag改为最近的commit<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s.source       = &#123; :git =&gt; &quot;https://github.com/fengzhihao123/FZHProjectInitializer.git&quot;, :commit =&gt; &quot;e004159d7d4cf32734ca52680b6af1bd5516aaf2&quot; &#125;</div></pre></td></tr></table></figure></p>
-<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
-<li><a href="http://guides.cocoapods.org/making/specs-and-specs-repo.html" target="_blank" rel="external">CocoaPods</a></li>
-<li><a href="http://www.jianshu.com/p/32ba94d41861" target="_blank" rel="external">如何发布自己的开源框架到CocoaPods</a></li>
-<li><a href="http://caibaojian.com/github-create-tag.html" target="_blank" rel="external">如何创建tag</a></li>
-<li><a href="https://onevcat.com/2016/01/create-framework/" target="_blank" rel="external">如何打造一个让人愉快的框架</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1749,7 +1773,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">35</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
