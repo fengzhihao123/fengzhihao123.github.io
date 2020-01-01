@@ -243,6 +243,167 @@
             
               
                 
+                <a class="post-title-link" href="/2020/01/01/Swift-入门教程-变量、基础类型及格式化输出/" itemprop="url">
+                  Swift 入门教程 - 变量、基础类型及格式化输出
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-01-01T18:44:21+08:00" content="2020-01-01">
+              2020-01-01
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2020/01/01/Swift-入门教程-变量、基础类型及格式化输出/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/01/01/Swift-入门教程-变量、基础类型及格式化输出/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2020/01/01/Swift-入门教程-变量、基础类型及格式化输出/" class="leancloud_visitors" data-flag-title="Swift 入门教程 - 变量、基础类型及格式化输出">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>千里之行，始于足下。</code></p>
+<h2 id="常量和变量"><a href="#常量和变量" class="headerlink" title="常量和变量"></a>常量和变量</h2><p>在现实生活中，我们会拿容器来存放东西，比如拿杯子装水，拿盘子装菜，那么对应到编程的世界里，我们需要的则是常量和变量。</p>
+<p>在 Swift 中，你可以使用 <code>let</code> 关键字声明一个常量。当你声明一个常量的时候，代表着你给它赋初始值之后，你不可以再修改它的值。例如在程序中，一般 <code>id</code> 是唯一且不可改变的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let id = 23333</div><div class="line">// 赋值之后再修改 id 的值，编译器会报错</div><div class="line">id = 1024</div></pre></td></tr></table></figure></p>
+<img src="/2020/01/01/Swift-入门教程-变量、基础类型及格式化输出/pic1.png" alt="修改常量报错" title="修改常量报错">
+<p><code>如果你代码中存储的值不会改变，一定要用 let 关键字把它声明为常量。原则：起初，把所有要存储的值都定义为常量，当需要修改值时再把它改为 var 关键字修饰。</code></p>
+<p>当你需要声明一个在赋值完初始值之后，还可能修改变量值的时候，可以使用 <code>var</code> 关键字声明一个变量，例如在程序中，用户的昵称是可以修改的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var nickName = &quot;Swift&quot;</div><div class="line">// 赋值之后，还可以修改 nickName 变量的值</div><div class="line">nickName = &quot;Objective-C&quot;</div></pre></td></tr></table></figure></p>
+<p>在 Swift 中，你使用的常量或者变量需要在使用之前声明它，如果使用未声明的变量，编译器会报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 因为使用的 age 变量并未声明，所以编译器会报错</div><div class="line">age = 10</div></pre></td></tr></table></figure></p>
+<img src="/2020/01/01/Swift-入门教程-变量、基础类型及格式化输出/pic2.png" alt="使用未声明的变量" title="使用未声明的变量">
+<h3 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h3><p>在 Swift 中，采用<a href="https://baike.baidu.com/item/%E9%AA%86%E9%A9%BC%E5%91%BD%E5%90%8D%E6%B3%95" target="_blank" rel="external">驼峰命名</a>法则给变量和类命名。变量用小写字母开头，后面的单词依次首字母大写。例如：userName、userAge等；而类的名字则是大写字母开头，后面的单词依次首字母大写。例如：SeniorStudent等。<code>在 Swift 中不要使用下划线命名，如：user_name 这种格式。</code>虽然使用这种格式编译器不会报错，但这会影响程序的代码统一性，也给项目维护增大了难度。</p>
+<h3 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a>类型推断</h3><p>从上面的代码可以看出，我们声明常量或者变量的时候并没有显式的表现它们是什么类型，那么编译器又是怎么知道我们声明的变量的类型呢？答案就是 Swift 的编译器会进行类型推断(Type Annotations)。当你声明一个变量，并给予该变量初始值的时候， Swift 会根据你赋予的值来给变量正确的类型(<code>按住 option 键，点击变量名可以看见变量的类型</code>)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 通过查看变量类型，我们可以看到 identifier 为 Int， height 为 Double</div><div class="line">![](https://user-gold-cdn.xitu.io/2019/12/16/16f0ef7509bbeba6?w=758&amp;h=198&amp;f=png&amp;s=20046)</div><div class="line">let identifier = 23333</div><div class="line">// 等同于 let identifier: Int = 23333</div><div class="line">var height = 1.75</div><div class="line">// 等同于 var height: Double = 1.75</div></pre></td></tr></table></figure></p>
+<img src="/2020/01/01/Swift-入门教程-变量、基础类型及格式化输出/pic3.png" alt="Swift 的类型推断" title="Swift 的类型推断">
+<h2 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><h4 id="Int"><a href="#Int" class="headerlink" title="Int"></a>Int</h4><p>声明 Int 类型的常量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let age = 18</div></pre></td></tr></table></figure></p>
+<p>在 Swift 中，多数情况下你不需要指定整型的类型(如 Int32、Int64)，编译器会自动适配当前平台。也就是说：在 32 位的系统上，Int 就是 Int32；在 64 位的系统上 Int 就是 Int64。</p>
+<h4 id="UInt"><a href="#UInt" class="headerlink" title="UInt"></a>UInt</h4><p>声明 UInt 类型的常量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 此时不能省略类型，因为编译器总是把整型推断为 Int</div><div class="line">let positiveNumber: UInt = 18</div></pre></td></tr></table></figure></p>
+<p>UInt 平台适配规则同 Int，在 32 位的系统上，UInt 就是 UInt32；在 64 位的系统上 UInt 就是 UInt64。</p>
+<p><code>当声明整型类型时，尽量使用 Int 类型，它在各种情况下是适应最好的。</code></p>
+<p>获取当前整型类型的范围(例如 Int32、Int64)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">let min32 = Int32.min</div><div class="line">let max32 = Int32.max</div><div class="line">// min32 = -2147483648, max32 = 2147483647</div><div class="line"></div><div class="line">let min64 = Int64.min</div><div class="line">let max64 = Int64.max</div><div class="line">// min64 = -9223372036854775808, max64 = 9223372036854775807</div></pre></td></tr></table></figure></p>
+<h3 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h3><h4 id="Float"><a href="#Float" class="headerlink" title="Float"></a>Float</h4><p>Float：32位的单精度，有至少6位小数的精度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let float32: Float = 0.01</div></pre></td></tr></table></figure></p>
+<h4 id="Double"><a href="#Double" class="headerlink" title="Double"></a>Double</h4><p>Doubel：64位的单精度，有至少15位小数的精度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let float64 = 0.01</div></pre></td></tr></table></figure></p>
+<p><code>Swift 的类型推断，总是把浮点数类型推断为 Double。</code></p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>在程序开发中，打交道最多的类型莫过于字符串了。你可以通过下面的方式来存储字符串的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let language = &quot;Swift&quot;</div></pre></td></tr></table></figure></p>
+<p>你也可以在 Swift 中存储多行字符串的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let multipleStr = &quot;&quot;&quot;</div><div class="line">Swift</div><div class="line">Objective-C</div><div class="line">&quot;&quot;&quot;</div></pre></td></tr></table></figure></p>
+<h4 id="可对字符串应用的操作符"><a href="#可对字符串应用的操作符" class="headerlink" title="可对字符串应用的操作符"></a>可对字符串应用的操作符</h4><p>Swift 中，你可以对字符串应用以下 2 个操作符：</p>
+<ul>
+<li>+：拼接字符串</li>
+<li>+=：对字符串进行累加</li>
+</ul>
+<p>具体示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">let language = &quot;Swift&quot;</div><div class="line">let welcome = &quot;Hello&quot;</div><div class="line">// plusStr = HelloSwift</div><div class="line">let plusStr = welcome + language</div><div class="line">var languages = &quot;Language: &quot;</div><div class="line">// languages = Language: Swift</div><div class="line">languages += language</div></pre></td></tr></table></figure></p>
+<h3 id="基本类型互转"><a href="#基本类型互转" class="headerlink" title="基本类型互转"></a>基本类型互转</h3><h4 id="浮点数转整型"><a href="#浮点数转整型" class="headerlink" title="浮点数转整型"></a>浮点数转整型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let floatNum = 1.2</div><div class="line">// intNum = 1</div><div class="line">let intNum = Int(floatNum)</div></pre></td></tr></table></figure>
+<h4 id="整型转浮点数"><a href="#整型转浮点数" class="headerlink" title="整型转浮点数"></a>整型转浮点数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let intNum = 1</div><div class="line">// floatNum = 1</div><div class="line">let floatNum = Double(intNum)</div></pre></td></tr></table></figure>
+<p>需要注意的是：<code>只有在特定情况下才会使用 Float，其它情况下都要使用 Double（官方文档推荐）。</code></p>
+<h4 id="字符串转整型、整型转字符串"><a href="#字符串转整型、整型转字符串" class="headerlink" title="字符串转整型、整型转字符串"></a>字符串转整型、整型转字符串</h4><p>字符串和数字类型的互相转换大概使我们写代码中遇到的最频繁的转换了。</p>
+<ul>
+<li><p>字符串转整型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let strNum = &quot;2333&quot;</div><div class="line">// 注意此处 intNum 为 Int? 类型，这里涉及可选类型 - optional，</div><div class="line">后面会将到可选类型，这里看一下即可。</div><div class="line">intNum = Optional(2333)</div><div class="line">let intNum = Int(strNum)</div></pre></td></tr></table></figure>
+</li>
+<li><p>整型转字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let intNum = 23333</div><div class="line">// strNum = &quot;23333&quot;</div><div class="line">let strNum = String(intNum)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h3><p>前面声明了许多常量，那么怎样能快捷的看到常量存储的值呢，这里就用到 <code>print()</code> 函数了。</p>
+<p>你可以简单的只打印一个常量或者变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let strNum = &quot;Swift&quot;</div><div class="line">print(strNum)</div></pre></td></tr></table></figure></p>
+<p>在程序比较简单的时候，上面这种打印方式还可以。但在程序越来越复杂时，打印的东西会错综复杂。这时，你就需要使用格式化输出了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// strNum = Swift</div><div class="line">print(&quot;strNum = \(strNum)&quot;)</div></pre></td></tr></table></figure>
+<p>格式化输出格式： <code>&quot;xxx\(变量、常量的名字)&quot;</code> xxx会原样输出，<code>\()</code>里面放置你声明变量。</p>
+<p>在格式化输出时，后面可以放置多个变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let min32 = Int32.min</div><div class="line">let max32 = Int32.max</div><div class="line">// min32 = -2147483648, max32 = 2147483647</div><div class="line">print(&quot;min32 = \(min32), max32 = \(max32)&quot;)</div></pre></td></tr></table></figure></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>建议以上的代码都在 Playground 里面多敲几遍，看懂并不代表会了。</p>
+<ul>
+<li>使用常量或者变量之前要先声明</li>
+<li><code>let</code> 关键字声明的常量不可修改；<code>var</code> 关键字声明的变量值可以修改</li>
+</ul>
+<!-- 下一篇：[Swift 入门教程 - 集合]() -->
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2019/12/07/Swift-使用单例管理共享资源-译/" itemprop="url">
                   Swift - 使用单例管理共享资源(译)
                 </a>
@@ -1807,218 +1968,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/05/30/Swift/深入了解Swift中的初始化/" itemprop="url">
-                  深入了解Swift中的初始化
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2019-05-30T20:20:13+08:00" content="2019-05-30">
-              2019-05-30
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2019/05/30/Swift/深入了解Swift中的初始化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/05/30/Swift/深入了解Swift中的初始化/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2019/05/30/Swift/深入了解Swift中的初始化/" class="leancloud_visitors" data-flag-title="深入了解Swift中的初始化">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><code>Swift version:5.0</code></p>
-<h3 id="初始化是什么"><a href="#初始化是什么" class="headerlink" title="初始化是什么"></a>初始化是什么</h3><p>初始化简而言之是一个准备的过程，就好比你想吃地三鲜，这时候你光在脑海里想，你是吃不到的，你需要买菜、洗菜、切菜、炒菜，然后你才能吃上地三鲜。初始化就相当于买菜、洗菜、切菜、炒菜的过程。回到代码上面，它主要做了下面两件事：</p>
-<ul>
-<li>给每一个存储属性赋初始值</li>
-<li>执行其他必须的设置</li>
-</ul>
-<p>代码示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class PotatoPepperEggplant &#123;</div><div class="line">    let potato: String</div><div class="line">    let pepper: String</div><div class="line">    let eggplant: String</div><div class="line">    </div><div class="line">    init(potato: String, pepper: String, eggplant: String) &#123;</div><div class="line">        //给每一个存储属性赋初始值</div><div class="line">        self.potato = potato</div><div class="line">        self.pepper = pepper</div><div class="line">        self.eggplant = eggplant</div><div class="line">        //执行其他必须的设置</div><div class="line">        cook()</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func cook() &#123;</div><div class="line">        //do something</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let ppe = PotatoPepperEggplant(potato: &quot;🥔&quot;, pepper: &quot;🌶&quot;, eggplant: &quot;🍆&quot;)</div><div class="line">print(&quot;now you can eat\(ppe)&quot;)</div></pre></td></tr></table></figure></p>
-<p>除了上面的方式，我们还可以通过设置默认值的方式来给存储属性赋值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class PotatoPepperEggplant &#123;</div><div class="line">    let potato = &quot;🥔&quot;</div><div class="line">    let pepper = &quot;🌶&quot;</div><div class="line">    let eggplant = &quot;🍆&quot;</div><div class="line">    </div><div class="line">    init() &#123;</div><div class="line">        cook()</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func cook() &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let ppe = PotatoPepperEggplant()</div></pre></td></tr></table></figure></p>
-<p>现在，我们知道了初始化就是执行构造器的过程，下面我们来看一下默认构造器和创建自定义构造器的几种方式。</p>
-<h3 id="默认构造器"><a href="#默认构造器" class="headerlink" title="默认构造器"></a>默认构造器</h3><p>对于值类型和引用类型，默认构造器是不同的。如果 class 给所有的存储属性赋了默认值，且没有实现任何自定义的构造器，那么 Swift 会提供一个默认的构造器。</p>
-<h4 id="class"><a href="#class" class="headerlink" title="class"></a>class</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class ShoppingListItem &#123;</div><div class="line">    var name: String?</div><div class="line">    var quantity = 1</div><div class="line">    var purchased = false</div><div class="line">&#125;</div><div class="line">var item = ShoppingListItem()</div></pre></td></tr></table></figure>
-<p>而对于 struct ，只要没有实现任何自定义构造器，不管它有没有给存储属性赋默认值， Swift 都会提供默认构造器。</p>
-<h4 id="struct"><a href="#struct" class="headerlink" title="struct"></a>struct</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">struct Size &#123;</div><div class="line">    //var width, height: Double 也会提供默认构造器</div><div class="line">    var width = 0.0, height = 0.0</div><div class="line">&#125;</div><div class="line">let twoByTwo = Size(width: 2.0, height: 2.0)</div></pre></td></tr></table></figure>
-<p><code>当你给存储属性分配默认值或者通过构造器设置初始值的时候，属性的值被直接设置，不会触发属性观察</code></p>
-<h3 id="创建自定义构造器的几种方式"><a href="#创建自定义构造器的几种方式" class="headerlink" title="创建自定义构造器的几种方式"></a>创建自定义构造器的几种方式</h3><h4 id="形参-parameter-构造器"><a href="#形参-parameter-构造器" class="headerlink" title="形参(parameter)构造器"></a>形参(parameter)构造器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">struct Celsius &#123;</div><div class="line">    var temperatureInCelsius: Double</div><div class="line">    init(fromFahrenheit fahrenheit: Double) &#123;</div><div class="line">        temperatureInCelsius = (fahrenheit - 32.0) / 1.8</div><div class="line">    &#125;</div><div class="line">    init(fromKelvin kelvin: Double) &#123;</div><div class="line">        temperatureInCelsius = kelvin - 273.15</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let boilingPointOfWater = Celsius(fromFahrenheit: 212.0)</div><div class="line">// boilingPointOfWater.temperatureInCelsius 是 100.0</div><div class="line">let freezingPointOfWater = Celsius(fromKelvin: 273.15)</div><div class="line">// freezingPointOfWater.temperatureInCelsius 是 0.0</div></pre></td></tr></table></figure>
-<h4 id="形参-parameter-和实参-argument-构造器"><a href="#形参-parameter-和实参-argument-构造器" class="headerlink" title="形参(parameter)和实参(argument)构造器"></a>形参(parameter)和实参(argument)构造器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">struct Color &#123;</div><div class="line">    let red, green, blue: Double</div><div class="line">    </div><div class="line">    init(red: Double, green: Double, blue: Double) &#123;</div><div class="line">        self.red   = red</div><div class="line">        self.green = green</div><div class="line">        self.blue  = blue</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    init(white: Double) &#123;</div><div class="line">        red   = white</div><div class="line">        green = white</div><div class="line">        blue  = white</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let magenta = Color(red: 1.0, green: 0.0, blue: 1.0)</div><div class="line">let halfGray = Color(white: 0.5)</div></pre></td></tr></table></figure>
-<p>如果声明了实参名称，调用的时候不能省略实参名称。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let veryGreen = Color(0.0, 1.0, 0.0)</div><div class="line">// this reports a compile-time error - argument labels are required</div></pre></td></tr></table></figure></p>
-<p><code>如果你在定义构造器时没有提供实参标签，Swift 会为构造器的每个形参自动生成一个实参标签。</code></p>
-<h4 id="不带实参的形参构造器"><a href="#不带实参的形参构造器" class="headerlink" title="不带实参的形参构造器"></a>不带实参的形参构造器</h4><p>如果你不希望构造器的某个形参使用实参标签，可以使用下划线（_）来代替显式的实参标签来重写默认行为。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">struct Celsius &#123;</div><div class="line">    var temperatureInCelsius: Double</div><div class="line">    init(fromFahrenheit fahrenheit: Double) &#123;</div><div class="line">        temperatureInCelsius = (fahrenheit - 32.0) / 1.8</div><div class="line">    &#125;</div><div class="line">    init(fromKelvin kelvin: Double) &#123;</div><div class="line">        temperatureInCelsius = kelvin - 273.15</div><div class="line">    &#125;</div><div class="line">    init(_ celsius: Double) &#123;</div><div class="line">        temperatureInCelsius = celsius</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">let bodyTemperature = Celsius(37.0)</div><div class="line">// bodyTemperature.temperatureInCelsius is 37.0</div></pre></td></tr></table></figure></p>
-<h4 id="有可选类型属性的构造器"><a href="#有可选类型属性的构造器" class="headerlink" title="有可选类型属性的构造器"></a>有可选类型属性的构造器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class SurveyQuestion &#123;</div><div class="line">    var text: String</div><div class="line">    var response: String?</div><div class="line">    init(text: String) &#123;</div><div class="line">        self.text = text</div><div class="line">    &#125;</div><div class="line">    func ask() &#123;</div><div class="line">        print(text)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">let cheeseQuestion = SurveyQuestion(text: &quot;Do you like cheese?&quot;)</div><div class="line">cheeseQuestion.ask()</div><div class="line">// Prints &quot;Do you like cheese?&quot;</div><div class="line">cheeseQuestion.response = &quot;Yes, I do like cheese.&quot;</div></pre></td></tr></table></figure>
-<h4 id="有常量属性的构造器"><a href="#有常量属性的构造器" class="headerlink" title="有常量属性的构造器"></a>有常量属性的构造器</h4><p>常量属性，只能在构造器中被赋值，且一旦赋值就不可修改。<code>子类中也不能修改。</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class SurveyQuestion &#123;</div><div class="line">    let text: String</div><div class="line">    var response: String?</div><div class="line">    init(text: String) &#123;</div><div class="line">        self.text = text</div><div class="line">    &#125;</div><div class="line">    func ask() &#123;</div><div class="line">        print(text)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">let beetsQuestion = SurveyQuestion(text: &quot;How about beets?&quot;)</div><div class="line">beetsQuestion.ask()</div><div class="line">// 打印“How about beets?”</div><div class="line">beetsQuestion.response = &quot;I also like beets. (But not with cheese.)&quot;</div></pre></td></tr></table></figure></p>
-<p>到这里，我们了解了默认构造器和创建自定义构造器的几种方式，接下来我们看一下如果使用构造器代理( Initializer Delegation )来避免多个构造器的代码重复。</p>
-<p>因为值类型是不能继承的，所以构造器代理又分为值类型的构造器代理和类的构造器代理，我们先看一下比较简单的值类型的构造器代理。</p>
-<h3 id="值类型的构造器代理"><a href="#值类型的构造器代理" class="headerlink" title="值类型的构造器代理"></a>值类型的构造器代理</h3><p>对于值类型，你可以使用 <code>self.init</code> 在自定义的构造器中引用相同类型中的其它构造器。并且你只能在构造器内部调用 <code>self.init</code>。还有就是：<code>如果你为某个值类型定义了一个自定义的构造器，你将无法访问到默认构造器</code>。这主要是为了避免在一个构造器中做了一些重要设置，但有人不小心使用自动生成的构造器而导致错误的情况。</p>
-<p>如果你想让默认构造器、自定义的构造器都可以使用的话，你可以将自定义的构造器放在<code>Extension</code>中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">struct Size &#123;</div><div class="line">    var width = 0.0, height = 0.0</div><div class="line">&#125;</div><div class="line"></div><div class="line">struct Point &#123;</div><div class="line">    var x = 0.0, y = 0.0</div><div class="line">&#125;</div><div class="line"></div><div class="line">struct Rect &#123;</div><div class="line">    var origin = Point()</div><div class="line">    var size = Size()</div><div class="line">    init() &#123;&#125;</div><div class="line"></div><div class="line">    init(origin: Point, size: Size) &#123;</div><div class="line">        self.origin = origin</div><div class="line">        self.size = size</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    init(center: Point, size: Size) &#123;</div><div class="line">        let originX = center.x - (size.width / 2)</div><div class="line">        let originY = center.y - (size.height / 2)</div><div class="line">        self.init(origin: Point(x: originX, y: originY), size: size)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>通过上面的代码你可以使用<code>init()</code>、<code>init(origin: Point, size: Size)</code>、<code>init(center: Point, size: Size)</code>三种方式来初始化 Rect 的实例。</p>
-<p>看完上面的代码你也许会有疑问：<code>init(origin: Point, size: Size)</code>和默认构造器是一样的，那为什么我们还要再写一遍？那是因为我们自定义了<code>init(center: Point, size: Size)</code>构造器，所以默认构造器已经失效，我们只能再自己写一遍。</p>
-<p>如果你不想自己写一遍默认构造器的话，可以用下面这种方式实现上面等效的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">extension Rect &#123;</div><div class="line">    init(center: Point, size: Size) &#123;</div><div class="line">        let originX = center.x - (size.width / 2)</div><div class="line">        let originY = center.y - (size.height / 2)</div><div class="line">        self.init(origin: Point(x: originX, y: originY), size: size)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="类的构造器代理"><a href="#类的构造器代理" class="headerlink" title="类的构造器代理"></a>类的构造器代理</h3><p>为了确保实例中的所有存储属性都能有初始值， Swift 提供了两种构造器，分别是：指定构造器、便利构造器。</p>
-<h4 id="指定构造器-Designated-Initializers"><a href="#指定构造器-Designated-Initializers" class="headerlink" title="指定构造器( Designated Initializers )"></a>指定构造器( Designated Initializers )</h4><p>定义一个指定构造器:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">init(parameters) &#123;</div><div class="line">    statements</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="便利构造器-Convenience-Initializers"><a href="#便利构造器-Convenience-Initializers" class="headerlink" title="便利构造器( Convenience Initializers )"></a>便利构造器( Convenience Initializers )</h4><p>定义一个便利构造器:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">convenience init(parameters) &#123;</div><div class="line">    statements</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>为了简化指定构造器和便利构造器之间的调用关系，Swift 构造器之间的代理调用需要遵循类类型的构造器代理规则。</p>
-<h4 id="类类型的构造器代理规则"><a href="#类类型的构造器代理规则" class="headerlink" title="类类型的构造器代理规则"></a>类类型的构造器代理规则</h4><p>规则有三条，分别是：</p>
-<ul>
-<li>指定构造器必须调用其直接父类的的指定构造器。</li>
-<li>便利构造器必须调用同类中定义的其它构造器。</li>
-<li>便利构造器最后必须调用指定构造器。</li>
-</ul>
-<p>总结一下就是：指定构造器必须总是向上代理(去父类)；便利构造器必须总是横向代理(在本类)。如下图所示：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2019/5/27/16af8a84d4b222e5?w=896&amp;h=429&amp;f=png&amp;s=20711" alt=""></p>
-<h4 id="构造器的两个阶段"><a href="#构造器的两个阶段" class="headerlink" title="构造器的两个阶段"></a>构造器的两个阶段</h4><p>Swift 中类的构造过程包含两个阶段。第一个阶段：给类中的每个存储属性赋初始值。只要每个存储属性初始值被赋值，第二阶段开始，它给每个类一次机会，在新实例准备使用之前进一步自定义它们的存储属性。</p>
-<p>Swift 通过4步安全检查来确定构造器两个阶段的成功执行：</p>
-<ul>
-<li>安全检查1：指定构造器必须在完成本类所有存储属性赋值之后，才能向上代理到父类的构造器。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class Animal &#123;</div><div class="line">    var head = 1</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Dog: Animal &#123;</div><div class="line">    var foot: Int</div><div class="line">    override init() &#123;</div><div class="line">        super.init()</div><div class="line">        foot = 4</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>上面的<code>super.init()</code>会报错，因为此时 Dog 的 foot 还没有被赋值。将 init() 改为下面即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">override init() &#123;</div><div class="line">    foot = 4</div><div class="line">    //这句也可以省略，它默认是隐式调用的。</div><div class="line">    super.init()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<ul>
-<li><p>安全检查2：指定构造器必须在为继承的属性设置新值之前向上代理调用父类构造器。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//这时，你必须显式的调用super.init()，因为你要修改继承属性- head 的值</div><div class="line">override init() &#123;</div><div class="line">    foot = 4</div><div class="line">    super.init()</div><div class="line">    head = 2</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>安全检查3：便利构造器必须先调用其他构造器，再为任意属性（包括所有同类中定义的）赋新值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">convenience init(foot: Int) &#123;</div><div class="line">    //先调用其他构造器，如果此处不调用会编译出错</div><div class="line">    self.init()</div><div class="line">    //再为任意属性（包括所有同类中定义的）赋新值</div><div class="line">    self.foot = foot</div><div class="line">    head = 3</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>安全检查4：构造器在第一阶段构造完成之前，不能调用任何实例方法，不能读取任何实例属性的值，不能引用 <code>self</code> 作为一个值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Dog: Animal &#123;</div><div class="line">    var foot: Int</div><div class="line">    override init() &#123;</div><div class="line">        foot = 4</div><div class="line">        super.init()</div><div class="line">        head = 2</div><div class="line">        // 如果上面的未完成，是不能调用run()的，因为self还没有完整的创建</div><div class="line">        run()</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func run() &#123;</div><div class="line">        //do something</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>现在看一下阶段一和阶段二的完整流程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">阶段 1 - 自下而上</div><div class="line">* 类的某个指定构造器或便利构造器被调用。</div><div class="line">* 完成类的新实例内存的分配，但此时内存还没有被初始化。</div><div class="line">* 指定构造器确保其所在类引入的所有存储型属性都已赋初值。</div><div class="line">  存储型属性所属的内存完成初始化。</div><div class="line">* 指定构造器切换到父类的构造器，对其存储属性完成相同的任务。</div><div class="line">* 这个过程沿着类的继承链一直往上执行，直到到达继承链的最顶部。</div><div class="line">* 当到达了继承链最顶部，而且继承链的最后一个类已确保所有的存储型属性都已经赋值，</div><div class="line">  这个实例的内存被认为已经完全初始化。此时阶段 1 完成。</div><div class="line">阶段 2 - 自上而下</div><div class="line">* 从继承链顶部往下，继承链中每个类的指定构造器都有机会进一步自定义实例。</div><div class="line">  构造器此时可以访问 self、修改它的属性并调用实例方法等等。</div><div class="line">* 最终，继承链中任意的便利构造器有机会自定义实例和使用 self。</div></pre></td></tr></table></figure></p>
-<p>第一阶段示例图 - 自下而上：<br><img src="https://user-gold-cdn.xitu.io/2019/5/27/16af8c8fb857580f?w=897&amp;h=429&amp;f=png&amp;s=14402" alt=""><br>第二阶段示例图 - 自上而下：<br><img src="https://user-gold-cdn.xitu.io/2019/5/27/16af8c92b45c302b?w=896&amp;h=429&amp;f=png&amp;s=14114" alt=""></p>
-<h4 id="构造器的继承与重写"><a href="#构造器的继承与重写" class="headerlink" title="构造器的继承与重写"></a>构造器的继承与重写</h4><ul>
-<li><p>继承<br>默认情况下子类是不会继承父类的构造器。但是如果满足特定条件，父类构造器是可以被子类自动继承。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">规则 1</div><div class="line">如果子类没有定义任何指定构造器，它将自动继承父类所有的指定构造器。</div><div class="line">规则 2</div><div class="line">如果子类提供了所有父类指定构造器的实现——无论是通过规则 1</div><div class="line">继承过来的，还是提供了自定义实现——它将自动继承父类所有的便利构造器。</div><div class="line"></div><div class="line">class Animal &#123;</div><div class="line">    let head = 1</div><div class="line">    var name = &quot;&quot;</div><div class="line">    </div><div class="line">    init(name: String) &#123;</div><div class="line">        self.name = name</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    convenience init() &#123;</div><div class="line">        self.init(name: &quot;animal&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Dog: Animal &#123;</div><div class="line">    let foot  = 4</div><div class="line">&#125;</div><div class="line">//自动继承父类所有的指定构造</div><div class="line">let d1 = Dog(name: &quot;dog&quot;) // d1.name dog</div><div class="line">//自动继承父类所有的便利构造器</div><div class="line">let d2 = Dog() // d2.name animal</div></pre></td></tr></table></figure>
-</li>
-<li><p>重写</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Vehicle &#123;</div><div class="line">    var numberOfWheels = 0</div><div class="line">    var description: String &#123;</div><div class="line">        return &quot;\(numberOfWheels) wheel(s)&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Bicycle: Vehicle &#123;</div><div class="line">    override init() &#123;</div><div class="line">        super.init()</div><div class="line">        numberOfWheels = 2</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="可失败构造器"><a href="#可失败构造器" class="headerlink" title="可失败构造器"></a>可失败构造器</h3><p>在给构造器传入无效的形参，或缺少某种所需的外部资源，又或是不满足某种必要的条件等情况下，我们创建一个可失败的构造器是非常有必要的，来看一下可失败构造器的语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">struct Animal &#123;</div><div class="line">    let species: String</div><div class="line">    init?(species: String) &#123;</div><div class="line">        if species.isEmpty &#123;</div><div class="line">            return nil</div><div class="line">        &#125;</div><div class="line">        self.species = species</div><div class="line">    &#125;</div><div class="line">    // 可失败构造器不能与其他非可失败构造器（指定构造器、便利构造器）的参数和类型相同</div><div class="line">    //所以下面这个指定构造器是非法的。</div><div class="line">    //init(species: String) &#123; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>值类型的可失败构造器可以横向代理到自身其他的可失败构造器；类的可失败构造器既可横向代理自身的可失败构造器，亦可向上代理到父类的可失败构造器。</p>
-<p>但无论是向上还是横向，只要可失败构造器触发构造失败，整个构造过程将即刻停止，不会再执行后面的构造代码。</p>
-<h3 id="必要构造器"><a href="#必要构造器" class="headerlink" title="必要构造器"></a>必要构造器</h3><p>我们可以通过<code>required</code>关键字来实现必要构造器，子类必须实现父类的必要构造器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">class Animal &#123;</div><div class="line">    var name: String</div><div class="line">    required init(name: String) &#123;</div><div class="line">        self.name = name</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Dog: Animal &#123;</div><div class="line">    var foot: Int</div><div class="line">    //在重写父类必要构造器的时候不需要加override</div><div class="line">    required init(name: String) &#123;</div><div class="line">        foot = 4</div><div class="line">        super.init(name: name)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Dog(name: &quot;dog&quot;)</div></pre></td></tr></table></figure></p>
-<p>有一点需要注意的就是：<code>如果子类继承的构造器能满足必要构造器的要求，则无须在子类中显式提供必要构造器的实现。</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Animal &#123;</div><div class="line">    var name: String</div><div class="line">    required init(name: String) &#123;</div><div class="line">        self.name = name</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Dog: Animal &#123;</div><div class="line">    var foot = 2</div><div class="line">&#125;</div><div class="line"></div><div class="line">Dog(name: &quot;dog&quot;)</div></pre></td></tr></table></figure></p>
-<p>在我们日常开发中，我们会经常自定义UITableViewCell的子类来实现我们定制化的需求，如果我们没有实现<code>required init?(coder aDecoder: NSCoder)</code>方法的话，我们的代码是编译报错的。查看文档我们发现该方法为<code>NSCoding</code>的方法，且该方法为UIView 必要构造器，所以它的子类必须实现该方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class CustomTableViewCell: UITableViewCell &#123;</div><div class="line">    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) &#123;</div><div class="line">        super.init(style: style, reuseIdentifier: reuseIdentifier)</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    required init?(coder aDecoder: NSCoder) &#123;</div><div class="line">        fatalError(&quot;init(coder:) has not been implemented&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="练手小栗子"><a href="#练手小栗子" class="headerlink" title="练手小栗子"></a>练手小栗子</h3><p>光说不练假把式，通过下面的几个小栗子来加深一下对构造器的理解。</p>
-<p>分析一下下面的例子是否正确并思考错误的原因。</p>
-<ul>
-<li><p>例1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class Animal &#123;</div><div class="line">    let head = 1</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Dog: Animal &#123;</div><div class="line">    override init() &#123;</div><div class="line">        head = 3</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>例2</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">struct Student &#123;</div><div class="line">    var name = &quot;&quot;</div><div class="line">    var age = 0</div><div class="line">    </div><div class="line">    init(stuName: String, stuAge: Int) &#123;</div><div class="line">        name = stuName</div><div class="line">        age = stuAge</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Student(name: &quot;jack&quot;, age: 18)</div></pre></td></tr></table></figure>
-</li>
-<li><p>例3</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">class Animal &#123;</div><div class="line">    let head = 1</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Dog: Animal &#123;</div><div class="line">    let foot: Int</div><div class="line">    </div><div class="line">    init(foot: Int) &#123;</div><div class="line">        self.foot = foot</div><div class="line">        run()</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func run() &#123;</div><div class="line">        //do something</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>例4</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">class Animal &#123;</div><div class="line">    let head = 1</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Dog: Animal &#123;</div><div class="line">    var foot: Int</div><div class="line">    </div><div class="line">    init(foot: Int) &#123;</div><div class="line">        super.init()</div><div class="line">        self.foot = foot</div><div class="line">        run()</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func run() &#123;</div><div class="line">        //do something</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过上面的介绍，我们了解了默认构造器、自定义构造器类型、构造器代理、构造器的两个阶段、可失败构造器和必要构造器是什么。现在我们总结一下需要重点理解的构造器代理和构造器的两个阶段：</p>
-<ul>
-<li><p>构造器代理</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1、值类型只能横向代理</div><div class="line">2、类可以横向代理和向上代理</div></pre></td></tr></table></figure>
-</li>
-<li><p>构造器的两个阶段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">1、先确保所有的存储属性都被赋予初始值</div><div class="line">2、在实例准备使用之前，可以自定义存储属性的值</div><div class="line"></div><div class="line">通过4步安全检查来确保两个阶段成功:</div><div class="line">* 安全检查1：指定构造器必须在完成本类所有存储属性赋值之后，才能向上代理到父类的构造器。</div><div class="line">* 安全检查2：指定构造器必须在为继承的属性设置新值之前向上代理调用父类构造器。</div><div class="line">* 安全检查3：便利构造器必须先调用其他构造器，再为任意属性（包括所有同类中定义的）赋新值。</div><div class="line">* 安全检查4：构造器在第一阶段构造完成之前，不能调用任何实例方法，不能读取任何实例属性的值，不能引用 `self` 作为一个值。</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>除了上面的两个重点，我们还需要注意一下几个小点：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">* Swift 中的构造器与 Objective-C 中的不同，它并不返回值。</div><div class="line">* 如果你为某个值类型定义了一个自定义的构造器，你将无法访问到默认构造器</div><div class="line"> （如果是结构体，还将无法访问逐一成员构造器）。</div><div class="line">  但可以将自定义构造器写在Extension中，来避免这个问题。</div><div class="line">* 子类可以在构造过程修改继承来的变量属性，但是不能修改继承来的常量属性。</div></pre></td></tr></table></figure></p>
-<p>关于构造器，自己总结的思维导图：</p>
-<p><img src="https://user-gold-cdn.xitu.io/2019/5/28/16afc76c69c7aa22?w=1928&amp;h=1366&amp;f=png&amp;s=306591" alt=""></p>
-<p>好了，本文到此就结束了。希望通过这篇文章能让大家对 Swift 的构造过程能有一个更清晰的认识。Enjoy Every Day！🙂</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2064,7 +2013,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2074,7 +2023,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2111,7 +2060,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
