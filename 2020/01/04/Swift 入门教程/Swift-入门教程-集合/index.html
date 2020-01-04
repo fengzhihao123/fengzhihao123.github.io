@@ -1,0 +1,825 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Swift 入门教程," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="少抱怨，多思考，未来生活很美好。
+上一章讲了常量、变量、基本类型和格式化输出。这一章来加一下 Swift 中的集合。
+什么是集合呢？简而言之就是存放一堆数据的容器。
+在 Swift 中，一共有三种集合类型：Array、Set、Dictionary。三种集合类型的简要定义如下：
+
+Array：存放有序且类型相同的一组元素
+Set：存放无序、值唯一且类型相同的一组元素。
+Dictionary：存放无序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 入门教程 - 集合">
+<meta property="og:url" content="http://yoursite.com/2020/01/04/Swift 入门教程/Swift-入门教程-集合/index.html">
+<meta property="og:site_name" content="冯志浩的个人博客">
+<meta property="og:description" content="少抱怨，多思考，未来生活很美好。
+上一章讲了常量、变量、基本类型和格式化输出。这一章来加一下 Swift 中的集合。
+什么是集合呢？简而言之就是存放一堆数据的容器。
+在 Swift 中，一共有三种集合类型：Array、Set、Dictionary。三种集合类型的简要定义如下：
+
+Array：存放有序且类型相同的一组元素
+Set：存放无序、值唯一且类型相同的一组元素。
+Dictionary：存放无序">
+<meta property="og:image" content="http://yoursite.com/2020/01/04/Swift%20入门教程/Swift-入门教程-集合/collection.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/04/Swift%20入门教程/Swift-入门教程-集合/venn.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/04/Swift%20入门教程/Swift-入门教程-集合/euler.png">
+<meta property="og:updated_time" content="2020-01-04T14:03:50.707Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 入门教程 - 集合">
+<meta name="twitter:description" content="少抱怨，多思考，未来生活很美好。
+上一章讲了常量、变量、基本类型和格式化输出。这一章来加一下 Swift 中的集合。
+什么是集合呢？简而言之就是存放一堆数据的容器。
+在 Swift 中，一共有三种集合类型：Array、Set、Dictionary。三种集合类型的简要定义如下：
+
+Array：存放有序且类型相同的一组元素
+Set：存放无序、值唯一且类型相同的一组元素。
+Dictionary：存放无序">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/04/Swift%20入门教程/Swift-入门教程-集合/collection.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Swift 入门教程 - 集合 | 冯志浩的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?915cf9a0ea53fbd82400bb21c1f4e873";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">冯志浩的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Swift 入门教程 - 集合
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-01-04T21:47:57+08:00" content="2020-01-04">
+              2020-01-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2020/01/04/Swift 入门教程/Swift-入门教程-集合/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/01/04/Swift 入门教程/Swift-入门教程-集合/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2020/01/04/Swift 入门教程/Swift-入门教程-集合/" class="leancloud_visitors" data-flag-title="Swift 入门教程 - 集合">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>少抱怨，多思考，未来生活很美好。</code></p>
+<p>上一章讲了常量、变量、基本类型和格式化输出。这一章来加一下 Swift 中的集合。</p>
+<p>什么是集合呢？简而言之就是存放一堆数据的容器。</p>
+<p>在 Swift 中，一共有三种集合类型：Array、Set、Dictionary。三种集合类型的简要定义如下：</p>
+<ul>
+<li>Array：存放有序且类型相同的一组元素</li>
+<li>Set：存放无序、值唯一且类型相同的一组元素。</li>
+<li>Dictionary：存放无序，键值对形式的元素。</li>
+</ul>
+<p><code>注意：用 let 声明的常量是不可更改的集合，用 var 声明的为可更改的集合。</code><br><img src="/2020/01/04/Swift%20入门教程/Swift-入门教程-集合/collection.png" alt="Apple 官方文档 - 三种数据结构图解" title="Apple 官方文档 - 三种数据结构图解"></p>
+<p>下面详细介绍一些这三种类型。</p>
+<h3 id="数组（Array）"><a href="#数组（Array）" class="headerlink" title="数组（Array）"></a>数组（Array）</h3><p>数组用来存放有序、类型相同的多个元素。它的索引是从 0 开始计算的，也就是说它的最后一个元素的索引等于它的总长度减一。下面我们来看一下数组的基本使用。</p>
+<h4 id="创建一个空数组"><a href="#创建一个空数组" class="headerlink" title="创建一个空数组"></a>创建一个空数组</h4><p>有以下两种方式来创建一个空数组。</p>
+<ul>
+<li><p>完整版</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var intArrFull = Array&lt;Int&gt;()</div></pre></td></tr></table></figure>
+</li>
+<li><p>简洁版</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var intArrShortcut = [Int]()</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>官方文档推荐使用简洁版，言简意赅。</p>
+<h4 id="创建有默认值的数组"><a href="#创建有默认值的数组" class="headerlink" title="创建有默认值的数组"></a>创建有默认值的数组</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// repeating：需要重复的值，count：重复的次数</div><div class="line">var threeDoubles = Array(repeating: 0.0, count: 3)</div><div class="line">// threeDoubles 的类型时 [Double] 上述代码等同于 </div><div class="line">// var threeDoubles = [0.0, 0.0, 0.0]</div></pre></td></tr></table></figure>
+<p>通过该函数我们可以快速创建带有多个重复值的数组，而无需写大量冗余代码。</p>
+<h4 id="数组的基本使用"><a href="#数组的基本使用" class="headerlink" title="数组的基本使用"></a>数组的基本使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">var languages = [&quot;Swift&quot;, &quot;Java&quot;, &quot;Objective-C&quot;]</div><div class="line">// 增</div><div class="line">languages.append(&quot;Python&quot;) </div><div class="line">// languages: [&quot;Swift&quot;, &quot;Java&quot;, &quot;Objective-C&quot;, &quot;Python&quot;]</div><div class="line"></div><div class="line">languages.insert(&quot;C++&quot;, at: 1) </div><div class="line">// [&quot;Swift&quot;, &quot;C++&quot;, &quot;Java&quot;, &quot;Objective-C&quot;, &quot;Python&quot;]</div><div class="line"></div><div class="line">// 删</div><div class="line">languages.remove(at: 2) </div><div class="line">// [&quot;Swift&quot;, &quot;C++&quot;, &quot;Objective-C&quot;, &quot;Python&quot;]</div><div class="line"></div><div class="line">// 改</div><div class="line">languages[1] = &quot;C&quot;</div><div class="line">// [&quot;Swift&quot;, &quot;C&quot;, &quot;Objective-C&quot;, &quot;Python&quot;]</div><div class="line"></div><div class="line">// 查</div><div class="line">let lang = languages[0]</div><div class="line">// Swift</div></pre></td></tr></table></figure>
+<p>注意点：</p>
+<ul>
+<li>使用数组最重要的也是最容易犯错的地方：<code>不要越界、不要越界、不要越界</code>(数组越界的意思就是索引超出数组长度)。</li>
+<li>用 <code>let</code> 修饰的是不可变数组；用 <code>var</code> 修饰的是可变数组。</li>
+<li>调用 <code>append()</code> 函数添加的元素放在数组的最后，调用<code>insert()</code>函数则是放在你指定的位置。</li>
+</ul>
+<p>数组合并：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var lang1 = [&quot;Swift&quot;, &quot;Java&quot;, &quot;Objective-C&quot;]</div><div class="line">var lang2 = [&quot;C&quot;]</div><div class="line">let languages = lang1 + lang2</div><div class="line">// [&quot;Swift&quot;, &quot;Java&quot;, &quot;Objective-C&quot;, &quot;C&quot;]</div></pre></td></tr></table></figure></p>
+<h4 id="数组的常用属性"><a href="#数组的常用属性" class="headerlink" title="数组的常用属性"></a>数组的常用属性</h4><ul>
+<li>count 代表数组的长度。</li>
+<li>isEmpty 代表数组是否为空。</li>
+<li>first 代表数组的第一个元素，它是 <code>optional</code> 类型，若没有则返回 nil。</li>
+<li>last 代表数组的最后一个元素，它是 <code>optional</code> 类型，若没有则返回 nil。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let languages = [&quot;Swift&quot;, &quot;Java&quot;, &quot;Objective-C&quot;]</div><div class="line">let count = languages.count // 3</div><div class="line">let isEmpty = languages.isEmpty // false</div><div class="line">let first = languages.first // Swift 类型为 String?</div><div class="line">let last = languages.last // Objective-C 类型为 String?</div></pre></td></tr></table></figure>
+<h4 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let languages = [&quot;Swift&quot;, &quot;Java&quot;, &quot;Objective-C&quot;]</div><div class="line">for lang in languages &#123;</div><div class="line">    print(lang)</div><div class="line">&#125;</div><div class="line">// print: Swift Java Objective-C</div></pre></td></tr></table></figure>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p>set 是用来存储相同类型、无序且值唯一的多个元素。</p>
+<p>什么时候使用 set：</p>
+<ul>
+<li>当你的数据对于顺序没有特定要求时，你可以用 set 来替代数组。</li>
+<li>当需要一个元素只能出现一次时。</li>
+</ul>
+<h4 id="使用-Set-数据结构需满足的条件"><a href="#使用-Set-数据结构需满足的条件" class="headerlink" title="使用 Set 数据结构需满足的条件"></a>使用 Set 数据结构需满足的条件</h4><p>使用 Set 存储的元素必须是可哈希的，也就是说元素必须提供一种方式去计算它本身的哈希值。Set 正是通过比较每个元素的哈希值来确保每个元素只出现一次。</p>
+<p>Swift 中的基本类型默认都是可哈希的（String、Int、Double、Bool等）。</p>
+<h4 id="Set-的基本使用"><a href="#Set-的基本使用" class="headerlink" title="Set 的基本使用"></a>Set 的基本使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//创建 Set</div><div class="line">var locations: Set = [&quot;bj&quot;, &quot;nj&quot;, &quot;dj&quot;]</div><div class="line">// 增</div><div class="line">locations.insert(&quot;xj&quot;)</div><div class="line">// 删</div><div class="line">locations.remove(&quot;nj&quot;)</div><div class="line">// 遍历 Set </div><div class="line">for location in locations &#123;</div><div class="line">    print(location)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里需要说明一下 Set 的删除操作，如果 Set 包含要删除的值，调用 <code>remove</code> 方法会删除并返回该值，反之则返回 <code>nil</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let deleteContainValue = locations.remove(&quot;dj&quot;)</div><div class="line">let deleteUncontainValue = locations.remove(&quot;sh&quot;)</div><div class="line">// deleteContainValue = dj deleteUncontainValue = nil</div><div class="line">print(deleteContainValue, deleteUncontainValue)</div></pre></td></tr></table></figure></p>
+<h4 id="常用属性"><a href="#常用属性" class="headerlink" title="常用属性"></a>常用属性</h4><ul>
+<li>count</li>
+<li>isEmpty</li>
+<li>func contains(_ member: String) -&gt; Bool<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// 获取 Set 的数量</div><div class="line">print(locations.count)</div><div class="line">// 判断 Set 是否为空</div><div class="line">if locations.isEmpty &#123;</div><div class="line">    print(&quot;locations 为空&quot;)</div><div class="line">&#125;</div><div class="line">// 判断 Set 是否包含某个值</div><div class="line">if locations.contains(&quot;sh&quot;) &#123;</div><div class="line">    print(&quot;locations 包含 sh&quot;)</div><div class="line">&#125; else &#123;</div><div class="line">    print(&quot;locations 未包含 sh&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Set-的常用操作"><a href="#Set-的常用操作" class="headerlink" title="Set 的常用操作"></a>Set 的常用操作</h4><ul>
+<li>intersection(_:)：用两个 set 的合集创建新的 set。</li>
+<li>symmetricDifference(_:)：用两个 set 的非合集创建新的 set。</li>
+<li>union(_:)：用两个 set 的全部值创建新的 set。</li>
+<li>subtracting(_:)：用当前 set 与另一个 set 的非合集创建新的 set。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 因为 set 是无序的，所以调用 sorted() 方法对结果进行排序</div><div class="line">let oddDigits: Set = [1, 3, 5, 7, 9]</div><div class="line">let evenDigits: Set = [0, 2, 4, 6, 8]</div><div class="line">let singleDigitPrimeNumbers: Set = [2, 3, 5, 7]</div><div class="line"></div><div class="line">oddDigits.union(evenDigits).sorted()</div><div class="line">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</div><div class="line">oddDigits.intersection(evenDigits).sorted()</div><div class="line">// []</div><div class="line">oddDigits.subtracting(singleDigitPrimeNumbers).sorted()</div><div class="line">// [1, 9]</div><div class="line">oddDigits.symmetricDifference(singleDigitPrimeNumbers).sorted()</div><div class="line">// [1, 2, 9]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<img src="/2020/01/04/Swift%20入门教程/Swift-入门教程-集合/venn.png" alt="Apple 官网 - Set 的操作" title="Apple 官网 - Set 的操作">
+<h4 id="Set-的逻辑关系操作"><a href="#Set-的逻辑关系操作" class="headerlink" title="Set 的逻辑关系操作"></a>Set 的逻辑关系操作</h4><ul>
+<li>==：判断两个 set 包含的所有值都相同。</li>
+<li>isSubset(of:)：判断当前 set 是另一个 set 的子集。</li>
+<li>isSuperset(of:)：判断是否当前 set 是另一个 set 的父集。</li>
+<li>isStrictSubset(of:) / isStrictSuperset(of:)：判断是否为子集或者父集，并且两个不相同。</li>
+<li>isDisjoint(with:)：判断是否两个 set 无交集。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">let houseAnimals: Set = [&quot;🐶&quot;, &quot;🐱&quot;]</div><div class="line">let farmAnimals: Set = [&quot;🐮&quot;, &quot;🐔&quot;, &quot;🐑&quot;, &quot;🐶&quot;, &quot;🐱&quot;]</div><div class="line">let cityAnimals: Set = [&quot;🐦&quot;, &quot;🐭&quot;]</div><div class="line"></div><div class="line">houseAnimals.isSubset(of: farmAnimals)</div><div class="line">// true</div><div class="line">farmAnimals.isSuperset(of: houseAnimals)</div><div class="line">// true</div><div class="line">farmAnimals.isDisjoint(with: cityAnimals)</div><div class="line">// true</div><div class="line"></div><div class="line">let subSetEqual: Set = [&quot;🐶&quot;, &quot;🐱&quot;]</div><div class="line">let subSetNoteEqual: Set = [&quot;🐶&quot;]</div><div class="line"></div><div class="line">let equal = subSetEqual.isStrictSubset(of: houseAnimals) // false</div><div class="line">let notEqual = subSetNoteEqual.isStrictSubset(of: houseAnimals) // true</div></pre></td></tr></table></figure>
+<img src="/2020/01/04/Swift%20入门教程/Swift-入门教程-集合/euler.png" alt="Apple 官网 - Set 的逻辑关系" title="Apple 官网 - Set 的逻辑关系">
+<h3 id="字典（Dictionary）"><a href="#字典（Dictionary）" class="headerlink" title="字典（Dictionary）"></a>字典（Dictionary）</h3><p>字典用来存储键值对结构（key - value）的数据，它是无序的。它的键是唯一的，不可重复；而它的值是可以重复的。它和现实中的字典很类似。</p>
+<p>注意：<code>它所有的键必须是同一类型，并且因为需要保证键的唯一性，所以类型也必须遵守 Hashable 协议。</code></p>
+<h4 id="字典的基本使用"><a href="#字典的基本使用" class="headerlink" title="字典的基本使用"></a>字典的基本使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">// 创建一个空的字典，类型为：[String: String]</div><div class="line">var student = [String: String]()</div><div class="line">// 给字典赋值</div><div class="line">student[&quot;name&quot;] = &quot;xiaoming&quot;</div><div class="line">student[&quot;age&quot;] = &quot;18&quot;</div><div class="line">// 给同一个键赋值，会覆盖之前的旧值</div><div class="line">student[&quot;age&quot;] = &quot;20&quot;</div><div class="line">student[&quot;weight&quot;] = &quot;60.5&quot;</div><div class="line">// [&quot;name&quot;: &quot;xiaoming&quot;, &quot;age&quot;: &quot;20&quot;, &quot;weight&quot;: &quot;60.5&quot;]</div><div class="line">print(student)</div><div class="line">// 删除 item</div><div class="line">student[&quot;height&quot;] = nil</div><div class="line">// [&quot;weight&quot;: &quot;60.5&quot;, &quot;name&quot;: &quot;xiaoming&quot;, &quot;age&quot;: &quot;20&quot;]</div><div class="line">print(student)</div><div class="line">// 是否包含某个键</div><div class="line">if let weight = student[&quot;weight&quot;] &#123;</div><div class="line">    print(weight)</div><div class="line">&#125; else &#123;</div><div class="line">    print(&quot;字典不包含 weight&quot;)</div><div class="line">&#125;</div><div class="line">// 60.5</div></pre></td></tr></table></figure>
+<h4 id="常用属性-1"><a href="#常用属性-1" class="headerlink" title="常用属性"></a>常用属性</h4><ul>
+<li>count</li>
+<li>isEmpty<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(student.count) // 3，它含有 3 个 item。一个键值对为一个 item</div><div class="line">print(student.isEmpty) // false</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="遍历字典"><a href="#遍历字典" class="headerlink" title="遍历字典"></a>遍历字典</h4><ul>
+<li><p>遍历所有的键</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">for key in student.keys &#123;</div><div class="line">    print(key)</div><div class="line">&#125;</div><div class="line"></div><div class="line">//weight</div><div class="line">//age</div><div class="line">//name</div><div class="line">//height</div></pre></td></tr></table></figure>
+</li>
+<li><p>遍历所有的 item</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">for (key, value) in student &#123;</div><div class="line">    print(key, value)</div><div class="line">&#125;</div><div class="line">//weight 60.5</div><div class="line">//name xiaoming</div><div class="line">//height 1.75</div><div class="line">//age 20</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这三种数据结构是日常开发中，每天都要和它们打交道，尤其是数组和字典，所以我们要将它们的概念和用法烂熟于心。</p>
+<ul>
+<li>Array：存储相同类型的值，可重复，有序。</li>
+<li>Set：存储相同类型的值，值唯一，无序。</li>
+<li>Dictionary：存储键值对，键唯一，无序。</li>
+</ul>
+<p><code>文中的部分示例代码来自于官网。</code></p>
+<ul>
+<li><a href="https://docs.swift.org/swift-book/LanguageGuide/CollectionTypes.html" target="_blank" rel="external">Apple Document</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift-入门教程/" rel="tag">#Swift 入门教程</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/01/Swift 入门教程/Swift-入门教程-变量、基础类型及格式化输出/" rel="next" title="Swift 入门教程 - 变量、基础类型及格式化输出">
+                <i class="fa fa-chevron-left"></i> Swift 入门教程 - 变量、基础类型及格式化输出
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2020/01/04/Swift 入门教程/Swift-入门教程-集合/"
+           data-title="Swift 入门教程 - 集合" data-url="http://yoursite.com/2020/01/04/Swift 入门教程/Swift-入门教程-集合/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="冯志浩" />
+          <p class="site-author-name" itemprop="name">冯志浩</p>
+          <p class="site-description motion-element" itemprop="description">一个不安分的程序猿</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组（Array）"><span class="nav-number">1.</span> <span class="nav-text">数组（Array）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建一个空数组"><span class="nav-number">1.1.</span> <span class="nav-text">创建一个空数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建有默认值的数组"><span class="nav-number">1.2.</span> <span class="nav-text">创建有默认值的数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组的基本使用"><span class="nav-number">1.3.</span> <span class="nav-text">数组的基本使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组的常用属性"><span class="nav-number">1.4.</span> <span class="nav-text">数组的常用属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历数组"><span class="nav-number">1.5.</span> <span class="nav-text">遍历数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">2.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-Set-数据结构需满足的条件"><span class="nav-number">2.1.</span> <span class="nav-text">使用 Set 数据结构需满足的条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set-的基本使用"><span class="nav-number">2.2.</span> <span class="nav-text">Set 的基本使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用属性"><span class="nav-number">2.3.</span> <span class="nav-text">常用属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set-的常用操作"><span class="nav-number">2.4.</span> <span class="nav-text">Set 的常用操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set-的逻辑关系操作"><span class="nav-number">2.5.</span> <span class="nav-text">Set 的逻辑关系操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典（Dictionary）"><span class="nav-number">3.</span> <span class="nav-text">字典（Dictionary）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字典的基本使用"><span class="nav-number">3.1.</span> <span class="nav-text">字典的基本使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用属性-1"><span class="nav-number">3.2.</span> <span class="nav-text">常用属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历字典"><span class="nav-number">3.3.</span> <span class="nav-text">遍历字典</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">冯志浩</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fengzhihao123"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("nCxez2PBEQDAzw3yNwTIjiqq-gzGzoHsz", "MNIIVCp3cdzMk5mUwMmBNvrH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

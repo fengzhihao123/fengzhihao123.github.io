@@ -1,0 +1,768 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Swift 入门教程," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="千里之行，始于足下。
+常量和变量在现实生活中，我们会拿容器来存放东西，比如拿杯子装水，拿盘子装菜，那么对应到编程的世界里，我们需要的则是常量和变量。
+在 Swift 中，你可以使用 let 关键字声明一个常量。当你声明一个常量的时候，代表着你给它赋初始值之后，你不可以再修改它的值。例如在程序中，一般 id 是唯一且不可改变的：123let id = 23333// 赋值之后再修改 id 的值，编译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 入门教程 - 变量、基础类型及格式化输出">
+<meta property="og:url" content="http://yoursite.com/2020/01/01/Swift 入门教程/Swift-入门教程-变量、基础类型及格式化输出/index.html">
+<meta property="og:site_name" content="冯志浩的个人博客">
+<meta property="og:description" content="千里之行，始于足下。
+常量和变量在现实生活中，我们会拿容器来存放东西，比如拿杯子装水，拿盘子装菜，那么对应到编程的世界里，我们需要的则是常量和变量。
+在 Swift 中，你可以使用 let 关键字声明一个常量。当你声明一个常量的时候，代表着你给它赋初始值之后，你不可以再修改它的值。例如在程序中，一般 id 是唯一且不可改变的：123let id = 23333// 赋值之后再修改 id 的值，编译">
+<meta property="og:image" content="http://yoursite.com/2020/01/01/Swift%20入门教程/Swift-入门教程-变量、基础类型及格式化输出/pic1.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/01/Swift%20入门教程/Swift-入门教程-变量、基础类型及格式化输出/pic2.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/01/Swift%20入门教程/Swift-入门教程-变量、基础类型及格式化输出/pic3.png">
+<meta property="og:updated_time" content="2020-01-01T10:52:51.695Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 入门教程 - 变量、基础类型及格式化输出">
+<meta name="twitter:description" content="千里之行，始于足下。
+常量和变量在现实生活中，我们会拿容器来存放东西，比如拿杯子装水，拿盘子装菜，那么对应到编程的世界里，我们需要的则是常量和变量。
+在 Swift 中，你可以使用 let 关键字声明一个常量。当你声明一个常量的时候，代表着你给它赋初始值之后，你不可以再修改它的值。例如在程序中，一般 id 是唯一且不可改变的：123let id = 23333// 赋值之后再修改 id 的值，编译">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/01/Swift%20入门教程/Swift-入门教程-变量、基础类型及格式化输出/pic1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Swift 入门教程 - 变量、基础类型及格式化输出 | 冯志浩的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?915cf9a0ea53fbd82400bb21c1f4e873";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">冯志浩的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Swift 入门教程 - 变量、基础类型及格式化输出
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-01-01T18:44:21+08:00" content="2020-01-01">
+              2020-01-01
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2020/01/01/Swift 入门教程/Swift-入门教程-变量、基础类型及格式化输出/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/01/01/Swift 入门教程/Swift-入门教程-变量、基础类型及格式化输出/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2020/01/01/Swift 入门教程/Swift-入门教程-变量、基础类型及格式化输出/" class="leancloud_visitors" data-flag-title="Swift 入门教程 - 变量、基础类型及格式化输出">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>千里之行，始于足下。</code></p>
+<h2 id="常量和变量"><a href="#常量和变量" class="headerlink" title="常量和变量"></a>常量和变量</h2><p>在现实生活中，我们会拿容器来存放东西，比如拿杯子装水，拿盘子装菜，那么对应到编程的世界里，我们需要的则是常量和变量。</p>
+<p>在 Swift 中，你可以使用 <code>let</code> 关键字声明一个常量。当你声明一个常量的时候，代表着你给它赋初始值之后，你不可以再修改它的值。例如在程序中，一般 <code>id</code> 是唯一且不可改变的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let id = 23333</div><div class="line">// 赋值之后再修改 id 的值，编译器会报错</div><div class="line">id = 1024</div></pre></td></tr></table></figure></p>
+<img src="/2020/01/01/Swift%20入门教程/Swift-入门教程-变量、基础类型及格式化输出/pic1.png" alt="修改常量报错" title="修改常量报错">
+<p><code>如果你代码中存储的值不会改变，一定要用 let 关键字把它声明为常量。原则：起初，把所有要存储的值都定义为常量，当需要修改值时再把它改为 var 关键字修饰。</code></p>
+<p>当你需要声明一个在赋值完初始值之后，还可能修改变量值的时候，可以使用 <code>var</code> 关键字声明一个变量，例如在程序中，用户的昵称是可以修改的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var nickName = &quot;Swift&quot;</div><div class="line">// 赋值之后，还可以修改 nickName 变量的值</div><div class="line">nickName = &quot;Objective-C&quot;</div></pre></td></tr></table></figure></p>
+<p>在 Swift 中，你使用的常量或者变量需要在使用之前声明它，如果使用未声明的变量，编译器会报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 因为使用的 age 变量并未声明，所以编译器会报错</div><div class="line">age = 10</div></pre></td></tr></table></figure></p>
+<img src="/2020/01/01/Swift%20入门教程/Swift-入门教程-变量、基础类型及格式化输出/pic2.png" alt="使用未声明的变量" title="使用未声明的变量">
+<h3 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h3><p>在 Swift 中，采用<a href="https://baike.baidu.com/item/%E9%AA%86%E9%A9%BC%E5%91%BD%E5%90%8D%E6%B3%95" target="_blank" rel="external">驼峰命名</a>法则给变量和类命名。变量用小写字母开头，后面的单词依次首字母大写。例如：userName、userAge等；而类的名字则是大写字母开头，后面的单词依次首字母大写。</p>
+<p>例如：SeniorStudent等。<code>在 Swift 中不要使用下划线命名，如：user_name 这种格式。</code>虽然使用这种格式编译器不会报错，但这会影响程序的代码统一性，也给项目维护增大了难度。</p>
+<h3 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a>类型推断</h3><p>从上面的代码可以看出，我们声明常量或者变量的时候并没有显式的表现它们是什么类型，那么编译器又是怎么知道我们声明的变量的类型呢？答案就是 Swift 的编译器会进行类型推断(Type Annotations)。当你声明一个变量，并给予该变量初始值的时候， Swift 会根据你赋予的值来给变量正确的类型(<code>按住 option 键，点击变量名可以看见变量的类型</code>)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 通过查看变量类型，我们可以看到 identifier 为 Int， height 为 Double</div><div class="line">![](https://user-gold-cdn.xitu.io/2019/12/16/16f0ef7509bbeba6?w=758&amp;h=198&amp;f=png&amp;s=20046)</div><div class="line">let identifier = 23333</div><div class="line">// 等同于 let identifier: Int = 23333</div><div class="line">var height = 1.75</div><div class="line">// 等同于 var height: Double = 1.75</div></pre></td></tr></table></figure></p>
+<img src="/2020/01/01/Swift%20入门教程/Swift-入门教程-变量、基础类型及格式化输出/pic3.png" alt="Swift 的类型推断" title="Swift 的类型推断">
+<h2 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><h4 id="Int"><a href="#Int" class="headerlink" title="Int"></a>Int</h4><p>声明 Int 类型的常量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let age = 18</div></pre></td></tr></table></figure></p>
+<p>在 Swift 中，多数情况下你不需要指定整型的类型(如 Int32、Int64)，编译器会自动适配当前平台。也就是说：在 32 位的系统上，Int 就是 Int32；在 64 位的系统上 Int 就是 Int64。</p>
+<h4 id="UInt"><a href="#UInt" class="headerlink" title="UInt"></a>UInt</h4><p>声明 UInt 类型的常量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 此时不能省略类型，因为编译器总是把整型推断为 Int</div><div class="line">let positiveNumber: UInt = 18</div></pre></td></tr></table></figure></p>
+<p>UInt 平台适配规则同 Int，在 32 位的系统上，UInt 就是 UInt32；在 64 位的系统上 UInt 就是 UInt64。</p>
+<p><code>当声明整型类型时，尽量使用 Int 类型，它在各种情况下是适应最好的。</code></p>
+<p>获取当前整型类型的范围(例如 Int32、Int64)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">let min32 = Int32.min</div><div class="line">let max32 = Int32.max</div><div class="line">// min32 = -2147483648, max32 = 2147483647</div><div class="line"></div><div class="line">let min64 = Int64.min</div><div class="line">let max64 = Int64.max</div><div class="line">// min64 = -9223372036854775808, max64 = 9223372036854775807</div></pre></td></tr></table></figure></p>
+<h3 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h3><h4 id="Float"><a href="#Float" class="headerlink" title="Float"></a>Float</h4><p>Float：32位的单精度，有至少6位小数的精度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let float32: Float = 0.01</div></pre></td></tr></table></figure></p>
+<h4 id="Double"><a href="#Double" class="headerlink" title="Double"></a>Double</h4><p>Doubel：64位的单精度，有至少15位小数的精度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let float64 = 0.01</div></pre></td></tr></table></figure></p>
+<p><code>Swift 的类型推断，总是把浮点数类型推断为 Double。</code></p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>在程序开发中，打交道最多的类型莫过于字符串了。你可以通过下面的方式来存储字符串的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let language = &quot;Swift&quot;</div></pre></td></tr></table></figure></p>
+<p>你也可以在 Swift 中存储多行字符串的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let multipleStr = &quot;&quot;&quot;</div><div class="line">Swift</div><div class="line">Objective-C</div><div class="line">&quot;&quot;&quot;</div></pre></td></tr></table></figure></p>
+<h4 id="可对字符串应用的操作符"><a href="#可对字符串应用的操作符" class="headerlink" title="可对字符串应用的操作符"></a>可对字符串应用的操作符</h4><p>Swift 中，你可以对字符串应用以下 2 个操作符：</p>
+<ul>
+<li>+：拼接字符串</li>
+<li>+=：对字符串进行累加</li>
+</ul>
+<p>具体示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">let language = &quot;Swift&quot;</div><div class="line">let welcome = &quot;Hello&quot;</div><div class="line">// plusStr = HelloSwift</div><div class="line">let plusStr = welcome + language</div><div class="line">var languages = &quot;Language: &quot;</div><div class="line">// languages = Language: Swift</div><div class="line">languages += language</div></pre></td></tr></table></figure></p>
+<h3 id="基本类型互转"><a href="#基本类型互转" class="headerlink" title="基本类型互转"></a>基本类型互转</h3><h4 id="浮点数转整型"><a href="#浮点数转整型" class="headerlink" title="浮点数转整型"></a>浮点数转整型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let floatNum = 1.2</div><div class="line">// intNum = 1</div><div class="line">let intNum = Int(floatNum)</div></pre></td></tr></table></figure>
+<h4 id="整型转浮点数"><a href="#整型转浮点数" class="headerlink" title="整型转浮点数"></a>整型转浮点数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let intNum = 1</div><div class="line">// floatNum = 1</div><div class="line">let floatNum = Double(intNum)</div></pre></td></tr></table></figure>
+<p>需要注意的是：<code>只有在特定情况下才会使用 Float，其它情况下都要使用 Double（官方文档推荐）。</code></p>
+<h4 id="字符串转整型、整型转字符串"><a href="#字符串转整型、整型转字符串" class="headerlink" title="字符串转整型、整型转字符串"></a>字符串转整型、整型转字符串</h4><p>字符串和数字类型的互相转换大概使我们写代码中遇到的最频繁的转换了。</p>
+<ul>
+<li><p>字符串转整型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let strNum = &quot;2333&quot;</div><div class="line">// 注意此处 intNum 为 Int? 类型，这里涉及可选类型 - optional，</div><div class="line">后面会将到可选类型，这里看一下即可。</div><div class="line">intNum = Optional(2333)</div><div class="line">let intNum = Int(strNum)</div></pre></td></tr></table></figure>
+</li>
+<li><p>整型转字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let intNum = 23333</div><div class="line">// strNum = &quot;23333&quot;</div><div class="line">let strNum = String(intNum)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h3><p>前面声明了许多常量，那么怎样能快捷的看到常量存储的值呢，这里就用到 <code>print()</code> 函数了。</p>
+<p>你可以简单的只打印一个常量或者变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let strNum = &quot;Swift&quot;</div><div class="line">print(strNum)</div></pre></td></tr></table></figure></p>
+<p>在程序比较简单的时候，上面这种打印方式还可以。但在程序越来越复杂时，打印的东西会错综复杂。这时，你就需要使用格式化输出了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// strNum = Swift</div><div class="line">print(&quot;strNum = \(strNum)&quot;)</div></pre></td></tr></table></figure>
+<p>格式化输出格式： <code>&quot;xxx\(变量、常量的名字)&quot;</code> xxx会原样输出，<code>\()</code>里面放置你声明变量。</p>
+<p>在格式化输出时，后面可以放置多个变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let min32 = Int32.min</div><div class="line">let max32 = Int32.max</div><div class="line">// min32 = -2147483648, max32 = 2147483647</div><div class="line">print(&quot;min32 = \(min32), max32 = \(max32)&quot;)</div></pre></td></tr></table></figure></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>建议以上的代码都在 Playground 里面多敲几遍，看懂并不代表会了。</p>
+<ul>
+<li>使用常量或者变量之前要先声明</li>
+<li><code>let</code> 关键字声明的常量不可修改；<code>var</code> 关键字声明的变量值可以修改</li>
+</ul>
+<!-- 下一篇：[Swift 入门教程 - 集合]() -->
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift-入门教程/" rel="tag">#Swift 入门教程</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/07/Swift-使用单例管理共享资源-译/" rel="next" title="Swift - 使用单例管理共享资源(译)">
+                <i class="fa fa-chevron-left"></i> Swift - 使用单例管理共享资源(译)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/04/Swift 入门教程/Swift-入门教程-集合/" rel="prev" title="Swift 入门教程 - 集合">
+                Swift 入门教程 - 集合 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2020/01/01/Swift 入门教程/Swift-入门教程-变量、基础类型及格式化输出/"
+           data-title="Swift 入门教程 - 变量、基础类型及格式化输出" data-url="http://yoursite.com/2020/01/01/Swift 入门教程/Swift-入门教程-变量、基础类型及格式化输出/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="冯志浩" />
+          <p class="site-author-name" itemprop="name">冯志浩</p>
+          <p class="site-description motion-element" itemprop="description">一个不安分的程序猿</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量和变量"><span class="nav-number">1.</span> <span class="nav-text">常量和变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命名规则"><span class="nav-number">1.1.</span> <span class="nav-text">命名规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型推断"><span class="nav-number">1.2.</span> <span class="nav-text">类型推断</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础类型"><span class="nav-number">2.</span> <span class="nav-text">基础类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整型"><span class="nav-number">2.1.</span> <span class="nav-text">整型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Int"><span class="nav-number">2.1.1.</span> <span class="nav-text">Int</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UInt"><span class="nav-number">2.1.2.</span> <span class="nav-text">UInt</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数"><span class="nav-number">2.2.</span> <span class="nav-text">浮点数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Float"><span class="nav-number">2.2.1.</span> <span class="nav-text">Float</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Double"><span class="nav-number">2.2.2.</span> <span class="nav-text">Double</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串"><span class="nav-number">2.3.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可对字符串应用的操作符"><span class="nav-number">2.3.1.</span> <span class="nav-text">可对字符串应用的操作符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型互转"><span class="nav-number">2.4.</span> <span class="nav-text">基本类型互转</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#浮点数转整型"><span class="nav-number">2.4.1.</span> <span class="nav-text">浮点数转整型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#整型转浮点数"><span class="nav-number">2.4.2.</span> <span class="nav-text">整型转浮点数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串转整型、整型转字符串"><span class="nav-number">2.4.3.</span> <span class="nav-text">字符串转整型、整型转字符串</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化输出"><span class="nav-number">2.5.</span> <span class="nav-text">格式化输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.6.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">冯志浩</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fengzhihao123"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("nCxez2PBEQDAzw3yNwTIjiqq-gzGzoHsz", "MNIIVCp3cdzMk5mUwMmBNvrH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
